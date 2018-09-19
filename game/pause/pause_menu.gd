@@ -1,8 +1,6 @@
-extends Container
+# By Jan Domalaon
 
-# class member variables go here, for example:
-# var a = 2
-# var b = "textvar"
+extends Container
 
 var paused = false
 

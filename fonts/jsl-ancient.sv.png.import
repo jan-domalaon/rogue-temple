@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/jsl-ancient.sv.png-52332b49c449512a492a6bdd0ebcbd1f.stex"
+path="res://.import/jsl-ancient.sv.png-7ff0727f7321720be23eeb49d97a1354.stex"
 
 [deps]
 
-source_file="res://scenes/common/fonts/jsl-ancient.sv.png"
-dest_files=[ "res://.import/jsl-ancient.sv.png-52332b49c449512a492a6bdd0ebcbd1f.stex" ]
+source_file="res://fonts/jsl-ancient.sv.png"
+dest_files=[ "res://.import/jsl-ancient.sv.png-7ff0727f7321720be23eeb49d97a1354.stex" ]
 
 [params]
 

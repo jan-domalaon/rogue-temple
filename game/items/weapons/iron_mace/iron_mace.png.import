@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/iron_mace.png-2f8ba5ff9a63507a85a9e7a6fac68fec.stex"
+path="res://.import/iron_mace.png-449bf57a9ab6c7c2c869209cf19da69f.stex"
 
 [deps]
 
-source_file="res://scenes/common/weapons/iron_mace/iron_mace.png"
-dest_files=[ "res://.import/iron_mace.png-2f8ba5ff9a63507a85a9e7a6fac68fec.stex" ]
+source_file="res://game/items/weapons/iron_mace/iron_mace.png"
+dest_files=[ "res://.import/iron_mace.png-449bf57a9ab6c7c2c869209cf19da69f.stex" ]
 
 [params]
 

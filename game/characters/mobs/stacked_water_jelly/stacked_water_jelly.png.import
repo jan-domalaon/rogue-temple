@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/stacked_water_jelly.png-7ec7c92fcb998f2c8a7a3f2ef845119b.stex"
+path="res://.import/stacked_water_jelly.png-16f7f9dd22a775c10f0d91682336ca47.stex"
 
 [deps]
 
-source_file="res://npc/water_jelly/stacked_water_jelly.png"
-dest_files=[ "res://.import/stacked_water_jelly.png-7ec7c92fcb998f2c8a7a3f2ef845119b.stex" ]
+source_file="res://game/characters/mobs/stacked_water_jelly/stacked_water_jelly.png"
+dest_files=[ "res://.import/stacked_water_jelly.png-16f7f9dd22a775c10f0d91682336ca47.stex" ]
 
 [params]
 
@@ -16,8 +16,8 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
-flags/mipmaps=true
+flags/filter=false
+flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
 process/fix_alpha_border=true

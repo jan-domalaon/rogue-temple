@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/vignette.png-a6cd547be78510edfb39f252396fc461.stex"
+path="res://.import/vignette.png-4094ab36713c64af78723c6079a59987.stex"
 
 [deps]
 
-source_file="res://scenes/menu/pause/vignette.png"
-dest_files=[ "res://.import/vignette.png-a6cd547be78510edfb39f252396fc461.stex" ]
+source_file="res://game/pause/vignette.png"
+dest_files=[ "res://.import/vignette.png-4094ab36713c64af78723c6079a59987.stex" ]
 
 [params]
 

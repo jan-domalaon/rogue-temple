@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bucket_helm.png-72c7e305c00fe2f752ed92b778741d92.stex"
+path="res://.import/bucket_helm.png-491376d34aa01b8c75ca914df39c449b.stex"
 
 [deps]
 
-source_file="res://scenes/common/armor/bucket_helm.png"
-dest_files=[ "res://.import/bucket_helm.png-72c7e305c00fe2f752ed92b778741d92.stex" ]
+source_file="res://game/items/helmets/bucket_helm/bucket_helm.png"
+dest_files=[ "res://.import/bucket_helm.png-491376d34aa01b8c75ca914df39c449b.stex" ]
 
 [params]
 

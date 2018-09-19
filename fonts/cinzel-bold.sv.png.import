@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/cinzel-bold.sv.png-22f4238e91806c9b7fb4e330c5d3ff44.stex"
+path="res://.import/cinzel-bold.sv.png-c226a0b053eade187ab8bfe5c286c813.stex"
 
 [deps]
 
-source_file="res://scenes/common/fonts/cinzel-bold.sv.png"
-dest_files=[ "res://.import/cinzel-bold.sv.png-22f4238e91806c9b7fb4e330c5d3ff44.stex" ]
+source_file="res://fonts/cinzel-bold.sv.png"
+dest_files=[ "res://.import/cinzel-bold.sv.png-c226a0b053eade187ab8bfe5c286c813.stex" ]
 
 [params]
 

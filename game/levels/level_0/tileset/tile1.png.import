@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/tile1.png-c10168ab31192a198a293bfe4a2cd1a2.stex"
+path="res://.import/tile1.png-55dbbfa6760227aee03b5d47b2b34400.stex"
 
 [deps]
 
-source_file="res://scenes/common/tile1.png"
-dest_files=[ "res://.import/tile1.png-c10168ab31192a198a293bfe4a2cd1a2.stex" ]
+source_file="res://game/levels/level_0/tileset/tile1.png"
+dest_files=[ "res://.import/tile1.png-55dbbfa6760227aee03b5d47b2b34400.stex" ]
 
 [params]
 
@@ -16,8 +16,8 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
-flags/mipmaps=true
+flags/filter=false
+flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
 process/fix_alpha_border=true

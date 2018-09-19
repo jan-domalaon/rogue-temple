@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/white.png-7e9cba4202fb3744d1f9bdfe27cb17c5.stex"
+path="res://.import/white.png-c264d8d79935ff13f0004199aa02d5f3.stex"
 
 [deps]
 
-source_file="res://scenes/menu/pause/white.png"
-dest_files=[ "res://.import/white.png-7e9cba4202fb3744d1f9bdfe27cb17c5.stex" ]
+source_file="res://game/pause/white.png"
+dest_files=[ "res://.import/white.png-c264d8d79935ff13f0004199aa02d5f3.stex" ]
 
 [params]
 

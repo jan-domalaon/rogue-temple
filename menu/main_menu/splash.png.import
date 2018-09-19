@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/splash.png-cd27e03b864dbf5a8883bcc7cc56ca17.stex"
+path="res://.import/splash.png-540cc20e7e2fb69d349a69ad5e2ba6ef.stex"
 
 [deps]
 
-source_file="res://scenes/menu/splash.png"
-dest_files=[ "res://.import/splash.png-cd27e03b864dbf5a8883bcc7cc56ca17.stex" ]
+source_file="res://menu/main_menu/splash.png"
+dest_files=[ "res://.import/splash.png-540cc20e7e2fb69d349a69ad5e2ba6ef.stex" ]
 
 [params]
 

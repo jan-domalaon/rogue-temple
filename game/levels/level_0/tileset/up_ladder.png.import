@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/up_ladder.png-d23ea235d4ef2d09afebb8a776689313.stex"
+path="res://.import/up_ladder.png-a5bd6394fde2d87da8006dc9caf2d396.stex"
 
 [deps]
 
-source_file="res://scenes/common/up_ladder.png"
-dest_files=[ "res://.import/up_ladder.png-d23ea235d4ef2d09afebb8a776689313.stex" ]
+source_file="res://game/levels/level_0/tileset/up_ladder.png"
+dest_files=[ "res://.import/up_ladder.png-a5bd6394fde2d87da8006dc9caf2d396.stex" ]
 
 [params]
 

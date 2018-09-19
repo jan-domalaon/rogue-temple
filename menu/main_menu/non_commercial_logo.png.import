@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/non_commercial_logo.png-20d3baab0ec3f43f3b2579d0a792382a.stex"
+path="res://.import/non_commercial_logo.png-796a768f10b4f333cf9ba15f8848b3c7.stex"
 
 [deps]
 
-source_file="res://scenes/menu/non_commercial_logo.png"
-dest_files=[ "res://.import/non_commercial_logo.png-20d3baab0ec3f43f3b2579d0a792382a.stex" ]
+source_file="res://menu/main_menu/non_commercial_logo.png"
+dest_files=[ "res://.import/non_commercial_logo.png-796a768f10b4f333cf9ba15f8848b3c7.stex" ]
 
 [params]
 

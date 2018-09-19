@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/godot_engine_logo.png-0e02830c075533f087de7f543b8adba6.stex"
+path="res://.import/godot_engine_logo.png-1700ed684acffc6aad8b5bf88c2ab3dc.stex"
 
 [deps]
 
-source_file="res://scenes/menu/godot_engine_logo.png"
-dest_files=[ "res://.import/godot_engine_logo.png-0e02830c075533f087de7f543b8adba6.stex" ]
+source_file="res://menu/main_menu/godot_engine_logo.png"
+dest_files=[ "res://.import/godot_engine_logo.png-1700ed684acffc6aad8b5bf88c2ab3dc.stex" ]
 
 [params]
 

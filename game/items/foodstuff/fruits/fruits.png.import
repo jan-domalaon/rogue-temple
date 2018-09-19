@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/fruits.png-53349fb6432eafdf7a05bb31a3550b72.stex"
+path="res://.import/fruits.png-405ae0b8cb4fed80a80046c9f02d99ac.stex"
 
 [deps]
 
-source_file="res://scenes/common/items/fruits/fruits.png"
-dest_files=[ "res://.import/fruits.png-53349fb6432eafdf7a05bb31a3550b72.stex" ]
+source_file="res://game/items/foodstuff/fruits/fruits.png"
+dest_files=[ "res://.import/fruits.png-405ae0b8cb4fed80a80046c9f02d99ac.stex" ]
 
 [params]
 

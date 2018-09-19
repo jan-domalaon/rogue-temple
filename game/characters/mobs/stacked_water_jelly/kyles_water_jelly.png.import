@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/kyles_water_jelly.png-327ecd2699a4f1d136a13b26ac61f2c7.stex"
+path="res://.import/kyles_water_jelly.png-f428c36b299c73cbd42bceed5c0a19ee.stex"
 
 [deps]
 
-source_file="res://npc/water_jelly/kyles_water_jelly.png"
-dest_files=[ "res://.import/kyles_water_jelly.png-327ecd2699a4f1d136a13b26ac61f2c7.stex" ]
+source_file="res://game/characters/mobs/stacked_water_jelly/kyles_water_jelly.png"
+dest_files=[ "res://.import/kyles_water_jelly.png-f428c36b299c73cbd42bceed5c0a19ee.stex" ]
 
 [params]
 

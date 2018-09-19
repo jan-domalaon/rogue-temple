@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/door1.png-8727d910bcadbc9b4e6f08380e406bb8.stex"
+path="res://.import/door1.png-22e0adb901934906efd768dca44baf17.stex"
 
 [deps]
 
-source_file="res://scenes/common/door1.png"
-dest_files=[ "res://.import/door1.png-8727d910bcadbc9b4e6f08380e406bb8.stex" ]
+source_file="res://game/levels/level_0/tileset/door1.png"
+dest_files=[ "res://.import/door1.png-22e0adb901934906efd768dca44baf17.stex" ]
 
 [params]
 
@@ -16,8 +16,8 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
-flags/mipmaps=true
+flags/filter=false
+flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
 process/fix_alpha_border=true

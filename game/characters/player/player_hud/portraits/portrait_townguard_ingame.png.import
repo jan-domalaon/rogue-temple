@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/portrait_townguard_ingame.png-dad25e9655625f526884e026985d1177.stex"
+path="res://.import/portrait_townguard_ingame.png-f3491fe55eabc2bf36ab82b16ace55de.stex"
 
 [deps]
 
-source_file="res://gui/portraits/portrait_townguard_ingame.png"
-dest_files=[ "res://.import/portrait_townguard_ingame.png-dad25e9655625f526884e026985d1177.stex" ]
+source_file="res://game/characters/player/player_hud/portraits/portrait_townguard_ingame.png"
+dest_files=[ "res://.import/portrait_townguard_ingame.png-f3491fe55eabc2bf36ab82b16ace55de.stex" ]
 
 [params]
 

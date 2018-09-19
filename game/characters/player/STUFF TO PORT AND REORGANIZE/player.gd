@@ -7,7 +7,7 @@ extends KinematicBody2D
 
 # Placeholder variables
 const DEFAULT_MOVE_SPEED = 100
-const DEFAULT_SWORD_PATH = "res://player/sword_thrust.tscn"
+const DEFAULT_SWORD_PATH = "res://game/characters/player/STUFF TO PORT AND REORGANIZE/sword_thrust.tscn"
 # Default weapon for testing
 #onready var sword_tween = get_node("rotating/sword/Tween")
 #onready var sword = get_node("rotating/sword")
@@ -31,7 +31,7 @@ var strength = 10
 var experience = 0
 
 onready var weapon_timer = get_node("weapon_timer")
-onready var cursor_pos = get_node("player_camera").get_global_mouse_position()  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
+onready var cursor_pos = get_viewport().get_mouse_position() 
 var old_shape = null
 # Equipped weapon is the path of a weapon, not the string.
 var equipped_weapon = null

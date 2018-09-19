@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/armored_dummy.png-864e4a7d7b8a1cf7825cdec639bb0c9c.stex"
+path="res://.import/armored_dummy.png-4b58fd3366dc313aa1737aefa8c8273b.stex"
 
 [deps]
 
-source_file="res://npc/practice_dummy/armored_dummy.png"
-dest_files=[ "res://.import/armored_dummy.png-864e4a7d7b8a1cf7825cdec639bb0c9c.stex" ]
+source_file="res://game/characters/mobs/dummy_armored/armored_dummy.png"
+dest_files=[ "res://.import/armored_dummy.png-4b58fd3366dc313aa1737aefa8c8273b.stex" ]
 
 [params]
 

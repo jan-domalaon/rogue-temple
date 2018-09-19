@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/chainmail_armor.png-d973312c590b8e122910e948b80321c6.stex"
+path="res://.import/chainmail_armor.png-50ce56b2a7f7a61dc79671c6ea3d72da.stex"
 
 [deps]
 
-source_file="res://scenes/common/armor/chainmail_armor.png"
-dest_files=[ "res://.import/chainmail_armor.png-d973312c590b8e122910e948b80321c6.stex" ]
+source_file="res://game/items/armors/chainmail/chainmail_armor.png"
+dest_files=[ "res://.import/chainmail_armor.png-50ce56b2a7f7a61dc79671c6ea3d72da.stex" ]
 
 [params]
 

@@ -1,10 +1,9 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://gui/hud.gd" type="Script" id=1]
-[ext_resource path="res://gui/portraits/portrait_townguard_ingame.png" type="Texture" id=2]
-[ext_resource path="res://scenes/common/fonts/jsl-ancient.font" type="BitmapFont" id=3]
-[ext_resource path="res://scenes/test/fps_counter.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/menu/pause/pause_menu.tscn" type="PackedScene" id=5]
+[ext_resource path="res://game/characters/player/player_hud/hud.gd" type="Script" id=1]
+[ext_resource path="res://game/characters/player/player_hud/portraits/portrait_townguard_ingame.png" type="Texture" id=2]
+[ext_resource path="res://game/characters/player/player_hud/fps_counter.tscn" type="PackedScene" id=3]
+[ext_resource path="res://game/pause/pause_menu.tscn" type="PackedScene" id=4]
 
 [sub_resource type="StyleBoxFlat" id=1]
 
@@ -13,15 +12,29 @@ content_margin_right = -1.0
 content_margin_top = -1.0
 content_margin_bottom = -1.0
 bg_color = Color( 0.386719, 0.128403, 0.128403, 1 )
-light_color = Color( 0.914063, 0.096405, 0.096405, 1 )
-dark_color = Color( 0.214844, 0.0461578, 0.0461578, 1 )
-border_size = 0
+draw_center = true
+border_width_left = 0
+border_width_top = 0
+border_width_right = 0
+border_width_bottom = 0
+border_color = Color( 0.8, 0.8, 0.8, 1 )
 border_blend = true
-draw_bg = true
+corner_radius_top_left = 0
+corner_radius_top_right = 0
+corner_radius_bottom_right = 0
+corner_radius_bottom_left = 0
+corner_detail = 8
+expand_margin_left = 0.0
+expand_margin_right = 0.0
+expand_margin_top = 0.0
+expand_margin_bottom = 0.0
+shadow_color = Color( 0, 0, 0, 0.6 )
+shadow_size = 0
+anti_aliasing = true
+anti_aliasing_size = 1
 
 [sub_resource type="Theme" id=2]
 
-default_font = ExtResource( 3 )
 
 [node name="hud" type="CanvasLayer"]
 
@@ -29,31 +42,42 @@ layer = 1
 offset = Vector2( 0, 0 )
 rotation = 0.0
 scale = Vector2( 1, 1 )
+transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 script = ExtResource( 1 )
 
-[node name="health" type="Control" parent="."]
+[node name="health" type="Control" parent="." index="0"]
 
-hint_tooltip = "Current Health"
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags_horizontal = 1
-size_flags_vertical = 1
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 112.0
 margin_top = 32.0
 margin_right = 320.0
 margin_bottom = 48.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+hint_tooltip = "Current Health"
 mouse_filter = 0
-
-[node name="hp_bar" type="ProgressBar" parent="health"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
+mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
-size_flags_vertical = 0
+size_flags_vertical = 1
+
+[node name="hp_bar" type="ProgressBar" parent="health" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 8.0
-margin_top = 0.0
 margin_right = 216.0
 margin_bottom = 28.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 0
 custom_styles/fg = SubResource( 1 )
 min_value = 0.0
 max_value = 100.0
@@ -63,37 +87,45 @@ value = 1.0
 exp_edit = false
 rounded = false
 percent_visible = false
-mouse_filter = 0
 
-[node name="portrait" type="Sprite" parent="."]
+[node name="portrait" type="Sprite" parent="." index="1"]
 
 position = Vector2( 72, 72 )
 scale = Vector2( 2.5, 2.5 )
 texture = ExtResource( 2 )
 
-[node name="exp" type="Control" parent="."]
+[node name="exp" type="Control" parent="." index="2"]
 
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags_horizontal = 1
-size_flags_vertical = 1
-margin_left = 0.0
-margin_top = 0.0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_right = 40.0
 margin_bottom = 40.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
 mouse_filter = 0
-
-[node name="ProgressBar" type="ProgressBar" parent="exp"]
-
-rect_scale = Vector2( 1, 0.5 )
-focus/ignore_mouse = false
-focus/stop_mouse = true
+mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
-size_flags_vertical = 0
+size_flags_vertical = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="exp" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 32.0
 margin_top = 4.0
 margin_right = 1248.0
 margin_bottom = 20.0
+rect_scale = Vector2( 1, 0.5 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 0
 min_value = 0.0
 max_value = 100.0
 step = 1.0
@@ -102,78 +134,110 @@ value = 1.0
 exp_edit = false
 rounded = false
 percent_visible = true
-mouse_filter = 0
 
-[node name="inventory" type="ItemList" parent="."]
+[node name="inventory" type="ItemList" parent="." index="3"]
 
 visible = false
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags_horizontal = 1
-size_flags_vertical = 1
-theme = SubResource( 2 )
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 120.0
 margin_top = 64.0
 margin_right = 800.0
 margin_bottom = 278.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = true
+focus_mode = 2
 mouse_filter = 0
-
-[node name="game_level" type="Label" parent="."]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
+mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
-size_flags_vertical = 0
+size_flags_vertical = 1
+theme = SubResource( 2 )
+items = [  ]
+select_mode = 0
+allow_reselect = false
+icon_mode = 1
+fixed_icon_size = Vector2( 0, 0 )
+
+[node name="game_level" type="Label" parent="." index="4"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 4.0
 margin_top = 704.0
 margin_right = 44.0
 margin_bottom = 718.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 0
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-mouse_filter = 1
 
-[node name="debug_container" type="Container" parent="."]
+[node name="debug_container" type="Container" parent="." index="5"]
 
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags_horizontal = 1
-size_flags_vertical = 1
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 32.0
 margin_top = 120.0
 margin_right = 148.0
 margin_bottom = 200.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
 mouse_filter = 0
-
-[node name="debug_ms" type="Label" parent="debug_container"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
+mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
-size_flags_vertical = 0
-margin_left = 0.0
-margin_top = 0.0
+size_flags_vertical = 1
+
+[node name="debug_ms" type="Label" parent="debug_container" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_right = 123.0
 margin_bottom = 31.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 0
 text = "Movement speed:
 "
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-mouse_filter = 1
 
-[node name="fps_count" parent="debug_container" instance=ExtResource( 4 )]
+[node name="fps_count" parent="debug_container" index="1" instance=ExtResource( 3 )]
 
 margin_top = 32.0
 margin_bottom = 46.0
 
-[node name="pause_menu" parent="." instance=ExtResource( 5 )]
+[node name="pause_menu" parent="." index="6" instance=ExtResource( 4 )]
 
 pause_mode = 2
 visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_default_cursor_shape = 0
 
-[connection signal="focus_entered" from="inventory" to="." method="_on_inventory_focus_enter" binds=[  ]]
+[connection signal="focus_entered" from="inventory" to="." method="_on_inventory_focus_enter"]
 
-[connection signal="item_rmb_selected" from="inventory" to="." method="_on_inventory_item_rmb_selected" binds=[  ]]
+[connection signal="item_rmb_selected" from="inventory" to="." method="_on_inventory_item_rmb_selected"]
 
-[connection signal="item_selected" from="inventory" to="." method="_on_inventory_item_selected" binds=[  ]]
+[connection signal="item_selected" from="inventory" to="." method="_on_inventory_item_selected"]
+
+

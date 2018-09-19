@@ -1,0 +1,8 @@
+Weapon folder will have
+- weapon scene
+- weapon dropped texture
+- weapon action texture(s) (thrust, swing, etc.)
+
+Weapon scene will have
+- weapon statistics (dmg, attack speed)
+- filepath for weapon action texture

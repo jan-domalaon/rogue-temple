@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/iron_sword.png-f78b8841e63d33774bff166570a0e3d3.stex"
+path="res://.import/iron_sword.png-0a6f1f272ca39aa1d7924021cdb325e9.stex"
 
 [deps]
 
-source_file="res://scenes/common/weapons/iron_sword/iron_sword.png"
-dest_files=[ "res://.import/iron_sword.png-f78b8841e63d33774bff166570a0e3d3.stex" ]
+source_file="res://game/items/weapons/iron_sword/iron_sword.png"
+dest_files=[ "res://.import/iron_sword.png-0a6f1f272ca39aa1d7924021cdb325e9.stex" ]
 
 [params]
 

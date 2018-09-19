@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/sword_thrust.png-fa7bb5f01daa89695b6c3d09ad246019.stex"
+path="res://.import/sword_thrust.png-fc0544d73cc4b093bfaf597dfc630c7b.stex"
 
 [deps]
 
-source_file="res://player/sword_thrust.png"
-dest_files=[ "res://.import/sword_thrust.png-fa7bb5f01daa89695b6c3d09ad246019.stex" ]
+source_file="res://game/characters/player/STUFF TO PORT AND REORGANIZE/sword_thrust.png"
+dest_files=[ "res://.import/sword_thrust.png-fc0544d73cc4b093bfaf597dfc630c7b.stex" ]
 
 [params]
 

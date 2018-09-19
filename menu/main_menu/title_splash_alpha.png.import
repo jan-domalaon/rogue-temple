@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/title_splash_alpha.png-f1ab6cd9db5417d899a01825c13864d0.stex"
+path="res://.import/title_splash_alpha.png-204c0ef28893eec1476d09d4e45eec1e.stex"
 
 [deps]
 
-source_file="res://scenes/menu/title_splash_alpha.png"
-dest_files=[ "res://.import/title_splash_alpha.png-f1ab6cd9db5417d899a01825c13864d0.stex" ]
+source_file="res://menu/main_menu/title_splash_alpha.png"
+dest_files=[ "res://.import/title_splash_alpha.png-204c0ef28893eec1476d09d4e45eec1e.stex" ]
 
 [params]
 

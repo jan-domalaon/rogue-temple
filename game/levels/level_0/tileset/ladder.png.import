@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ladder.png-0aee96114c2b2101ed63a1ea162db2db.stex"
+path="res://.import/ladder.png-50a9cbfd9d0c7a828b99c5a25b141039.stex"
 
 [deps]
 
-source_file="res://scenes/common/ladder.png"
-dest_files=[ "res://.import/ladder.png-0aee96114c2b2101ed63a1ea162db2db.stex" ]
+source_file="res://game/levels/level_0/tileset/ladder.png"
+dest_files=[ "res://.import/ladder.png-50a9cbfd9d0c7a828b99c5a25b141039.stex" ]
 
 [params]
 
@@ -16,8 +16,8 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
-flags/mipmaps=true
+flags/filter=false
+flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
 process/fix_alpha_border=true

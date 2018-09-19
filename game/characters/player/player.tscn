@@ -1,7 +1,14 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://game/characters/player/player.gd" type="Script" id=1]
 [ext_resource path="res://game/characters/player/hero.png" type="Texture" id=2]
+[ext_resource path="res://game/characters/player/weapon_action.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 3.5, 5 )
+_sections_unfolded = [ "Resource" ]
 
 [node name="player" type="KinematicBody2D" index="0"]
 
@@ -11,12 +18,68 @@ collision_mask = 1
 collision/safe_margin = 0.08
 script = ExtResource( 1 )
 _sections_unfolded = [ "Material", "Pause", "Transform", "Visibility", "Z Index" ]
-move_speed = 200
+__meta__ = {
+"_edit_group_": true
+}
+move_speed = 100
 
 [node name="sprite" type="Sprite" parent="." index="0"]
 
-scale = Vector2( 2, 2 )
+scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 2 )
 _sections_unfolded = [ "Animation", "Offset", "Region", "Transform" ]
+
+[node name="hitbox" type="CollisionShape2D" parent="." index="1"]
+
+scale = Vector2( 2.5, 2.5 )
+shape = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="player_camera" type="Camera2D" parent="." index="2"]
+
+anchor_mode = 1
+rotating = false
+current = true
+zoom = Vector2( 0.25, 0.25 )
+limit_left = -10000000
+limit_top = -10000000
+limit_right = 10000000
+limit_bottom = 10000000
+limit_smoothed = false
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+smoothing_enabled = false
+smoothing_speed = 5.0
+offset_v = 0.0
+offset_h = 0.0
+drag_margin_left = 0.01
+drag_margin_top = 0.01
+drag_margin_right = 0.01
+drag_margin_bottom = 0.01
+editor_draw_screen = true
+editor_draw_limits = false
+editor_draw_drag_margin = true
+_sections_unfolded = [ "Drag Margin", "Editor" ]
+
+[node name="weapon_action" type="Node2D" parent="." index="3"]
+
+scale = Vector2( 0.75, 0.75 )
+script = ExtResource( 3 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="target" type="Position2D" parent="weapon_action" index="0"]
+
+position = Vector2( 0, 32 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="weapon_area2d" type="Area2D" parent="weapon_action" index="1"]
+
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
 
 

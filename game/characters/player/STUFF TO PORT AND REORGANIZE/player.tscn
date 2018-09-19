@@ -1,16 +1,17 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://player/player.gd" type="Script" id=1]
-[ext_resource path="res://player/hero.png" type="Texture" id=2]
-[ext_resource path="res://player/rotating.gd" type="Script" id=3]
-[ext_resource path="res://player/sword_thrust.png" type="Texture" id=4]
-[ext_resource path="res://player/sword_thrust.tscn" type="PackedScene" id=5]
-[ext_resource path="res://gui/hud.tscn" type="PackedScene" id=6]
+[ext_resource path="res://game/characters/player/STUFF TO PORT AND REORGANIZE/player.gd" type="Script" id=1]
+[ext_resource path="res://game/characters/player/STUFF TO PORT AND REORGANIZE/hero.png" type="Texture" id=2]
+[ext_resource path="res://game/characters/player/STUFF TO PORT AND REORGANIZE/rotating.gd" type="Script" id=3]
+[ext_resource path="res://game/characters/player/STUFF TO PORT AND REORGANIZE/sword_thrust.png" type="Texture" id=4]
+[ext_resource path="res://game/characters/player/STUFF TO PORT AND REORGANIZE/sword_thrust.tscn" type="PackedScene" id=5]
+[ext_resource path="res://game/characters/player/player_hud/hud.tscn" type="PackedScene" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
 extents = Vector2( 3.5, 5 )
+_sections_unfolded = [ "Resource" ]
 
 [sub_resource type="RectangleShape2D" id=2]
 
@@ -22,18 +23,19 @@ extents = Vector2( 16, 16 )
 custom_solver_bias = 0.0
 extents = Vector2( 10, 10 )
 
-[node name="player" type="KinematicBody2D" groups=[
+[node name="player_ported" type="KinematicBody2D" groups=[
 "mob",
 ]]
 
 input_pickable = false
-shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Transform2D( 2.4, 0, 0, 2.4, 0, 0 )
-shapes/0/trigger = false
 collision_layer = 1
 collision_mask = 1
 collision/safe_margin = 0.08
 script = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
+__meta__ = {
+"_edit_group_": true
+}
 move_speed = 100
 primary_as = 0.6
 secondary_as = 0.25
@@ -43,21 +45,21 @@ armor = 0
 primary_dmg = 2
 secondary_dmg = 2
 
-[node name="player_sprite" type="Sprite" parent="."]
+[node name="player_sprite" type="Sprite" parent="." index="0"]
 
 scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
 
-[node name="hitbox" type="CollisionShape2D" parent="."]
+[node name="hitbox" type="CollisionShape2D" parent="." index="1"]
 
 scale = Vector2( 2.4, 2.4 )
 shape = SubResource( 1 )
-trigger = false
-_update_shape_index = 0
+_sections_unfolded = [ "Transform", "Z Index" ]
 
-[node name="player_camera" type="Camera2D" parent="."]
+[node name="player_camera" type="Camera2D" parent="." index="2"]
 
-anchor_mode = 1.0
+anchor_mode = 1
 rotating = false
 current = true
 zoom = Vector2( 0.25, 0.25 )
@@ -65,84 +67,91 @@ limit_left = -10000000
 limit_top = -10000000
 limit_right = 10000000
 limit_bottom = 10000000
+limit_smoothed = false
 drag_margin_h_enabled = true
 drag_margin_v_enabled = true
 smoothing_enabled = false
 smoothing_speed = 5.0
+offset_v = 0.0
+offset_h = 0.0
 drag_margin_left = 0.01
 drag_margin_top = 0.01
 drag_margin_right = 0.01
 drag_margin_bottom = 0.01
+editor_draw_screen = true
+editor_draw_limits = false
+editor_draw_drag_margin = true
+_sections_unfolded = [ "Drag Margin", "Editor" ]
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="rotating" type="Node2D" parent="."]
+[node name="rotating" type="Node2D" parent="." index="3"]
 
-editor/display_folded = true
 scale = Vector2( 0.666667, 0.666667 )
 script = ExtResource( 3 )
+_sections_unfolded = [ "Transform" ]
 
-[node name="Position2D" type="Position2D" parent="rotating"]
+[node name="Position2D" type="Position2D" parent="rotating" index="0"]
 
 position = Vector2( 0, 32 )
+_sections_unfolded = [ "Transform" ]
 
-[node name="debug_target" type="Sprite" parent="rotating"]
+[node name="debug_target" type="Sprite" parent="rotating" index="1"]
 
 visible = false
 position = Vector2( 0, 32 )
 texture = ExtResource( 4 )
 
-[node name="weapon" parent="rotating" instance=ExtResource( 5 )]
+[node name="weapon" parent="rotating" index="2" instance=ExtResource( 5 )]
 
 visible = false
+audio_bus_override = false
+audio_bus_name = "Master"
 
-[node name="weapon_timer" type="Timer" parent="."]
+[node name="weapon_timer" type="Timer" parent="." index="4"]
 
 process_mode = 1
 wait_time = 1.0
 one_shot = false
 autostart = false
 
-[node name="hud" parent="." instance=ExtResource( 6 )]
+[node name="hud" parent="." index="5" instance=ExtResource( 6 )]
 
 editor/display_folded = true
 
-[node name="interact_area" type="Area2D" parent="."]
+[node name="interact_area" type="Area2D" parent="." index="6"]
 
 input_pickable = true
-shapes/0/shape = SubResource( 2 )
-shapes/0/transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-shapes/0/trigger = false
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="interact_area"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="interact_area" index="0"]
 
 shape = SubResource( 2 )
-trigger = false
-_update_shape_index = 0
 
-[node name="visibility" type="Area2D" parent="."]
+[node name="visibility" type="Area2D" parent="." index="7"]
 
+visible = false
 input_pickable = true
-shapes/0/shape = SubResource( 3 )
-shapes/0/transform = Transform2D( 6.4, 0, 0, 6.4, 9.53674e-07, 9.53674e-07 )
-shapes/0/trigger = false
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="visibility"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="visibility" index="0"]
 
-position = Vector2( 9.53674e-07, 9.53674e-07 )
+position = Vector2( 9.53674e-007, 9.53674e-007 )
 scale = Vector2( 6.4, 6.4 )
 shape = SubResource( 3 )
-trigger = false
-_update_shape_index = 0
+
+

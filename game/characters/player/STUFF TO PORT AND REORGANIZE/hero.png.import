@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/hero.png-d563cab17bf3ca7009f2f8b8488d2620.stex"
+path="res://.import/hero.png-b53580d364033216ada4f2975c01e97b.stex"
 
 [deps]
 
-source_file="res://player/hero.png"
-dest_files=[ "res://.import/hero.png-d563cab17bf3ca7009f2f8b8488d2620.stex" ]
+source_file="res://game/characters/player/STUFF TO PORT AND REORGANIZE/hero.png"
+dest_files=[ "res://.import/hero.png-b53580d364033216ada4f2975c01e97b.stex" ]
 
 [params]
 
@@ -16,8 +16,8 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
-flags/mipmaps=true
+flags/filter=false
+flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
 process/fix_alpha_border=true
