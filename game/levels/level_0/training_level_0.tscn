@@ -1,0 +1,175 @@
+[gd_scene load_steps=30 format=2]
+
+[ext_resource path="res://scenes/test/test_level_training.gd" type="Script" id=1]
+[ext_resource path="res://scenes/common/tileset.tres" type="TileSet" id=2]
+[ext_resource path="res://npc/practice_dummy/armored_dummy.tscn" type="PackedScene" id=3]
+[ext_resource path="res://npc/practice_dummy/unarmored_dummy.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/common/level_change.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/common/armor/chainmail.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/common/weapons/iron_mace/iron_mace.tscn" type="PackedScene" id=7]
+[ext_resource path="res://player/player.tscn" type="PackedScene" id=8]
+[ext_resource path="res://npc/water_jelly/water_jelly.tscn" type="PackedScene" id=9]
+
+[node name="training_level" type="Node"]
+
+script = ExtResource( 1 )
+
+[node name="TileMap" type="TileMap" parent="."]
+
+mode = 0
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 16, 16 )
+cell_quadrant_size = 16
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+cell_half_offset = 2
+cell_tile_origin = 0
+cell_y_sort = false
+collision_use_kinematic = false
+collision_friction = 1.0
+collision_bounce = 0.0
+collision_layer = 1
+collision_mask = 1
+occluder_light_mask = 1
+tile_data = PoolIntArray( -1769479, 0, -1769478, 0, -1769477, 0, -1769476, 0, -1769475, 0, -1769474, 0, -1769473, 0, -1835008, 0, -1835007, 0, -1835006, 0, -1835005, 0, -1835004, 0, -1835003, 0, -1835002, 0, -1835001, 0, -1835000, 0, -1834999, 0, -1834998, 0, -1834997, 0, -1834996, 0, -1834995, 0, -1834994, 0, -1834993, 0, -1834992, 0, -1834991, 0, -1834990, 0, -1834989, 0, -1834988, 0, -1834987, 0, -1834986, 0, -1834985, 0, -1834984, 0, -1834983, 0, -1834982, 0, -1703943, 0, -1769446, 0, -1638407, 0, -1638406, 1, -1638403, 1, -1703931, 1, -1703928, 1, -1703927, 1, -1703921, 1, -1703920, 1, -1703919, 1, -1703918, 1, -1703912, 1, -1703911, 1, -1703910, 0, -1572871, 0, -1572869, 1, -1572868, 1, -1638376, 1, -1638375, 1, -1638374, 0, -1507335, 0, -1507329, 1, -1572849, 1, -1572848, 1, -1572840, 1, -1572838, 0, -1441799, 0, -1441798, 1, -1441797, 1, -1441796, 1, -1507328, 1, -1507320, 1, -1507318, 1, -1507303, 1, -1507302, 0, -1376263, 0, -1376262, 1, -1441777, 1, -1441766, 0, -1310727, 0, -1310726, 1, -1376248, 1, -1376246, 1, -1376240, 1, -1376236, 1, -1376230, 0, -1245191, 0, -1245185, 1, -1310711, 1, -1310694, 0, -1179655, 0, -1179654, 1, -1179650, 1, -1245168, 1, -1245163, 1, -1245159, 1, -1245158, 0, -1114119, 0, -1114118, 1, -1179647, 1, -1179646, 1, -1179633, 1, -1179626, 1, -1179623, 1, -1179622, 0, -1048583, 0, -1048582, 1, -1048577, 1, -1114110, 1, -1114107, 1, -1114105, 1, -1114104, 1, -1114090, 1, -1114087, 1, -1114086, 0, -983047, 0, -1048550, 0, -917511, 0, -917505, 1, -983030, 1, -983029, 1, -983026, 1, -983025, 1, -983017, 1, -983016, 1, -983014, 0, -851975, 0, -851974, 1, -851972, 1, -851970, 1, -917498, 1, -917478, 0, -786439, 0, -786438, 1, -851968, 1, -851943, 1, -851942, 0, -720903, 0, -720902, 1, -786430, 1, -786416, 1, -786411, 1, -786407, 1, -786406, 0, -655367, 0, -720876, 1, -720871, 1, -720870, 0, -589831, 0, -589828, 1, -589826, 1, -655348, 1, -655344, 1, -655337, 1, -655334, 0, -524295, 0, -524291, 1, -589817, 1, -589808, 1, -589807, 1, -589806, 1, -589804, 1, -589799, 1, -589798, 0, -458759, 0, -524283, 1, -524281, 1, -524275, 1, -524274, 1, -524270, 1, -524269, 1, -524268, 1, -524265, 1, -524263, 1, -524262, 0, -393223, 0, -393222, 1, -458740, 1, -458739, 1, -458727, 1, -458726, 0, -327687, 0, -327686, 1, -327683, 1, -393206, 1, -393199, 1, -393194, 1, -393190, 0, -262151, 0, -262150, 1, -327671, 1, -327660, 1, -327658, 1, -327654, 0, -196615, 0, -196614, 1, -262127, 1, -262126, 1, -262118, 0, -131079, 0, -196607, 1, -196605, 1, -196591, 1, -196583, 1, -196582, 0, -65543, 0, -65542, 1, -65539, 1, -65537, 1, -131072, 1, -131047, 1, -131046, 0, -7, 0, -6, 0, -5, 0, -4, 0, -3, 0, -2, 0, -1, 0, -65530, 1, -65529, 1, -65528, 1, -65521, 1, -65520, 1, -65519, 1, -65518, 1, -65517, 1, -65511, 1, -65510, 0, 65535, 0, 0, 0, 1, 0, 2, 1, 3, 0, 4, 0, 5, 0, 6, 0, 7, 0, 8, 0, 9, 0, 10, 0, 11, 0, 12, 0, 13, 0, 14, 0, 15, 0, 16, 1, 17, 0, 18, 0, 19, 0, 20, 0, 21, 0, 22, 0, 23, 0, 24, 0, 25, 0, 26, 0, 65536, 0, 65538, 1, 65540, 0, 65544, 0, 65545, 1, 65546, 1, 65548, 0, 65549, 0, 65550, 0, 65551, 0, 65553, 0, 65555, 1, 65561, 0, 131072, 0, 131076, 0, 131078, 1, 131080, 0, 131084, 0, 131089, 0, 131090, 1, 131094, 1, 131095, 1, 131097, 0, 196608, 0, 196612, 0, 196616, 0, 196617, 1, 196619, 1, 196620, 0, 196625, 0, 196629, 1, 196632, 1, 196633, 0, 262144, 0, 262148, 0, 262152, 0, 262156, 0, 262161, 0, 262162, 1, 262167, 1, 262168, 0, 262169, 0, 327680, 0, 327683, 1, 327684, 0, 327688, 0, 327691, 1, 327692, 0, 327693, 1, 327694, 1, 327697, 0, 327698, 0, 327699, 0, 327700, 0, 327701, 2, 327702, 0, 327703, 2, 327704, 0, 393216, 0, 393233, 0, 393238, 0, 393239, 1, 393240, 0, 458752, 0, 458768, 1, 458769, 0, 458774, 0, 458776, 0, 524288, 0, 524294, 1, 524310, 0, 524312, 0, 589824, 0, 589834, 1, 589843, 0, 589846, 0, 589848, 0, 589849, 0, 655360, 0, 655379, 0, 655382, 1, 655384, 1, 655385, 0, 720896, 0, 720901, 1, 720902, 1, 720905, 1, 720906, 0, 720907, 0, 720908, 0, 720909, 0, 720910, 0, 720911, 0, 720912, 0, 720913, 0, 720914, 0, 720915, 0, 720921, 0, 786432, 0, 786442, 0, 786443, 1, 786444, 1, 786454, 1, 786457, 0, 851968, 0, 851978, 0, 851980, 1, 851981, 1, 851988, 1, 851989, 1, 851993, 0, 917504, 0, 917505, 0, 917506, 0, 917507, 0, 917508, 0, 917509, 0, 917510, 0, 917511, 0, 917512, 0, 917513, 0, 917514, 0, 917515, 0, 917516, 0, 917517, 0, 917518, 0, 917519, 0, 917520, 0, 917521, 0, 917522, 0, 917523, 0, 917524, 0, 917525, 0, 917526, 0, 917527, 0, 917528, 0, 917529, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="YSort" type="YSort" parent="."]
+
+sort_enabled = true
+
+[node name="armored_dummy" parent="YSort" instance=ExtResource( 3 )]
+
+position = Vector2( 88, 48 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="armored_dummy1" parent="YSort" instance=ExtResource( 3 )]
+
+position = Vector2( 52, 140 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="armored_dummy 2" parent="YSort" instance=ExtResource( 3 )]
+
+position = Vector2( 120, 72 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="armored_dummy3" parent="YSort" instance=ExtResource( 3 )]
+
+position = Vector2( 52, 160 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="armored_dummy5" parent="YSort" instance=ExtResource( 3 )]
+
+position = Vector2( 52, 180 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="armored_dummy 3" parent="YSort" instance=ExtResource( 3 )]
+
+position = Vector2( 104, 36 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="armored_dummy4" parent="YSort" instance=ExtResource( 3 )]
+
+position = Vector2( 68, 128 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="unarmored_dummy" parent="YSort" instance=ExtResource( 4 )]
+
+position = Vector2( 152, 40 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="unarmored_dummy5" parent="YSort" instance=ExtResource( 4 )]
+
+position = Vector2( 152, 56 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="unarmored_dummy1" parent="YSort" instance=ExtResource( 4 )]
+
+position = Vector2( 184, 40 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="unarmored_dummy5 3" parent="YSort" instance=ExtResource( 4 )]
+
+position = Vector2( 152, 88 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="unarmored_dummy3 2" parent="YSort" instance=ExtResource( 4 )]
+
+position = Vector2( 152, 72 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="unarmored_dummy33" parent="YSort" instance=ExtResource( 4 )]
+
+position = Vector2( 152, 200 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="unarmored_dummy2" parent="YSort" instance=ExtResource( 4 )]
+
+position = Vector2( 184, 56 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="unarmored_dummy5 4" parent="YSort" instance=ExtResource( 4 )]
+
+position = Vector2( 184, 72 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="unarmored_dummy3" parent="YSort" instance=ExtResource( 4 )]
+
+position = Vector2( 184, 88 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="unarmored_dummy6" parent="YSort" instance=ExtResource( 4 )]
+
+editor/display_folded = true
+position = Vector2( 212, 128 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="unarmored_dummy5 5" parent="YSort" instance=ExtResource( 4 )]
+
+position = Vector2( 136, 200 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="unarmored_dummy4" parent="YSort" instance=ExtResource( 4 )]
+
+position = Vector2( 152, 180 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="unarmored_dummy5 2" parent="YSort" instance=ExtResource( 4 )]
+
+position = Vector2( 136, 180 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="next_level_change" parent="YSort" instance=ExtResource( 5 )]
+
+position = Vector2( 240, 112 )
+next_level = "res://scenes/test/training_level_1.tscn"
+
+[node name="chainmail" parent="." instance=ExtResource( 6 )]
+
+position = Vector2( 132, 144 )
+
+[node name="chainmail 2" parent="." instance=ExtResource( 6 )]
+
+position = Vector2( 148, 136 )
+
+[node name="iron_mace" parent="." instance=ExtResource( 7 )]
+
+position = Vector2( 114, 144 )
+scale = Vector2( 0.0625, 0.125 )
+
+[node name="iron_mace1" parent="." instance=ExtResource( 7 )]
+
+position = Vector2( 214, 108 )
+scale = Vector2( 0.0625, 0.125 )
+
+[node name="player" parent="." instance=ExtResource( 8 )]
+
+position = Vector2( 176, 144 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="test_ai" parent="." instance=ExtResource( 9 )]
+
+position = Vector2( 96, -32 )
+scale = Vector2( 0.5, 0.5 )
+[editable path="YSort/unarmored_dummy6"]

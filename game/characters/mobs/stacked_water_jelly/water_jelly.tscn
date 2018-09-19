@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://npc/water_jelly/water_jelly.gd" type="Script" id=1]
+[ext_resource path="res://npc/water_jelly/stacked_water_jelly.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 6, 12 )
+
+[node name="water_jelly" type="KinematicBody2D"]
+
+input_pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Transform2D( 1.45455, 0, 0, 1.06667, 4.76837e-07, -4.76837e-07 )
+shapes/0/trigger = false
+collision_layer = 1
+collision_mask = 1
+collision/safe_margin = 0.08
+script = ExtResource( 1 )
+move_speed = 100
+health = 4
+
+[node name="sprite" type="Sprite" parent="."]
+
+position = Vector2( -4.76837e-07, 4.76837e-07 )
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 2 )
+
+[node name="hitbox" type="CollisionShape2D" parent="."]
+
+position = Vector2( 4.76837e-07, -4.76837e-07 )
+scale = Vector2( 1.45455, 1.06667 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0

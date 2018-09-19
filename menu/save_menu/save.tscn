@@ -1,0 +1,82 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/menu/save.gd" type="Script" id=1]
+[ext_resource path="res://scenes/common/fonts/cinzel-bold.font" type="BitmapFont" id=2]
+
+[node name="save" type="Container"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 1280.0
+margin_bottom = 720.0
+script = ExtResource( 1 )
+mouse_filter = 0
+
+[node name="save_slots" type="Container" parent="."]
+
+visible = false
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 1280.0
+margin_bottom = 720.0
+mouse_filter = 0
+
+[node name="new_game_cont" type="Container" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 1280.0
+margin_bottom = 720.0
+mouse_filter = 0
+
+[node name="new_game" type="Button" parent="new_game_cont"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 320.0
+margin_top = 128.0
+margin_right = 960.0
+margin_bottom = 228.0
+custom_fonts/font = ExtResource( 2 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "New Game"
+flat = false
+mouse_filter = 0
+
+[node name="load" type="Button" parent="new_game_cont"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 320.0
+margin_top = 288.0
+margin_right = 960.0
+margin_bottom = 388.0
+custom_fonts/font = ExtResource( 2 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Continue"
+flat = false
+mouse_filter = 0
+
+[connection signal="pressed" from="new_game_cont/new_game" to="." method="_on_new_game_pressed" binds=[  ]]
+
+[connection signal="pressed" from="new_game_cont/load" to="." method="_on_load_pressed" binds=[  ]]

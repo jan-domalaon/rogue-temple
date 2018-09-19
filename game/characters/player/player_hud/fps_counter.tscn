@@ -1,0 +1,19 @@
+[gd_scene load_steps=1 format=2]
+
+[ext_resource path="res://scenes/test/fps_counter.gd" type="Script" id=1]
+
+[node name="fps_count" type="Label"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 0
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 40.0
+margin_bottom = 14.0
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+script = ExtResource( 1 )
+mouse_filter = 1

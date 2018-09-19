@@ -1,0 +1,188 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://scenes/menu/pause/pause_menu.gd" type="Script" id=1]
+[ext_resource path="res://scenes/menu/pause/white.png" type="Texture" id=2]
+[ext_resource path="res://scenes/common/fonts/cinzel-bold.font" type="BitmapFont" id=3]
+
+[sub_resource type="Shader" id=1]
+
+_code = {
+"fragment": "uniform texture vignette;
+float radius = 0.003;
+vec3 col = vec3(0);
+
+col+= texscreen(SCREEN_UV+vec2(-radius,-radius));
+col+= texscreen(SCREEN_UV+vec2(0,-radius));
+col+= texscreen(SCREEN_UV+vec2(radius,-radius));
+
+col+= texscreen(SCREEN_UV+vec2(-radius,0));
+col+= texscreen(SCREEN_UV+vec2(0,0));
+col+= texscreen(SCREEN_UV+vec2(radius,0));
+
+
+col+= texscreen(SCREEN_UV+vec2(-radius,radius));
+col+= texscreen(SCREEN_UV+vec2(0,radius));
+col+= texscreen(SCREEN_UV+vec2(radius,radius));
+
+col/=9.0;
+COLOR.rgb=col;",
+"fragment_ofs": 0,
+"light": "",
+"light_ofs": 0,
+"vertex": "",
+"vertex_ofs": 0
+}
+
+[sub_resource type="ShaderMaterial" id=2]
+
+shader/shader = SubResource( 1 )
+shader/shading_mode = 0
+
+[node name="pause_menu" type="Container"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 1280.0
+margin_bottom = 720.0
+script = ExtResource( 1 )
+mouse_filter = 0
+
+[node name="blur" type="TextureRect" parent="."]
+
+material = SubResource( 2 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 1280.0
+margin_bottom = 720.0
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 0
+__meta__ = {
+"_edit_lock_": true
+}
+mouse_filter = 1
+
+[node name="options_container" type="Container" parent="."]
+
+visible = false
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 1280.0
+margin_bottom = 720.0
+mouse_filter = 0
+
+[node name="pause_menu_container" type="Container" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 1280.0
+margin_bottom = 720.0
+mouse_filter = 0
+
+[node name="resume" type="Button" parent="pause_menu_container"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 320.0
+margin_top = 96.0
+margin_right = 960.0
+margin_bottom = 192.0
+custom_fonts/font = ExtResource( 3 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Resume"
+flat = false
+mouse_filter = 0
+
+[node name="options" type="Button" parent="pause_menu_container"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 320.0
+margin_top = 384.0
+margin_right = 960.0
+margin_bottom = 480.0
+custom_fonts/font = ExtResource( 3 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Options"
+flat = false
+mouse_filter = 0
+
+[node name="save" type="Button" parent="pause_menu_container"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 320.0
+margin_top = 240.0
+margin_right = 960.0
+margin_bottom = 336.0
+custom_fonts/font = ExtResource( 3 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Save"
+flat = false
+mouse_filter = 0
+
+[node name="exit" type="Button" parent="pause_menu_container"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 320.0
+margin_top = 528.0
+margin_right = 960.0
+margin_bottom = 624.0
+custom_fonts/font = ExtResource( 3 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Quit to Menu"
+flat = false
+mouse_filter = 0
+
+[node name="save_slot_container" type="Container" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 0
+
+[connection signal="pressed" from="pause_menu_container/resume" to="." method="_on_resume_pressed" binds=[  ]]
+
+[connection signal="pressed" from="pause_menu_container/options" to="." method="_on_options_pressed" binds=[  ]]
+
+[connection signal="pressed" from="pause_menu_container/save" to="." method="_on_save_pressed" binds=[  ]]
+
+[connection signal="pressed" from="pause_menu_container/exit" to="." method="_on_quit_pressed" binds=[  ]]
