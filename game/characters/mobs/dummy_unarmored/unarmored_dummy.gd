@@ -19,4 +19,3 @@ func _process(delta):
 	if (health <= 0):
 		print(get_name() + ' is deadaz')
 		queue_free()
-

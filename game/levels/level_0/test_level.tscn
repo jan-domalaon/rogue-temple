@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://game/levels/level_0/tileset/tileset_post_port.tres" type="TileSet" id=1]
 [ext_resource path="res://game/characters/player/player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://game/characters/mobs/stacked_water_jelly/water_jelly.tscn" type="PackedScene" id=3]
+[ext_resource path="res://game/characters/generic_character.tscn" type="PackedScene" id=4]
 
 [node name="prototype_level" type="Node"]
 
@@ -46,5 +47,11 @@ _sections_unfolded = [ "Transform" ]
 
 position = Vector2( 64, 96 )
 scale = Vector2( 0.5, 0.5 )
+
+[node name="generic_character" parent="." index="4" instance=ExtResource( 4 )]
+
+position = Vector2( 88, 24 )
+scale = Vector2( 0.5, 0.5 )
+_sections_unfolded = [ "Transform" ]
 
 

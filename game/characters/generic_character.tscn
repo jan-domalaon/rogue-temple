@@ -1,34 +1,29 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://game/characters/mobs/stacked_water_jelly/water_jelly.gd" type="Script" id=1]
-[ext_resource path="res://game/characters/mobs/stacked_water_jelly/stacked_water_jelly.png" type="Texture" id=2]
+[ext_resource path="res://game/characters/character.gd" type="Script" id=1]
+[ext_resource path="res://game/characters/generic_character.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 6, 12 )
+extents = Vector2( 12, 12 )
 
-[node name="water_jelly" type="KinematicBody2D" index="0"]
+[node name="generic_character" type="KinematicBody2D"]
 
 input_pickable = false
 collision_layer = 1
 collision_mask = 1
 collision/safe_margin = 0.08
 script = ExtResource( 1 )
-move_speed = 100
-health = 4
 
 [node name="sprite" type="Sprite" parent="." index="0"]
 
-position = Vector2( -4.76837e-007, 4.76837e-007 )
 scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 2 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="hitbox" type="CollisionShape2D" parent="." index="1"]
 
-position = Vector2( 4.76837e-007, -4.76837e-007 )
-scale = Vector2( 1.45455, 1.06667 )
 shape = SubResource( 1 )
 
 

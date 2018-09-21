@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://game/characters/player/player.gd" type="Script" id=1]
 [ext_resource path="res://game/characters/player/hero.png" type="Texture" id=2]
 [ext_resource path="res://game/characters/player/weapon_action.gd" type="Script" id=3]
+[ext_resource path="res://game/items/weapons/iron_mace/iron_mace.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -72,14 +73,6 @@ _sections_unfolded = [ "Transform" ]
 position = Vector2( 0, 32 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="weapon_area2d" type="Area2D" parent="weapon_action" index="1"]
-
-input_pickable = true
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
-audio_bus_override = false
-audio_bus_name = "Master"
+[node name="iron_mace" parent="weapon_action" index="1" instance=ExtResource( 4 )]
 
 

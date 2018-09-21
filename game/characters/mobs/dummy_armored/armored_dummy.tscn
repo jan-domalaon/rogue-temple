@@ -1,7 +1,9 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://npc/practice_dummy/armored_dummy.gd" type="Script" id=1]
-[ext_resource path="res://npc/practice_dummy/armored_dummy.png" type="Texture" id=2]
+[ext_resource path="res://game/characters/mobs/dummy_armored/armored_dummy.gd" type="Script" id=1]
+[ext_resource path="res://game/characters/mobs/dummy_armored/armored_dummy.png" type="Texture" id=2]
+
+
 
 [sub_resource type="RectangleShape2D" id=1]
 
