@@ -3,12 +3,12 @@
 [ext_resource path="res://game/characters/player/player.gd" type="Script" id=1]
 [ext_resource path="res://game/characters/player/hero.png" type="Texture" id=2]
 [ext_resource path="res://game/characters/player/weapon_action.gd" type="Script" id=3]
-[ext_resource path="res://game/items/weapons/iron_mace/iron_mace.tscn" type="PackedScene" id=4]
+[ext_resource path="res://game/items/weapons/generic_weapon.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 3.5, 5 )
+extents = Vector2( 6, 7 )
 _sections_unfolded = [ "Resource" ]
 
 [node name="player" type="KinematicBody2D" index="0"]
@@ -22,17 +22,19 @@ _sections_unfolded = [ "Material", "Pause", "Transform", "Visibility", "Z Index"
 __meta__ = {
 "_edit_group_": true
 }
+health = 20
+armor = 4
 move_speed = 100
 
 [node name="sprite" type="Sprite" parent="." index="0"]
 
-scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 2 )
 _sections_unfolded = [ "Animation", "Offset", "Region", "Transform" ]
 
-[node name="hitbox" type="CollisionShape2D" parent="." index="1"]
+[node name="hitbox" type="CollisionShape2D" parent="." index="1" groups=[
+"player",
+]]
 
-scale = Vector2( 2.5, 2.5 )
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
@@ -68,11 +70,6 @@ scale = Vector2( 0.75, 0.75 )
 script = ExtResource( 3 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="target" type="Position2D" parent="weapon_action" index="0"]
-
-position = Vector2( 0, 32 )
-_sections_unfolded = [ "Transform" ]
-
-[node name="iron_mace" parent="weapon_action" index="1" instance=ExtResource( 4 )]
+[node name="generic_weapon" parent="weapon_action" index="0" instance=ExtResource( 4 )]
 
 

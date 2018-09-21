@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/unarmored_dummy.png-de47b12629fabdfee4014d4060eda516.stex"
+path="res://.import/generic_weapon.png-06e1facc658c1b659475cb23ea56b503.stex"
 
 [deps]
 
-source_file="res://game/characters/mobs/dummy_unarmored/unarmored_dummy.png"
-dest_files=[ "res://.import/unarmored_dummy.png-de47b12629fabdfee4014d4060eda516.stex" ]
+source_file="res://game/items/weapons/generic_weapon.png"
+dest_files=[ "res://.import/generic_weapon.png-06e1facc658c1b659475cb23ea56b503.stex" ]
 
 [params]
 

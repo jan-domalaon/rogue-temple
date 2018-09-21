@@ -3,14 +3,11 @@
 # TODO: Camera zoom
 
 
-extends KinematicBody2D
+extends "res://game/characters/character.gd"
 
 
 # Default values
 const DEF_MOVE_SPEED = 100
-
-
-export (int) var move_speed = 100
 
 onready var cursor_pos = get_global_mouse_position()
 
@@ -46,4 +43,6 @@ func _process(delta):
 		get_node("sprite").set_flip_h(false)
 
 func _input(event):
-	pass
+	# If primary_attack, do weapon's primary attack
+	if (event.is_action_pressed('primary_attack')):
+		pass

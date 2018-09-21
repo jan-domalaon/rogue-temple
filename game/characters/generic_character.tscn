@@ -6,24 +6,30 @@
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 12, 12 )
+extents = Vector2( 8, 8 )
 
-[node name="generic_character" type="KinematicBody2D"]
+[node name="generic_character" type="KinematicBody2D" groups=[
+"enemies",
+]]
 
 input_pickable = false
 collision_layer = 1
 collision_mask = 1
 collision/safe_margin = 0.08
 script = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
+health = 1
+armor = 0
+move_speed = 100
 
 [node name="sprite" type="Sprite" parent="." index="0"]
 
-scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 2 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="hitbox" type="CollisionShape2D" parent="." index="1"]
 
 shape = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
 
 

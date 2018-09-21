@@ -6,14 +6,10 @@ extends Node2D
 
 
 func _ready():
-	# Called when the node is added to the scene for the first time.
-	# Initialization here
-	pass
+	#set_process(true)
 
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass
+func _process(delta):
+	#look_at(get_global_mouse_position())
 
 func deliver_dmg():
 	# Delivers damage to enemies
