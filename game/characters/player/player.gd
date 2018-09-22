@@ -15,24 +15,16 @@ func _ready():
 	set_physics_process(true)
 	set_process_input(true)
 	set_process(true)
+	
 
 func _physics_process(delta):
 	# Movement
-	var motion = Vector2()
-	if (Input.is_action_pressed("move_up")):
-		motion += Vector2(0, -1)
-	if (Input.is_action_pressed("move_down")):
-		motion += Vector2(0, 1)
-	if (Input.is_action_pressed("move_left")):
-		motion += Vector2(-1, 0)
-	if (Input.is_action_pressed("move_right")):
-		motion += Vector2(1, 0)
-	motion = motion.normalized()* move_speed * delta
-	move_and_collide(motion)
-	if (is_on_wall()):
-		var n = get_collision_normal()
-		motion = n.slide(motion)
-		move_and_collide(motion)
+	movement_dir.x = -int(Input.is_action_pressed("move_left")) + int(Input.is_action_pressed("move_right"))
+	movement_dir.y = -int(Input.is_action_pressed("move_up")) + int(Input.is_action_pressed("move_down"))
+	movement()
+	
+	# Knockback between enemies with knockback and player
+	knockback()
 
 func _process(delta):
 	# Flips the player sprite horizontally to mimic the player facing direction.

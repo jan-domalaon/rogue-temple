@@ -10,6 +10,7 @@ func _ready():
 
 func _process(delta):
 	#look_at(get_global_mouse_position())
+	pass
 
 func deliver_dmg():
 	# Delivers damage to enemies

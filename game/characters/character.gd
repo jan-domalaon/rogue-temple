@@ -8,13 +8,39 @@ export (int) var move_speed = 100
 # Physical resistance of all characters
 var phys_resist = armor * 0.8
 
-func _ready():
-	pass
+# Vars on knockback mechanic
+var knockback_counter = 0
+var knockback_dir = Vector2(0, 0)
+export var knockback_factor = 1.0
 
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass
+var movement_dir = Vector2(0, 0)
+
+func movement():
+	var motion
+	if (knockback_counter == 0):
+		motion = movement_dir.normalized() * move_speed
+	else:
+		motion = knockback_dir.normalized() * move_speed * knockback_factor
+	move_and_slide(motion, Vector2(0, 0))
+
+func knockback():
+	# Knockback countdown
+	if (knockback_counter > 0):
+		knockback_counter -= 1
+	for body in $knockback_area.get_overlapping_bodies():
+		# Knockback if THIS character is an enemy and touches a player
+		if ("bouncy_mobs" in get_groups() && (knockback_counter == 0 && "player" in body.get_groups())):
+			# Start knockback counter
+			knockback_counter = 5
+			knockback_dir = transform.origin - body.transform.origin
+			print("bouncy_mobs", " knocked back!")
+
+		if ("player" in get_groups() && (knockback_counter == 0 && "bouncy_mobs" in body.get_groups())):
+			# Start knockback counter
+			knockback_counter = 5
+			knockback_dir = transform.origin - body.transform.origin
+			print("player", " knocked back!")
+	
 
 func receive_phys_damage(body):
 	# Remove HP from this character based on the damage stat of weapon

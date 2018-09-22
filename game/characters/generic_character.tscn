@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://game/characters/character.gd" type="Script" id=1]
 [ext_resource path="res://game/characters/generic_character.png" type="Texture" id=2]
@@ -6,11 +6,14 @@
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 8, 8 )
+extents = Vector2( 8, 9 )
 
-[node name="generic_character" type="KinematicBody2D" groups=[
-"enemies",
-]]
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 5, 7 )
+
+[node name="generic_character" type="KinematicBody2D"]
 
 input_pickable = false
 collision_layer = 1
@@ -21,15 +24,31 @@ _sections_unfolded = [ "Transform" ]
 health = 1
 armor = 0
 move_speed = 100
+knockback_factor = 1.0
 
 [node name="sprite" type="Sprite" parent="." index="0"]
 
 texture = ExtResource( 2 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="hitbox" type="CollisionShape2D" parent="." index="1"]
+[node name="knockback_area" type="Area2D" parent="." index="1"]
+
+visible = false
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+
+[node name="knockback_hitbox" type="CollisionShape2D" parent="knockback_area" index="0"]
 
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
+
+[node name="hitbox" type="CollisionShape2D" parent="." index="2"]
+
+shape = SubResource( 2 )
 
 

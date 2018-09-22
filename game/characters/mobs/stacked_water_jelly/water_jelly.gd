@@ -1,14 +1,12 @@
-extends KinematicBody2D
+extends "res://game/characters/character.gd"
 
 # TODO: AI - states, state change triggers.
 
-export var move_speed = 100
-export var health = 4
 # State is either 'IDLE', 'CHASING', 'ATTACKING_MELEE', 'ATTACKING_RANGED', 'RETREATING'
 var state = 'IDLE'
 
 func _ready():
-	set_process(true)
+	set_physics_process(true)
 
 func _process(delta):
 	# Check for death. player_weapons will subtract the health.
@@ -16,3 +14,5 @@ func _process(delta):
 		print(get_name() + ' is deadaz')
 		queue_free()
 
+func _physics_process(delta):
+	knockback()

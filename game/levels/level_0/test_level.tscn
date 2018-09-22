@@ -1,11 +1,11 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://game/levels/level_0/tileset/tileset_post_port.tres" type="TileSet" id=1]
-[ext_resource path="res://game/characters/player/player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://game/characters/mobs/stacked_water_jelly/water_jelly.tscn" type="PackedScene" id=3]
-[ext_resource path="res://game/characters/generic_character.tscn" type="PackedScene" id=4]
+[ext_resource path="res://game/characters/mobs/stacked_water_jelly/stacked_water_jelly.tscn" type="PackedScene" id=2]
+[ext_resource path="res://game/characters/generic_character.tscn" type="PackedScene" id=3]
+[ext_resource path="res://game/characters/player/test_player.tscn" type="PackedScene" id=4]
 
-[node name="prototype_level" type="Node"]
+[node name="prototype_level" type="Node" index="0"]
 
 [node name="TileMap" type="TileMap" parent="." index="0"]
 
@@ -31,27 +31,20 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="player" parent="." index="1" instance=ExtResource( 2 )]
-
-editor/display_folded = true
-position = Vector2( 32, 32 )
-scale = Vector2( 0.5, 0.5 )
-
-[node name="water_jelly" parent="." index="2" instance=ExtResource( 3 )]
+[node name="water_jelly" parent="." index="1" instance=ExtResource( 2 )]
 
 position = Vector2( 96, 64 )
-scale = Vector2( 0.5, 0.5 )
-_sections_unfolded = [ "Transform" ]
 
-[node name="water_jelly 2" parent="." index="3" instance=ExtResource( 3 )]
+[node name="water_jelly 2" parent="." index="2" instance=ExtResource( 2 )]
 
 position = Vector2( 64, 96 )
-scale = Vector2( 0.5, 0.5 )
 
-[node name="generic_character" parent="." index="4" instance=ExtResource( 4 )]
+[node name="generic_character" parent="." index="3" instance=ExtResource( 3 )]
 
 position = Vector2( 88, 24 )
-scale = Vector2( 0.5, 0.5 )
-_sections_unfolded = [ "Transform" ]
+
+[node name="player" parent="." index="4" instance=ExtResource( 4 )]
+
+position = Vector2( 48, 48 )
 
 
