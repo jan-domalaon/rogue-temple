@@ -14,6 +14,14 @@ config/name="Catacombs2018"
 boot_splash/image="res://non_commercial_logo.png"
 config/icon="res://icon.png"
 
+[autoload]
+
+global="*res://game/global_scripts/global.gd"
+item_db="*res://game/global_scripts/item_db.gd"
+weapons_db="*res://game/global_scripts/weapons_db.gd"
+player_variables="*res://game/characters/player/STUFF TO PORT AND REORGANIZE/player_variables.gd"
+builds="*res://game/characters/player/STUFF TO PORT AND REORGANIZE/builds.gd"
+
 [display]
 
 window/size/width=1280

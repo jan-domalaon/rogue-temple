@@ -1,11 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://game/characters/player/STUFF TO PORT AND REORGANIZE/player.gd" type="Script" id=1]
 [ext_resource path="res://game/characters/player/STUFF TO PORT AND REORGANIZE/hero.png" type="Texture" id=2]
 [ext_resource path="res://game/characters/player/STUFF TO PORT AND REORGANIZE/rotating.gd" type="Script" id=3]
 [ext_resource path="res://game/characters/player/STUFF TO PORT AND REORGANIZE/sword_thrust.png" type="Texture" id=4]
 [ext_resource path="res://game/characters/player/STUFF TO PORT AND REORGANIZE/sword_thrust.tscn" type="PackedScene" id=5]
-[ext_resource path="res://game/characters/player/player_hud/hud.tscn" type="PackedScene" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -32,7 +31,7 @@ collision_layer = 1
 collision_mask = 1
 collision/safe_margin = 0.08
 script = ExtResource( 1 )
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Pause", "Transform" ]
 __meta__ = {
 "_edit_group_": true
 }
@@ -49,7 +48,7 @@ secondary_dmg = 2
 
 scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 2 )
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Pause", "Transform" ]
 
 [node name="hitbox" type="CollisionShape2D" parent="." index="1"]
 
@@ -116,11 +115,7 @@ wait_time = 1.0
 one_shot = false
 autostart = false
 
-[node name="hud" parent="." index="5" instance=ExtResource( 6 )]
-
-editor/display_folded = true
-
-[node name="interact_area" type="Area2D" parent="." index="6"]
+[node name="interact_area" type="Area2D" parent="." index="5"]
 
 visible = false
 input_pickable = true
@@ -138,7 +133,7 @@ __meta__ = {
 
 shape = SubResource( 2 )
 
-[node name="visibility" type="Area2D" parent="." index="7"]
+[node name="visibility" type="Area2D" parent="." index="6"]
 
 visible = false
 input_pickable = true

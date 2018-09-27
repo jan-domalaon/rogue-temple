@@ -4,12 +4,12 @@ extends Node
 
 # Contains the starting builds for the player. Runs once at the level 0
 # ie the first level of the game.
-onready var weapons_db 		= get_node('/root/weapon_database')
-onready var item_db 		= get_node('/root/item_database')
+onready var weapons_db 		= get_node('/root/weapons_db')
+onready var item_db 		= get_node('/root/item_db')
 onready var weapons 		= weapons_db.WEAPONS
 onready var potions 		= item_db.POTIONS
 onready var foodstuffs 		= item_db.FOODSTUFF
-onready var body_armor 		= item_db.BODY_ARMOR
+onready var armors 		= item_db.ARMORS
 onready var helmets 		= item_db.HELMETS
 onready var gloves			= item_db.GLOVES
 onready var boots			= item_db.BOOTS

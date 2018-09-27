@@ -14,14 +14,14 @@ extends Node
 # Satiated gives a buff to move speed and regenerates health.
 # Full indicates the stage between satiated and stuffed, meaning that the player should stop eating.
 # Stuffed reduces move speed less than normal but buffs HP and health regeneration.
-const HUNGER_STAGES = ['normal', 'satiated', 'full', 'stuffed']
+const HUNGER_STAGES = ['NORMAL', 'SATIATED', 'FULL', 'STUFFED']
 # Damage types: cut, blunt, pierce
 const DAMAGE_TYPES = ['c', 'b', 'p']
 # Default starting build
 const DEF_STARTING_BUILD = 'HAA Bladesman'
 
-onready var item_db = get_node('/root/item_database')
-onready var weapon_db = get_node('/root/weapon_database')
+onready var item_db = get_node('/root/item_db')
+onready var weapon_db = get_node('/root/weapons_db')
 
 var primary_dmg = 2
 var secondary_dmg = 2

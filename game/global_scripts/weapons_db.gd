@@ -5,7 +5,7 @@ extends Node
 # Contains all of the weapons in the game.
 
 # WEAPONS {Weapon Name (str): Weapon Path (str)}
-const WEAPONS = {'Iron Sword': 'res://scenes/common/weapons/iron_sword/iron_sword.tscn', 
+const WEAPONS = {'Iron Sword': 'res://game/items/weapons/iron_sword/iron_sword.tscn', 
 				 'Iron Mace': 'res://scenes/common/weapons/iron_mace.tscn'}
 
 

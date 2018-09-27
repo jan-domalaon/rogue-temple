@@ -29,18 +29,11 @@ func knockback():
 		knockback_counter -= 1
 	for body in $knockback_area.get_overlapping_bodies():
 		# Knockback if THIS character is an enemy and touches a player
-		if ("bouncy_mobs" in get_groups() && (knockback_counter == 0 && "player" in body.get_groups())):
+		if (knockback_counter == 0 && ("bouncy_mobs" in get_groups() && "player" in body.get_groups()) or 
+		("player" in get_groups() && "bouncy_mobs" in body.get_groups())):
 			# Start knockback counter
 			knockback_counter = 5
 			knockback_dir = transform.origin - body.transform.origin
-			print("bouncy_mobs", " knocked back!")
-
-		if ("player" in get_groups() && (knockback_counter == 0 && "bouncy_mobs" in body.get_groups())):
-			# Start knockback counter
-			knockback_counter = 5
-			knockback_dir = transform.origin - body.transform.origin
-			print("player", " knocked back!")
-	
 
 func receive_phys_damage(body):
 	# Remove HP from this character based on the damage stat of weapon

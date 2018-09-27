@@ -226,13 +226,6 @@ margin_bottom = 46.0
 
 pause_mode = 2
 visible = false
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_default_cursor_shape = 0
 
 [connection signal="focus_entered" from="inventory" to="." method="_on_inventory_focus_enter"]
 

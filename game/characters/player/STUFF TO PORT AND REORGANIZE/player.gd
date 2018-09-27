@@ -48,20 +48,20 @@ var level_name 			= null
 signal level_change
 
 
-func _enter_tree():
-	global_player_vars 		= get_node("/root/player_variables")
-	inventory 				= global_player_vars.inventory
-	weapon_db				= get_node("/root/weapon_database")
-	# Set variables from a previous scene.
-	primary_dmg = global_player_vars.primary_dmg
-	secondary_dmg = global_player_vars.secondary_dmg
-	health = global_player_vars.health
-	armor = global_player_vars.armor
-	print(armor)
-	# Load PackedScene from player_vars. Instancing occurs in _ready()
-	equipped_weapon = load(weapon_db.WEAPONS[global_player_vars.equipped_weapon])
-	# Set level
-	level_name = get_parent().level_name
+#func _enter_tree():
+#	global_player_vars 		= get_node("/root/player_variables")
+#	inventory 				= global_player_vars.inventory
+#	weapon_db				= get_node("/root/weapons_db")
+#	# Set variables from a previous scene.
+#	primary_dmg = global_player_vars.primary_dmg
+#	secondary_dmg = global_player_vars.secondary_dmg
+#	health = global_player_vars.health
+#	armor = global_player_vars.armor
+#	print(armor)
+#	# Load PackedScene from player_vars. Instancing occurs in _ready()
+#	equipped_weapon = load(weapon_db.WEAPONS[global_player_vars.equipped_weapon])
+#	# Set level
+#	level_name = get_parent().level_name
 
 func _ready():
 	# Called every time the node is added to the scene.
@@ -71,7 +71,8 @@ func _ready():
 	set_process(true)
 	
 	# Instance equipped weapon from global player vars/last scene.
-	weapon = equipped_weapon.instance()
+	# weapon = equipped_weapon.instance()
+	weapon = load('res://game/characters/player/STUFF TO PORT AND REORGANIZE/sword_thrust.tscn').instance()
 	get_node("rotating").add_child(weapon)
 	get_node("rotating/weapon").free()
 	weapon.set_name('weapon')
@@ -212,7 +213,7 @@ func make_swing():
 	# Put blade further from player.
 	weapon.set_position(Vector2(0, 32))  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 	# Tweening: needs starting angle. Look_at() in input ensures that the sword will be facing perpendicular at swing apex.
-	weapon_tween.interpolate_method(get_node("rotating"), "set_rot", get_angle_to(cursor_pos) - (PI / 2), get_angle_to(cursor_pos) + (PI / 2), primary_as, weapon_tween.TRANS_EXPO, weapon_tween.EASE_OUT)
+	weapon_tween.interpolate_method(get_node("rotating"), "set_rotation", get_angle_to(cursor_pos) - (PI / 2), get_angle_to(cursor_pos) + (PI / 2), primary_as, weapon_tween.TRANS_EXPO, weapon_tween.EASE_OUT)
 	weapon_tween.start()
 
 func on_attack_timeout():
