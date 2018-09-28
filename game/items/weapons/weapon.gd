@@ -18,6 +18,7 @@ var attack_type
 var can_attack = true
 
 func _ready():
+	$weapon_area/hitbox.set_disabled(true)
 	if (user_type == "player" or ("player" in get_parent().get_groups())):
 		set_process_input(true)
 	else:

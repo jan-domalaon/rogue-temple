@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+const FLICKER_TIME = 1.0
+
 # Various stats for characters
 export (int) var health = 1
 export (int) var armor = 0
@@ -14,34 +16,45 @@ var knockback_dir = Vector2(0, 0)
 export var knockback_factor = 1.0
 
 var movement_dir = Vector2(0, 0)
+var flickering = false
+# Check if weapon doesn't only do blunt dmg.
+var blunt_hit = false
+
+func _ready():
+	$flicker_timer.set_wait_time(FLICKER_TIME)
+
+func _physics_process(delta):
+	pass
 
 func movement():
 	var motion
 	if (knockback_counter == 0):
 		motion = movement_dir.normalized() * move_speed
 	else:
-		motion = knockback_dir.normalized() * move_speed * knockback_factor
+		motion = knockback_dir.normalized() * 100
 	move_and_slide(motion, Vector2(0, 0))
 
 func knockback():
 	# Knockback countdown
 	if (knockback_counter > 0):
 		knockback_counter -= 1
-	for body in $knockback_area.get_overlapping_bodies():
+	for area in $knockback_area.get_overlapping_areas():
+		var body = area.get_parent()
 		# Knockback if THIS character is an enemy and touches a player
-		if (knockback_counter == 0 && ("bouncy_mobs" in get_groups() && "player" in body.get_groups()) or 
-		("player" in get_groups() && "bouncy_mobs" in body.get_groups())):
+		if (knockback_counter == 0 && ("player" in get_groups() && "bouncy_mobs" in body.get_groups())):
 			# Start knockback counter
 			knockback_counter = 5
 			knockback_dir = transform.origin - body.transform.origin
-		
 		# Knockback if THIS character touches blunt damage (Player hits mob (this))
-		if (knockback_counter == 0 && ("enemies" in get_groups() && "blunt_weapons" in body.get_groups())):
+		if (knockback_counter == 0 && ("enemies" in get_groups() && "blunt_weapons" in body.get_groups()) && blunt_hit):
 			knockback_counter = 5
-			knockback_dir = transform.origin - body.transform.origin
-		# Knockback if THIS character touches blunt damage (Mob hits player (this))
+			knockback_dir = global_transform.origin - body.global_transform.origin
+			print("yeet")
+			blunt_hit = false
 
 func receive_phys_damage(dmg, dmg_type):
+	# Any type of damage should trigger flickering
+	flicker()
 	# Remove HP from this character based on the damage stat of weapon
 	# TODO: Armor reduction formula
 	if (dmg_type == 'c'):
@@ -53,5 +66,24 @@ func receive_phys_damage(dmg, dmg_type):
 		print($".".get_name() + " got hit with pierce dmg")
 	elif (dmg_type == 'b'):
 		# Blunt dmg. Do knockback
+		blunt_hit = true
 		health -= dmg
 		print($".".get_name() + " got hit with blunt dmg")
+
+func weapon_knockback():
+	print("slide my guy")
+	move_and_slide(Vector2(0, 4))
+
+func flicker():
+	# Disable hitboxes
+	#$hitbox.set_disabled(true)
+	$knockback_area/knockback_hitbox.set_disabled(true)
+	$animation_player.play("flicker")
+	$flicker_timer.start()
+	flickering = true
+
+func _on_flicker_timer_timeout():
+	# Enable collisions
+	#$hitbox.set_disabled(false)
+	$knockback_area/knockback_hitbox.set_disabled(false)
+	flickering = false

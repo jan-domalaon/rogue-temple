@@ -15,7 +15,6 @@ func _ready():
 	set_physics_process(true)
 	set_process_input(true)
 	set_process(true)
-	
 
 func _physics_process(delta):
 	# Movement
@@ -24,6 +23,7 @@ func _physics_process(delta):
 	movement()
 	
 	# Knockback between enemies with knockback and player
+	# Player is knockbackable.
 	knockback()
 
 func _process(delta):

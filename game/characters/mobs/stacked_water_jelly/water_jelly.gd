@@ -15,4 +15,9 @@ func _process(delta):
 		queue_free()
 
 func _physics_process(delta):
+	# This mob is knockbackable
 	knockback()
+	movement()
+
+func _on_knockback_area_body_entered(body):
+	pass
