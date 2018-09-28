@@ -34,19 +34,24 @@ func knockback():
 			# Start knockback counter
 			knockback_counter = 5
 			knockback_dir = transform.origin - body.transform.origin
+		
+		# Knockback if THIS character touches blunt damage (Player hits mob (this))
+		if (knockback_counter == 0 && ("enemies" in get_groups() && "blunt_weapons" in body.get_groups())):
+			knockback_counter = 5
+			knockback_dir = transform.origin - body.transform.origin
+		# Knockback if THIS character touches blunt damage (Mob hits player (this))
 
-func receive_phys_damage(body):
+func receive_phys_damage(dmg, dmg_type):
 	# Remove HP from this character based on the damage stat of weapon
-	# Piercing damage. Goes through armor.
-#	if (dmg_type == 'p'):
-#		body.health -= dmg
-#	else:
-#		# Blunt damage. Add knockback.
-#		if (dmg_type == 'b'):
-#			pass
-#		# If dmg is greater than physical resistance, damage.
-#		# If not, the player will not damage the enemy.
-#		if (dmg > phys_resist):
-#			body.health -= (dmg - phys_resist)
-#	print(body.health)
-	pass
+	# TODO: Armor reduction formula
+	if (dmg_type == 'c'):
+		health -= dmg
+		print($".".get_name() + " got hit with cut dmg")
+	elif (dmg_type == 'p'):
+		# Piercing damage. Goes through armor.
+		health -= dmg
+		print($".".get_name() + " got hit with pierce dmg")
+	elif (dmg_type == 'b'):
+		# Blunt dmg. Do knockback
+		health -= dmg
+		print($".".get_name() + " got hit with blunt dmg")

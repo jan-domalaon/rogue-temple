@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 16, 2 )
+extents = Vector2( 16, 3 )
 
 [node name="generic_weapon" type="Node2D"]
 
@@ -16,10 +16,11 @@ weapon_name = "Test Mace"
 primary_damage = 1
 secondary_damage = 1
 primary_dmg_type = "c"
-secondary_dmg_type = "p"
+secondary_dmg_type = "b"
 user_type = "player"
 primary_as = 0.75
 secondary_as = 0.5
+weapon_type = "mace"
 
 [node name="weapon_area" type="Area2D" parent="." index="0"]
 
@@ -31,7 +32,7 @@ linear_damp = 0.1
 angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
-_sections_unfolded = [ "Transform", "Visibility" ]
+_sections_unfolded = [ "Collision", "Transform", "Visibility" ]
 
 [node name="sprite" type="Sprite" parent="weapon_area" index="0"]
 
@@ -77,6 +78,15 @@ editor_draw_screen = true
 editor_draw_limits = false
 editor_draw_drag_margin = false
 
+[node name="weapon_cooldown" type="Timer" parent="." index="2"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
+
 [connection signal="body_entered" from="weapon_area" to="." method="_on_weapon_area_body_entered"]
+
+[connection signal="timeout" from="weapon_cooldown" to="." method="_on_weapon_cooldown_timeout"]
 
 

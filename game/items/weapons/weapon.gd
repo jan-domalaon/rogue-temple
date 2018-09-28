@@ -6,12 +6,16 @@ export var weapon_name = "Test Mace"
 export var primary_damage = 1
 export var secondary_damage = 1
 export var primary_dmg_type = 'c'
-export var secondary_dmg_type = 'p'
+export var secondary_dmg_type = 'b'
 export var user_type = "player"
 export var primary_as = 0.75
 export var secondary_as = 0.5
+export var weapon_type = "mace"
 
-onready var cursor_pos = get_viewport().get_mouse_position() 
+# Hitbox shape used for disable/enable collision
+var old_shape = null
+var attack_type
+var can_attack = true
 
 func _ready():
 	if (user_type == "player" or ("player" in get_parent().get_groups())):
@@ -20,19 +24,34 @@ func _ready():
 		set_process_input(false)
 
 func _input(event):
-	if (Input.is_action_pressed("primary_attack")):
+	if (Input.is_action_just_pressed("primary_attack") and can_attack):
+		$weapon_cooldown.set_wait_time(primary_as)
+		attack_type = "primary"
+		$weapon_cooldown.start()
 		reset_weapon()
-		make_swing()
-	if (Input.is_action_pressed("secondary_attack")):
-		# Do a downward swing
+		if (weapon_type in ["mace", "sword", "spear"]):
+			make_swing()
+	elif (Input.is_action_just_pressed("secondary_attack") and can_attack):
+		$weapon_cooldown.set_wait_time(secondary_as)
+		attack_type = "secondary"
+		$weapon_cooldown.start()
 		reset_weapon()
-		make_downward_swing()
-
-func _process(delta):
-	pass
+		if (weapon_type in ["mace"]):
+			make_downward_swing()
+		elif (weapon_type in ["sword", "spear"]):
+			make_thrust()
 
 func _on_weapon_area_body_entered(body):
-	pass # replace with function body
+	# Verify the owner of this weapon
+	if ("player" in get_parent().get_groups()):
+		# If player wields this, check if body is enemy
+		if ("enemies" in body.get_groups()):
+			if (attack_type == "primary"):
+				body.receive_phys_damage(primary_damage, primary_dmg_type)
+			elif (attack_type == "secondary"):
+				body.receive_phys_damage(secondary_damage, secondary_dmg_type)
+	elif ("enemies" in get_parent().get_groups()):
+		pass
 
 func make_swing():
 	# Reset position of weapon and rotating Node2D
@@ -58,8 +77,10 @@ func make_downward_swing():
 	# Don't forget to add timer to hitbox when fading in
 	weapon_tween.interpolate_method($weapon_area, "set_modulate", Color(1, 1, 1, 1), Color(1,1,1,0), secondary_as, 
 	weapon_tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
-	weapon_tween.interpolate_method($weapon_area, "set_scale", Vector2(1, 1), Vector2(0.75, 1), secondary_as,
+	weapon_tween.interpolate_method($weapon_area, "set_scale", Vector2(1.1, 1.1), Vector2(1, 1), secondary_as / 4,
 	weapon_tween.TRANS_CUBIC, weapon_tween.EASE_OUT)
+	weapon_tween.interpolate_method($weapon_area, "set_scale", Vector2(1, 1), Vector2(0.75, 1), secondary_as,
+	weapon_tween.TRANS_CUBIC, weapon_tween.EASE_OUT, secondary_as / 2)
 	weapon_tween.start()
 
 func make_thrust():
@@ -75,10 +96,17 @@ func make_thrust():
 	# Fade out when retracting
 	weapon_tween.interpolate_method($weapon_area, "set_modulate", Color(1, 1, 1, 1), Color(1,1,1,0), secondary_as, weapon_tween.TRANS_CUBIC, Tween.EASE_OUT, secondary_as / 2)
 	weapon_tween.start()
-	
 
 func reset_weapon():
 	# Reset the scale, position, and other transformed properties from tweening
 	$weapon_area.set_scale(Vector2(1,1))
 	$weapon_area.set_modulate(Color(1,1,1,1))
 	$weapon_area.set_position(Vector2(0, 0))
+	$".".show()
+	$weapon_area/hitbox.set_disabled(false)
+	can_attack = false
+
+func _on_weapon_cooldown_timeout():
+	$weapon_area/hitbox.set_disabled(true)
+	$".".hide()
+	can_attack = true

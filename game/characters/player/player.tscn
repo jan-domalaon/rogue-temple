@@ -11,8 +11,8 @@ custom_solver_bias = 0.0
 extents = Vector2( 6, 7 )
 _sections_unfolded = [ "Resource" ]
 
-[node name="player" type="KinematicBody2D" index="0" groups=[
-"Player",
+[node name="player" type="KinematicBody2D" groups=[
+"player",
 ]]
 
 input_pickable = false
@@ -27,6 +27,7 @@ __meta__ = {
 health = 20
 armor = 4
 move_speed = 100
+knockback_factor = 1.0
 
 [node name="sprite" type="Sprite" parent="." index="0"]
 
