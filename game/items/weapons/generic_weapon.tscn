@@ -8,10 +8,11 @@
 custom_solver_bias = 0.0
 extents = Vector2( 16, 2 )
 
-[node name="generic_weapon" type="Node2D" index="0"]
+[node name="generic_weapon" type="Node2D"]
 
 script = ExtResource( 1 )
-weapon_name = "Weapon (Parent Weapon)"
+_sections_unfolded = [ "Transform" ]
+weapon_name = "Test Mace"
 primary_damage = 1
 secondary_damage = 1
 primary_dmg_type = "c"
@@ -30,7 +31,7 @@ linear_damp = 0.1
 angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Transform", "Visibility" ]
 
 [node name="sprite" type="Sprite" parent="weapon_area" index="0"]
 
