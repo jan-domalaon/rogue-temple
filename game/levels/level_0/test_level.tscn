@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://game/levels/level_0/tileset/tileset_post_port.tres" type="TileSet" id=1]
+[ext_resource path="res://game/levels/level_0/tileset/tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://game/characters/mobs/stacked_water_jelly/stacked_water_jelly.tscn" type="PackedScene" id=2]
 [ext_resource path="res://game/characters/generic_character.tscn" type="PackedScene" id=3]
 [ext_resource path="res://game/characters/player/test_player.tscn" type="PackedScene" id=4]
@@ -21,12 +21,12 @@ cell_clip_uv = false
 collision_use_kinematic = false
 collision_friction = 1.0
 collision_bounce = 0.0
-collision_layer = 1
-collision_mask = 1
+collision_layer = 4
+collision_mask = 3
 occluder_light_mask = 1
 format = 1
-tile_data = PoolIntArray( -262140, 0, 0, -262139, 0, 0, -262138, 0, 0, -262137, 0, 0, -262136, 0, 0, -262135, 0, 0, -262134, 0, 0, -262133, 0, 0, -262132, 0, 0, -196604, 0, 0, -196602, 1, 0, -196596, 0, 0, -131068, 0, 0, -131066, 0, 0, -131065, 0, 0, -131064, 0, 0, -131063, -2147483647, 0, -131060, 0, 0, -65532, 0, 0, -65530, 0, 0, -65529, -2147483647, 0, -65528, 0, 0, -65524, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 6, 0, 0, 8, 0, 0, 10, 1, 0, 12, 0, 0, 65536, 0, 0, 65538, 1, 0, 65540, 1, 0, 65542, 0, 0, 65543, -2147483647, 0, 65544, 0, 0, 65545, 1, 0, 65548, 0, 0, 131072, 0, 0, 131073, 1, 0, 131078, 1, 0, 131081, 1, 0, 131084, 0, 0, 196608, 0, 0, 196610, 1, 0, 196613, 1, 0, 196616, 1, 0, 196619, 1, 0, 196620, 0, 0, 262144, 0, 0, 262148, 1, 0, 262150, 1, 0, 262156, 0, 0, 327680, 0, 0, 327681, 1, 0, 327685, 1, 0, 327688, 1, 0, 327692, 0, 0, 393216, 0, 0, 393219, 1, 0, 393225, 1, 0, 393228, 0, 0, 458752, 0, 0, 458759, 1, 0, 458763, 1, 0, 458764, 0, 0, 524288, 0, 0, 524289, 1, 0, 524291, 1, 0, 524294, 1, 0, 524300, 0, 0, 589824, 0, 0, 589825, 0, 0, 589826, 0, 0, 589827, 0, 0, 589828, 0, 0, 589829, 0, 0, 589830, 0, 0, 589831, 0, 0, 589832, 0, 0, 589833, 0, 0, 589834, 0, 0, 589835, 0, 0, 589836, 0, 0 )
-_sections_unfolded = [ "Cell" ]
+tile_data = PoolIntArray( 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 10, 0, 0, 11, 0, 0, 65537, 2, 0, 65547, 0, 0, 131073, 2, 0, 131083, 0, 0, 196609, 0, 0, 196619, 0, 0, 262145, 0, 0, 262155, 0, 0, 327681, 0, 0, 327691, 0, 0, 393217, 0, 0, 393227, 0, 0, 458753, 0, 0, 458763, 0, 0, 524289, 0, 0, 524299, 0, 0, 589825, 0, 0, 589826, 0, 0, 589827, 0, 0, 589828, 0, 0, 589829, 0, 0, 589830, 0, 0, 589831, 0, 0, 589832, 0, 0, 589833, 0, 0, 589834, 0, 0, 589835, 0, 0 )
+_sections_unfolded = [ "Cell", "Collision" ]
 __meta__ = {
 "_edit_lock_": true
 }
@@ -34,14 +34,19 @@ __meta__ = {
 [node name="water_jelly" parent="." index="1" instance=ExtResource( 2 )]
 
 position = Vector2( 96, 64 )
+collision_layer = 1
+collision_mask = 1
 
 [node name="water_jelly 2" parent="." index="2" instance=ExtResource( 2 )]
 
 position = Vector2( 64, 96 )
+collision_layer = 1
+collision_mask = 1
 
 [node name="generic_character" parent="." index="3" instance=ExtResource( 3 )]
 
 position = Vector2( 88, 24 )
+_sections_unfolded = [ "Collision", "Pickable", "Transform", "Visibility" ]
 
 [node name="player" parent="." index="4" instance=ExtResource( 4 )]
 
@@ -50,9 +55,13 @@ position = Vector2( 48, 48 )
 [node name="stacked_water_jelly" parent="." index="5" instance=ExtResource( 2 )]
 
 position = Vector2( 145, 41 )
+collision_layer = 1
+collision_mask = 1
 
 [node name="stacked_water_jelly2" parent="." index="6" instance=ExtResource( 2 )]
 
 position = Vector2( 160, 41 )
+collision_layer = 1
+collision_mask = 1
 
 

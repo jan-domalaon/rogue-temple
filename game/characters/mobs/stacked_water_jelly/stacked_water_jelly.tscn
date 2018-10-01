@@ -5,8 +5,8 @@
 [ext_resource path="res://game/characters/mobs/stacked_water_jelly/stacked_water_jelly.png" type="Texture" id=3]
 
 [node name="stacked_water_jelly" groups=[
-"enemies",
 "bouncy_mobs",
+"enemies",
 ] instance=ExtResource( 1 )]
 
 script = ExtResource( 2 )
@@ -20,10 +20,6 @@ texture = ExtResource( 3 )
 [node name="knockback_area" parent="." index="1"]
 
 visible = true
-
-[node name="hitbox" parent="." index="2"]
-
-visible = false
 
 [connection signal="body_entered" from="knockback_area" to="." method="_on_knockback_area_body_entered"]
 

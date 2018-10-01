@@ -20,6 +20,9 @@ var flickering = false
 # Check if weapon doesn't only do blunt dmg.
 var blunt_hit = false
 
+# Possible movement states for a character
+enum State {IDLE, MOVING, ATTACKING, STUNNED}
+
 func _ready():
 	$flicker_timer.set_wait_time(FLICKER_TIME)
 
@@ -47,7 +50,7 @@ func knockback():
 			knockback_dir = transform.origin - body.transform.origin
 		# Knockback if THIS character touches blunt damage (Player hits mob (this))
 		if (knockback_counter == 0 && ("enemies" in get_groups() && "blunt_weapons" in body.get_groups()) && blunt_hit):
-			knockback_counter = 5
+			knockback_counter = 10
 			knockback_dir = global_transform.origin - body.global_transform.origin
 			print("yeet")
 			blunt_hit = false
@@ -70,13 +73,9 @@ func receive_phys_damage(dmg, dmg_type):
 		health -= dmg
 		print($".".get_name() + " got hit with blunt dmg")
 
-func weapon_knockback():
-	print("slide my guy")
-	move_and_slide(Vector2(0, 4))
-
 func flicker():
 	# Disable hitboxes
-	#$hitbox.set_disabled(true)
+	$hitbox.set_disabled(true)
 	$knockback_area/knockback_hitbox.set_disabled(true)
 	$animation_player.play("flicker")
 	$flicker_timer.start()
@@ -84,6 +83,6 @@ func flicker():
 
 func _on_flicker_timer_timeout():
 	# Enable collisions
-	#$hitbox.set_disabled(false)
+	$hitbox.set_disabled(false)
 	$knockback_area/knockback_hitbox.set_disabled(false)
 	flickering = false

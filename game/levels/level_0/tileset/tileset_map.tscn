@@ -21,12 +21,13 @@ region_rect = Rect2( 0, 0, 16, 16 )
 [node name="StaticBody2D" type="StaticBody2D" parent="wall" index="0"]
 
 input_pickable = false
-collision_layer = 1
-collision_mask = 1
+collision_layer = 4
+collision_mask = 2
 constant_linear_velocity = Vector2( 0, 0 )
 constant_angular_velocity = 0.0
 friction = 1.0
 bounce = 0.0
+_sections_unfolded = [ "Collision" ]
 __meta__ = {
 "_edit_lock_": true
 }
@@ -55,12 +56,13 @@ region_rect = Rect2( 22.25, 4.5, 44.375, 10.875 )
 [node name="StaticBody2D1" type="StaticBody2D" parent="door" index="0"]
 
 input_pickable = false
-collision_layer = 1
-collision_mask = 1
+collision_layer = 4
+collision_mask = 2
 constant_linear_velocity = Vector2( 0, 0 )
 constant_angular_velocity = 0.0
 friction = 1.0
 bounce = 0.0
+_sections_unfolded = [ "Collision" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="door/StaticBody2D1" index="0"]
 

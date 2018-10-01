@@ -9,6 +9,8 @@
 "player",
 ] instance=ExtResource( 1 )]
 
+collision_layer = 1
+collision_mask = 2
 script = ExtResource( 2 )
 health = 20
 armor = 5
@@ -20,6 +22,8 @@ texture = ExtResource( 3 )
 [node name="knockback_area" parent="." index="1"]
 
 visible = true
+collision_layer = 1
+collision_mask = 2
 
 [node name="player_camera" type="Camera2D" parent="." index="3"]
 
