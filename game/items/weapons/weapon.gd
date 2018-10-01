@@ -46,7 +46,7 @@ func _on_weapon_area_body_entered(body):
 	# Verify the owner of this weapon
 	if ("player" in get_parent().get_groups()):
 		# If player wields this, check if body is enemy
-		if ("enemies" in body.get_groups()):
+		if ("enemies" in body.get_groups() and (body.get("flickering") == false)):
 			if (attack_type == "primary"):
 				body.receive_phys_damage(primary_damage, primary_dmg_type)
 			elif (attack_type == "secondary"):

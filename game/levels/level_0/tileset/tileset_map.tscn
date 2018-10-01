@@ -22,7 +22,7 @@ region_rect = Rect2( 0, 0, 16, 16 )
 
 input_pickable = false
 collision_layer = 4
-collision_mask = 2
+collision_mask = 18
 constant_linear_velocity = Vector2( 0, 0 )
 constant_angular_velocity = 0.0
 friction = 1.0
@@ -57,7 +57,7 @@ region_rect = Rect2( 22.25, 4.5, 44.375, 10.875 )
 
 input_pickable = false
 collision_layer = 4
-collision_mask = 2
+collision_mask = 18
 constant_linear_velocity = Vector2( 0, 0 )
 constant_angular_velocity = 0.0
 friction = 1.0

@@ -16,6 +16,7 @@ var knockback_dir = Vector2(0, 0)
 export var knockback_factor = 1.0
 
 var movement_dir = Vector2(0, 0)
+# Flickering flag. Can't be hit while flickering
 var flickering = false
 # Check if weapon doesn't only do blunt dmg.
 var blunt_hit = false
@@ -75,7 +76,8 @@ func receive_phys_damage(dmg, dmg_type):
 
 func flicker():
 	# Disable hitboxes
-	$hitbox.set_disabled(true)
+	#$hitbox.set_disabled(true)
+	# Disable collision between weapons or other bodies
 	$knockback_area/knockback_hitbox.set_disabled(true)
 	$animation_player.play("flicker")
 	$flicker_timer.start()
@@ -83,6 +85,6 @@ func flicker():
 
 func _on_flicker_timer_timeout():
 	# Enable collisions
-	$hitbox.set_disabled(false)
+	#$hitbox.set_disabled(false)
 	$knockback_area/knockback_hitbox.set_disabled(false)
 	flickering = false
