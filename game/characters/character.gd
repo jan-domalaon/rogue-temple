@@ -27,8 +27,10 @@ enum State {IDLE, MOVING, ATTACKING, STUNNED}
 func _ready():
 	$flicker_timer.set_wait_time(FLICKER_TIME)
 
-func _physics_process(delta):
-	pass
+func _process(delta):
+	if (health <= 0):
+		print(get_name() + ' is deadaz')
+		queue_free()
 
 func movement():
 	var motion

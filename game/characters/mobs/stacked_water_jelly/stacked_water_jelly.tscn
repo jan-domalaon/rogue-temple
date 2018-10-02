@@ -5,8 +5,8 @@
 [ext_resource path="res://game/characters/mobs/stacked_water_jelly/stacked_water_jelly.png" type="Texture" id=3]
 
 [node name="stacked_water_jelly" groups=[
-"enemies",
 "bouncy_mobs",
+"enemies",
 ] instance=ExtResource( 1 )]
 
 script = ExtResource( 2 )

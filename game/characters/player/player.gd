@@ -21,7 +21,6 @@ func _physics_process(delta):
 	movement_dir.x = -int(Input.is_action_pressed("move_left")) + int(Input.is_action_pressed("move_right"))
 	movement_dir.y = -int(Input.is_action_pressed("move_up")) + int(Input.is_action_pressed("move_down"))
 	movement()
-	
 	# Knockback between enemies with knockback and player
 	# Player is knockbackable.
 	knockback()
