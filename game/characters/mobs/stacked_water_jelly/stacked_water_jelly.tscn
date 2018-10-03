@@ -1,8 +1,13 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://game/characters/generic_character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://game/characters/mobs/stacked_water_jelly/water_jelly.gd" type="Script" id=2]
 [ext_resource path="res://game/characters/mobs/stacked_water_jelly/stacked_water_jelly.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 7, 8 )
 
 [node name="stacked_water_jelly" groups=[
 "bouncy_mobs",
@@ -20,6 +25,10 @@ texture = ExtResource( 3 )
 [node name="knockback_area" parent="." index="1"]
 
 visible = true
+
+[node name="knockback_hitbox" parent="knockback_area" index="0"]
+
+shape = SubResource( 1 )
 
 [connection signal="body_entered" from="knockback_area" to="." method="_on_knockback_area_body_entered"]
 

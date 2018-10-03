@@ -32,9 +32,11 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="water_jelly" parent="." index="1" instance=ExtResource( 2 )]
+[node name="smart_jelly" parent="." index="1" instance=ExtResource( 2 )]
 
-position = Vector2( 51, -41 )
+position = Vector2( 41, -10 )
+health = 1
+knockback_factor = 1.0
 
 [node name="water_jelly 2" parent="." index="2" instance=ExtResource( 2 )]
 
@@ -57,11 +59,7 @@ position = Vector2( 145, 41 )
 
 position = Vector2( 160, 41 )
 
-[node name="generic_mob" parent="." index="7" instance=ExtResource( 5 )]
-
-position = Vector2( 201, -59 )
-
-[node name="generic_mob2" parent="." index="8" instance=ExtResource( 5 )]
+[node name="generic_mob2" parent="." index="7" instance=ExtResource( 5 )]
 
 position = Vector2( -88, -64 )
 

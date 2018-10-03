@@ -16,4 +16,3 @@ func _physics_process(delta):
 func _on_knockback_area_body_entered(body):
 	if ("player" in body.get_groups()):
 		body.flicker()
-	pass
