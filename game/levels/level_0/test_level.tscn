@@ -6,7 +6,7 @@
 [ext_resource path="res://game/characters/player/test_player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://game/characters/mobs/generic_mob/generic_mob.tscn" type="PackedScene" id=5]
 
-[node name="prototype_level" type="Node"]
+[node name="prototype_level" type="Node" index="0"]
 
 [node name="TileMap" type="TileMap" parent="." index="0"]
 

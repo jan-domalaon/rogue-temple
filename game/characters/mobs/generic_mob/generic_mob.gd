@@ -5,6 +5,8 @@ var STATES = ["IDLE", "WANDERING", "CHASING", "RANGED_ATTACK", "MELEE_ATTACK"]
 
 var wander_time = (randi()%3) + 1
 var original_move_speed = move_speed
+# Get player position for player detection
+var player_pos
 
 var state_stack = []
 var current_state
@@ -22,6 +24,7 @@ func _physics_process(delta):
 		movement_dir = Vector2(0,0)
 	knockback()
 	movement()
+	detect_player()
 
 func _on_wander_timer_timeout():
 	# Get another random value
@@ -41,6 +44,8 @@ func update_state():
 			state_idle()
 		"WANDERING":
 			state_wandering()
+		"CHASING":
+			state_chasing()
 
 func state_idle():
 	# Wait for some time
@@ -65,12 +70,11 @@ func state_wandering():
 	# Random move speed when wandering (fraction of actual move speed)
 	# Wander speed = (ms *. 75) / wander_mult
 	var wander_mult = (randi()%3) + 2
-	print("wm ", wander_mult)
 	move_speed = original_move_speed / wander_mult
-	print(move_speed)
 
 func state_chasing():
-	pass
+	print("chasing player!")
+	# Add pathfinding
 
 func state_ranged_attack():
 	pass
@@ -85,3 +89,10 @@ func random_move_dir():
 	# If the random direction is (0, 0), randomize again
 	if (movement_dir == Vector2(0,0)):
 		random_move_dir()
+
+func detect_player():
+	player_pos = get_parent().get_node("player").get_global_position()
+	var physics_space = get_world_2d().direct_space_state
+	var detect_ray = physics_space.intersect_ray(get_global_position(), player_pos, [self, $knockback_area])
+	if (detect_ray.position == player_pos):
+		print(get_name(), " detected player")
