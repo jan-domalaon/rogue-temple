@@ -10,14 +10,14 @@
 custom_solver_bias = 0.0
 extents = Vector2( 8, 8 )
 
-[sub_resource type="NavigationPolygon" id=3]
+[sub_resource type="NavigationPolygon" id=2]
 
 vertices = PoolVector2Array( 8, 8, -8, 8, -8, -8, 8, -8 )
 polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 outlines = [ PoolVector2Array( 8, 8, -8, 8, -8, -8, 8, -8 ) ]
 _sections_unfolded = [ "Resource" ]
 
-[sub_resource type="NavigationPolygon" id=2]
+[sub_resource type="NavigationPolygon" id=3]
 
 vertices = PoolVector2Array( 8, 8, -8, 8, -8, -8, 8, -8 )
 polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
@@ -47,7 +47,7 @@ outlines = [ PoolVector2Array( 8, 8, -8, 8, -8, -8, 8, -8 ) ]
 1/is_autotile = false
 1/occluder_offset = Vector2( 8, 8 )
 1/navigation_offset = Vector2( 8, 8 )
-1/navigation = SubResource( 3 )
+1/navigation = SubResource( 2 )
 1/shapes = [  ]
 2/name = "door"
 2/texture = ExtResource( 3 )
@@ -80,7 +80,7 @@ outlines = [ PoolVector2Array( 8, 8, -8, 8, -8, -8, 8, -8 ) ]
 4/is_autotile = false
 4/occluder_offset = Vector2( 8, 8 )
 4/navigation_offset = Vector2( 8, 8 )
-4/navigation = SubResource( 2 )
+4/navigation = SubResource( 3 )
 4/shapes = [  ]
 _sections_unfolded = [ "0", "Resource" ]
 

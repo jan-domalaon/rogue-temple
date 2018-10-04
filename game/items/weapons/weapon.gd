@@ -17,12 +17,16 @@ var old_shape = null
 var attack_type
 var can_attack = true
 
+# For tilemap collision
+var walls
+
 func _ready():
 	$weapon_area/hitbox.set_disabled(true)
 	if (user_type == "player" or ("player" in get_parent().get_groups())):
 		set_process_input(true)
 	else:
 		set_process_input(false)
+	walls = get_parent().get_parent().get_node("nav/tilemap")
 
 func _input(event):
 	if (Input.is_action_just_pressed("primary_attack") and can_attack):
@@ -45,12 +49,14 @@ func _input(event):
 func _on_weapon_area_body_entered(body):
 	# Verify the owner of this weapon
 	if ("player" in get_parent().get_groups()):
-		# If player wields this, check if body is enemy
-		if ("enemies" in body.get_groups() and (body.get("flickering") == false)):
-			if (attack_type == "primary"):
-				body.receive_phys_damage(primary_damage, primary_dmg_type)
-			elif (attack_type == "secondary"):
-				body.receive_phys_damage(secondary_damage, secondary_dmg_type)
+		# Do not deliver damage if the weapon touches a wall
+		if (not ($weapon_area.overlaps_body(walls))):
+			# If player wields this, check if body is enemy
+			if ("enemies" in body.get_groups() and (body.get("flickering") == false)):
+				if (attack_type == "primary"):
+					body.receive_phys_damage(primary_damage, primary_dmg_type)
+				elif (attack_type == "secondary"):
+					body.receive_phys_damage(secondary_damage, secondary_dmg_type)
 	elif ("enemies" in get_parent().get_groups()):
 		pass
 

@@ -49,6 +49,7 @@ func _physics_process(delta):
 	# Only update state per frame when not in passive states
 	if (get_current_state() != STATES[0] and get_current_state() != STATES[1]):
 		update_state()
+	old_player_pos = player_pos
 
 func _on_wander_timer_timeout():
 	var current_state = get_current_state()
