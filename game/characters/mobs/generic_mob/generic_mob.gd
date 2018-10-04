@@ -3,17 +3,27 @@ extends "res://game/characters/character.gd"
 # List of all possible states
 var STATES = ["IDLE", "WANDERING", "CHASING", "RANGED_ATTACKING", "MELEE_ATTACKING"]
 
+# Movement and wandering vars
 var wander_time = (randi()%3) + 1
 var wander_counter = 0
 var original_move_speed = move_speed
+
 # Get player position for player detection
 var player_pos
 var player_health
+
 # Detected flag used to push CHASING state only once when detected
 var detected = false
 
+# State variables
 var state_stack = []
 var current_state
+
+# Navigation variables
+var nav = null setget set_nav
+var path = [] 
+var nav_map
+var old_player_pos
 
 func _ready():
 	# Makes sure movement is random every time
@@ -22,11 +32,15 @@ func _ready():
 	push_state("IDLE")
 	wander_counter = wander_time
 	update_state()
+	
+	# Set navigation
+	nav_map = get_parent().get_node("nav")
+	nav = nav_map
 
 func _physics_process(delta):
 	# If I touch a wall and is not hit, change movement dir
-	if (is_on_wall() and (not flickering)):
-		movement_dir = Vector2(0,0)
+#	if (is_on_wall() and (not flickering)):
+#		movement_dir = Vector2(0,0)
 #	player_health = get_parent().get_node("player").get("health")
 	if (not detected):
 		detect_player()
@@ -111,11 +125,22 @@ func state_wandering():
 	print("wandering state")
 
 func state_chasing():
-	print("chasing player!")
 	# Set move speed back to normal
 	move_speed = original_move_speed
-	# Add pathfinding
-	movement_dir = get_parent().get_node("player").transform.origin - transform.origin
+	
+	# Chase down player. Use simple move_dir if player is visible
+	# Use pathfinding if the player is behind a wall
+	var detect_ray = detection_ray()
+	if ("player" in detect_ray.collider.get_parent().get_groups()):
+		movement_dir = get_parent().get_node("player").transform.origin - transform.origin
+		print("chasing player with move dir!")
+	else:
+		# Use pathfinding
+		print("path finding!")
+		if (player_pos != old_player_pos):
+			set_nav(nav_map)
+		pathfinding()
+	
 	# Stay in CHASING while the player is still alive
 	# If not a bouncy_mob, this mob will have a weapon
 	# Choose preferred weapon depending on distance
@@ -143,10 +168,14 @@ func random_move_dir():
 	if (movement_dir == Vector2(0,0)):
 		random_move_dir()
 
-func detect_player():
+func detection_ray():
 	player_pos = get_parent().get_node("player").get_global_position()
 	var physics_space = get_world_2d().direct_space_state
 	var detect_ray = physics_space.intersect_ray(get_global_position(), player_pos, [self, $knockback_area])
+	return detect_ray
+
+func detect_player():
+	var detect_ray = detection_ray()
 	if ("player" in detect_ray.collider.get_parent().get_groups()):
 		# Player is detected. Push CHASING state to trigger aggressive behaviour
 		$wander_timer.stop()
@@ -157,13 +186,19 @@ func detect_player():
 		print("player detected!")
 		update_state()
 
-#func wander_countdown(time, state):
-#	if (wander_counter > 0):
-#		wander_counter -= 1
-#	elif (wander_counter == 0):
-#		pop_state()
-#		if (state == "WANDERING"):
-#			push_state("IDLE")
-#		elif (state == "IDLE"):
-#			push_state("WANDERING")
-#		wander_counter = time
+func set_nav(new_nav):
+	nav = new_nav
+	old_player_pos = player_pos
+	update_path()
+
+func update_path():
+	path = nav.get_simple_path(get_global_position(), player_pos, false)
+
+func pathfinding():
+	if path.size() > 1:
+		var dist = get_global_position().distance_to(path[0])
+		if dist > 2:
+			# Move to next path node
+			movement_dir = path[0] - transform.origin
+		else:
+			path.remove(0)

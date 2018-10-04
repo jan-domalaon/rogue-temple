@@ -63,5 +63,5 @@ access_debug=[ Object(InputEventKey,"resource_local_to_scene":false,"resource_na
 
 [rendering]
 
-environment/default_clear_color=Color( 0.0745098, 0.109804, 0.137255, 1 )
+environment/default_clear_color=Color( 0.289917, 0.335579, 0.371094, 1 )
 environment/default_environment="res://default_env.tres"
