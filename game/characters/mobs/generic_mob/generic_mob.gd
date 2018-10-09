@@ -36,6 +36,9 @@ func _ready():
 	# Set navigation
 	nav_map = get_parent().get_node("nav")
 	nav = nav_map
+	
+	# Get player's signal
+	get_parent().get_node("player").connect("player_moved", self, "on_player_movement")
 
 func _physics_process(delta):
 	# If I touch a wall and is not hit, change movement dir
@@ -64,9 +67,12 @@ func _on_wander_timer_timeout():
 		push_state("IDLE")
 	update_state()
 
+func _update_path():
+	path = nav.get_simple_path(get_global_position(), player_pos, false)
+
 func update_state():
 	var current_state = get_current_state()
-	print(state_stack)
+	#print(state_stack)
 	if (get_current_state() != null):
 		match current_state:
 			"IDLE":
@@ -134,10 +140,10 @@ func state_chasing():
 	var detect_ray = detection_ray()
 	if ("player" in detect_ray.collider.get_parent().get_groups()):
 		movement_dir = get_parent().get_node("player").transform.origin - transform.origin
-		print("chasing player with move dir!")
+		#print("chasing player with move dir!")
 	else:
 		# Use pathfinding
-		print("path finding!")
+		#print("path finding!")
 		if (player_pos != old_player_pos):
 			set_nav(nav_map)
 		pathfinding()
@@ -145,20 +151,22 @@ func state_chasing():
 	# Stay in CHASING while the player is still alive
 	# If not a bouncy_mob, this mob will have a weapon
 	# Choose preferred weapon depending on distance
-#	if ("ranged_mobs" in get_groups()):
-#		pass
-#	if ("melee_mobs" in get_groups() and not ("ranged_mobs" in get_groups())):
-#		# If in melee range, switch to melee attack
-#		pop_state()
-#		push_state("MELEE_ATTACKING")
+	if ("ranged_mobs" in get_groups()):
+		pass
+	if ("melee_mobs" in get_groups() and not ("ranged_mobs" in get_groups())):
+		# If in melee range, switch to melee attack
+		var weapon_length = get_node("weapon/weapon_area/hitbox").shape.extents.x
+		var distance_vector = (get_global_transform().origin - player_pos).length()
+		if (distance_vector <= weapon_length):
+			pop_state()
+			push_state("MELEE_ATTACKING")
 
 func state_ranged_attack():
-	# Keep attacking until out of range, or player is dead
+	# Code in humanoid.gd
 	pass
 
 func state_melee_attack():
-	# Keep attacking until out of range, or player is dead
-	print("melee attacking!")
+	# Code in humanoid.gd
 	pass
 
 func random_move_dir():
@@ -190,10 +198,9 @@ func detect_player():
 func set_nav(new_nav):
 	nav = new_nav
 	old_player_pos = player_pos
-	update_path()
+	_update_path()
 
-func update_path():
-	path = nav.get_simple_path(get_global_position(), player_pos, false)
+
 
 func pathfinding():
 	if path.size() > 1:
@@ -203,3 +210,6 @@ func pathfinding():
 			movement_dir = path[0] - transform.origin
 		else:
 			path.remove(0)
+
+func on_player_movement(pos):
+	player_pos = pos

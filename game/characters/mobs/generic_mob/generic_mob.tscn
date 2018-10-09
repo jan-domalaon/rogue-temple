@@ -16,6 +16,14 @@ health = 6
 
 texture = ExtResource( 3 )
 
+[node name="knockback_area" parent="." index="1"]
+
+visible = true
+
+[node name="hitbox" parent="." index="2"]
+
+visible = false
+
 [node name="wander_timer" type="Timer" parent="." index="5"]
 
 process_mode = 1

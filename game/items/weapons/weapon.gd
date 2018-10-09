@@ -34,14 +34,14 @@ func _input(event):
 		attack_type = "primary"
 		$weapon_cooldown.start()
 		reset_weapon()
-		if (weapon_type in ["mace", "sword", "spear"]):
+		if (weapon_type in ["mace", "sword", "spear", "staff"]):
 			make_swing()
 	elif (Input.is_action_just_pressed("secondary_attack") and can_attack):
 		$weapon_cooldown.set_wait_time(secondary_as)
 		attack_type = "secondary"
 		$weapon_cooldown.start()
 		reset_weapon()
-		if (weapon_type in ["mace"]):
+		if (weapon_type in ["mace", "staff"]):
 			make_downward_swing()
 		elif (weapon_type in ["sword", "spear"]):
 			make_thrust()

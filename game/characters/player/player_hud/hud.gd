@@ -10,15 +10,15 @@ onready var player_vars = get_node("/root/player_variables")
 func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
-	set_process_input(true)
-	set_process(true)
+	set_process_input(false)
+	set_process(false)
 	# Get level name from player scene
-	get_node('game_level').set_text(get_parent().level_name)
+	#get_node('game_level').set_text(get_parent().level_name)
 	# Hide appropriate UI elements
-	get_node("inventory").hide()
-	get_node("debug_container").hide()
+	#get_node("inventory").hide()
+	#get_node("debug_container").hide()
 	# Allow inventory to be selected with rmb
-	get_node("inventory").set_allow_rmb_select(true)
+	#get_node("inventory").set_allow_rmb_select(true)
 
 func _input(event):
 	# Use event.is_action_pressed() to avoid key repeats
