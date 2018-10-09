@@ -5,12 +5,13 @@
 [ext_resource path="res://game/characters/mobs/bandit_scavenger/bandit_scavenger.png" type="Texture" id=3]
 [ext_resource path="res://game/items/weapons/wooden_staff/wooden_staff.tscn" type="PackedScene" id=4]
 
-[node name="bandit_scavenger" index="0" groups=[
+[node name="bandit_scavenger" groups=[
 "melee_mobs",
 ] instance=ExtResource( 1 )]
 
 script = ExtResource( 2 )
 health = 1
+move_speed = 85
 melee_weapon_path = ""
 ranged_weapon_path = ""
 weapon_type = ""
@@ -21,6 +22,7 @@ texture = ExtResource( 3 )
 
 [node name="weapon" parent="." index="6" instance=ExtResource( 4 )]
 
+visible = false
 modulate = Color( 0.501961, 0.501961, 0.501961, 1 )
 scale = Vector2( 0.5, 0.5 )
 _sections_unfolded = [ "Transform", "Visibility" ]

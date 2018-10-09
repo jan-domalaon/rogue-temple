@@ -25,6 +25,9 @@ var path = []
 var nav_map
 var old_player_pos
 
+# Attacking logic
+var can_attack = true
+
 func _ready():
 	# Makes sure movement is random every time
 	randomize()
@@ -44,7 +47,6 @@ func _physics_process(delta):
 	# If I touch a wall and is not hit, change movement dir
 #	if (is_on_wall() and (not flickering)):
 #		movement_dir = Vector2(0,0)
-#	player_health = get_parent().get_node("player").get("health")
 	if (not detected):
 		detect_player()
 	knockback()
@@ -108,7 +110,7 @@ func state_idle():
 	$wander_timer.start()
 	wander_time = (randi()%3) + 1
 #	wander_countdown(wander_time, STATES[0])
-	print("idle state")
+	print(get_name(), " idle state")
 
 func state_wandering():
 	# Walk for a random amount of time (1 - 10)
@@ -129,7 +131,7 @@ func state_wandering():
 	# Wander speed = (ms *. 75) / wander_mult
 	var wander_mult = (randi()%3) + 2
 	move_speed = original_move_speed / wander_mult
-	print("wandering state")
+	print(get_name(), " wandering state")
 
 func state_chasing():
 	# Set move speed back to normal
@@ -192,7 +194,7 @@ func detect_player():
 		pop_state()
 		detected = true
 		push_state("CHASING")
-		print("player detected!")
+		print(get_name(), " player detected!")
 		update_state()
 
 func set_nav(new_nav):
@@ -213,3 +215,6 @@ func pathfinding():
 
 func on_player_movement(pos):
 	player_pos = pos
+
+func _on_attack_timer_timeout():
+	pass

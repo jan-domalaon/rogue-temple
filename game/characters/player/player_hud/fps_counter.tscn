@@ -1,6 +1,8 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
 
-[node name="fps_count" type="Label"]
+[ext_resource path="res://game/characters/player/player_hud/fps_counter.gd" type="Script" id=1]
+
+[node name="fps_count" type="Label" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -17,5 +19,6 @@ size_flags_vertical = 0
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
+script = ExtResource( 1 )
 
 

@@ -46,10 +46,22 @@ position = Vector2( 44, 78 )
 [node name="smart_water_jelly2" parent="." index="3" instance=ExtResource( 4 )]
 
 position = Vector2( 641, 181 )
+input_pickable = false
+collision_layer = 2
+collision/safe_margin = 0.08
+_sections_unfolded = [ "Collision", "Transform", "Visibility" ]
+armor = 0
 move_speed = 100
+knockback_factor = 1.0
 
 [node name="bandit_scavenger" parent="." index="4" instance=ExtResource( 5 )]
 
 position = Vector2( -80, -61 )
+input_pickable = false
+collision_layer = 2
+collision/safe_margin = 0.08
+_sections_unfolded = [ "Collision", "Transform", "Visibility" ]
+armor = 0
+knockback_factor = 1.0
 
 

@@ -10,7 +10,7 @@ onready var player_vars = get_node("/root/player_variables")
 func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
-	set_process_input(false)
+	set_process_input(true)
 	set_process(false)
 	# Get level name from player scene
 	#get_node('game_level').set_text(get_parent().level_name)
