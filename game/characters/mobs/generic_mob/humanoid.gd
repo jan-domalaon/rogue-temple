@@ -24,7 +24,7 @@ func _process():
 
 func state_melee_attack():
 	# Check first if the mob can attack to prevent spamming
-	if (can_attack):
+	if (can_attack && player_health > 0):
 		$weapon.reset_weapon()
 		can_attack = false
 		$attack_timer.start()

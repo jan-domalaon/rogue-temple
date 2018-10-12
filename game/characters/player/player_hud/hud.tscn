@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://game/characters/player/player_hud/hud.gd" type="Script" id=1]
-[ext_resource path="res://game/characters/player/player_hud/portraits/portrait_townguard_ingame.png" type="Texture" id=2]
-[ext_resource path="res://game/characters/player/player_hud/fps_counter.tscn" type="PackedScene" id=3]
-[ext_resource path="res://game/pause/pause_menu.tscn" type="PackedScene" id=4]
+[ext_resource path="res://game/characters/player/player_hud/player_hud.tres" type="Theme" id=2]
+[ext_resource path="res://game/characters/player/player_hud/portraits/portrait_townguard_ingame.png" type="Texture" id=3]
+[ext_resource path="res://game/characters/player/player_hud/fps_counter.tscn" type="PackedScene" id=4]
+[ext_resource path="res://game/pause/pause_menu.tscn" type="PackedScene" id=5]
 
 [sub_resource type="StyleBoxFlat" id=1]
 
@@ -62,6 +63,8 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
+theme = ExtResource( 2 )
+_sections_unfolded = [ "Theme" ]
 
 [node name="hp_bar" type="ProgressBar" parent="health" index="0"]
 
@@ -87,12 +90,13 @@ value = 1.0
 exp_edit = false
 rounded = false
 percent_visible = false
+_sections_unfolded = [ "Theme" ]
 
 [node name="portrait" type="Sprite" parent="." index="1"]
 
 position = Vector2( 72, 72 )
 scale = Vector2( 2.5, 2.5 )
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 
 [node name="exp" type="Control" parent="." index="2"]
 
@@ -167,19 +171,21 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 4.0
-margin_top = 704.0
-margin_right = 44.0
-margin_bottom = 718.0
+margin_top = 694.0
+margin_right = 87.0
+margin_bottom = 716.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 0
+theme = ExtResource( 2 )
 text = "Level Test"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
+_sections_unfolded = [ "Theme" ]
 
 [node name="debug_container" type="Container" parent="." index="5"]
 
@@ -212,18 +218,22 @@ mouse_filter = 1
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 0
+theme = ExtResource( 2 )
 text = "Movement speed:
 "
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
+_sections_unfolded = [ "Theme" ]
 
-[node name="fps_count" parent="debug_container" index="1" instance=ExtResource( 3 )]
+[node name="fps_count" parent="debug_container" index="1" instance=ExtResource( 4 )]
 
 margin_top = 32.0
 margin_bottom = 46.0
+theme = ExtResource( 2 )
+_sections_unfolded = [ "Theme" ]
 
-[node name="pause_menu" parent="." index="6" instance=ExtResource( 4 )]
+[node name="pause_menu" parent="." index="6" instance=ExtResource( 5 )]
 
 pause_mode = 2
 visible = false

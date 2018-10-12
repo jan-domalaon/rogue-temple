@@ -5,7 +5,7 @@ extends Container
 var paused = false
 
 func _ready():
-	set_process_input(true)
+	set_process_input(false)
 	self.hide()
 
 func _input(event):

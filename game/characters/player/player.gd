@@ -29,7 +29,7 @@ func _physics_process(delta):
 	
 	# Emit signal to update player position. Meant for mob pathfinding when aggressive
 	if (movement_dir != Vector2(0,0)):
-		emit_signal("player_moved", get_global_transform().origin)
+		emit_signal("player_moved", get_global_position())
 
 func _process(delta):
 	# Flips the player sprite horizontally to mimic the player facing direction.

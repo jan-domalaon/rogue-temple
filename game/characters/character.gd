@@ -31,7 +31,8 @@ func _ready():
 func _process(delta):
 	if (health <= 0):
 		print(get_name() + ' is deadaz')
-		queue_free()
+		if (not "player" in get_groups()):
+			queue_free()
 
 func movement():
 	var motion
@@ -58,7 +59,7 @@ func knockback():
 			# Start knockback counter
 			knockback_counter = KNOCKBACK_LENGTH * 2
 			knockback_dir = global_transform.origin - body.global_transform.origin
-			print("knocking back!")
+			print("mob knocking back!")
 		# Knockback if THIS character touches blunt damage (Player hits mob (this))
 		if (knockback_counter == 0 && ("enemies" in get_groups() && "blunt_weapons" in body.get_groups()) && blunt_hit):
 			knockback_counter = 10
