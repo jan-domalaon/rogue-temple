@@ -13,6 +13,7 @@ onready var cursor_pos = get_global_mouse_position()
 
 signal player_moved
 
+
 func _ready():
 	set_physics_process(true)
 	set_process_input(true)
