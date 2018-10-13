@@ -6,7 +6,7 @@
 [ext_resource path="res://game/characters/player/test_player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://game/characters/mobs/bandit_scavenger/bandit_scavenger.tscn" type="PackedScene" id=5]
 
-[node name="prototype_level" type="Node"]
+[node name="prototype_level" type="Node" index="0"]
 
 [node name="nav" type="Navigation2D" parent="." index="0"]
 
@@ -61,12 +61,6 @@ health = 100
 [node name="bandit_scavenger" parent="." index="4" instance=ExtResource( 5 )]
 
 position = Vector2( -8, -55 )
-input_pickable = false
-collision_layer = 2
 collision_mask = 31
-collision/safe_margin = 0.08
-_sections_unfolded = [ "Collision", "Transform", "Visibility" ]
-armor = 0
-knockback_factor = 1.0
 
 

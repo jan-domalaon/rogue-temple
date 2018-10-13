@@ -35,6 +35,7 @@ func _ready():
 	else:
 		set_process_input(false)
 
+
 func _input(event):
 	if (Input.is_action_just_pressed("primary_attack") and can_attack):
 		$weapon_cooldown.set_wait_time(primary_as)
@@ -51,30 +52,29 @@ func _input(event):
 		elif (weapon_type in ["sword", "spear"]):
 			make_thrust()
 
+
 func _on_weapon_area_body_entered(body):
 	var map_collision = false
+	var enemy_group
+	
 	for body in $weapon_area.get_overlapping_bodies():
 		if "doors" in body.get_groups() or "walls" in body.get_groups():
 			map_collision = true
-	# Verify the owner of this weapon
+	# Verify the owner of this weapon. Get correct enemy group
 	if ("player" in get_parent().get_groups()):
-		# Do not deliver damage if the weapon touches a wall
-		if (not map_collision):
-			# If player wields this, check if body is enemy
-			if ("enemies" in body.get_groups() and (body.get("flickering") == false)):
-				if (attack_type == "primary"):
-					body.receive_phys_damage(primary_damage, primary_dmg_type)
-				elif (attack_type == "secondary"):
-					body.receive_phys_damage(secondary_damage, secondary_dmg_type)
+		enemy_group = "enemies"
 	elif ("enemies" in get_parent().get_groups()):
-		# Do not deliver damage if the weapon touches a wall
-		if (not map_collision):
-			# If player wields this, check if body is enemy
-			if ("player" in body.get_groups() and (body.get("flickering") == false)):
-				if (attack_type == "primary"):
-					body.receive_phys_damage(primary_damage, primary_dmg_type)
-				elif (attack_type == "secondary"):
-					body.receive_phys_damage(secondary_damage, secondary_dmg_type)
+		enemy_group = "player"
+	
+	# Deliver damage to the user's enemy group
+	# Do not deliver damage if the weapon touches a wall
+	if (not map_collision):
+		if (enemy_group in body.get_groups() and (body.get("flickering") == false)):
+			if (attack_type == "primary"):
+				body.receive_phys_damage(primary_damage, primary_dmg_type)
+			elif (attack_type == "secondary"):
+				body.receive_phys_damage(secondary_damage, secondary_dmg_type)
+
 
 func make_swing():
 	reset_weapon()
@@ -96,6 +96,7 @@ func make_swing():
 	weapon_tween.TRANS_CUBIC, weapon_tween.EASE_OUT)
 	weapon_tween.start()
 
+
 func make_downward_swing():
 	reset_weapon()
 	# Update look_dir to get correct rotation
@@ -113,6 +114,7 @@ func make_downward_swing():
 	weapon_tween.interpolate_method($weapon_area, "set_scale", Vector2(1, 1), Vector2(0.75, 1), secondary_as,
 	weapon_tween.TRANS_CUBIC, weapon_tween.EASE_OUT, secondary_as / 2)
 	weapon_tween.start()
+
 
 func make_thrust():
 	reset_weapon()
@@ -132,6 +134,7 @@ func make_thrust():
 	weapon_tween.interpolate_method($weapon_area, "set_modulate", Color(1, 1, 1, 1), Color(1,1,1,0), secondary_as, weapon_tween.TRANS_CUBIC, Tween.EASE_OUT, secondary_as / 2)
 	weapon_tween.start()
 
+
 func reset_weapon():
 	# Reset the scale, position, and other transformed properties from tweening
 	$weapon_area.set_scale(Vector2(1,1))
@@ -141,10 +144,12 @@ func reset_weapon():
 	$weapon_area/hitbox.set_disabled(false)
 	can_attack = false
 
+
 func _on_weapon_cooldown_timeout():
 	$weapon_area/hitbox.set_disabled(true)
 	$".".hide()
 	can_attack = true
+
 
 func update_look_dir():
 	if ("player" in get_parent().get_groups()):
