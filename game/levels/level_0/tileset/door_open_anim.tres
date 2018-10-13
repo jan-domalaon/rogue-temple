@@ -1,0 +1,21 @@
+[gd_resource type="Animation" format=2]
+
+[resource]
+
+resource_name = "open_door"
+length = 0.1
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("closed_door:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Rect2( 0, 0, 16, 16 ), Rect2( 16, 0, 16, 16 ) ]
+}
+

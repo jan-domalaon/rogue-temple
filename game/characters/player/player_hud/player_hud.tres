@@ -13,4 +13,10 @@ _sections_unfolded = [ "Font", "Settings" ]
 [resource]
 
 default_font = SubResource( 1 )
+ProgressBar/colors/font_color = Color( 0.941176, 0.941176, 0.941176, 1 )
+ProgressBar/colors/font_color_shadow = Color( 0, 0, 0, 1 )
+ProgressBar/fonts/font = null
+ProgressBar/styles/bg = null
+ProgressBar/styles/fg = null
+_sections_unfolded = [ "ProgressBar", "ProgressBar/colors", "ProgressBar/styles" ]
 

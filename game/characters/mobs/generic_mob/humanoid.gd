@@ -16,7 +16,6 @@ onready var weapon_length = get_node("weapon/weapon_area/hitbox").shape.extents.
 
 func _ready():
 	randomize()
-	print(weapon_length)
 	$attack_timer.set_wait_time($weapon.get("secondary_as"))
 
 func _process():
@@ -31,8 +30,6 @@ func state_melee_attack():
 		$weapon.make_downward_swing()
 		pop_state()
 		push_state("CHASING")
-		print("melee attacking!")
-		print(state_stack)
 
 func state_ranged_attack():
 	pass

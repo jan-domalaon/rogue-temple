@@ -54,7 +54,7 @@ func _on_weapon_area_body_entered(body):
 	# Verify the owner of this weapon
 	if ("player" in get_parent().get_groups()):
 		# Do not deliver damage if the weapon touches a wall
-		if (not ($weapon_area.overlaps_body(walls))):
+		if ($weapon_area.get_collision_mask_bit(14)):
 			# If player wields this, check if body is enemy
 			if ("enemies" in body.get_groups() and (body.get("flickering") == false)):
 				if (attack_type == "primary"):

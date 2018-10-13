@@ -5,7 +5,7 @@
 [ext_resource path="res://game/characters/mobs/bandit_scavenger/bandit_scavenger.png" type="Texture" id=3]
 [ext_resource path="res://game/items/weapons/wooden_staff/wooden_staff.tscn" type="PackedScene" id=4]
 
-[node name="bandit_scavenger" groups=[
+[node name="bandit_scavenger" index="0" groups=[
 "melee_mobs",
 "humanoids",
 ] instance=ExtResource( 1 )]

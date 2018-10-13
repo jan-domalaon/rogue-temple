@@ -192,6 +192,7 @@ func detection_ray():
 	
 	# Ignore mob mask (1101 == 13). Bit mask is in binary
 	var detect_ray = physics_space.intersect_ray(get_global_position(), player_pos, ignore_areas, 13)
+	print(detect_ray["collider"].get_name())
 	return detect_ray
 
 func detect_player():
