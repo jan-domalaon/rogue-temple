@@ -14,9 +14,9 @@ func _physics_process(delta):
 			# Disables collisions and changes sprite texture (might add an animation later on)
 			# Change collision layer mask to doors instead of walls. Workaround for raycast
 			# going through disabled shapes
-			$closed_door/door_body/door_collision.set_disabled(true)
-			$closed_door/door_body.set_collision_layer_bit(4, 1)
-			$closed_door/door_body.set_collision_layer_bit(2, 0)
+			$door_collision.set_disabled(true)
+			$".".set_collision_layer_bit(4, 1)
+			$".".set_collision_layer_bit(2, 0)
 			$interact_area/interact_shape.set_disabled(true)
 			$interact_area.set_collision_layer_bit(4, 1)
 			$interact_area.set_collision_layer_bit(2, 0)

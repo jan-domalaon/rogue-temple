@@ -8,6 +8,7 @@ extends Node2D
 onready var weapon_tween = $weapon_area/weapon_tween
 # For tilemap collision
 onready var walls = get_parent().get_parent().get_node("nav/tilemap")
+onready var doors = get_parent().get_parent().get_node("doors")
 
 export var weapon_name = "Test Mace"
 export var primary_damage = 1
@@ -51,10 +52,14 @@ func _input(event):
 			make_thrust()
 
 func _on_weapon_area_body_entered(body):
+	var map_collision = false
+	for body in $weapon_area.get_overlapping_bodies():
+		if "doors" in body.get_groups() or "walls" in body.get_groups():
+			map_collision = true
 	# Verify the owner of this weapon
 	if ("player" in get_parent().get_groups()):
 		# Do not deliver damage if the weapon touches a wall
-		if ($weapon_area.get_collision_mask_bit(14)):
+		if (not map_collision):
 			# If player wields this, check if body is enemy
 			if ("enemies" in body.get_groups() and (body.get("flickering") == false)):
 				if (attack_type == "primary"):
@@ -63,7 +68,7 @@ func _on_weapon_area_body_entered(body):
 					body.receive_phys_damage(secondary_damage, secondary_dmg_type)
 	elif ("enemies" in get_parent().get_groups()):
 		# Do not deliver damage if the weapon touches a wall
-		if (not ($weapon_area.overlaps_body(walls))):
+		if (not map_collision):
 			# If player wields this, check if body is enemy
 			if ("player" in body.get_groups() and (body.get("flickering") == false)):
 				if (attack_type == "primary"):
