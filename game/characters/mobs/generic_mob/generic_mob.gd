@@ -52,7 +52,7 @@ func _physics_process(delta):
 		if (not detected):
 			detect_player()
 		# Only update state per frame when not in passive states
-	if (get_current_state() != STATES[0] and get_current_state() != STATES[1]):
+	if (get_current_state() != STATES[0] and get_current_state() != STATES[1] and get_current_state() != STATES[3]):
 		update_state()
 	old_player_pos = player_pos
 

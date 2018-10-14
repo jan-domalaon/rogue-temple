@@ -18,13 +18,13 @@ func _ready():
 	randomize()
 	$attack_timer.set_wait_time($weapon.get("secondary_as"))
 
-func _process():
-	pass
-
 func state_melee_attack():
-	# Check first if the mob can attack to prevent spamming
-	if (can_attack && player_health > 0):
-		$weapon.reset_weapon()
+	# Keep the weapon hitbox disabled if the mob is not attacking
+	# FOR USE WITH DOWNWARD SWING
+	$weapon/weapon_area/hitbox.set_disabled(true)
+	# Mob can attack when cooldown is finished and player is still alive
+	if (can_attack and player_health > 0 and not flickering):
+		print("melee state ", state_stack)
 		can_attack = false
 		$attack_timer.start()
 		$weapon.make_downward_swing()
