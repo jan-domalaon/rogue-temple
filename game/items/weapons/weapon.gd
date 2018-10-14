@@ -56,16 +56,16 @@ func _input(event):
 func _on_weapon_area_body_entered(body):
 	var map_collision = false
 	var enemy_group
-	
+	print(get_parent().get_name(), " ", body.get_name())
 	for body in $weapon_area.get_overlapping_bodies():
 		if "doors" in body.get_groups() or "walls" in body.get_groups():
 			map_collision = true
+	
 	# Verify the owner of this weapon. Get correct enemy group
 	if ("player" in get_parent().get_groups()):
 		enemy_group = "enemies"
 	elif ("enemies" in get_parent().get_groups()):
 		enemy_group = "player"
-	
 	# Deliver damage to the user's enemy group
 	# Do not deliver damage if the weapon touches a wall
 	if (not map_collision):

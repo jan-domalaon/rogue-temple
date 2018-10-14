@@ -11,8 +11,8 @@ func _ready():
 
 func _input(event):
 	if (event.is_pressed()):
-		get_tree().change_scene("res://scenes/menu/menu.tscn")
+		get_tree().change_scene("res://menu/main_menu/menu.tscn")
 
 func _on_intro_finished():
-	get_tree().change_scene("res://scenes/menu/menu.tscn")
+	get_tree().change_scene("res://menu/main_menu/menu.tscn")
 

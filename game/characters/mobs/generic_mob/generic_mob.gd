@@ -6,7 +6,7 @@ var STATES = ["IDLE", "WANDERING", "CHASING", "RANGED_ATTACKING", "MELEE_ATTACKI
 # Movement and wandering vars
 var wander_time = (randi()%3) + 1
 var wander_counter = 0
-var original_move_speed = move_speed
+onready var original_move_speed = move_speed
 
 # Get player position for player detection
 var player_pos
@@ -44,7 +44,6 @@ func _physics_process(delta):
 	# If I touch a wall and is not hit, change movement dir
 #	if (is_on_wall() and (not flickering)):
 #		movement_dir = Vector2(0,0)
-	
 	knockback()
 	movement()
 	# Update detection only when the player is alive

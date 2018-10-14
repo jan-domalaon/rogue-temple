@@ -5,7 +5,7 @@
 [ext_resource path="res://game/characters/mobs/bandit_scavenger/bandit_scavenger.png" type="Texture" id=3]
 [ext_resource path="res://game/items/weapons/wooden_staff/wooden_staff.tscn" type="PackedScene" id=4]
 
-[node name="bandit_scavenger" index="0" groups=[
+[node name="bandit_scavenger" groups=[
 "melee_mobs",
 "humanoids",
 ] instance=ExtResource( 1 )]
@@ -20,6 +20,10 @@ weapon_type = ""
 [node name="sprite" parent="." index="0"]
 
 texture = ExtResource( 3 )
+
+[node name="hitbox" parent="." index="2"]
+
+visible = true
 
 [node name="weapon" parent="." index="6" instance=ExtResource( 4 )]
 

@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/godot_engine_logo.png-1700ed684acffc6aad8b5bf88c2ab3dc.stex"
+path="res://.import/non_commercial_logo.png-916aa5a580c01c4da3fb375996873f3a.stex"
 
 [deps]
 
-source_file="res://menu/main_menu/godot_engine_logo.png"
-dest_files=[ "res://.import/godot_engine_logo.png-1700ed684acffc6aad8b5bf88c2ab3dc.stex" ]
+source_file="res://menu/intro/non_commercial_logo.png"
+dest_files=[ "res://.import/non_commercial_logo.png-916aa5a580c01c4da3fb375996873f3a.stex" ]
 
 [params]
 
@@ -16,8 +16,8 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
-flags/mipmaps=true
+flags/filter=false
+flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
 process/fix_alpha_border=true

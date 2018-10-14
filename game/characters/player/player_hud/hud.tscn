@@ -37,7 +37,7 @@ anti_aliasing_size = 1
 [sub_resource type="Theme" id=2]
 
 
-[node name="hud" type="CanvasLayer" index="0"]
+[node name="hud" type="CanvasLayer"]
 
 layer = 1
 offset = Vector2( 0, 0 )

@@ -54,17 +54,16 @@ func knockback():
 			knockback_counter = KNOCKBACK_LENGTH
 			knockback_dir = global_transform.origin - body.global_transform.origin
 			flicker()
-			print("knocking back!")
+			#print("knocking back!")
 		if (knockback_counter == 0 && ("bouncy_mobs" in get_groups() && "player" in body.get_groups())):
 			# Start knockback counter
 			knockback_counter = KNOCKBACK_LENGTH * 2
 			knockback_dir = global_transform.origin - body.global_transform.origin
-			print("mob knocking back!")
+			#print("mob knocking back!")
 		# Knockback if THIS character touches blunt damage (Player hits mob (this))
 		if (knockback_counter == 0 && ("enemies" in get_groups() && "blunt_weapons" in body.get_groups()) && blunt_hit):
 			knockback_counter = 10
 			knockback_dir = global_transform.origin - body.global_transform.origin
-			print("yeet")
 			blunt_hit = false
 
 func receive_phys_damage(dmg, dmg_type):
