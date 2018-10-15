@@ -57,9 +57,9 @@ func _on_weapon_area_body_entered(body):
 	var map_collision = false
 	var enemy_group
 #	print(get_parent().get_name(), " ", $weapon_area.get_overlapping_bodies())
-#	for body in $weapon_area.get_overlapping_bodies():
-#		if "doors" in body.get_groups() or "walls" in body.get_groups():
-#			map_collision = true
+	for body in $weapon_area.get_overlapping_bodies():
+		if "doors" in body.get_groups() or "walls" in body.get_groups():
+			map_collision = true
 	
 	# Verify the owner of this weapon. Get correct enemy group
 	if ("player" in get_parent().get_groups()):

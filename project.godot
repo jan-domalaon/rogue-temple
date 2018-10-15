@@ -11,7 +11,7 @@ config_version=3
 [application]
 
 config/name="Catacombs2018"
-run/main_scene="res://game/levels/level_0/test_level.tscn"
+run/main_scene="res://menu/main_menu/menu.tscn"
 boot_splash/image="res://non_commercial_logo.png"
 config/icon="res://icon.png"
 
