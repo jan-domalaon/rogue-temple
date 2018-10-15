@@ -13,6 +13,10 @@ onready var cursor_pos = get_global_mouse_position()
 
 signal player_moved
 
+# Inventory
+var inventory_size = 2
+var inventory_space = []
+
 
 func _ready():
 	set_physics_process(true)
@@ -48,3 +52,18 @@ func _input(event):
 	# If primary_attack, do weapon's primary attack
 	if (event.is_action_pressed('primary_attack')):
 		pass
+	
+	if (event.is_action_pressed('interact')):
+		var interactables = $knockback_area.get_overlapping_areas()
+		if (interactables.size() > 0):
+			var interacted = false
+			var w = false
+			if ((interactables[0].is_in_group('items')) and (inventory_space.size() < inventory_size)):
+				inventory_space.append(interactables[0].name)
+				# Sort inventory alphabetically
+				#inventory_space.sort()
+				print(inventory_space)
+				interactables[0].queue_free()
+				interacted = true
+			elif ((interactables[0].is_in_group("level_change"))):
+				pass

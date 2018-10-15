@@ -11,7 +11,7 @@ func _ready():
 
 func _on_play_button_pressed():
 	# Change scene to save scene, where player can choose new game or load a saved game
-	# get_tree().change_scene("res://scenes/menu/save.tscn")
+	get_tree().change_scene("res://game/levels/level_0/test_level.tscn")
 	pass
 
 func _on_options_pressed():
