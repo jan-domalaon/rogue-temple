@@ -56,10 +56,6 @@ func _input(event):
 func _on_weapon_area_body_entered(body):
 	var map_collision = false
 	var enemy_group
-#	print(get_parent().get_name(), " ", $weapon_area.get_overlapping_bodies())
-	for body in $weapon_area.get_overlapping_bodies():
-		if "doors" in body.get_groups() or "walls" in body.get_groups():
-			map_collision = true
 	
 	# Verify the owner of this weapon. Get correct enemy group
 	if ("player" in get_parent().get_groups()):
@@ -68,12 +64,11 @@ func _on_weapon_area_body_entered(body):
 		enemy_group = "player"
 	# Deliver damage to the user's enemy group
 	# Do not deliver damage if the weapon touches a wall
-	if (not map_collision):
-		if (enemy_group in body.get_groups() and (body.get("flickering") == false)):
-			if (attack_type == "primary"):
-				body.receive_phys_damage(primary_damage, primary_dmg_type)
-			elif (attack_type == "secondary"):
-				body.receive_phys_damage(secondary_damage, secondary_dmg_type)
+	if (body.is_in_group(enemy_group) and (body.get("flickering") == false)):
+		if (attack_type == "primary"):
+			body.receive_phys_damage(primary_damage, primary_dmg_type, get_parent().get_name(), get_parent().get_groups())
+		elif (attack_type == "secondary"):
+			body.receive_phys_damage(secondary_damage, secondary_dmg_type, get_parent().get_name(), get_parent().get_groups())
 
 
 func make_swing():

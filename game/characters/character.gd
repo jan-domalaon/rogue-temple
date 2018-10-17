@@ -66,7 +66,21 @@ func knockback():
 			knockback_dir = global_transform.origin - body.global_transform.origin
 			blunt_hit = false
 
-func receive_phys_damage(dmg, dmg_type):
+func receive_phys_damage(dmg, dmg_type, attacker, attacker_groups):
+	# Check if the damage given was through walls. No dmg should be given if true
+#	var attacker_pos = get_parent().get_node(attacker).get_global_position()
+#	var world = get_world_2d().direct_space_state
+#	var ignore_areas
+#	if ("humanoids" in get_groups()):
+#		ignore_areas = [self, $knockback_area]
+#	else:
+#		ignore_areas = [self, $knockback_area, $weapon]
+#	print(attacker_pos)
+#	# Ignore mob mask (1101 == 13). Bit mask is in binary
+#	var ray = world.intersect_ray(get_global_position(), attacker_pos, [self], 13)
+#	#print(ray.collider.get_parent().get_groups())
+#	if ("player" in ray.collider.get_parent().get_groups() and get_parent().get_node(attacker).is_in_group("player")):
+	print("hit!")
 	# Any type of damage should trigger flickering
 	flicker()
 	# Remove HP from this character based on the damage stat of weapon
