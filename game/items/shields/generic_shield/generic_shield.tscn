@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://game/items/shields/generic_shield/generic_shield.gd" type="Script" id=1]
+[ext_resource path="res://game/items/shields/generic_shield/iron_shield.png" type="Texture" id=2]
+
+[node name="generic_shield" type="Area2D" index="0"]
+
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+shield_hp = 5
+shield_cooldown = 1
+
+[node name="shield_sprite" type="Sprite" parent="." index="0"]
+
+scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="shield_cooldown" type="Timer" parent="." index="1"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
+
+
