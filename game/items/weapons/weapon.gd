@@ -66,9 +66,9 @@ func _on_weapon_area_body_entered(body):
 	# Do not deliver damage if the weapon touches a wall
 	if (body.is_in_group(enemy_group) and (body.get("flickering") == false)):
 		if (attack_type == "primary"):
-			body.receive_phys_damage(primary_damage, primary_dmg_type, get_parent().get_name(), get_parent().get_groups())
+			body.receive_phys_damage(primary_damage, primary_dmg_type)
 		elif (attack_type == "secondary"):
-			body.receive_phys_damage(secondary_damage, secondary_dmg_type, get_parent().get_name(), get_parent().get_groups())
+			body.receive_phys_damage(secondary_damage, secondary_dmg_type)
 
 
 func make_swing():

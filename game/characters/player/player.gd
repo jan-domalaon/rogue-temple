@@ -67,3 +67,9 @@ func _input(event):
 				interacted = true
 			elif ((interactables[0].is_in_group("level_change"))):
 				pass
+	
+	if (event.is_action_pressed('block') and has_shield):
+		use_shield(true)
+	
+	if (event.is_action_released("block") and has_shield):
+		use_shield(false)

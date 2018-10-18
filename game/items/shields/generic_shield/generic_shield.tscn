@@ -13,23 +13,45 @@ angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_lock_": true
-}
 shield_hp = 5
-shield_cooldown = 1
+complete_regen_cooldown = 4
+partial_regen_cooldown = 2
+regen_time = 0.5
+shield_name = "Shield (Generic)"
 
 [node name="shield_sprite" type="Sprite" parent="." index="0"]
 
-scale = Vector2( 2, 2 )
+position = Vector2( -2.38419e-007, 2.38419e-007 )
 texture = ExtResource( 2 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="shield_cooldown" type="Timer" parent="." index="1"]
+[node name="complete_regen_timer" type="Timer" parent="." index="1"]
 
 process_mode = 1
 wait_time = 1.0
 one_shot = false
 autostart = false
+
+[node name="shield_hitbox" type="CollisionShape2D" parent="." index="2"]
+
+[node name="partial_regen_timer" type="Timer" parent="." index="3"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
+
+[node name="shield_regen_timer" type="Timer" parent="." index="4"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
+
+[connection signal="timeout" from="complete_regen_timer" to="." method="_on_complete_regen_timer_timeout"]
+
+[connection signal="timeout" from="partial_regen_timer" to="." method="_on_partial_regen_timer_timeout"]
+
+[connection signal="timeout" from="shield_regen_timer" to="." method="_on_shield_regen_timer_timeout"]
 
 

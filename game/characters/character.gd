@@ -1,3 +1,8 @@
+# By Jan Domalaon
+
+# Character script. All mobs, town NPCs, player inherit from this
+
+
 extends KinematicBody2D
 
 const FLICKER_TIME = 0.25
@@ -17,22 +22,32 @@ export var knockback_factor = 1.0
 const KNOCKBACK_LENGTH = 10
 
 var movement_dir = Vector2(0, 0)
+onready var starting_move_speed = move_speed
 # Flickering flag. Can't be hit and can't hit while flickering
 var flickering = false
 # Check if weapon doesn't only do blunt dmg.
 var blunt_hit = false
-
+# Shield vars
+var has_shield = false
+var shield_up = false
 # Possible movement states for a character
 enum State {IDLE, MOVING, ATTACKING, STUNNED}
 
+
 func _ready():
 	$flicker_timer.set_wait_time(FLICKER_TIME)
+	
+	# Check if this character has a shield
+	if (has_node("shield")):
+		has_shield = true
+		$shield/shield_hitbox.set_disabled(true)
 
 func _process(delta):
 	if (health <= 0):
 		print(get_name() + ' is deadaz')
 		if (not "player" in get_groups()):
 			queue_free()
+
 
 func movement():
 	var motion
@@ -41,6 +56,7 @@ func movement():
 	else:
 		motion = knockback_dir.normalized() * 100
 	move_and_slide(motion, Vector2(0, 0))
+
 
 func knockback():
 	# Knockback countdown
@@ -66,7 +82,8 @@ func knockback():
 			knockback_dir = global_transform.origin - body.global_transform.origin
 			blunt_hit = false
 
-func receive_phys_damage(dmg, dmg_type, attacker, attacker_groups):
+
+func receive_phys_damage(dmg, dmg_type):
 	# Check if the damage given was through walls. No dmg should be given if true
 #	var attacker_pos = get_parent().get_node(attacker).get_global_position()
 #	var world = get_world_2d().direct_space_state
@@ -80,23 +97,29 @@ func receive_phys_damage(dmg, dmg_type, attacker, attacker_groups):
 #	var ray = world.intersect_ray(get_global_position(), attacker_pos, [self], 13)
 #	#print(ray.collider.get_parent().get_groups())
 #	if ("player" in ray.collider.get_parent().get_groups() and get_parent().get_node(attacker).is_in_group("player")):
+	
 	print("hit!")
-	# Any type of damage should trigger flickering
-	flicker()
-	# Remove HP from this character based on the damage stat of weapon
-	# TODO: Armor reduction formula
-	if (dmg_type == 'c'):
-		health -= dmg
-		print($".".get_name() + " got hit with cut dmg")
-	elif (dmg_type == 'p'):
-		# Piercing damage. Goes through armor.
-		health -= dmg
-		print($".".get_name() + " got hit with pierce dmg")
-	elif (dmg_type == 'b'):
-		# Blunt dmg. Do knockback
-		blunt_hit = true
-		health -= dmg
-		print($".".get_name() + " got hit with blunt dmg")
+	# If the user has a shield and it is up, the shield will absorb dmg
+	if (shield_up):
+		get_node("shield").shield_absorb(dmg)
+	else:
+		# Any type of damage should trigger flickering
+		flicker()
+		# Remove HP from this character based on the damage stat of weapon
+		# TODO: Armor reduction formula
+		if (dmg_type == 'c'):
+			health -= dmg
+			print($".".get_name() + " got hit with cut dmg")
+		elif (dmg_type == 'p'):
+			# Piercing damage. Goes through armor.
+			health -= dmg
+			print($".".get_name() + " got hit with pierce dmg")
+		elif (dmg_type == 'b'):
+			# Blunt dmg. Do knockback
+			blunt_hit = true
+			health -= dmg
+			print($".".get_name() + " got hit with blunt dmg")
+
 
 func flicker():
 	# Disable hitboxes
@@ -107,8 +130,33 @@ func flicker():
 	$flicker_timer.start()
 	flickering = true
 
+
 func _on_flicker_timer_timeout():
 	# Enable collisions
 	#$hitbox.set_disabled(false)
 	$knockback_area/knockback_hitbox.set_disabled(false)
 	flickering = false
+
+
+# Handles shield appearance and knockback collision logic wrt shields
+func use_shield(blocking):
+	# Check if this character has a shield first
+	if (has_shield and blocking):
+		# "Turn on" shield
+		get_node("shield").show()
+		$shield/shield_hitbox.set_disabled(false)
+		shield_up = true
+		# Disable knockback area
+		$knockback_area/knockback_hitbox.set_disabled(true)
+		# Slow down movement speed
+		move_speed = move_speed * 0.66
+	elif (has_shield and not blocking):
+		# The character is not blocking
+		# Play animation that brings down shield
+		get_node("shield").hide()
+		$shield/shield_hitbox.set_disabled(true)
+		shield_up = false
+		$knockback_area/knockback_hitbox.set_disabled(false)
+		# Return move_speed back to normal
+		move_speed = starting_move_speed
+
