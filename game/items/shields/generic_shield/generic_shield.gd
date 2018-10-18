@@ -22,6 +22,7 @@ signal shield_ready
 func _ready():
 	# Check if this is a child of a character
 	# If so, this shield will be renamed "shield"
+	$shield_hitbox.set_disabled(true)
 	if (get_name() == "shield"):
 		# Get shape of the parent knockback_area to use as its shape
 		var shield_shape = get_parent().get_node("knockback_area/knockback_hitbox").get_shape()
@@ -30,6 +31,7 @@ func _ready():
 		$partial_regen_timer.set_wait_time(partial_regen_cooldown)
 		$complete_regen_timer.set_wait_time(complete_regen_cooldown)
 		$shield_regen_timer.set_wait_time(regen_time)
+
 
 func shield_absorb(dmg, dmg_type):
 	if (dmg < shield_hp):

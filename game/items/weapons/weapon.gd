@@ -4,6 +4,14 @@
 
 extends Node2D
 
+enum WEAPON_TYPES {
+	axe,
+	mace,
+	spear,
+	staff,
+	sword,
+	blade
+}
 
 onready var weapon_tween = $weapon_area/weapon_tween
 # For tilemap collision
@@ -30,27 +38,6 @@ var look_dir
 
 func _ready():
 	$weapon_area/hitbox.set_disabled(true)
-	if (user_type == "player" or ("player" in get_parent().get_groups())):
-		set_process_input(true)
-	else:
-		set_process_input(false)
-
-
-func _input(event):
-	if (Input.is_action_just_pressed("primary_attack") and can_attack):
-		$weapon_cooldown.set_wait_time(primary_as)
-		attack_type = "primary"
-		$weapon_cooldown.start()
-		if (weapon_type in ["mace", "sword", "spear", "staff"]):
-			make_swing()
-	elif (Input.is_action_just_pressed("secondary_attack") and can_attack):
-		$weapon_cooldown.set_wait_time(secondary_as)
-		attack_type = "secondary"
-		$weapon_cooldown.start()
-		if (weapon_type in ["mace", "staff"]):
-			make_downward_swing()
-		elif (weapon_type in ["sword", "spear"]):
-			make_thrust()
 
 
 func _on_weapon_area_body_entered(body):
@@ -153,3 +140,21 @@ func update_look_dir():
 		# The wielder of this weapon is a mob/humanoid
 		# Mob vector to player
 		look_dir = get_parent().get("player_pos")
+
+
+func make_primary_attack():
+	$weapon_cooldown.set_wait_time(primary_as)
+	attack_type = "primary"
+	$weapon_cooldown.start()
+	if (weapon_type in ["mace", "sword", "spear", "staff"]):
+		make_swing()
+
+
+func make_secondary_attack():
+	$weapon_cooldown.set_wait_time(secondary_as)
+	attack_type = "secondary"
+	$weapon_cooldown.start()
+	if (weapon_type in ["mace", "staff"]):
+		make_downward_swing()
+	elif (weapon_type in ["sword", "spear"]):
+		make_thrust()

@@ -23,6 +23,7 @@ func _ready():
 	set_process_input(true)
 	set_process(true)
 
+
 func _physics_process(delta):
 	# Movement
 	movement_dir.x = -int(Input.is_action_pressed("move_left")) + int(Input.is_action_pressed("move_right"))
@@ -36,6 +37,7 @@ func _physics_process(delta):
 	if (movement_dir != Vector2(0,0)):
 		emit_signal("player_moved", get_global_position())
 
+
 func _process(delta):
 	# Flips the player sprite horizontally to mimic the player facing direction.
 	cursor_pos = get_global_mouse_position()
@@ -48,10 +50,14 @@ func _process(delta):
 	# If flickering, the player can't use their weapon
 	$weapon.set_process_input(false) if flickering else $weapon.set_process_input(true)
 
+
 func _input(event):
 	# If primary_attack, do weapon's primary attack
-	if (event.is_action_pressed('primary_attack')):
-		pass
+	if (event.is_action_pressed('primary_attack') and $weapon.get("can_attack") and not shield_up):
+		$weapon.make_primary_attack()
+	
+	if(event.is_action_pressed("secondary_attack") and $weapon.get("can_attack") and not shield_up):
+		$weapon.make_secondary_attack()
 	
 	if (event.is_action_pressed('interact')):
 		var interactables = $knockback_area.get_overlapping_areas()
