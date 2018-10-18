@@ -30,6 +30,7 @@ var blunt_hit = false
 # Shield vars
 var has_shield = false
 var shield_up = false
+var shield_ready = false
 # Possible movement states for a character
 enum State {IDLE, MOVING, ATTACKING, STUNNED}
 
@@ -41,6 +42,9 @@ func _ready():
 	if (has_node("shield")):
 		has_shield = true
 		$shield/shield_hitbox.set_disabled(true)
+		shield_ready = true
+		$shield.connect("shield_broken", self, "on_shield_broken")
+		$shield.connect("shield_ready", self, "on_shield_ready")
 
 func _process(delta):
 	if (health <= 0):
@@ -100,8 +104,8 @@ func receive_phys_damage(dmg, dmg_type):
 	
 	print("hit!")
 	# If the user has a shield and it is up, the shield will absorb dmg
-	if (shield_up):
-		get_node("shield").shield_absorb(dmg)
+	if (shield_ready and shield_up):
+		get_node("shield").shield_absorb(dmg, dmg_type)
 	else:
 		# Any type of damage should trigger flickering
 		flicker()
@@ -150,7 +154,7 @@ func use_shield(blocking):
 		$knockback_area/knockback_hitbox.set_disabled(true)
 		# Slow down movement speed
 		move_speed = move_speed * 0.66
-	elif (has_shield and not blocking):
+	elif (has_shield):
 		# The character is not blocking
 		# Play animation that brings down shield
 		get_node("shield").hide()
@@ -160,3 +164,10 @@ func use_shield(blocking):
 		# Return move_speed back to normal
 		move_speed = starting_move_speed
 
+
+func on_shield_broken():
+	shield_ready = false
+
+
+func on_shield_ready():
+	shield_ready = true

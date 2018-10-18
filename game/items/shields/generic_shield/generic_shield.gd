@@ -14,6 +14,7 @@ export var shield_name = "Shield (Generic)"
 
 # Upper limit of shield
 onready var shield_max_hp = shield_hp
+var no_shield_hp = false
 
 # Signals when shield is disabled
 signal shield_broken
@@ -34,34 +35,45 @@ func _ready():
 
 
 func shield_absorb(dmg, dmg_type):
+	print("dmg ", dmg, " shield hp ", shield_hp)
 	if (dmg < shield_hp):
 		# Shield is still "up", wait for partial regen timer, then start to regenerate shield hp
 		shield_hp = shield_hp - dmg
+		# Stop other timers, stop regen, start partial timer again
+		$complete_regen_timer.stop()
+		$shield_regen_timer.stop()
 		$partial_regen_timer.start()
 	else:
-		# Reset shield hp, so no negative values
-		shield_hp = 0
+		get_parent().use_shield(false)
 		# Give damage to its parent
 		get_parent().receive_phys_damage(dmg - shield_hp, dmg_type)
+		# Reset shield hp, so no negative values
+		shield_hp = 0
 		# Characters cannot use their shield when their shield is down
 		emit_signal("shield_broken")
-		# Start complete regen timer
+		# Stop partial timer, start complete timer
+		$partial_regen_timer.stop()
 		$complete_regen_timer.start()
 
 
 func _on_partial_regen_timer_timeout():
 	# Start regenrating shield hp
+	print("partial regen timer done!")
 	$shield_regen_timer.start()
 
 
 func _on_complete_regen_timer_timeout():
 	# Shield HP is back to normal
 	shield_hp = shield_max_hp
+	no_shield_hp = false
 	emit_signal("shield_ready")
 
 
 func _on_shield_regen_timer_timeout():
 	# Regenerate shield HP until shield HP == shield_max_hp
-	if (shield_hp < shield_max_hp):
+	if (shield_hp != shield_max_hp):
 		shield_hp += 1
 		$shield_regen_timer.start()
+	else:
+		$shield_regen_timer.stop()
+	print(shield_hp)

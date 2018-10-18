@@ -46,18 +46,23 @@ func _process(delta):
 		get_node("sprite").set_flip_h(true)
 	else:
 		get_node("sprite").set_flip_h(false)
-	
-	# If flickering, the player can't use their weapon
-	$weapon.set_process_input(false) if flickering else $weapon.set_process_input(true)
 
 
 func _input(event):
-	# If primary_attack, do weapon's primary attack
-	if (event.is_action_pressed('primary_attack') and $weapon.get("can_attack") and not shield_up):
-		$weapon.make_primary_attack()
-	
-	if(event.is_action_pressed("secondary_attack") and $weapon.get("can_attack") and not shield_up):
-		$weapon.make_secondary_attack()
+	# These actions can only be done if the player is not flickering
+	if (not flickering):
+		# If primary_attack, do weapon's primary attack
+		if (event.is_action_pressed('primary_attack') and $weapon.get("can_attack") and not shield_up):
+			$weapon.make_primary_attack()
+		
+		if(event.is_action_pressed("secondary_attack") and $weapon.get("can_attack") and not shield_up):
+			$weapon.make_secondary_attack()
+		
+		if (shield_ready and event.is_action_pressed('block')):
+			use_shield(true)
+		
+		if (shield_ready and event.is_action_released("block")):
+			use_shield(false)
 	
 	if (event.is_action_pressed('interact')):
 		var interactables = $knockback_area.get_overlapping_areas()
@@ -73,9 +78,3 @@ func _input(event):
 				interacted = true
 			elif ((interactables[0].is_in_group("level_change"))):
 				pass
-	
-	if (event.is_action_pressed('block') and has_shield):
-		use_shield(true)
-	
-	if (event.is_action_released("block") and has_shield):
-		use_shield(false)
