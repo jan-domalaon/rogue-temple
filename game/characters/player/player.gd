@@ -51,19 +51,35 @@ func _process(delta):
 func _input(event):
 	# These actions can only be done if the player is not flickering
 	if (not flickering):
-		# If primary_attack, do weapon's primary attack
-		if (event.is_action_pressed('primary_attack') and $weapon.get("can_attack") and not shield_up):
-			$weapon.make_primary_attack()
-		
-		if(event.is_action_pressed("secondary_attack") and $weapon.get("can_attack") and not shield_up):
-			$weapon.make_secondary_attack()
 		
 		if (shield_ready and event.is_action_pressed('block')):
 			use_shield(true)
 		
 		if (shield_ready and event.is_action_released("block")):
 			use_shield(false)
-	
+		
+		if ($weapon.get("can_attack") and not shield_up):
+			# Special conditions for ranged weapons
+			if ($weapon.is_in_group("ranged_weapons")):
+				# Bow conditions
+				if ($weapon.get("weapon_type") == "bow"):
+					if Input.is_action_pressed("primary_attack"):
+						# Only shoot a bow when releasing
+						$weapon.make_draw_bow()
+					if Input.is_action_just_pressed("primary_attack"):
+						$weapon/draw_timer.start()
+					if Input.is_action_just_released("primary_attack"):
+						$weapon.make_reset_bow()
+					if Input.is_action_just_released("primary_attack") and $weapon.get("can_fire"):
+						$weapon.fire_bow()
+			else:
+				# Melee weapon attacks
+				if (event.is_action_pressed('primary_attack')):
+					$weapon.make_primary_attack()
+				
+				if(event.is_action_pressed("secondary_attack")):
+					$weapon.make_secondary_attack()
+		
 	if (event.is_action_pressed('interact')):
 		var interactables = $knockback_area.get_overlapping_areas()
 		if (interactables.size() > 0):

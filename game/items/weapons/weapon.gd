@@ -148,6 +148,8 @@ func make_primary_attack():
 	$weapon_cooldown.start()
 	if (weapon_type in ["mace", "sword", "spear", "staff"]):
 		make_swing()
+	elif (weapon_type == "bow"):
+		make_draw_bow()
 
 
 func make_secondary_attack():
@@ -156,5 +158,5 @@ func make_secondary_attack():
 	$weapon_cooldown.start()
 	if (weapon_type in ["mace", "staff"]):
 		make_downward_swing()
-	elif (weapon_type in ["sword", "spear"]):
+	elif (weapon_type in ["sword", "spear", "bow"]):
 		make_thrust()

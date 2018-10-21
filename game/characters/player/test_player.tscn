@@ -4,8 +4,8 @@
 [ext_resource path="res://game/characters/player/player.gd" type="Script" id=2]
 [ext_resource path="res://game/characters/player/hero.png" type="Texture" id=3]
 [ext_resource path="res://game/characters/player/player_hud/hud.tscn" type="PackedScene" id=4]
-[ext_resource path="res://game/items/weapons/wooden_staff/wooden_staff.tscn" type="PackedScene" id=5]
-[ext_resource path="res://game/items/shields/generic_shield/generic_shield.tscn" type="PackedScene" id=6]
+[ext_resource path="res://game/items/shields/generic_shield/generic_shield.tscn" type="PackedScene" id=5]
+[ext_resource path="res://game/items/weapons/generic_bow.tscn" type="PackedScene" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -17,7 +17,7 @@ extents = Vector2( 14, 16 )
 custom_solver_bias = 0.0
 extents = Vector2( 6, 7 )
 
-[node name="player" groups=[
+[node name="player" index="0" groups=[
 "player",
 ] instance=ExtResource( 1 )]
 
@@ -48,12 +48,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="hud" parent="." index="5" instance=ExtResource( 4 )]
 
-[node name="weapon" parent="." index="6" instance=ExtResource( 5 )]
-
-visible = false
-scale = Vector2( 0.5, 0.5 )
-
-[node name="player_camera" type="Camera2D" parent="." index="7"]
+[node name="player_camera" type="Camera2D" parent="." index="6"]
 
 anchor_mode = 1
 rotating = false
@@ -79,8 +74,13 @@ editor_draw_limits = false
 editor_draw_drag_margin = true
 _sections_unfolded = [ "Drag Margin", "Editor", "Material", "Transform", "Visibility", "Z Index" ]
 
-[node name="shield" parent="." index="8" instance=ExtResource( 6 )]
+[node name="shield" parent="." index="7" instance=ExtResource( 5 )]
 
 visible = false
+
+[node name="weapon" parent="." index="8" instance=ExtResource( 6 )]
+
+visible = false
+scale = Vector2( 0.5, 0.5 )
 
 

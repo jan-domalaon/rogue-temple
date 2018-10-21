@@ -34,6 +34,9 @@ var shield_ready = false
 # Possible movement states for a character
 enum State {IDLE, MOVING, ATTACKING, STUNNED}
 
+# Signals
+signal shoot(projectile, direction, location)
+
 
 func _ready():
 	$flicker_timer.set_wait_time(FLICKER_TIME)

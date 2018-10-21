@@ -1,6 +1,6 @@
 Weapon folder will have
 - weapon scene
-- weapon dropped texture
+- weapon texture
 - weapon action texture(s) (thrust, swing, etc.)
 
 Weapon scene will have
