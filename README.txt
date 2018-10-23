@@ -8,3 +8,11 @@ Made using Godot Game Engine 3 & GD Script
 Tools Used:
 Paint.NET
 Git
+
+Features (so far):
+- Melee, ranged weaponry
+- Damage blocking
+- Basic mobs with knockback
+- Humanoids with AI
+- Barebones inventory system
+- Doors
