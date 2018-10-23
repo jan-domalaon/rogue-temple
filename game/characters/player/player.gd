@@ -85,6 +85,7 @@ func _input(event):
 		if (interactables.size() > 0):
 			var interacted = false
 			var w = false
+			# If the interactable is an item
 			if ((interactables[0].is_in_group('items')) and (inventory_space.size() < inventory_size)):
 				inventory_space.append(interactables[0].name)
 				# Sort inventory alphabetically
@@ -92,5 +93,9 @@ func _input(event):
 				print(inventory_space)
 				interactables[0].queue_free()
 				interacted = true
+			# If the interactable is a level change
 			elif ((interactables[0].is_in_group("level_change"))):
 				pass
+			# If the interactable is a door
+			elif (interactables[0].get_parent().is_in_group("doors")):
+				interactables[0].get_parent().open_door()

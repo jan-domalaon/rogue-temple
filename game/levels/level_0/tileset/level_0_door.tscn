@@ -6,7 +6,7 @@
 [ext_resource path="res://game/levels/level_0/tileset/door_open_anim.tres" type="Animation" id=4]
 [ext_resource path="res://game/levels/level_0/tileset/tile_shape.tres" type="Shape2D" id=5]
 
-[node name="level_0_door" type="StaticBody2D" groups=[
+[node name="level_0_door" type="StaticBody2D" index="0" groups=[
 "doors",
 ]]
 
@@ -27,7 +27,9 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 16, 16 )
 _sections_unfolded = [ "Region" ]
 
-[node name="interact_area" type="Area2D" parent="." index="1"]
+[node name="interact_area" type="Area2D" parent="." index="1" groups=[
+"doors",
+]]
 
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
