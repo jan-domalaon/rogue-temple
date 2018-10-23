@@ -34,9 +34,12 @@ tracks/0/keys = {
 
 script = ExtResource( 2 )
 weapon_name = "Bow (Test)"
+primary_damage = 3
 primary_dmg_type = "p"
 weapon_type = "bow"
-projectile_speed = 80
+projectile_speed = 100
+projectile = "res://game/items/weapons/generic_projectile.tscn"
+piercing = false
 
 [node name="sprite" parent="weapon_area" index="0"]
 
@@ -68,6 +71,8 @@ playback_default_blend_time = 0.0
 playback_speed = 1.0
 anims/bow_draw = SubResource( 2 )
 blend_times = [  ]
+
+[node name="projectile_container" type="Node" parent="." index="4"]
 
 [connection signal="timeout" from="draw_timer" to="." method="_on_draw_timer_timeout"]
 
