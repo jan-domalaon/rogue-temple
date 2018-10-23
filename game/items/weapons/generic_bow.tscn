@@ -28,7 +28,7 @@ tracks/0/keys = {
 "values": [ Rect2( 0, 0, 16, 16 ), Rect2( 16, 0, 16, 16 ) ]
 }
 
-[node name="generic_bow" groups=[
+[node name="generic_bow" index="0" groups=[
 "ranged_weapons",
 ] instance=ExtResource( 1 )]
 

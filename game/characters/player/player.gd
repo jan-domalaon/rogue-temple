@@ -87,7 +87,7 @@ func _input(event):
 			var w = false
 			# If the interactable is an item
 			if ((interactables[0].is_in_group('items')) and (inventory_space.size() < inventory_size)):
-				inventory_space.append(interactables[0].name)
+				inventory_space.append(interactables[0].item_name)
 				# Sort inventory alphabetically
 				#inventory_space.sort()
 				print(inventory_space)

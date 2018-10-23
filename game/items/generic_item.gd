@@ -4,5 +4,7 @@
 
 extends Area2D
 
-func _physics_process(delta):
-	pass
+
+export var item_name = "Item (Generic)"
+export var item_type = "MISC"
+

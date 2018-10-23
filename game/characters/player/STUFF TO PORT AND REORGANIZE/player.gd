@@ -168,7 +168,7 @@ func _input(event):
 			while (not interacted or i > interactable_nodes.size()):
 				# Pick up item
 				if interactable_nodes[i].is_in_group('items'):
-					inventory.append(interactable_nodes[i].name)
+					inventory.append(interactable_nodes[i].item_name)
 					# Sort inventory alphabetically
 					inventory.sort()
 					print(inventory)
