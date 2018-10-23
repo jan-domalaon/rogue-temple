@@ -49,6 +49,9 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="hud" parent="." index="5" instance=ExtResource( 4 )]
 
+visible = false
+_sections_unfolded = [ "Anchor", "Margin" ]
+
 [node name="player_camera" type="Camera2D" parent="." index="6"]
 
 anchor_mode = 1

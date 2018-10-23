@@ -1,4 +1,4 @@
-extends CanvasLayer
+extends Control
 
 # Get inventory from player
 #onready var player_vars = get_node("/root/player_variables")

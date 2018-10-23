@@ -1,11 +1,14 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://game/characters/player/player_hud/hud.gd" type="Script" id=1]
-[ext_resource path="res://game/characters/player/player_hud/player_hud.tres" type="Theme" id=2]
+[ext_resource path="res://game/pause/pause_menu.tscn" type="PackedScene" id=2]
 [ext_resource path="res://game/characters/player/player_hud/portraits/portrait_townguard_ingame.png" type="Texture" id=3]
-[ext_resource path="res://game/characters/player/player_hud/fps_counter.tscn" type="PackedScene" id=4]
-[ext_resource path="res://game/characters/player/player_hud/block_count.gd" type="Script" id=5]
-[ext_resource path="res://game/pause/pause_menu.tscn" type="PackedScene" id=6]
+[ext_resource path="res://game/characters/player/player_hud/player_hud.tres" type="Theme" id=4]
+[ext_resource path="res://game/characters/player/player_hud/fps_counter.tscn" type="PackedScene" id=5]
+[ext_resource path="res://game/characters/player/player_hud/block_count.gd" type="Script" id=6]
+
+[sub_resource type="Theme" id=2]
+
 
 [sub_resource type="StyleBoxFlat" id=1]
 
@@ -35,46 +38,219 @@ shadow_size = 0
 anti_aliasing = true
 anti_aliasing_size = 1
 
-[sub_resource type="Theme" id=2]
-
-
-[node name="hud" type="CanvasLayer" index="0"]
-
-layer = 1
-offset = Vector2( 0, 0 )
-rotation = 0.0
-scale = Vector2( 1, 1 )
-transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-script = ExtResource( 1 )
-
-[node name="health" type="Control" parent="." index="0"]
+[node name="hud" type="Control" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 118.0
-margin_top = 32.0
-margin_right = 326.0
-margin_bottom = 48.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-hint_tooltip = "Current Health"
 mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-theme = ExtResource( 2 )
-_sections_unfolded = [ "Theme" ]
+script = ExtResource( 1 )
 
-[node name="hp_bar" type="ProgressBar" parent="health" index="0"]
+[node name="inventory" type="ItemList" parent="." index="0"]
+
+visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 8.0
+margin_right = 106.0
+margin_bottom = 74.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = true
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+theme = SubResource( 2 )
+items = [  ]
+select_mode = 0
+allow_reselect = false
+icon_mode = 1
+fixed_icon_size = Vector2( 0, 0 )
+
+[node name="pause_menu" parent="." index="1" instance=ExtResource( 2 )]
+
+pause_mode = 2
+visible = false
+margin_right = 106.0
+margin_bottom = 74.0
+_sections_unfolded = [ "Margin" ]
+
+[node name="MarginContainer" type="MarginContainer" parent="." index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 1280.0
+margin_bottom = 720.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_constants/margin_right = 20
+custom_constants/margin_top = 10
+custom_constants/margin_left = 20
+_sections_unfolded = [ "Margin", "custom_constants" ]
+
+[node name="HBoxContainer" type="VBoxContainer" parent="MarginContainer" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 208.0
-margin_bottom = 28.0
+margin_left = 20.0
+margin_top = 10.0
+margin_right = 1260.0
+margin_bottom = 720.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+alignment = 0
+_sections_unfolded = [ "Rect", "Size Flags" ]
+
+[node name="xp_center_cont" type="CenterContainer" parent="MarginContainer/HBoxContainer" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 1240.0
+margin_bottom = 16.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+use_top_left = false
+_sections_unfolded = [ "Margin" ]
+
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/HBoxContainer/xp_center_cont" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 20.0
+margin_right = 1220.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 1200, 10 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 0
+min_value = 0.0
+max_value = 100.0
+step = 1.0
+page = 0.0
+value = 1.0
+exp_edit = false
+rounded = false
+percent_visible = true
+_sections_unfolded = [ "Rect", "Size Flags" ]
+
+[node name="HBox" type="VBoxContainer" parent="MarginContainer/HBoxContainer" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 20.0
+margin_right = 1240.0
+margin_bottom = 162.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+alignment = 0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/HBox" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 268.0
+margin_bottom = 64.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 0
+size_flags_vertical = 1
+alignment = 0
+_sections_unfolded = [ "Size Flags" ]
+
+[node name="portrait" type="TextureRect" parent="MarginContainer/HBoxContainer/HBox/HBoxContainer" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 64.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+texture = ExtResource( 3 )
+_sections_unfolded = [ "Rect", "Size Flags" ]
+
+[node name="MarginContainer" type="CenterContainer" parent="MarginContainer/HBoxContainer/HBox/HBoxContainer" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 68.0
+margin_right = 268.0
+margin_bottom = 64.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+use_top_left = false
+_sections_unfolded = [ "Rect", "Size Flags", "Theme" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="hp_bar" type="ProgressBar" parent="MarginContainer/HBoxContainer/HBox/HBoxContainer/MarginContainer" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 16.0
+margin_right = 200.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 200, 32 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -90,131 +266,37 @@ value = 1.0
 exp_edit = false
 rounded = false
 percent_visible = false
-_sections_unfolded = [ "Theme" ]
-__meta__ = {
-"_edit_lock_": true
-}
+_sections_unfolded = [ "Rect", "Size Flags", "Theme" ]
 
-[node name="portrait" type="Sprite" parent="." index="1"]
+[node name="debug_container" type="VBoxContainer" parent="MarginContainer/HBoxContainer/HBox" index="1"]
 
-position = Vector2( 72, 72 )
-scale = Vector2( 2.5, 2.5 )
-texture = ExtResource( 3 )
-
-[node name="exp" type="Control" parent="." index="2"]
-
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 40.0
-margin_bottom = 40.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-
-[node name="ProgressBar" type="ProgressBar" parent="exp" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 32.0
-margin_top = 4.0
-margin_right = 1248.0
-margin_bottom = 20.0
-rect_scale = Vector2( 1, 0.5 )
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 0
-min_value = 0.0
-max_value = 100.0
-step = 1.0
-page = 0.0
-value = 1.0
-exp_edit = false
-rounded = false
-percent_visible = true
-
-[node name="inventory" type="ItemList" parent="." index="3"]
-
-visible = false
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 120.0
-margin_top = 64.0
-margin_right = 800.0
-margin_bottom = 278.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = true
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-theme = SubResource( 2 )
-items = [  ]
-select_mode = 0
-allow_reselect = false
-icon_mode = 1
-fixed_icon_size = Vector2( 0, 0 )
-
-[node name="game_level" type="Label" parent="." index="4"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 4.0
-margin_top = 694.0
-margin_right = 87.0
-margin_bottom = 716.0
+margin_top = 68.0
+margin_right = 1240.0
+margin_bottom = 142.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
 mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 0
-theme = ExtResource( 2 )
-text = "Level Test"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "Theme" ]
-
-[node name="debug_container" type="VBoxContainer" parent="." index="5"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 32.0
-margin_top = 120.0
-margin_right = 328.0
-margin_bottom = 216.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
+size_flags_horizontal = 3
 size_flags_vertical = 1
 alignment = 0
+_sections_unfolded = [ "Size Flags" ]
+__meta__ = {
+"_edit_group_": true
+}
 
-[node name="debug_ms" type="Label" parent="debug_container" index="0"]
+[node name="debug_ms" type="Label" parent="MarginContainer/HBoxContainer/HBox/debug_container" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 296.0
+margin_right = 1240.0
 margin_bottom = 22.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -222,30 +304,30 @@ mouse_filter = 1
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 0
-theme = ExtResource( 2 )
+theme = ExtResource( 4 )
 text = "Move speed:"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Theme" ]
 
-[node name="fps_count" parent="debug_container" index="1" instance=ExtResource( 4 )]
+[node name="fps_count" parent="MarginContainer/HBoxContainer/HBox/debug_container" index="1" instance=ExtResource( 5 )]
 
 margin_top = 26.0
-margin_right = 296.0
+margin_right = 1240.0
 margin_bottom = 48.0
-theme = ExtResource( 2 )
+theme = ExtResource( 4 )
 text = "FPS:"
 _sections_unfolded = [ "Theme" ]
 
-[node name="armor" type="Label" parent="debug_container" index="2"]
+[node name="armor" type="Label" parent="MarginContainer/HBoxContainer/HBox/debug_container" index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 52.0
-margin_right = 296.0
+margin_right = 1240.0
 margin_bottom = 74.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -253,23 +335,34 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-theme = ExtResource( 2 )
+theme = ExtResource( 4 )
 text = "Armor: "
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-script = ExtResource( 5 )
+script = ExtResource( 6 )
 _sections_unfolded = [ "Theme" ]
 
-[node name="pause_menu" parent="." index="6" instance=ExtResource( 6 )]
+[node name="game_level" type="Label" parent="MarginContainer/HBoxContainer" index="2"]
 
-pause_mode = 2
-visible = false
-
-[connection signal="focus_entered" from="inventory" to="." method="_on_inventory_focus_enter"]
-
-[connection signal="item_rmb_selected" from="inventory" to="." method="_on_inventory_item_rmb_selected"]
-
-[connection signal="item_selected" from="inventory" to="." method="_on_inventory_item_selected"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 166.0
+margin_right = 1240.0
+margin_bottom = 188.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+theme = ExtResource( 4 )
+text = "Level Test"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Size Flags", "Theme" ]
 
 
