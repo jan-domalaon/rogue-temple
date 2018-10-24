@@ -12,8 +12,10 @@ render_priority = 0
 
 anchor_left = 0.0
 anchor_top = 0.0
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 1280.0
+margin_bottom = 720.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -28,12 +30,8 @@ script = ExtResource( 1 )
 material = SubResource( 1 )
 anchor_left = 0.0
 anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 640.0
-margin_top = 360.0
-margin_right = 640.0
-margin_bottom = 360.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -65,22 +63,23 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 
-[node name="pause_menu_container" type="Container" parent="." index="2"]
+[node name="pause_menu_container" type="VBoxContainer" parent="." index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 640.0
-margin_top = 360.0
-margin_right = 640.0
-margin_bottom = 360.0
+margin_left = 456.0
+margin_top = 226.0
+margin_right = 824.0
+margin_bottom = 494.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 0
+mouse_filter = 1
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
+alignment = 0
 _sections_unfolded = [ "Margin" ]
 
 [node name="resume" type="Button" parent="pause_menu_container" index="0"]
@@ -89,10 +88,8 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 320.0
-margin_top = 96.0
-margin_right = 960.0
-margin_bottom = 192.0
+margin_right = 368.0
+margin_bottom = 64.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -115,10 +112,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 320.0
-margin_top = 384.0
-margin_right = 960.0
-margin_bottom = 480.0
+margin_top = 68.0
+margin_right = 368.0
+margin_bottom = 132.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -141,10 +137,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 320.0
-margin_top = 240.0
-margin_right = 960.0
-margin_bottom = 336.0
+margin_top = 136.0
+margin_right = 368.0
+margin_bottom = 200.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -160,6 +155,7 @@ group = null
 text = "Save"
 flat = false
 align = 1
+_sections_unfolded = [ "Rect" ]
 
 [node name="exit" type="Button" parent="pause_menu_container" index="3"]
 
@@ -167,10 +163,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 320.0
-margin_top = 528.0
-margin_right = 960.0
-margin_bottom = 624.0
+margin_top = 204.0
+margin_right = 368.0
+margin_bottom = 268.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -186,6 +181,7 @@ group = null
 text = "Quit to Menu"
 flat = false
 align = 1
+_sections_unfolded = [ "Rect" ]
 
 [node name="save_slot_container" type="Container" parent="." index="3"]
 
