@@ -10,18 +10,22 @@ extends "res://game/characters/character.gd"
 const DEF_MOVE_SPEED = 100
 
 onready var cursor_pos = get_global_mouse_position()
+onready var old_hp = health
 
 signal player_moved
+signal max_health_changed(max_health)
 
 # Inventory
 var inventory_size = 2
 var inventory_space = []
-
+ 
 
 func _ready():
 	set_physics_process(true)
 	set_process_input(true)
 	set_process(true)
+	emit_signal("max_health_changed", health)
+	emit_signal("health_changed", health)
 
 
 func _physics_process(delta):

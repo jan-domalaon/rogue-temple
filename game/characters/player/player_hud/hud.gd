@@ -1,5 +1,10 @@
 extends Control
 
+
+signal update_health_bar(health)
+signal update_max_health_bar(max_health)
+
+
 # Get inventory from player
 #onready var player_vars = get_node("/root/player_variables")
 
@@ -61,3 +66,11 @@ func _process(delta):
 #func _on_inventory_interact_item_pressed( ID ):
 #	pass # replace with function body
 #
+
+
+func _on_player_max_health_changed(max_health):
+	emit_signal("update_max_health_bar", max_health)
+
+
+func _on_player_health_changed(health):
+	emit_signal("update_health_bar", health)

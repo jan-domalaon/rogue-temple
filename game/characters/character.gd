@@ -9,6 +9,7 @@ const FLICKER_TIME = 0.25
 
 # Various stats for characters
 export (int) var health = 1
+export (int) var max_health
 export (int) var armor = 0
 export (int) var move_speed = 100
 
@@ -36,6 +37,7 @@ enum State {IDLE, MOVING, ATTACKING, STUNNED}
 
 # Signals
 signal shoot(projectile, direction, location)
+signal health_changed(health)
 
 
 func _ready():
@@ -48,6 +50,9 @@ func _ready():
 		shield_ready = true
 		$shield.connect("shield_broken", self, "on_shield_broken")
 		$shield.connect("shield_ready", self, "on_shield_ready")
+	
+	# Max health given when character enters scene
+	max_health = health
 
 func _process(delta):
 	if (health <= 0):
@@ -126,6 +131,7 @@ func receive_phys_damage(dmg, dmg_type):
 			blunt_hit = true
 			health -= dmg
 			print($".".get_name() + " got hit with blunt dmg")
+		emit_signal("health_changed", health)
 
 
 func flicker():

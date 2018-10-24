@@ -32,7 +32,7 @@ tracks/0/keys = {
 "values": [ true, false, true, false, true, false, false, true, false, true, false, true ]
 }
 
-[node name="generic_character" type="KinematicBody2D" index="0"]
+[node name="generic_character" type="KinematicBody2D"]
 
 input_pickable = false
 collision_layer = 2
@@ -41,6 +41,7 @@ collision/safe_margin = 0.08
 script = ExtResource( 1 )
 _sections_unfolded = [ "Collision", "Transform", "Visibility" ]
 health = 1
+max_health = null
 armor = 0
 move_speed = 100
 knockback_factor = 1.0

@@ -8,7 +8,7 @@
 [ext_resource path="res://fonts/UASQUARE.tres" type="DynamicFont" id=6]
 [ext_resource path="res://game/characters/player/player_hud/inventory/player_stats_bg.png" type="Texture" id=7]
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=1]
 
 size = 30
 use_mipmaps = false
@@ -16,7 +16,7 @@ use_filter = false
 font_data = ExtResource( 5 )
 _sections_unfolded = [ "Font", "Settings" ]
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=2]
 
 size = 22
 use_mipmaps = false
@@ -24,7 +24,7 @@ use_filter = false
 font_data = ExtResource( 5 )
 _sections_unfolded = [ "Font", "Settings" ]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=3]
 
 size = 32
 use_mipmaps = false
@@ -32,7 +32,7 @@ use_filter = false
 font_data = ExtResource( 5 )
 _sections_unfolded = [ "Font", "Settings" ]
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=4]
 
 size = 20
 use_mipmaps = false
@@ -40,7 +40,7 @@ use_filter = false
 font_data = ExtResource( 5 )
 _sections_unfolded = [ "Font", "Settings" ]
 
-[node name="inventory_hud" type="Control" index="0"]
+[node name="inventory_hud" type="Control"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -70,6 +70,10 @@ custom_constants/margin_top = 20
 custom_constants/margin_left = 20
 custom_constants/margin_bottom = 20
 _sections_unfolded = [ "custom_constants" ]
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" index="0"]
 
@@ -80,7 +84,7 @@ anchor_bottom = 0.0
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 1260.0
-margin_bottom = 754.0
+margin_bottom = 700.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -93,12 +97,13 @@ _sections_unfolded = [ "Size Flags", "custom_constants" ]
 
 [node name="items_container" type="VBoxContainer" parent="MarginContainer/HBoxContainer" index="0"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 640.0
-margin_bottom = 734.0
+margin_bottom = 680.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -968,6 +973,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 texture = ExtResource( 4 )
 expand = true
+stretch_mode = 0
 _sections_unfolded = [ "Size Flags" ]
 
 [node name="CenterContainer" type="CenterContainer" parent="MarginContainer/HBoxContainer/items_container/item_info/CenterContainer/description_container" index="1"]
@@ -1028,7 +1034,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 1 )
 text = "Item Name Here"
 percent_visible = 1.0
 lines_skipped = 0
@@ -1126,7 +1132,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 790.0
 margin_right = 1200.0
-margin_bottom = 734.0
+margin_bottom = 680.0
 rect_min_size = Vector2( 410, 0 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -1390,7 +1396,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 text = "Helmet"
 percent_visible = 1.0
 lines_skipped = 0
@@ -1412,7 +1418,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 text = "Armor"
 percent_visible = 1.0
 lines_skipped = 0
@@ -1434,7 +1440,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 text = "Gloves"
 percent_visible = 1.0
 lines_skipped = 0
@@ -1456,7 +1462,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 text = "Boots"
 percent_visible = 1.0
 lines_skipped = 0
@@ -1628,7 +1634,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 text = "Main Weapon"
 autowrap = true
 percent_visible = 1.0
@@ -1651,7 +1657,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 text = "Secondary"
 percent_visible = 1.0
 lines_skipped = 0
@@ -1673,7 +1679,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 text = "Shield"
 percent_visible = 1.0
 lines_skipped = 0
@@ -1754,7 +1760,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 3 )
 text = "Player Stats"
 percent_visible = 1.0
 lines_skipped = 0
@@ -1776,7 +1782,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 4 )
 text = "Health:"
 percent_visible = 1.0
 lines_skipped = 0
@@ -1798,7 +1804,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 4 )
 text = "Armor:"
 percent_visible = 1.0
 lines_skipped = 0
@@ -1820,7 +1826,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 4 )
 text = "Move speed:"
 percent_visible = 1.0
 lines_skipped = 0
@@ -1842,7 +1848,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 4 )
 text = "Experience:"
 percent_visible = 1.0
 lines_skipped = 0
@@ -1864,7 +1870,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 4 )
 text = "Strength:"
 percent_visible = 1.0
 lines_skipped = 0
