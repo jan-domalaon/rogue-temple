@@ -27,6 +27,9 @@ func _enter_tree():
 	inventory_space = create_inventory_space(inventory_size)
 
 
+#
+# Inventory backend functions
+#
 func create_inventory_space(size):
 	# Creates an empty inventory
 	var space = []
@@ -84,4 +87,11 @@ func pickup_item(item_node):
 			item_node.queue_free()
 			print("inventory: " + str(inventory_space))
 			break
-		
+
+
+func get_armor_value():
+	# Gets the armor value. To be retrieved by player
+	var armor_value = 0
+	# Instance all armor pieces and get its armor value. Queue_free after
+	return armor_value
+

@@ -29,8 +29,11 @@ func _ready():
 	emit_signal("health_changed", health)
 	
 	# Get equipment from inventory
+	get_weaponry()
+	get_shield()
+	
 	# Set appropriate stats
-	$weapon = $inventory.equipment["Primary"]
+	# $inventory.get_armor_value()
 
 
 func _physics_process(delta):
@@ -112,3 +115,40 @@ func _input(event):
 func swap_weapon(equipped):
 	# Use other weapon
 	equipped = "secondary" if equipped == "primary" else "primary"
+
+
+func get_weaponry():
+	# Get name from inventory and get resource path from item database
+	var primary_weapon_path = item_db.WEAPON[$inventory.equipment["Primary"][0]]
+	var secondary_weapon_path = item_db.WEAPON[$inventory.equipment["Secondary"][0]]
+	var primary = load(primary_weapon_path)
+	var secondary = load(secondary_weapon_path)
+	
+	# Instance weapons
+	var primary_instance = primary.instance()
+	var secondary_instance = secondary.instance()
+	
+	# Rename and set values accordingly
+	primary_instance.name = "weapon"
+	secondary_instance.name = "sheathed_weapon"
+	primary_instance.set_scale(Vector2(0.5, 0.5))
+	secondary_instance.set_scale(Vector2(0.5, 0.5))
+	primary_instance.hide()
+	secondary_instance.hide()
+	
+	# Add weaponry to player. Deferred b/c this is called in _ready()
+	call_deferred("add_child", primary_instance)
+	call_deferred("add_child", secondary_instance)
+
+
+func get_shield():
+	# Same format as get_weaponry(), but for shields
+	var shield_path = item_db.SHIELD[$inventory.equipment["Shield"][0]]
+	var shield = load(shield_path)
+	var shield_instance = shield.instance()
+	
+	shield_instance.name = "shield"
+	shield_instance.hide()
+	
+	call_deferred("add_child", shield_instance)
+
