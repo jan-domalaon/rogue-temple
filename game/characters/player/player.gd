@@ -18,6 +18,7 @@ signal max_health_changed(max_health)
 # Inventory
 var inventory_size = 2
 var inventory_space = []
+var current_weapon = "primary"
 
 
 func _ready():
@@ -26,6 +27,10 @@ func _ready():
 	set_process(true)
 	emit_signal("max_health_changed", health)
 	emit_signal("health_changed", health)
+	
+	# Get equipment from inventory
+	# Set appropriate stats
+	$weapon = $inventory.equipment["Primary"]
 
 
 func _physics_process(delta):
@@ -99,3 +104,11 @@ func _input(event):
 			# If the interactable is a door
 			elif (interactables[0].get_parent().is_in_group("doors")):
 				interactables[0].get_parent().open_door()
+	
+	if (event.is_action_pressed("weapon_swap")):
+		swap_weapon(current_weapon)
+
+
+func swap_weapon(equipped):
+	# Use other weapon
+	equipped = "secondary" if equipped == "primary" else "primary"

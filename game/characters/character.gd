@@ -32,6 +32,7 @@ var blunt_hit = false
 var has_shield = false
 var shield_up = false
 var shield_ready = false
+
 # Possible movement states for a character
 enum State {IDLE, MOVING, ATTACKING, STUNNED}
 
