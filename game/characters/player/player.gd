@@ -1,6 +1,6 @@
 # By Jan Domalaon
 
-# TODO: Camera zoom
+# Player script. Mostly controls input.
 
 
 extends "res://game/characters/character.gd"
@@ -18,7 +18,7 @@ signal max_health_changed(max_health)
 # Inventory
 var inventory_size = 2
 var inventory_space = []
- 
+
 
 func _ready():
 	set_physics_process(true)
@@ -90,12 +90,8 @@ func _input(event):
 			var interacted = false
 			var w = false
 			# If the interactable is an item
-			if ((interactables[0].is_in_group('items')) and (inventory_space.size() < inventory_size)):
-				inventory_space.append(interactables[0].item_name)
-				# Sort inventory alphabetically
-				#inventory_space.sort()
-				print(inventory_space)
-				interactables[0].queue_free()
+			if ((interactables[0].is_in_group('items'))):
+				$inventory.pickup_item(interactables[0])
 				interacted = true
 			# If the interactable is a level change
 			elif ((interactables[0].is_in_group("level_change"))):

@@ -6,16 +6,40 @@
 extends Node
 
 
-var inventory_size = 12
+var inventory_size = 24
 var inventory_space = []
-var equipment = {"Primary Weapon": "", "Secondary Weapon": "", "Shield": "", "Helmet": "", 
+var equipment = {"Primary": "", "Secondary": "", "Shield": "", "Helmet": "", 
 				"Armor": "", "Gloves": "", "Boots": ""}
+
+
+func _enter_tree():
+	# Get all items when the player enters the tree
+	# For now, the items are hard coded
+	equipment["Primary"] = "Iron Mace"
+	equipment["Secondary"] = "Ranger Bow"
+	equipment["Shield"] = "Wooden Shield"
+	equipment["Helmet"] = "Bucket Helmet"
+	equipment["Armor"] = "Chainmail Armor"
+	equipment["Gloves"] = "Chainmail Gloves"
+	equipment["Boots"] = "Leather Boots"
+	
+	# Add items to inventory space
+	inventory_space = create_inventory_space(inventory_size)
+
+
+func create_inventory_space(size):
+	# Creates an empty inventory
+	var space = []
+	for i in range(size):
+		space.append(null)
+	return space
 
 
 func equip(slot, item):
 	# Equip an item to an equipment slot
-	# Unequip current equipment slot
-	unequip(slot)
+	# Unequip current equipment slot, if there's an item in that slot
+	if (equipment[slot] != ""):
+		unequip(slot)
 	# Equip desired item to slot
 	equipment[slot] = item
 
@@ -52,7 +76,12 @@ func pickup_item(item_node):
 	# Add item to inventory
 	# Add item according to inventory form
 	var inventory_slot = [item_node.item_name, item_node.item_type]
-	if (inventory_space.size() < inventory_size):
-		inventory_space.append(inventory_slot)
-		# Remove item from the world
-		item_node.queue_free()
+	for i in range(inventory_space.size()):
+		if (inventory_space[i] == null):
+			# Place item in that slot and stop looking for an empty slot.
+			inventory_space[i] = inventory_slot
+			# Remove item from the world
+			item_node.queue_free()
+			print("inventory: " + str(inventory_space))
+			break
+		
