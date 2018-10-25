@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/iron_shield.png-71f18bf0d0afbf02f14f7e149f65e736.stex"
+path="res://.import/leather_boots.png-58772cd9213e6083bb24a02904422966.stex"
 
 [deps]
 
-source_file="res://game/items/shields/generic_shield/iron_shield.png"
-dest_files=[ "res://.import/iron_shield.png-71f18bf0d0afbf02f14f7e149f65e736.stex" ]
+source_file="res://game/items/boots/leather_boots/leather_boots.png"
+dest_files=[ "res://.import/leather_boots.png-58772cd9213e6083bb24a02904422966.stex" ]
 
 [params]
 

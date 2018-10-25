@@ -8,20 +8,20 @@ extends Node
 
 var inventory_size = 24
 var inventory_space = []
-var equipment = {"Primary": "", "Secondary": "", "Shield": "", "Helmet": "", 
-				"Armor": "", "Gloves": "", "Boots": ""}
+var equipment = {"Primary": null, "Secondary": null, "Shield": null, "Helmet": null, 
+				"Armor": null, "Gloves": null, "Boots": null}
 
 
 func _enter_tree():
 	# Get all items when the player enters the tree
 	# For now, the items are hard coded
-	equipment["Primary"] = "Iron Mace"
-	equipment["Secondary"] = "Ranger Bow"
-	equipment["Shield"] = "Wooden Shield"
-	equipment["Helmet"] = "Bucket Helmet"
-	equipment["Armor"] = "Chainmail Armor"
-	equipment["Gloves"] = "Chainmail Gloves"
-	equipment["Boots"] = "Leather Boots"
+	equipment["Primary"] = ["Iron Mace", "WEAPON"]
+	equipment["Secondary"] = ["Ranger Bow", "WEAPON"]
+	equipment["Shield"] = ["Iron Shield", "SHIELD"]
+	equipment["Helmet"] = ["Bucket Helm", "HELMET"]
+	equipment["Armor"] = ["Chainmail Armor", "ARMOR"]
+	equipment["Gloves"] = ["Chainmail Gloves", "GLOVES"]
+	equipment["Boots"] = ["Leather Boots", "BOOTS"]
 	
 	# Add items to inventory space
 	inventory_space = create_inventory_space(inventory_size)

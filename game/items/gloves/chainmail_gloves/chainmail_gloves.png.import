@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bucket_helm.png-491376d34aa01b8c75ca914df39c449b.stex"
+path="res://.import/chainmail_gloves.png-fe4d751ef1fb9c258198728f71bfed31.stex"
 
 [deps]
 
-source_file="res://game/items/helmets/bucket_helm/bucket_helm.png"
-dest_files=[ "res://.import/bucket_helm.png-491376d34aa01b8c75ca914df39c449b.stex" ]
+source_file="res://game/items/gloves/chainmail_gloves/chainmail_gloves.png"
+dest_files=[ "res://.import/chainmail_gloves.png-fe4d751ef1fb9c258198728f71bfed31.stex" ]
 
 [params]
 

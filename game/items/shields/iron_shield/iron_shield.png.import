@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bucket_helm.png-491376d34aa01b8c75ca914df39c449b.stex"
+path="res://.import/iron_shield.png-1deeb816013a49c1d8765c60a8ed9abf.stex"
 
 [deps]
 
-source_file="res://game/items/helmets/bucket_helm/bucket_helm.png"
-dest_files=[ "res://.import/bucket_helm.png-491376d34aa01b8c75ca914df39c449b.stex" ]
+source_file="res://game/items/shields/iron_shield/iron_shield.png"
+dest_files=[ "res://.import/iron_shield.png-1deeb816013a49c1d8765c60a8ed9abf.stex" ]
 
 [params]
 

@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://game/items/generic_armor_piece.tscn" type="PackedScene" id=1]
+[ext_resource path="res://game/items/boots/leather_boots/leather_boots.png" type="Texture" id=2]
+
+[node name="leather_boots" index="0" instance=ExtResource( 1 )]
+
+item_name = "Leather Boots"
+item_type = "BOOTS"
+
+[node name="sprite" parent="." index="0"]
+
+texture = ExtResource( 2 )
+
+
