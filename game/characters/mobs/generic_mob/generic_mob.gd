@@ -28,6 +28,10 @@ var old_player_pos
 # Attacking logic
 var can_attack = true
 
+# Mob stats
+var mob_xp = 0
+
+
 func _ready():
 	# Makes sure movement is random every time
 	randomize()

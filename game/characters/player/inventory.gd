@@ -109,9 +109,16 @@ func pickup_item(item_node):
 
 func get_armor_value():
 	# Gets the armor value. To be retrieved by player
-	var armor_value = 0
 	# Instance all armor pieces and get its armor value. Queue_free after
-	return armor_value
+	var helmet = instance_item(equipment["Helmet"])
+	var armor = instance_item(equipment["Armor"])
+	var boots = instance_item(equipment["Boots"])
+	var gloves = instance_item(equipment["Gloves"])
+	return helmet.get("armor_value") + armor.get("armor_value") + boots.get("armor_value") + gloves.get("armor_value")
+	helmet.queue_free()
+	armor.queue_free()
+	boots.queue_free()
+	gloves.queue_free()
 
 
 func swap_weapon():
@@ -124,6 +131,16 @@ func swap_weapon():
 	display_equipment()
 
 
+func instance_item(item):
+	var item_path = item_db.get(item[1])[item[0]]
+	var item_load = load(item_path)
+	return item_load.instance()
+
+
+func update_player_stats():
+	pass
+
+
 #
 # Inventory UI functions
 #
@@ -133,6 +150,8 @@ func update_slot_tex(instance, slot_name):
 		emit_signal("update_slot_tex", null, slot_name)
 	else:
 		emit_signal("update_slot_tex", instance.get_node("sprite").get_texture(), slot_name)
+		# Queue instance free
+		instance.queue_free()
 
 
 func display_equipment():
@@ -164,3 +183,4 @@ func display_inventory_space():
 			update_slot_tex(item_instance, str(i))
 		else:
 			update_slot_tex(null, str(i))
+
