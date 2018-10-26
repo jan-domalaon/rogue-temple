@@ -27,6 +27,16 @@ func _enter_tree():
 	inventory_space = create_inventory_space(inventory_size)
 
 
+func _ready():
+	pass
+
+
+func _input(event):
+	# Open inventory UI
+	if (event.is_action_pressed("open_inventory")):
+		$CanvasLayer/inventory_hud.show() if not $CanvasLayer/inventory_hud.is_visible_in_tree() else $CanvasLayer/inventory_hud.hide()
+
+
 #
 # Inventory backend functions
 #
@@ -102,3 +112,13 @@ func swap_weapon():
 	equipment["Primary"] = equipment["Secondary"]
 	equipment["Secondary"] = primary
 
+
+#
+# Inventory UI functions
+#
+func display_equipment():
+	emit_signal("")
+
+
+func display_slot(slot, item):
+	

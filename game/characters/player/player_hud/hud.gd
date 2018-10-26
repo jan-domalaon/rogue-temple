@@ -27,10 +27,10 @@ func _input(event):
 #		else:
 #			show_inventory()
 	if (event.is_action_pressed("access_debug")):
-		if get_node("debug_container").is_visible():
-			get_node("debug_container").hide()
+		if $HBoxContainer/MarginContainer/HBox/debug_container.is_visible():
+			$HBoxContainer/MarginContainer/HBox/debug_container.hide()
 		else:
-			get_node("debug_container").show()
+			$HBoxContainer/MarginContainer/HBox/debug_container.show()
 
 func _process(delta):
 	get_node('debug_container/debug_ms').set_text('Movement speed: ' + str(get_parent().move_speed))
