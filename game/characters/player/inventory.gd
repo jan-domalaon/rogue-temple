@@ -95,3 +95,10 @@ func get_armor_value():
 	# Instance all armor pieces and get its armor value. Queue_free after
 	return armor_value
 
+
+func swap_weapon():
+	# Swap primary to secondary
+	var primary = equipment["Primary"]
+	equipment["Primary"] = equipment["Secondary"]
+	equipment["Secondary"] = primary
+

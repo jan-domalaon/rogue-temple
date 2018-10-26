@@ -109,12 +109,17 @@ func _input(event):
 				interactables[0].get_parent().open_door()
 	
 	if (event.is_action_pressed("weapon_swap")):
-		swap_weapon(current_weapon)
+		player_swap_weapon()
 
 
-func swap_weapon(equipped):
-	# Use other weapon
-	equipped = "secondary" if equipped == "primary" else "primary"
+func player_swap_weapon():
+	# Secondary is primary weapon, or vice versa
+	# Swap weapons in inventory
+	$inventory.swap_weapon()
+	# Rename weapons
+	$sheathed_weapon.name = "intermediate"
+	$weapon.name = "sheathed_weapon"
+	$intermediate.name = "weapon"
 
 
 func get_weaponry():
