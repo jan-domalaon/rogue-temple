@@ -132,11 +132,16 @@ func display_equipment():
 			var item_load = load(item_path)
 			var item_instance = item_load.instance()
 			update_equipment_slot(item_instance, key)
+		else:
+			# There is no item here. No texture in slot
+			update_equipment_slot(null, key)
 
 
 func update_equipment_slot(instance, equipment_key):
+	# Get the first texture sprite
 	emit_signal("update_slot_tex", instance.get_node("sprite").get_texture(), equipment_key)
 
 
 func display_slot(slot, item):
-	
+	pass
+

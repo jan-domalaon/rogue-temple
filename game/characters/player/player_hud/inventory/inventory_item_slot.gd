@@ -19,5 +19,9 @@ func _on_inventory_item_slot_pressed():
 
 func on_update_slot_tex(tex, equipment_key):
 	if (equipment_key.to_lower() == slot_name):
-		$TextureRect.set_texture(tex)
+		# Use only the first sprite of the texture
+		var tex_subregion = AtlasTexture.new()
+		tex_subregion.set_atlas(tex)
+		tex_subregion.set_region(Rect2(0, 0, 16, 16))
+		$TextureRect.set_texture(tex_subregion)
 		print("updated " + str(slot_name) + " slot texture!")

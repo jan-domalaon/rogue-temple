@@ -4,7 +4,7 @@
 [ext_resource path="res://game/characters/player/player_hud/inventory/inventory_item_slot.gd" type="Script" id=2]
 [ext_resource path="res://game/items/generic_item.png" type="Texture" id=3]
 
-[node name="inventory_item_slot" type="TextureButton" index="0"]
+[node name="inventory_item_slot" type="TextureButton"]
 
 anchor_left = 0.0
 anchor_top = 0.0
