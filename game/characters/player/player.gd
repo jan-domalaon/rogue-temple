@@ -151,4 +151,4 @@ func get_shield():
 	shield_instance.hide()
 	
 	call_deferred("add_child", shield_instance)
-
+	call_deferred("connect_shield")

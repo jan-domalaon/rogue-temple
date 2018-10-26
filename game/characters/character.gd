@@ -46,11 +46,7 @@ func _ready():
 	
 	# Check if this character has a shield
 	if (has_node("shield")):
-		has_shield = true
-		$shield/shield_hitbox.set_disabled(true)
-		shield_ready = true
-		$shield.connect("shield_broken", self, "on_shield_broken")
-		$shield.connect("shield_ready", self, "on_shield_ready")
+		connect_shield()
 	
 	# Max health given when character enters scene
 	max_health = health
@@ -181,3 +177,11 @@ func on_shield_broken():
 
 func on_shield_ready():
 	shield_ready = true
+
+
+func connect_shield():
+	has_shield = true
+	$shield/shield_hitbox.set_disabled(true)
+	shield_ready = true
+	$shield.connect("shield_broken", self, "on_shield_broken")
+	$shield.connect("shield_ready", self, "on_shield_ready")

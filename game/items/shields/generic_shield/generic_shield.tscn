@@ -3,7 +3,6 @@
 [ext_resource path="res://game/items/shields/generic_shield/generic_shield.gd" type="Script" id=1]
 [ext_resource path="res://game/items/shields/iron_shield/iron_shield.png" type="Texture" id=2]
 
-
 [node name="generic_shield" type="Area2D"]
 
 input_pickable = true
