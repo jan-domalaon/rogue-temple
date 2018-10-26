@@ -28,6 +28,7 @@ texture_normal = ExtResource( 1 )
 expand = true
 script = ExtResource( 2 )
 _sections_unfolded = [ "Rect", "Textures" ]
+slot_name = ""
 
 [node name="TextureRect" type="TextureRect" parent="." index="0"]
 

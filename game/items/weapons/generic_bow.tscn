@@ -16,7 +16,7 @@ length = 0.1
 loop = false
 step = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("weapon_area/sprite:region_rect")
+tracks/0/path = NodePath("sprite:region_rect")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -41,16 +41,16 @@ projectile_speed = 100
 projectile = "res://game/items/weapons/generic_projectile.tscn"
 piercing = false
 
-[node name="sprite" parent="weapon_area" index="0"]
+[node name="sprite" parent="." index="0"]
 
-position = Vector2( 0, 0 )
+position = Vector2( 32, -4.76837e-007 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 3 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 16, 16 )
-_sections_unfolded = [ "Region", "Transform" ]
+_sections_unfolded = [ "Region" ]
 
-[node name="hitbox" parent="weapon_area" index="1"]
+[node name="hitbox" parent="weapon_area" index="0"]
 
 position = Vector2( 1, 0 )
 shape = SubResource( 1 )

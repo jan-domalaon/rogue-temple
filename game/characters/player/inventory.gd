@@ -6,6 +6,10 @@
 extends Node
 
 
+# Signals for updating inventory UI
+signal update_slot_tex(texture, slot_name)
+
+
 var inventory_size = 24
 var inventory_space = []
 var equipment = {"Primary": null, "Secondary": null, "Shield": null, "Helmet": null, 
@@ -28,7 +32,8 @@ func _enter_tree():
 
 
 func _ready():
-	pass
+	# Update the inventory's item textures
+	display_equipment()
 
 
 func _input(event):
@@ -117,7 +122,20 @@ func swap_weapon():
 # Inventory UI functions
 #
 func display_equipment():
-	emit_signal("")
+	# Update all textures in equipment. Ftn to be called when starting inventory
+	for key in equipment.keys():
+		if (equipment[key] != null):
+			# Instance, get texture, send to UI
+			# Item path: item_db.item_type[item_name]
+			var item = equipment[key]
+			var item_path = item_db.get(item[1])[item[0]]
+			var item_load = load(item_path)
+			var item_instance = item_load.instance()
+			update_equipment_slot(item_instance, key)
+
+
+func update_equipment_slot(instance, equipment_key):
+	emit_signal("update_slot_tex", instance.get_node("sprite").get_texture(), equipment_key)
 
 
 func display_slot(slot, item):

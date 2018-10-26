@@ -22,7 +22,13 @@ primary_as = 0.75
 secondary_as = 0.5
 weapon_type = "mace"
 
-[node name="weapon_area" type="Area2D" parent="." index="0"]
+[node name="sprite" type="Sprite" parent="." index="0"]
+
+position = Vector2( 32, 0 )
+scale = Vector2( 2, 1 )
+texture = ExtResource( 2 )
+
+[node name="weapon_area" type="Area2D" parent="." index="1"]
 
 position = Vector2( 32, 0 )
 input_pickable = true
@@ -36,17 +42,11 @@ audio_bus_override = false
 audio_bus_name = "Master"
 _sections_unfolded = [ "Collision", "Transform", "Visibility" ]
 
-[node name="sprite" type="Sprite" parent="weapon_area" index="0"]
-
-position = Vector2( -4.76837e-007, 0 )
-scale = Vector2( 2, 1 )
-texture = ExtResource( 2 )
-
-[node name="hitbox" type="CollisionShape2D" parent="weapon_area" index="1"]
+[node name="hitbox" type="CollisionShape2D" parent="weapon_area" index="0"]
 
 shape = SubResource( 1 )
 
-[node name="weapon_tween" type="Tween" parent="weapon_area" index="2"]
+[node name="weapon_tween" type="Tween" parent="weapon_area" index="1"]
 
 repeat = false
 playback_process_mode = 1
@@ -55,7 +55,7 @@ playback/active = false
 playback/repeat = false
 playback/speed = 1.0
 
-[node name="weapon_cooldown" type="Timer" parent="." index="1"]
+[node name="weapon_cooldown" type="Timer" parent="." index="2"]
 
 process_mode = 1
 wait_time = 1.0

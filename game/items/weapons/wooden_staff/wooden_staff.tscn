@@ -8,7 +8,7 @@
 custom_solver_bias = 0.0
 extents = Vector2( 24, 1 )
 
-[node name="wooden_staff" instance=ExtResource( 1 )]
+[node name="wooden_staff" index="0" instance=ExtResource( 1 )]
 
 weapon_name = "Wooden Staff"
 primary_dmg_type = "b"
@@ -16,14 +16,13 @@ primary_as = 0.7
 secondary_as = 0.6
 weapon_type = "staff"
 
-[node name="sprite" parent="weapon_area" index="0"]
+[node name="sprite" parent="." index="0"]
 
-position = Vector2( 8, 0 )
+position = Vector2( 40, 0 )
 scale = Vector2( 3, 1 )
 texture = ExtResource( 2 )
-_sections_unfolded = [ "Transform" ]
 
-[node name="hitbox" parent="weapon_area" index="1"]
+[node name="hitbox" parent="weapon_area" index="0"]
 
 position = Vector2( 8, 0 )
 shape = SubResource( 1 )

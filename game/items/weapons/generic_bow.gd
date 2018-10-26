@@ -40,7 +40,7 @@ func fire_bow():
 	if (can_fire):
 		print("fired bow!")
 		can_fire = false
-		$weapon_area/sprite.set_region_rect(Rect2(0, 0, 16, 16))
+		$sprite.set_region_rect(Rect2(0, 0, 16, 16))
 		$weapon_area/hitbox.set_disabled(true)
 		$".".hide()
 		

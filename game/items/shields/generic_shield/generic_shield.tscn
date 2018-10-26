@@ -19,7 +19,7 @@ partial_regen_cooldown = 2
 regen_time = 0.5
 shield_name = "Shield (Generic)"
 
-[node name="shield_sprite" type="Sprite" parent="." index="0"]
+[node name="sprite" type="Sprite" parent="." index="0"]
 
 position = Vector2( -2.38419e-007, 2.38419e-007 )
 texture = ExtResource( 2 )
