@@ -17,8 +17,8 @@ func _on_inventory_item_slot_pressed():
 
 
 
-func on_update_slot_tex(tex, equipment_key):
-	if (equipment_key.to_lower() == slot_name):
+func on_update_slot_tex(tex, slot):
+	if (slot.to_lower() == slot_name):
 		# Use only the first sprite of the texture
 		var tex_subregion = AtlasTexture.new()
 		tex_subregion.set_atlas(tex)

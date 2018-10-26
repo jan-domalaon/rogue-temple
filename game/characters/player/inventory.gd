@@ -34,6 +34,7 @@ func _enter_tree():
 func _ready():
 	# Update the inventory's item textures
 	display_equipment()
+	display_inventory_space()
 
 
 func _input(event):
@@ -100,6 +101,8 @@ func pickup_item(item_node):
 			inventory_space[i] = inventory_slot
 			# Remove item from the world
 			item_node.queue_free()
+			# Update UI
+			update_slot_tex(item_node, str(i))
 			print("inventory: " + str(inventory_space))
 			break
 
@@ -121,6 +124,14 @@ func swap_weapon():
 #
 # Inventory UI functions
 #
+func update_slot_tex(instance, slot_name):
+	# If null, then there's no instance. Null texture
+	if instance == null:
+		emit_signal("update_slot_tex", null, slot_name)
+	else:
+		emit_signal("update_slot_tex", instance.get_node("sprite").get_texture(), slot_name)
+
+
 func display_equipment():
 	# Update all textures in equipment. Ftn to be called when starting inventory
 	for key in equipment.keys():
@@ -131,17 +142,22 @@ func display_equipment():
 			var item_path = item_db.get(item[1])[item[0]]
 			var item_load = load(item_path)
 			var item_instance = item_load.instance()
-			update_equipment_slot(item_instance, key)
+			# Pass equipment key as the slot name
+			update_slot_tex(item_instance, key)
 		else:
 			# There is no item here. No texture in slot
-			update_equipment_slot(null, key)
+			update_slot_tex(null, key)
 
 
-func update_equipment_slot(instance, equipment_key):
-	# Get the first texture sprite
-	emit_signal("update_slot_tex", instance.get_node("sprite").get_texture(), equipment_key)
-
-
-func display_slot(slot, item):
-	pass
-
+func display_inventory_space():
+	# Display all items in the inventory space
+	for i in inventory_space.size():
+		if (inventory_space[i] != null):
+			var item = inventory_space[i]
+			var item_path = item_db.get(item[1])[item[0]]
+			var item_load = load(item_path)
+			var item_instance = item_load.instance()
+			# Pass instance and index as the slot name
+			update_slot_tex(item_instance, str(i))
+		else:
+			update_slot_tex(null, str(i))
