@@ -24,6 +24,8 @@ const KNOCKBACK_LENGTH = 10
 
 var movement_dir = Vector2(0, 0)
 onready var starting_move_speed = move_speed
+# Can change when buffed
+onready var max_move_speed = move_speed
 # Flickering flag. Can't be hit and can't hit while flickering
 var flickering = false
 # Check if weapon doesn't only do blunt dmg.

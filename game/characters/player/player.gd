@@ -14,7 +14,7 @@ onready var old_hp = health
 
 signal player_moved
 signal max_health_changed(max_health)
-signal update_player_stats()
+signal update_player_stats(hp, max_hp, armor, max_ms, xp, next_lvl_xp, lvl)
 
 # Inventory
 var inventory_size = 2
@@ -24,6 +24,8 @@ var current_weapon = "primary"
 var player_xp = 0
 var player_level = 1
 var player_armor = 0
+# Will change as the player levels
+var next_lvl_xp = 100
 
 
 func _ready():
@@ -39,7 +41,6 @@ func _ready():
 	
 	# Set appropriate stats from inventory
 	player_armor = $inventory.get_armor_value()
-	print("player armor: " + str(player_armor))
 
 
 func _physics_process(delta):
@@ -65,7 +66,7 @@ func _process(delta):
 	else:
 		get_node("sprite").set_flip_h(false)
 	
-	$inventory.update_player_stats()
+	emit_signal("update_player_stats", health, max_health, player_armor, max_move_speed, player_xp, next_lvl_xp, player_level)
 
 
 func _input(event):
