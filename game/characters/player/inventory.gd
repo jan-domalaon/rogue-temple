@@ -119,6 +119,9 @@ func swap_weapon():
 	var primary = equipment["Primary"]
 	equipment["Primary"] = equipment["Secondary"]
 	equipment["Secondary"] = primary
+	
+	# Update equipment UI
+	display_equipment()
 
 
 #
