@@ -1,11 +1,12 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://game/levels/level_0/tileset/tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://game/levels/level_0/tileset/level_0_door.tscn" type="PackedScene" id=2]
 [ext_resource path="res://game/characters/generic_character.tscn" type="PackedScene" id=3]
 [ext_resource path="res://game/characters/player/test_player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://game/characters/mobs/bandit_scavenger/bandit_scavenger.tscn" type="PackedScene" id=5]
-[ext_resource path="res://game/items/foodstuff/fruits/fruits.tscn" type="PackedScene" id=6]
+[ext_resource path="res://game/characters/mobs/stacked_water_jelly/stacked_water_jelly.tscn" type="PackedScene" id=6]
+[ext_resource path="res://game/items/foodstuff/fruits/fruits.tscn" type="PackedScene" id=7]
 
 [node name="prototype_level" type="Node" index="0"]
 
@@ -64,17 +65,35 @@ health = 100
 position = Vector2( -9, -56 )
 health = 10
 
-[node name="item_container" type="Node" parent="." index="5"]
+[node name="bandit_scavenger2" parent="." index="5" instance=ExtResource( 5 )]
 
-[node name="fruits" parent="item_container" index="0" instance=ExtResource( 6 )]
+position = Vector2( 424, -72 )
+health = 10
+
+[node name="bandit_scavenger3" parent="." index="6" instance=ExtResource( 5 )]
+
+position = Vector2( 508, 0 )
+health = 10
+
+[node name="stacked_water_jelly" parent="." index="7" instance=ExtResource( 6 )]
+
+position = Vector2( 232, 244 )
+
+[node name="stacked_water_jelly2" parent="." index="8" instance=ExtResource( 6 )]
+
+position = Vector2( 176, 236 )
+
+[node name="item_container" type="Node" parent="." index="9"]
+
+[node name="fruits" parent="item_container" index="0" instance=ExtResource( 7 )]
 
 position = Vector2( -57, 35 )
 
-[node name="fruits2" parent="item_container" index="1" instance=ExtResource( 6 )]
+[node name="fruits2" parent="item_container" index="1" instance=ExtResource( 7 )]
 
 position = Vector2( -55, 54 )
 
-[node name="fruits3" parent="item_container" index="2" instance=ExtResource( 6 )]
+[node name="fruits3" parent="item_container" index="2" instance=ExtResource( 7 )]
 
 position = Vector2( -55, 70 )
 
