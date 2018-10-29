@@ -4,7 +4,7 @@
 [ext_resource path="res://game/characters/player/player_hud/inventory/inventory_item_slot.gd" type="Script" id=2]
 [ext_resource path="res://game/items/generic_item.png" type="Texture" id=3]
 
-[node name="inventory_item_slot" type="TextureButton" groups=[
+[node name="inventory_item_slot" type="TextureButton" index="0" groups=[
 "inventory_slots",
 ]]
 
@@ -52,7 +52,7 @@ size_flags_vertical = 1
 texture = ExtResource( 3 )
 expand = true
 stretch_mode = 0
-_sections_unfolded = [ "Rect" ]
+_sections_unfolded = [ "Rect", "Visibility" ]
 
 [connection signal="pressed" from="." to="." method="_on_inventory_item_slot_pressed"]
 

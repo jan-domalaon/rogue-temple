@@ -8,7 +8,7 @@ extends Node
 
 # Signals for updating inventory UI
 signal update_slot_tex(texture, slot_name)
-signal inventory_item_select(item_name, primary_dmg, primary_dmg_type, secondary_dmg, secondary_dmg_type, tex)
+signal inventory_item_select(item_name, primary_dmg, primary_dmg_type, secondary_dmg, secondary_dmg_type, tex, type)
 
 const EQUIPMENT_SLOTS = ["Primary", "Secondary", "Shield", "Helmet", "Armor", "Gloves", "Boots"]
 
@@ -194,20 +194,23 @@ func on_item_selected(item_slot):
 	# Put info into item description box
 	# Slot name is either in equipment or in inventory space
 	var item_instance
+	var inv_type
 	if (slot_name in EQUIPMENT_SLOTS):
 		item_instance = instance_item(equipment[slot_name])
+		inv_type = "equipment"
 	else:
 		item_instance = instance_item(inventory_space[int(slot_name)])
+		inv_type = "inventory"
 	
 	var item_texture = get_item_texture(item_instance.get_node("sprite").get_texture())
 	# Give details to inventory UI
 	if item_instance.is_in_group("weapons"):
 		emit_signal("inventory_item_select", item_instance.weapon_name, item_instance.primary_damage, item_instance.primary_dmg_type,
-		item_instance.secondary_damage, item_instance.secondary_dmg_type, item_texture)
+		item_instance.secondary_damage, item_instance.secondary_dmg_type, item_texture, inv_type)
 	elif item_instance.is_in_group("shields"):
-		emit_signal("inventory_item_select", item_instance.shield_name, null, null, null, null, item_texture)
+		emit_signal("inventory_item_select", item_instance.shield_name, null, null, null, null, item_texture, inv_type)
 	else:
-		emit_signal("inventory_item_select", item_instance.item_name, null, null, null, null, item_texture)
+		emit_signal("inventory_item_select", item_instance.item_name, null, null, null, null, item_texture, inv_type)
 	item_instance.queue_free()
 
 
