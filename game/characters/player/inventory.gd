@@ -8,7 +8,9 @@ extends Node
 
 # Signals for updating inventory UI
 signal update_slot_tex(texture, slot_name)
+signal inventory_item_select(item_name, primary_dmg, primary_dmg_type, secondary_dmg, secondary_dmg_type, tex)
 
+const EQUIPMENT_SLOTS = ["Primary", "Secondary", "Shield", "Helmet", "Armor", "Gloves", "Boots"]
 
 var inventory_size = 24
 var inventory_space = []
@@ -35,6 +37,8 @@ func _ready():
 	# Update the inventory's item textures
 	display_equipment()
 	display_inventory_space()
+	for button in get_tree().get_nodes_in_group("inventory_slots"):
+		button.connect("item_selected", self, "on_item_selected")
 
 
 func _input(event):
@@ -184,3 +188,32 @@ func display_inventory_space():
 		else:
 			update_slot_tex(null, str(i))
 
+
+func on_item_selected(item_slot):
+	var slot_name = item_slot.capitalize()
+	# Put info into item description box
+	# Slot name is either in equipment or in inventory space
+	var item_instance
+	if (slot_name in EQUIPMENT_SLOTS):
+		item_instance = instance_item(equipment[slot_name])
+	else:
+		item_instance = instance_item(inventory_space[int(slot_name)])
+	
+	var item_texture = get_item_texture(item_instance.get_node("sprite").get_texture())
+	# Give details to inventory UI
+	if item_instance.is_in_group("weapons"):
+		emit_signal("inventory_item_select", item_instance.weapon_name, item_instance.primary_damage, item_instance.primary_dmg_type,
+		item_instance.secondary_damage, item_instance.secondary_dmg_type, item_texture)
+	elif item_instance.is_in_group("shields"):
+		emit_signal("inventory_item_select", item_instance.shield_name, null, null, null, null, item_texture)
+	else:
+		emit_signal("inventory_item_select", item_instance.item_name, null, null, null, null, item_texture)
+	item_instance.queue_free()
+
+
+func get_item_texture(tex):
+	# Get the first sprite in a sprite's texture
+	var tex_subregion = AtlasTexture.new()
+	tex_subregion.set_atlas(tex)
+	tex_subregion.set_region(Rect2(0, 0, 16, 16))
+	return tex_subregion
