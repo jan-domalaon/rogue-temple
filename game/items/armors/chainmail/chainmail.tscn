@@ -4,7 +4,9 @@
 [ext_resource path="res://game/items/generic_armor_piece.gd" type="Script" id=2]
 [ext_resource path="res://game/items/armors/chainmail/chainmail_armor.png" type="Texture" id=3]
 
-[node name="chainmail" instance=ExtResource( 1 )]
+[node name="chainmail" groups=[
+"armor_pieces",
+] instance=ExtResource( 1 )]
 
 script = ExtResource( 2 )
 item_name = "Chainmail Armor"

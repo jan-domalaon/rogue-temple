@@ -94,10 +94,9 @@ func equip(slot_name):
 	if (equipment[equipment_slot] != null):
 		unequip(equipment_slot)
 	# Equip desired item to slot
-	var item = inventory_space[int(equipment_slot)]
-	equipment[equipment_slot] = item
+	equipment[equipment_slot] = inventory_item
 	# Remove item from inventory_space
-	inventory_space[int(equipment_slot)] = null
+	inventory_space[int(slot_name)] = null
 	update_inventory_ui()
 
 
