@@ -146,9 +146,9 @@ func make_primary_attack():
 	$weapon_cooldown.set_wait_time(primary_as)
 	attack_type = "primary"
 	$weapon_cooldown.start()
-	if (weapon_type in ["mace", "sword", "spear", "staff"]):
+	if (weapon_type in ["MACE", "SWORD", "SPEAR", "STAFF"]):
 		make_swing()
-	elif (weapon_type == "bow"):
+	elif (weapon_type == "BOW"):
 		make_draw_bow()
 
 
@@ -156,7 +156,7 @@ func make_secondary_attack():
 	$weapon_cooldown.set_wait_time(secondary_as)
 	attack_type = "secondary"
 	$weapon_cooldown.start()
-	if (weapon_type in ["mace", "staff"]):
+	if (weapon_type in ["MACE", "STAFF"]):
 		make_downward_swing()
-	elif (weapon_type in ["sword", "spear", "bow"]):
+	elif (weapon_type in ["SWORD", "SPEAR", "BOW"]):
 		make_thrust()

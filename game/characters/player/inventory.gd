@@ -9,6 +9,7 @@ extends Node
 # Signals for updating inventory UI
 signal update_slot_tex(texture, slot_name)
 signal inventory_item_select(item_name, primary_dmg, primary_dmg_type, secondary_dmg, secondary_dmg_type, tex, type, slot_name)
+signal hide_item_description
 
 const EQUIPMENT_SLOTS = ["Primary", "Secondary", "Shield", "Helmet", "Armor", "Gloves", "Boots"]
 
@@ -72,41 +73,73 @@ func create_inventory_space(size):
 	return space
 
 
-func equip(slot, item):
+func equip(slot_name):
 	# Equip an item to an equipment slot
+	# Instance item to get the right slot to put in
+	var inventory_item = inventory_space[int(slot_name)]
+	var item_instance = instance_item(inventory_item)
+	
+	# Determine whether armor or weapon
+	var equipment_slot
+	if item_instance.is_in_group("armor_pieces"):
+		# Get appropriate armor piece type (gloves, boots, etc) for equipment slot
+		equipment_slot = item_instance.get("item_type").capitalize()
+	elif item_instance.is_in_group("shields"):
+		equipment_slot = "Shield"
+	else:
+		# This item is a weapon. Put in secondary slot.
+		equipment_slot = "Secondary"
+	
 	# Unequip current equipment slot, if there's an item in that slot
-	if (equipment[slot] != ""):
-		unequip(slot)
+	if (equipment[equipment_slot] != null):
+		unequip(equipment_slot)
 	# Equip desired item to slot
-	equipment[slot] = item
+	var item = inventory_space[int(equipment_slot)]
+	equipment[equipment_slot] = item
+	# Remove item from inventory_space
+	inventory_space[int(equipment_slot)] = null
+	update_inventory_ui()
 
 
-func unequip(slot):
+func unequip(slot_name):
 	#  (str) -> null
 	var i = 0
 	var full_inv = true
+	# Put unequipped item into inventory space
 	for i in inventory_space.size():
-		if (inventory_space[i] == ""):
+		if (inventory_space[i] == null):
 			# Place item in slot to inventory space
-			inventory_space[i] = equipment[slot]
-			equipment[slot] = ""
+			inventory_space[i] = equipment[slot_name]
+			equipment[slot_name] = null
 			full_inv = false
+	# Else, drop the item
 	if (full_inv):
 		# Drop the item to the ground
-		drop_item(equipment[slot])
-		equipment[slot] = ""
+		drop_item(equipment[slot_name])
+		equipment[slot_name] = null
+	update_inventory_ui()
 
 
-func drop_item(item):
+func drop_item(slot_name):
 	# Meant to place item in the world
 	# Look for item's item_name in item_type's list
 	# Resource path for item
+	var item
+	if slot_name in EQUIPMENT_SLOTS:
+		item = equipment[slot_name]
+		# Clear item from equipment
+		equipment[slot_name] = null
+	else:
+		item = inventory_space[int(slot_name)] 
+		# Clear item from inventory
+		inventory_space[int(slot_name)] = null
 	var to_drop  = get_node("/root/item_db").get(item[1].to_upper())[item[0]]
 	# Add item to world
 	var load_item = load(to_drop)
 	var item_instance = load_item.instance()
 	get_node("../..").add_child(item_instance)
 	item_instance.position = get_parent().get_global_position()
+	update_inventory_ui()
 
 
 func pickup_item(item_node):
@@ -159,31 +192,21 @@ func on_item_used():
 	# To be added when potions and foodstuff are implemented
 	pass
 
+
 func on_item_dropped():
-	var item
-	if (selected_slot in EQUIPMENT_SLOTS):
-		item = equipment[selected_slot]
-	else:
-		item = inventory_space[int(selected_slot)]
 	print("dropping item!")
-	drop_item(item)
+	drop_item(selected_slot)
 
 
 func on_item_unequipped():
-	pass
+	print("unequipping item!")
+	unequip(selected_slot)
+
 
 func on_item_equipped():
-	pass
+	print("equipping item!")
+	equip(selected_slot)
 
-
-func instance_in_item_space(slot_name):
-	var instanced_item
-	# Return the correct item instance given a slot name
-	if (slot_name in EQUIPMENT_SLOTS):
-		instanced_item = equipment[slot_name]
-	else:
-		instanced_item = inventory_space[int(slot_name)]
-	return instanced_item
 
 #
 # Inventory UI functions
@@ -229,14 +252,26 @@ func display_inventory_space():
 			update_slot_tex(null, str(i))
 
 
+func update_inventory_ui():
+	# Update the textures in the inventory. Called when backend is changed
+	display_equipment()
+	display_inventory_space()
+	# Hide the item description box (to reset)
+	emit_signal("hide_item_description")
+
+
 func on_item_slot_selected(item_slot):
 	var slot_name = item_slot.capitalize()
 	# Put info into item description box
 	# Slot name is either in equipment or in inventory space
 	var item_instance
 	var inv_type
+	
 	# Selected slot is the item slot given
 	selected_slot = slot_name
+	
+	# Run this only if the slot selected is not null
+	
 	if (slot_name in EQUIPMENT_SLOTS):
 		item_instance = instance_item(equipment[slot_name])
 		inv_type = "equipment"

@@ -16,6 +16,7 @@ var slot_name
 func _ready():
 	self.hide()
 	get_owner().get_parent().get_parent().connect("inventory_item_select", self, "on_inventory_item_select")
+	get_owner().get_parent().get_parent().connect("hide_item_description", self, "on_hide_item_description")
 
 
 func on_inventory_item_select(item_name, primary_dmg, primary_dmg_type, secondary_dmg, secondary_dmg_type, tex, type, slot_name):
@@ -69,3 +70,7 @@ func _on_unequip_button_pressed():
 
 func _on_equip_button_pressed():
 	emit_signal("item_equipped", self.slot_name)
+
+
+func on_hide_item_description():
+	self.hide()

@@ -6,6 +6,9 @@
 extends Node
 
 
+const ARMOR_TYPES = ["ARMOR", "GLOVES", "BOOTS", "HELMET"]
+const WEAPON_TYPES = ["BOW", "STAFF", "MACE", "BLADE"]
+
 
 const POTION = 	{'Bandages': '', 'Burgundy Potion': '', 'Cerulean Potion': '', 'Ochre Potion': '', 'Ultramarine Potion': ''}
 

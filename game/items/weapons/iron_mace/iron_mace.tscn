@@ -3,7 +3,7 @@
 [ext_resource path="res://game/items/weapons/generic_weapon.tscn" type="PackedScene" id=1]
 [ext_resource path="res://game/items/weapons/iron_mace/iron_mace.gd" type="Script" id=2]
 
-[node name="iron_mace" groups=[
+[node name="iron_mace" index="0" groups=[
 "blunt_weapons",
 ] instance=ExtResource( 1 )]
 
@@ -14,5 +14,6 @@ secondary_damage = 2
 primary_dmg_type = "b"
 primary_as = 0.6
 secondary_as = 0.3
+weapon_type = "MACE"
 
 
