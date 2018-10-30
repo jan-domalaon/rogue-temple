@@ -1,7 +1,16 @@
 extends NinePatchRect
 
+
+signal item_used(slot_name)
+signal item_dropped(slot_name)
+signal item_unequipped(slot_name)
+signal item_equipped(slot_name)
+
 const PRIMARY_DMG_TEXT = "Primary Damage: "
 const SECONDARY_DMG_TEXT = "Secondary Damage: "
+
+# Current slot in the description
+var slot_name
 
 
 func _ready():
@@ -9,7 +18,7 @@ func _ready():
 	get_owner().get_parent().get_parent().connect("inventory_item_select", self, "on_inventory_item_select")
 
 
-func on_inventory_item_select(item_name, primary_dmg, primary_dmg_type, secondary_dmg, secondary_dmg_type, tex, type):
+func on_inventory_item_select(item_name, primary_dmg, primary_dmg_type, secondary_dmg, secondary_dmg_type, tex, type, slot_name):
 	self.show()
 	$CenterContainer/description_container/VBoxContainer/CenterContainer/item_text/item_name.set_text(item_name)
 	if (primary_dmg == null):
@@ -33,6 +42,8 @@ func on_inventory_item_select(item_name, primary_dmg, primary_dmg_type, secondar
 		# For specific items, need to add Use button
 		$CenterContainer/description_container/VBoxContainer/buttons_container/drop_button.show()
 		$CenterContainer/description_container/VBoxContainer/buttons_container/equip_button.show()
+	
+	self.slot_name = slot_name
 
 
 func reset_buttons():
@@ -48,12 +59,13 @@ func _on_use_button_pressed():
 
 
 func _on_drop_button_pressed():
-	emit_signal("item_dropped")
+	print($CenterContainer/description_container/VBoxContainer/buttons_container/drop_button.get_name())
+	emit_signal("item_dropped", self.slot_name)
 
 
 func _on_unequip_button_pressed():
-	pass # replace with function body
+	emit_signal("item_unequipped", self.slot_name)
 
 
 func _on_equip_button_pressed():
-	pass # replace with function body
+	emit_signal("item_equipped", self.slot_name)

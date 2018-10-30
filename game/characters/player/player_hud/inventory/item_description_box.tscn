@@ -6,7 +6,7 @@
 [ext_resource path="res://game/items/weapons/iron_mace/iron_mace.png" type="Texture" id=4]
 [ext_resource path="res://fonts/UASQUARE.TTF" type="DynamicFontData" id=5]
 [ext_resource path="res://fonts/UASQUARE.tres" type="DynamicFont" id=6]
-[ext_resource path="res://game/characters/player/player_hud/player_hud.tres" type="Theme" id=7]
+[ext_resource path="res://game/characters/player/player_hud/inventory/inventory_interact_button.tscn" type="PackedScene" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 
@@ -16,7 +16,7 @@ use_filter = false
 font_data = ExtResource( 5 )
 _sections_unfolded = [ "Font", "Settings" ]
 
-[node name="item_info" type="NinePatchRect" index="0"]
+[node name="item_info" type="NinePatchRect"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -319,116 +319,25 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 alignment = 0
 
-[node name="use_button" type="Button" parent="CenterContainer/description_container/VBoxContainer/buttons_container" index="0"]
+[node name="use_button" parent="CenterContainer/description_container/VBoxContainer/buttons_container" index="0" instance=ExtResource( 7 )]
 
-visible = false
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 400.0
-margin_bottom = 30.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-hint_tooltip = "Use/consume this item"
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 3
-size_flags_vertical = 1
-theme = ExtResource( 7 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "Use"
-flat = false
-align = 1
-_sections_unfolded = [ "Hint", "Size Flags", "Theme" ]
+[node name="drop_button" parent="CenterContainer/description_container/VBoxContainer/buttons_container" index="1" instance=ExtResource( 7 )]
 
-[node name="drop_button" type="Button" parent="CenterContainer/description_container/VBoxContainer/buttons_container" index="1"]
-
-visible = false
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_left = 202.0
-margin_right = 400.0
-margin_bottom = 30.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-hint_tooltip = "Drop this item on the ground"
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 3
-size_flags_vertical = 1
-theme = ExtResource( 7 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
 text = "Drop"
-flat = false
-align = 1
-_sections_unfolded = [ "Hint", "Size Flags", "Theme" ]
+function = "Drop"
 
-[node name="equip_button" type="Button" parent="CenterContainer/description_container/VBoxContainer/buttons_container" index="2"]
+[node name="equip_button" parent="CenterContainer/description_container/VBoxContainer/buttons_container" index="2" instance=ExtResource( 7 )]
 
-visible = false
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_left = 268.0
-margin_right = 400.0
-margin_bottom = 30.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-hint_tooltip = "Equip this item"
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 3
-size_flags_vertical = 1
-theme = ExtResource( 7 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
 text = "Equip"
-flat = false
-align = 1
-_sections_unfolded = [ "Hint", "Size Flags", "Theme" ]
+function = "Equip"
 
-[node name="unequip_button" type="Button" parent="CenterContainer/description_container/VBoxContainer/buttons_container" index="3"]
+[node name="unequip_button" parent="CenterContainer/description_container/VBoxContainer/buttons_container" index="3" instance=ExtResource( 7 )]
 
-visible = false
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_left = 303.0
-margin_right = 400.0
-margin_bottom = 30.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-hint_tooltip = "Unequip this item"
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 3
-size_flags_vertical = 1
-theme = ExtResource( 7 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
 text = "Unequip"
-flat = false
-align = 1
-_sections_unfolded = [ "Hint", "Size Flags", "Theme" ]
+function = "Unequip"
 
 [node name="throw_button" type="Button" parent="CenterContainer/description_container/VBoxContainer" index="2"]
 
@@ -454,13 +363,5 @@ group = null
 flat = false
 align = 1
 _sections_unfolded = [ "Size Flags" ]
-
-[connection signal="pressed" from="CenterContainer/description_container/VBoxContainer/buttons_container/use_button" to="." method="_on_use_button_pressed"]
-
-[connection signal="pressed" from="CenterContainer/description_container/VBoxContainer/buttons_container/drop_button" to="." method="_on_drop_button_pressed"]
-
-[connection signal="pressed" from="CenterContainer/description_container/VBoxContainer/buttons_container/equip_button" to="." method="_on_equip_button_pressed"]
-
-[connection signal="pressed" from="CenterContainer/description_container/VBoxContainer/buttons_container/unequip_button" to="." method="_on_unequip_button_pressed"]
 
 

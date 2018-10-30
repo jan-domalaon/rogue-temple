@@ -8,7 +8,7 @@ extends Node
 
 # Signals for updating inventory UI
 signal update_slot_tex(texture, slot_name)
-signal inventory_item_select(item_name, primary_dmg, primary_dmg_type, secondary_dmg, secondary_dmg_type, tex, type)
+signal inventory_item_select(item_name, primary_dmg, primary_dmg_type, secondary_dmg, secondary_dmg_type, tex, type, slot_name)
 
 const EQUIPMENT_SLOTS = ["Primary", "Secondary", "Shield", "Helmet", "Armor", "Gloves", "Boots"]
 
@@ -16,6 +16,7 @@ var inventory_size = 24
 var inventory_space = []
 var equipment = {"Primary": null, "Secondary": null, "Shield": null, "Helmet": null, 
 				"Armor": null, "Gloves": null, "Boots": null}
+var selected_slot
 
 
 func _enter_tree():
@@ -37,8 +38,21 @@ func _ready():
 	# Update the inventory's item textures
 	display_equipment()
 	display_inventory_space()
+	
+	# Connect to inventory UI item slots
 	for button in get_tree().get_nodes_in_group("inventory_slots"):
-		button.connect("item_selected", self, "on_item_selected")
+		button.connect("item_selected", self, "on_item_slot_selected")
+	
+	# Connect to inventory interaction buttons
+	for button in get_tree().get_nodes_in_group("inv_interact_buttons"):
+#		if button.get_name() == "use_button":
+#			button.connect("item_used", self, "on_item_used")
+		if button.function == "Unequip":
+			button.connect("interact_inventory", self, "on_item_unequipped")
+		elif button.function == "Equip":
+			button.connect("interact_inventory", self, "on_item_equipped")
+		elif button.function == "Drop":
+			button.connect("interact_inventory", self, "on_item_dropped")
 
 
 func _input(event):
@@ -141,9 +155,35 @@ func instance_item(item):
 	return item_load.instance()
 
 
-func update_player_stats():
+func on_item_used():
+	# To be added when potions and foodstuff are implemented
 	pass
 
+func on_item_dropped():
+	var item
+	if (selected_slot in EQUIPMENT_SLOTS):
+		item = equipment[selected_slot]
+	else:
+		item = inventory_space[int(selected_slot)]
+	print("dropping item!")
+	drop_item(item)
+
+
+func on_item_unequipped():
+	pass
+
+func on_item_equipped():
+	pass
+
+
+func instance_in_item_space(slot_name):
+	var instanced_item
+	# Return the correct item instance given a slot name
+	if (slot_name in EQUIPMENT_SLOTS):
+		instanced_item = equipment[slot_name]
+	else:
+		instanced_item = inventory_space[int(slot_name)]
+	return instanced_item
 
 #
 # Inventory UI functions
@@ -189,12 +229,14 @@ func display_inventory_space():
 			update_slot_tex(null, str(i))
 
 
-func on_item_selected(item_slot):
+func on_item_slot_selected(item_slot):
 	var slot_name = item_slot.capitalize()
 	# Put info into item description box
 	# Slot name is either in equipment or in inventory space
 	var item_instance
 	var inv_type
+	# Selected slot is the item slot given
+	selected_slot = slot_name
 	if (slot_name in EQUIPMENT_SLOTS):
 		item_instance = instance_item(equipment[slot_name])
 		inv_type = "equipment"
@@ -206,11 +248,11 @@ func on_item_selected(item_slot):
 	# Give details to inventory UI
 	if item_instance.is_in_group("weapons"):
 		emit_signal("inventory_item_select", item_instance.weapon_name, item_instance.primary_damage, item_instance.primary_dmg_type,
-		item_instance.secondary_damage, item_instance.secondary_dmg_type, item_texture, inv_type)
+		item_instance.secondary_damage, item_instance.secondary_dmg_type, item_texture, inv_type, slot_name)
 	elif item_instance.is_in_group("shields"):
-		emit_signal("inventory_item_select", item_instance.shield_name, null, null, null, null, item_texture, inv_type)
+		emit_signal("inventory_item_select", item_instance.shield_name, null, null, null, null, item_texture, inv_type, slot_name)
 	else:
-		emit_signal("inventory_item_select", item_instance.item_name, null, null, null, null, item_texture, inv_type)
+		emit_signal("inventory_item_select", item_instance.item_name, null, null, null, null, item_texture, inv_type, slot_name)
 	item_instance.queue_free()
 
 
