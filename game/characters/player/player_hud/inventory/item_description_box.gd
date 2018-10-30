@@ -60,7 +60,6 @@ func _on_use_button_pressed():
 
 
 func _on_drop_button_pressed():
-	print($CenterContainer/description_container/VBoxContainer/buttons_container/drop_button.get_name())
 	emit_signal("item_dropped", self.slot_name)
 
 

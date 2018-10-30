@@ -104,19 +104,26 @@ func unequip(slot_name):
 	#  (str) -> null
 	var i = 0
 	var full_inv = true
-	# Put unequipped item into inventory space
-	for i in inventory_space.size():
-		if (inventory_space[i] == null):
-			# Place item in slot to inventory space
-			inventory_space[i] = equipment[slot_name]
+	# Check if this item is a primary
+	var can_drop = primary_unequipped(slot_name)
+	# If primary weapon, use secondary as primary
+	if (can_drop):
+		# Put unequipped item into inventory space
+		for i in inventory_space.size():
+			if (inventory_space[i] == null):
+				# Place item in slot to inventory space
+				inventory_space[i] = equipment[slot_name]
+				equipment[slot_name] = null
+				full_inv = false
+		# Else, drop the item
+		if (full_inv):
+			# Drop the item to the ground
+			drop_item(equipment[slot_name])
 			equipment[slot_name] = null
-			full_inv = false
-	# Else, drop the item
-	if (full_inv):
-		# Drop the item to the ground
-		drop_item(equipment[slot_name])
-		equipment[slot_name] = null
-	update_inventory_ui()
+		if (slot_name == "Primary"):
+			equipment["Primary"] = equipment["Secondary"]
+			equipment["Secondary"] = null
+		update_inventory_ui()
 
 
 func drop_item(slot_name):
@@ -124,21 +131,28 @@ func drop_item(slot_name):
 	# Look for item's item_name in item_type's list
 	# Resource path for item
 	var item
-	if slot_name in EQUIPMENT_SLOTS:
-		item = equipment[slot_name]
-		# Clear item from equipment
-		equipment[slot_name] = null
-	else:
-		item = inventory_space[int(slot_name)] 
-		# Clear item from inventory
-		inventory_space[int(slot_name)] = null
-	var to_drop  = get_node("/root/item_db").get(item[1].to_upper())[item[0]]
-	# Add item to world
-	var load_item = load(to_drop)
-	var item_instance = load_item.instance()
-	get_node("../..").add_child(item_instance)
-	item_instance.position = get_parent().get_global_position()
-	update_inventory_ui()
+	# Case where slot selected is the primary weapon
+	var can_drop = primary_unequipped(slot_name)
+	if (can_drop):
+		if slot_name in EQUIPMENT_SLOTS:
+			item = equipment[slot_name]
+			# Clear item from equipment
+			equipment[slot_name] = null
+		else:
+			item = inventory_space[int(slot_name)] 
+			# Clear item from inventory
+			inventory_space[int(slot_name)] = null
+		var to_drop  = get_node("/root/item_db").get(item[1].to_upper())[item[0]]
+		# Add item to world
+		var load_item = load(to_drop)
+		var item_instance = load_item.instance()
+		# Add to item container of level
+		get_node("../../item_container").add_child(item_instance)
+		item_instance.position = get_parent().get_global_position()
+		if (slot_name == "Primary"):
+			equipment["Primary"] = equipment["Secondary"]
+			equipment["Secondary"] = null
+		update_inventory_ui()
 
 
 func pickup_item(item_node):
@@ -207,6 +221,14 @@ func on_item_equipped():
 	equip(selected_slot)
 
 
+func primary_unequipped(slot_name):
+	# Case where primary weapon is unequipped or dropped
+	var can_drop = true
+	if (slot_name == "Primary" and equipment["Secondary"] == null):
+		can_drop = false
+	return can_drop
+
+
 #
 # Inventory UI functions
 #
@@ -215,7 +237,7 @@ func update_slot_tex(instance, slot_name):
 	if instance == null:
 		emit_signal("update_slot_tex", null, slot_name)
 	else:
-		emit_signal("update_slot_tex", instance.get_node("sprite").get_texture(), slot_name)
+		emit_signal("update_slot_tex", instance.find_node("sprite").get_texture(), slot_name)
 		# Queue instance free
 		instance.queue_free()
 
@@ -265,29 +287,36 @@ func on_item_slot_selected(item_slot):
 	# Slot name is either in equipment or in inventory space
 	var item_instance
 	var inv_type
+	var item
 	
 	# Selected slot is the item slot given
 	selected_slot = slot_name
 	
-	# Run this only if the slot selected is not null
-	
+	# Get item
 	if (slot_name in EQUIPMENT_SLOTS):
-		item_instance = instance_item(equipment[slot_name])
-		inv_type = "equipment"
+		item = equipment[slot_name]
 	else:
-		item_instance = instance_item(inventory_space[int(slot_name)])
-		inv_type = "inventory"
+		item = inventory_space[int(slot_name)]
 	
-	var item_texture = get_item_texture(item_instance.get_node("sprite").get_texture())
-	# Give details to inventory UI
-	if item_instance.is_in_group("weapons"):
-		emit_signal("inventory_item_select", item_instance.weapon_name, item_instance.primary_damage, item_instance.primary_dmg_type,
-		item_instance.secondary_damage, item_instance.secondary_dmg_type, item_texture, inv_type, slot_name)
-	elif item_instance.is_in_group("shields"):
-		emit_signal("inventory_item_select", item_instance.shield_name, null, null, null, null, item_texture, inv_type, slot_name)
-	else:
-		emit_signal("inventory_item_select", item_instance.item_name, null, null, null, null, item_texture, inv_type, slot_name)
-	item_instance.queue_free()
+	# Run this only if the slot selected is not null
+	if item != null:
+		if (slot_name in EQUIPMENT_SLOTS):
+			item_instance = instance_item(equipment[slot_name])
+			inv_type = "equipment"
+		else:
+			item_instance = instance_item(inventory_space[int(slot_name)])
+			inv_type = "inventory"
+		
+		var item_texture = get_item_texture(item_instance.find_node("sprite").get_texture())
+		# Give details to inventory UI
+		if item_instance.is_in_group("weapons"):
+			emit_signal("inventory_item_select", item_instance.weapon_name, item_instance.primary_damage, item_instance.primary_dmg_type,
+			item_instance.secondary_damage, item_instance.secondary_dmg_type, item_texture, inv_type, slot_name)
+		elif item_instance.is_in_group("shields"):
+			emit_signal("inventory_item_select", item_instance.shield_name, null, null, null, null, item_texture, inv_type, slot_name)
+		else:
+			emit_signal("inventory_item_select", item_instance.item_name, null, null, null, null, item_texture, inv_type, slot_name)
+		item_instance.queue_free()
 
 
 func get_item_texture(tex):

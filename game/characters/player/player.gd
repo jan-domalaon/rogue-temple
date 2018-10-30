@@ -62,9 +62,9 @@ func _process(delta):
 	cursor_pos = get_global_mouse_position()
 	
 	if (cursor_pos.x >= position.x):
-		get_node("sprite").set_flip_h(true)
+		find_node("sprite").set_flip_h(true)
 	else:
-		get_node("sprite").set_flip_h(false)
+		find_node("sprite").set_flip_h(false)
 	
 	emit_signal("update_player_stats", health, max_health, player_armor, max_move_speed, player_xp, next_lvl_xp, player_level)
 
@@ -83,7 +83,7 @@ func _input(event):
 			# Special conditions for ranged weapons
 			if ($weapon.is_in_group("ranged_weapons")):
 				# Bow conditions
-				if ($weapon.get("weapon_type") == "bow"):
+				if ($weapon.get("weapon_type") == "BOW"):
 					if Input.is_action_pressed("primary_attack"):
 						# Only shoot a bow when releasing
 						$weapon.make_draw_bow()
@@ -106,8 +106,9 @@ func _input(event):
 		if (interactables.size() > 0):
 			var interacted = false
 			var w = false
-			# If the interactable is an item
-			if ((interactables[0].is_in_group('items'))):
+			# If the interactable is an item and is in item container
+			if ((interactables[0].is_in_group('items')) and interactables[0].get_parent().get_name() == "item_container"):
+				print("picked up " + str(interactables[0].get_name()))
 				$inventory.pickup_item(interactables[0])
 				interacted = true
 			# If the interactable is a level change
@@ -129,6 +130,7 @@ func player_swap_weapon():
 	$sheathed_weapon.name = "intermediate"
 	$weapon.name = "sheathed_weapon"
 	$intermediate.name = "weapon"
+	print("primary weapon: " + $weapon.weapon_name)
 
 
 func get_weaponry():
@@ -145,6 +147,8 @@ func get_weaponry():
 	# Rename and set values accordingly
 	primary_instance.name = "weapon"
 	secondary_instance.name = "sheathed_weapon"
+	primary_instance.user_type = "player"
+	secondary_instance.user_type = "player"
 	primary_instance.set_scale(Vector2(0.5, 0.5))
 	secondary_instance.set_scale(Vector2(0.5, 0.5))
 	primary_instance.hide()

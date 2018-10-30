@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://game/items/weapons/weapon.gd" type="Script" id=1]
 [ext_resource path="res://game/items/weapons/generic_weapon.png" type="Texture" id=2]
@@ -8,7 +8,13 @@
 custom_solver_bias = 0.0
 extents = Vector2( 16, 3 )
 
-[node name="generic_weapon" type="Node2D" index="0" groups=[
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 16, 16 )
+
+[node name="generic_weapon" type="Node2D" groups=[
+"items",
 "weapons",
 ]]
 
@@ -19,18 +25,12 @@ primary_damage = 1
 secondary_damage = 1
 primary_dmg_type = "c"
 secondary_dmg_type = "b"
-user_type = "player"
+user_type = ""
 primary_as = 0.75
 secondary_as = 0.5
 weapon_type = "mace"
 
-[node name="sprite" type="Sprite" parent="." index="0"]
-
-position = Vector2( 32, 0 )
-scale = Vector2( 2, 1 )
-texture = ExtResource( 2 )
-
-[node name="weapon_area" type="Area2D" parent="." index="1"]
+[node name="weapon_area" type="Area2D" parent="." index="0"]
 
 position = Vector2( 32, 0 )
 input_pickable = true
@@ -57,12 +57,35 @@ playback/active = false
 playback/repeat = false
 playback/speed = 1.0
 
-[node name="weapon_cooldown" type="Timer" parent="." index="2"]
+[node name="sprite" type="Sprite" parent="weapon_area" index="2"]
+
+scale = Vector2( 2, 1 )
+texture = ExtResource( 2 )
+
+[node name="weapon_cooldown" type="Timer" parent="." index="1"]
 
 process_mode = 1
 wait_time = 1.0
 one_shot = false
 autostart = false
+
+[node name="interact_area" type="Area2D" parent="." index="2"]
+
+position = Vector2( 32, 0 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="interact_area" index="0"]
+
+shape = SubResource( 2 )
 
 [connection signal="body_entered" from="weapon_area" to="." method="_on_weapon_area_body_entered"]
 

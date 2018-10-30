@@ -13,6 +13,7 @@ export var piercing = false
 var can_fire = false
 var arrow = load(projectile)
 
+
 func make_draw_bow():
 	self.show()
 	$".".look_at(get_global_mouse_position())
@@ -40,7 +41,7 @@ func fire_bow():
 	if (can_fire):
 		print("fired bow!")
 		can_fire = false
-		$sprite.set_region_rect(Rect2(0, 0, 16, 16))
+		find_node("sprite").set_region_rect(Rect2(0, 0, 16, 16))
 		$weapon_area/hitbox.set_disabled(true)
 		$".".hide()
 		
