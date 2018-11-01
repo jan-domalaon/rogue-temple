@@ -8,6 +8,7 @@ signal item_equipped(slot_name)
 
 const PRIMARY_DMG_TEXT = "Primary Damage: "
 const SECONDARY_DMG_TEXT = "Secondary Damage: "
+const SHIELD_TEXT = "Shield HP: "
 
 # Current slot in the description
 var slot_name
@@ -40,6 +41,10 @@ func on_inventory_item_select(item_instance, inv_type):
 		item_name = item_instance.shield_name
 	$CenterContainer/description_container/VBoxContainer/CenterContainer/item_text/item_name.set_text(item_name)
 	
+	# Clear label text
+	$CenterContainer/description_container/VBoxContainer/CenterContainer/item_text/attributes_container/primary_dmg.set_text("")
+	$CenterContainer/description_container/VBoxContainer/CenterContainer/item_text/attributes_container/secondary_dmg.set_text("")
+	
 	# Weapon specific description
 	if (item_instance.is_in_group("weapons")):
 		$CenterContainer/description_container/VBoxContainer/CenterContainer/item_text/attributes_container.show()
@@ -47,6 +52,10 @@ func on_inventory_item_select(item_instance, inv_type):
 		str(primary_dmg) + " " + str(primary_dmg_type))
 		$CenterContainer/description_container/VBoxContainer/CenterContainer/item_text/attributes_container/secondary_dmg.set_text(SECONDARY_DMG_TEXT +
 		str(secondary_dmg) + " " + str(secondary_dmg_type))
+	elif (item_instance.is_in_group("shields")):
+		# Show armor value
+		$CenterContainer/description_container/VBoxContainer/CenterContainer/item_text/attributes_container.show()
+		$CenterContainer/description_container/VBoxContainer/CenterContainer/item_text/attributes_container/primary_dmg.set_text(SHIELD_TEXT + str(item_instance.shield_hp))
 	else:
 		$CenterContainer/description_container/VBoxContainer/CenterContainer/item_text/attributes_container.hide()
 	$CenterContainer/description_container/NinePatchRect/MarginContainer/item_sprite.set_texture(tex)

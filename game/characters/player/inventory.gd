@@ -233,6 +233,8 @@ func on_item_dropped():
 	drop_item(selected_slot)
 	get_parent().reset_weaponry()
 	get_parent().get_weaponry(false)
+	if (selected_slot == "Shield"):
+		get_parent().reset_shield()
 
 
 func on_item_unequipped():
@@ -240,6 +242,8 @@ func on_item_unequipped():
 	unequip(selected_slot)
 	get_parent().reset_weaponry()
 	get_parent().get_weaponry(false)
+	if (selected_slot == "Shield"):
+		get_parent().reset_shield()
 
 
 func on_item_equipped():
@@ -247,6 +251,9 @@ func on_item_equipped():
 	equip(selected_slot)
 	get_parent().reset_weaponry()
 	get_parent().get_weaponry(false)
+	if (selected_slot == "Shield"):
+		get_parent().reset_shield()
+		get_parent().get_shield(false)
 
 
 func primary_unequipped(slot_name):
