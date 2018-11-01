@@ -19,32 +19,59 @@ func _ready():
 	get_owner().get_parent().get_parent().connect("hide_item_description", self, "on_hide_item_description")
 
 
-func on_inventory_item_select(item_name, primary_dmg, primary_dmg_type, secondary_dmg, secondary_dmg_type, tex, type, slot_name):
+func on_inventory_item_select(item_instance, inv_type):
 	self.show()
+	# Get details from instance to display
+	var item_name
+	var tex = get_item_texture(item_instance.find_node("sprite").get_texture())
+	var primary_dmg
+	var primary_dmg_type
+	var secondary_dmg
+	var secondary_dmg_type
+	if item_instance.is_in_group("items"):
+		item_name = item_instance.item_name
+	elif item_instance.is_in_group("weapons"):
+		item_name = item_instance.weapon_name
+		primary_dmg = item_instance.primary_damage
+		primary_dmg_type = item_instance.primary_dmg_type
+		secondary_dmg = item_instance.secondary_damage
+		secondary_dmg_type = item_instance.secondary_dmg_type
+	elif item_instance.is_in_group("shields"):
+		item_name = item_instance.shield_name
 	$CenterContainer/description_container/VBoxContainer/CenterContainer/item_text/item_name.set_text(item_name)
-	if (primary_dmg == null):
-		$CenterContainer/description_container/VBoxContainer/CenterContainer/item_text/attributes_container.hide()
-	else:
+	
+	# Weapon specific description
+	if (item_instance.is_in_group("weapons")):
 		$CenterContainer/description_container/VBoxContainer/CenterContainer/item_text/attributes_container.show()
 		$CenterContainer/description_container/VBoxContainer/CenterContainer/item_text/attributes_container/primary_dmg.set_text(PRIMARY_DMG_TEXT +
 		str(primary_dmg) + " " + str(primary_dmg_type))
 		$CenterContainer/description_container/VBoxContainer/CenterContainer/item_text/attributes_container/secondary_dmg.set_text(SECONDARY_DMG_TEXT +
 		str(secondary_dmg) + " " + str(secondary_dmg_type))
+	else:
+		$CenterContainer/description_container/VBoxContainer/CenterContainer/item_text/attributes_container.hide()
 	$CenterContainer/description_container/NinePatchRect/MarginContainer/item_sprite.set_texture(tex)
 	
 	reset_buttons()
 	
-	if (type == "equipment"):
+	# Show appropriate buttons based on item type and where item is stored in inventory
+	if (inv_type == "equipment"):
 		# This item is equipped. Show appropriate buttons (Drop, unequip)
 		$CenterContainer/description_container/VBoxContainer/buttons_container/drop_button.show()
 		$CenterContainer/description_container/VBoxContainer/buttons_container/unequip_button.show()
-	elif (type == "inventory"):
+	elif (inv_type == "inventory"):
 		# For now, equip, drop
 		# For specific items, need to add Use button
 		$CenterContainer/description_container/VBoxContainer/buttons_container/drop_button.show()
-		$CenterContainer/description_container/VBoxContainer/buttons_container/equip_button.show()
+		if (item_instance.is_in_group("shields") or item_instance.is_in_group("weapons")):
+			$CenterContainer/description_container/VBoxContainer/buttons_container/equip_button.show()
+		if (item_instance.is_in_group("consumables")):
+			# For foodstuff, potions, scrolls
+			pass
 	
 	self.slot_name = slot_name
+	
+	# Free instance to free up memory
+	item_instance.queue_free()
 
 
 func reset_buttons():
@@ -73,3 +100,10 @@ func _on_equip_button_pressed():
 func on_hide_item_description():
 	self.hide()
 
+
+func get_item_texture(tex):
+	# Get the first sprite in a sprite's texture
+	var tex_subregion = AtlasTexture.new()
+	tex_subregion.set_atlas(tex)
+	tex_subregion.set_region(Rect2(0, 0, 16, 16))
+	return tex_subregion

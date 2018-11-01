@@ -320,7 +320,7 @@ func on_item_slot_selected(item_slot):
 	# Selected slot is the item slot given
 	selected_slot = slot_name
 	
-	# Get item
+	# Get item in inventory or equipment
 	if (slot_name in EQUIPMENT_SLOTS):
 		item = equipment[slot_name]
 	else:
@@ -334,17 +334,8 @@ func on_item_slot_selected(item_slot):
 		else:
 			item_instance = instance_item(inventory_space[int(slot_name)])
 			inv_type = "inventory"
-		
-		var item_texture = get_item_texture(item_instance.find_node("sprite").get_texture())
 		# Give details to inventory UI
-		if item_instance.is_in_group("weapons"):
-			emit_signal("inventory_item_select", item_instance.weapon_name, item_instance.primary_damage, item_instance.primary_dmg_type,
-			item_instance.secondary_damage, item_instance.secondary_dmg_type, item_texture, inv_type, slot_name)
-		elif item_instance.is_in_group("shields"):
-			emit_signal("inventory_item_select", item_instance.shield_name, null, null, null, null, item_texture, inv_type, slot_name)
-		else:
-			emit_signal("inventory_item_select", item_instance.item_name, null, null, null, null, item_texture, inv_type, slot_name)
-		item_instance.queue_free()
+		emit_signal("inventory_item_select", item_instance, inv_type)
 
 
 func get_item_texture(tex):

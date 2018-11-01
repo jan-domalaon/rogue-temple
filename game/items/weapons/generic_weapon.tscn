@@ -13,8 +13,7 @@ extents = Vector2( 16, 3 )
 custom_solver_bias = 0.0
 extents = Vector2( 16, 16 )
 
-[node name="generic_weapon" type="Node2D" index="0" groups=[
-"items",
+[node name="generic_weapon" type="Node2D" groups=[
 "weapons",
 ]]
 
