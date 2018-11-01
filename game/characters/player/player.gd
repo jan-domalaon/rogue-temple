@@ -36,7 +36,7 @@ func _ready():
 	emit_signal("health_changed", health)
 	
 	# Get equipment from inventory
-	get_weaponry()
+	get_weaponry(true)
 	get_shield()
 	
 	# Set appropriate stats from inventory
@@ -72,7 +72,6 @@ func _process(delta):
 func _input(event):
 	# These actions can only be done if the player is not flickering
 	if (not flickering):
-		
 		if (shield_ready and event.is_action_pressed('block')):
 			use_shield(true)
 		
@@ -104,10 +103,10 @@ func _input(event):
 	if (event.is_action_pressed('interact')):
 		var interactables = $knockback_area.get_overlapping_areas()
 		if (interactables.size() > 0):
+			print(interactables[0].get_groups())
 			var interacted = false
-			var w = false
 			# If the interactable is an item and is in item container
-			if ((interactables[0].is_in_group('items')) and interactables[0].get_parent().get_name() == "item_container"):
+			if ((interactables[0].is_in_group('items')) or interactables[0].is_in_group('dropped_weapons')):
 				print("picked up " + str(interactables[0].get_name()))
 				$inventory.pickup_item(interactables[0])
 				interacted = true
@@ -124,39 +123,52 @@ func _input(event):
 
 func player_swap_weapon():
 	# Secondary is primary weapon, or vice versa
-	# Swap weapons in inventory
-	$inventory.swap_weapon()
-	# Rename weapons
-	$sheathed_weapon.name = "intermediate"
-	$weapon.name = "sheathed_weapon"
-	$intermediate.name = "weapon"
-	print("primary weapon: " + $weapon.weapon_name)
+	# Swap weapons in inventory. Only swap if there are two weapons
+	if ($inventory.equipment["Secondary"] != null):
+		$inventory.swap_weapon()
+		# Rename weapons
+		$sheathed_weapon.name = "intermediate"
+		$weapon.name = "sheathed_weapon"
+		$intermediate.name = "weapon"
+		print("primary weapon: " + $weapon.weapon_name)
 
 
-func get_weaponry():
+func get_weaponry(on_ready):
 	# Get name from inventory and get resource path from item database
 	var primary_weapon_path = item_db.WEAPON[$inventory.equipment["Primary"][0]]
-	var secondary_weapon_path = item_db.WEAPON[$inventory.equipment["Secondary"][0]]
 	var primary = load(primary_weapon_path)
-	var secondary = load(secondary_weapon_path)
 	
 	# Instance weapons
 	var primary_instance = primary.instance()
-	var secondary_instance = secondary.instance()
 	
 	# Rename and set values accordingly
-	primary_instance.name = "weapon"
-	secondary_instance.name = "sheathed_weapon"
+	primary_instance.set_name("weapon")
 	primary_instance.user_type = "player"
-	secondary_instance.user_type = "player"
 	primary_instance.set_scale(Vector2(0.5, 0.5))
-	secondary_instance.set_scale(Vector2(0.5, 0.5))
 	primary_instance.hide()
-	secondary_instance.hide()
 	
 	# Add weaponry to player. Deferred b/c this is called in _ready()
-	call_deferred("add_child", primary_instance)
-	call_deferred("add_child", secondary_instance)
+	if on_ready:
+		print("added primary weapon to player on ready!")
+		call_deferred("add_child", primary_instance)
+	else:
+		print("added primary weapon to player!")
+		add_child(primary_instance)
+	
+	# Do the same if secondary exists
+	if $inventory.equipment["Secondary"] != null:
+		var secondary_weapon_path = item_db.WEAPON[$inventory.equipment["Secondary"][0]]
+		var secondary = load(secondary_weapon_path)
+		var secondary_instance = secondary.instance()
+		
+		secondary_instance.name = "sheathed_weapon"
+		secondary_instance.user_type = "player"
+		secondary_instance.set_scale(Vector2(0.5, 0.5))
+		secondary_instance.hide()
+		if on_ready:
+			call_deferred("add_child", secondary_instance)
+		else:
+			add_child(secondary_instance)
 
 
 func get_shield():
@@ -170,3 +182,12 @@ func get_shield():
 	
 	call_deferred("add_child", shield_instance)
 	call_deferred("connect_shield")
+
+
+func reset_weaponry():
+	# Clear existing weapons
+	if (has_node("weapon")):
+		$weapon.free()
+	if (has_node("sheathed_weapon")):
+		$sheathed_weapon.free()
+

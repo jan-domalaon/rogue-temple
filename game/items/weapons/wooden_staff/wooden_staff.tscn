@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 24, 1 )
+extents = Vector2( 24, 2 )
 
 [node name="wooden_staff" instance=ExtResource( 1 )]
 
@@ -16,15 +16,15 @@ primary_as = 0.7
 secondary_as = 0.6
 weapon_type = "STAFF"
 
-[node name="sprite" parent="." index="0"]
-
-position = Vector2( 40, 0 )
-scale = Vector2( 3, 1 )
-texture = ExtResource( 2 )
-
 [node name="hitbox" parent="weapon_area" index="0"]
 
 position = Vector2( 8, 0 )
 shape = SubResource( 1 )
+
+[node name="sprite" parent="weapon_area" index="2"]
+
+position = Vector2( 8, 0 )
+scale = Vector2( 3, 1 )
+texture = ExtResource( 2 )
 
 

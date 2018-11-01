@@ -23,4 +23,4 @@ func on_update_slot_tex(tex, slot):
 		tex_subregion.set_atlas(tex)
 		tex_subregion.set_region(Rect2(0, 0, 16, 16))
 		$TextureRect.set_texture(tex_subregion)
-		print("updated " + str(slot_name) + " slot texture!")
+		#print("updated " + str(slot_name) + " slot texture!")

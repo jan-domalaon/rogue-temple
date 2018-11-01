@@ -18,6 +18,8 @@ var inventory_space = []
 var equipment = {"Primary": null, "Secondary": null, "Shield": null, "Helmet": null, 
 				"Armor": null, "Gloves": null, "Boots": null}
 var selected_slot
+# Equips the player once
+onready var equipped_weaponry = false
 
 
 func _enter_tree():
@@ -59,7 +61,14 @@ func _ready():
 func _input(event):
 	# Open inventory UI
 	if (event.is_action_pressed("open_inventory")):
-		$CanvasLayer/inventory_hud.show() if not $CanvasLayer/inventory_hud.is_visible_in_tree() else $CanvasLayer/inventory_hud.hide()
+		if not $CanvasLayer/inventory_hud.is_visible_in_tree():
+			$CanvasLayer/inventory_hud.show() 
+			get_tree().paused = true
+			get_parent().set_process_input(false)
+		else:
+			$CanvasLayer/inventory_hud.hide()
+			get_tree().paused = false
+			get_parent().set_process_input(true)
 
 
 #
@@ -97,6 +106,7 @@ func equip(slot_name):
 	equipment[equipment_slot] = inventory_item
 	# Remove item from inventory_space
 	inventory_space[int(slot_name)] = null
+	# Update UI and update player
 	update_inventory_ui()
 
 
@@ -147,27 +157,39 @@ func drop_item(slot_name):
 		var load_item = load(to_drop)
 		var item_instance = load_item.instance()
 		# Add to item container of level
-		get_node("../../item_container").add_child(item_instance)
+		get_node("../../item_container").call_deferred("add_child", item_instance)
 		item_instance.position = get_parent().get_global_position()
+		# Use secondary weapon as primary if this slot is primary
 		if (slot_name == "Primary"):
 			equipment["Primary"] = equipment["Secondary"]
 			equipment["Secondary"] = null
+		# Set weapon to scale and turn on its interact area if this is a weapon
+		if (slot_name == "Primary" or slot_name == "Secondary"):
+			item_instance.get_node("interact_area/interact_shape").set_disabled(false)
+			item_instance.set_scale(Vector2(0.5, 0.5))
 		update_inventory_ui()
 
 
 func pickup_item(item_node):
 	# Add item to inventory
 	# Add item according to inventory form
-	var inventory_slot = [item_node.item_name, item_node.item_type]
+	var new_item = item_node
+	var inventory_slot
+	# Special case where item is a dropped weapon
+	if (item_node.is_in_group("dropped_weapons")):
+		new_item = item_node.get_parent()
+		inventory_slot = [new_item.weapon_name, "WEAPON"]
+	else:
+		inventory_slot = [new_item.item_name, new_item.item_type]
 	for i in range(inventory_space.size()):
 		if (inventory_space[i] == null):
 			# Place item in that slot and stop looking for an empty slot.
 			inventory_space[i] = inventory_slot
 			# Remove item from the world
-			item_node.queue_free()
+			new_item.queue_free()
 			# Update UI
-			update_slot_tex(item_node, str(i))
-			print("inventory: " + str(inventory_space))
+			update_slot_tex(new_item, str(i))
+			#print("inventory: " + str(inventory_space))
 			break
 
 
@@ -209,16 +231,22 @@ func on_item_used():
 func on_item_dropped():
 	print("dropping item!")
 	drop_item(selected_slot)
+	get_parent().reset_weaponry()
+	get_parent().get_weaponry(false)
 
 
 func on_item_unequipped():
 	print("unequipping item!")
 	unequip(selected_slot)
+	get_parent().reset_weaponry()
+	get_parent().get_weaponry(false)
 
 
 func on_item_equipped():
 	print("equipping item!")
 	equip(selected_slot)
+	get_parent().reset_weaponry()
+	get_parent().get_weaponry(false)
 
 
 func primary_unequipped(slot_name):

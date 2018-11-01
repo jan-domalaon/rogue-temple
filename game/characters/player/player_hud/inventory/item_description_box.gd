@@ -54,7 +54,6 @@ func reset_buttons():
 	$CenterContainer/description_container/VBoxContainer/throw_button.hide()
 
 
-
 func _on_use_button_pressed():
 	pass # replace with function body
 
@@ -73,3 +72,4 @@ func _on_equip_button_pressed():
 
 func on_hide_item_description():
 	self.hide()
+

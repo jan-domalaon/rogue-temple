@@ -5,7 +5,9 @@
 
 [node name="inventory" type="Node"]
 
+pause_mode = 2
 script = ExtResource( 1 )
+_sections_unfolded = [ "Pause" ]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." index="0"]
 

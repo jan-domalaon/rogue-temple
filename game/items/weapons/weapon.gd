@@ -27,6 +27,8 @@ export var user_type = "player"
 export var primary_as = 0.75
 export var secondary_as = 0.5
 export var weapon_type = "mace"
+# Indicates if this weapon is a dropped item
+export var dropped_item = false
 
 # Hitbox shape used for disable/enable collision
 var old_shape = null
@@ -38,6 +40,12 @@ var look_dir
 
 func _ready():
 	$weapon_area/hitbox.set_disabled(true)
+	
+	# Interact area is only on if this is a dropped item
+	if dropped_item:
+		$interact_area/interact_shape.set_disabled(false)
+	elif not dropped_item:
+		$interact_area/interact_shape.set_disabled(true)
 
 
 func _on_weapon_area_body_entered(body):

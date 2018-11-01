@@ -20,8 +20,10 @@ extents = Vector2( 6, 7 )
 "player",
 ] instance=ExtResource( 1 )]
 
+pause_mode = 2
 collision_layer = 1
 script = ExtResource( 2 )
+_sections_unfolded = [ "Collision", "Pause", "Transform", "Visibility" ]
 
 [node name="sprite" parent="." index="0"]
 

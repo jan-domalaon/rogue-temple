@@ -37,7 +37,8 @@ const SPELL_TOME = {'Standard HAA Training Guide': ''}
 
 const WEAPON = {'Iron Sword': 'res://game/items/weapons/iron_sword/iron_sword.tscn', 
 				'Iron Mace': 'res://game/items/weapons/iron_mace/iron_mace.tscn',
-				'Ranger Bow': 'res://game/items/weapons/ranger_bow/ranger_bow.tscn'}
+				'Ranger Bow': 'res://game/items/weapons/ranger_bow/ranger_bow.tscn',
+				'Wooden Staff': 'res://game/items/weapons/wooden_staff/wooden_staff.tscn'}
 
 
 const SHIELD = {'Iron Shield': 'res://game/items/shields/iron_shield/iron_shield.tscn'}

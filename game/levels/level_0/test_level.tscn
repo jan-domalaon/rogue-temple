@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://game/levels/level_0/tileset/tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://game/levels/level_0/tileset/level_0_door.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://game/characters/mobs/bandit_scavenger/bandit_scavenger.tscn" type="PackedScene" id=5]
 [ext_resource path="res://game/characters/mobs/stacked_water_jelly/stacked_water_jelly.tscn" type="PackedScene" id=6]
 [ext_resource path="res://game/items/foodstuff/fruits/fruits.tscn" type="PackedScene" id=7]
+[ext_resource path="res://game/items/weapons/wooden_staff/wooden_staff.tscn" type="PackedScene" id=8]
 
 [node name="prototype_level" type="Node"]
 
@@ -96,5 +97,11 @@ position = Vector2( -55, 54 )
 [node name="fruits3" parent="item_container" index="2" instance=ExtResource( 7 )]
 
 position = Vector2( -55, 70 )
+
+[node name="wooden_staff" parent="item_container" index="3" instance=ExtResource( 8 )]
+
+position = Vector2( -47, 103 )
+scale = Vector2( 0.5, 0.5 )
+dropped_item = true
 
 

@@ -13,7 +13,7 @@ extents = Vector2( 16, 3 )
 custom_solver_bias = 0.0
 extents = Vector2( 16, 16 )
 
-[node name="generic_weapon" type="Node2D" groups=[
+[node name="generic_weapon" type="Node2D" index="0" groups=[
 "items",
 "weapons",
 ]]
@@ -28,7 +28,8 @@ secondary_dmg_type = "b"
 user_type = ""
 primary_as = 0.75
 secondary_as = 0.5
-weapon_type = "mace"
+weapon_type = "MACE"
+dropped_item = false
 
 [node name="weapon_area" type="Area2D" parent="." index="0"]
 
@@ -69,7 +70,9 @@ wait_time = 1.0
 one_shot = false
 autostart = false
 
-[node name="interact_area" type="Area2D" parent="." index="2"]
+[node name="interact_area" type="Area2D" parent="." index="2" groups=[
+"dropped_weapons",
+]]
 
 position = Vector2( 32, 0 )
 input_pickable = true
@@ -83,7 +86,7 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="interact_area" index="0"]
+[node name="interact_shape" type="CollisionShape2D" parent="interact_area" index="0"]
 
 shape = SubResource( 2 )
 
