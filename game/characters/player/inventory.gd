@@ -344,3 +344,12 @@ func get_item_texture(tex):
 	tex_subregion.set_atlas(tex)
 	tex_subregion.set_region(Rect2(0, 0, 16, 16))
 	return tex_subregion
+
+
+func save_inventory():
+	pass
+
+
+func load_inventory():
+	pass
+

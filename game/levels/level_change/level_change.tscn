@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://game/levels/level_change/level_change.gd" type="Script" id=1]
+[ext_resource path="res://game/levels/level_change/temple_ladder.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 10 )
+
+[node name="level_change" type="Area2D" groups=[
+"level_change",
+]]
+
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 1 )
+next_level = ""
+
+[node name="sprite" type="Sprite" parent="." index="0"]
+
+texture = ExtResource( 2 )
+
+[node name="level_change_area" type="CollisionShape2D" parent="." index="1"]
+
+shape = SubResource( 1 )
+
+

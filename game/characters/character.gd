@@ -9,7 +9,7 @@ const FLICKER_TIME = 0.25
 
 # Various stats for characters
 export (int) var health = 1
-export (int) var max_health
+export (int) var max_health = 100
 export (int) var armor = 0
 export (int) var move_speed = 100
 
@@ -49,9 +49,8 @@ func _ready():
 	# Check if this character has a shield
 	if (has_node("shield")):
 		connect_shield()
-	
-	# Max health given when character enters scene
-	max_health = health
+	emit_signal("health_changed", health)
+
 
 func _process(delta):
 	if (health <= 0):
@@ -182,8 +181,26 @@ func on_shield_ready():
 
 
 func connect_shield():
+	# Connect this character's shield to shield functions of character
 	has_shield = true
 	$shield/shield_hitbox.set_disabled(true)
 	shield_ready = true
 	$shield.connect("shield_broken", self, "on_shield_broken")
 	$shield.connect("shield_ready", self, "on_shield_ready")
+
+
+func save():
+	# Save stats wanted when changing levels
+	var save_dict = {
+		max_health = max_health,
+		current_health = health,
+		move_speed = move_speed
+	}
+	return save_dict
+
+func load(dict):
+	# Set attributes from dictionary
+	max_health = dict["max_health"]
+	health = dict["current_health"]
+	move_speed = dict["move_speed"]
+

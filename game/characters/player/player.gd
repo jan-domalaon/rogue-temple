@@ -41,6 +41,8 @@ func _ready():
 	
 	# Set appropriate stats from inventory
 	player_armor = $inventory.get_armor_value()
+	
+	print("player.gd health " + str(health))
 
 
 func _physics_process(delta):
@@ -112,7 +114,7 @@ func _input(event):
 				interacted = true
 			# If the interactable is a level change
 			elif ((interactables[0].is_in_group("level_change"))):
-				pass
+				interactables[0].on_level_change()
 			# If the interactable is a door
 			elif (interactables[0].get_parent().is_in_group("doors")):
 				interactables[0].get_parent().open_door()
