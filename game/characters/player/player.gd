@@ -37,7 +37,7 @@ func _ready():
 	
 	# Get equipment from inventory
 	get_weaponry(true)
-	get_shield()
+	get_shield(true)
 	
 	# Set appropriate stats from inventory
 	player_armor = $inventory.get_armor_value()
@@ -173,7 +173,7 @@ func get_weaponry(on_ready):
 			add_child(secondary_instance)
 
 
-func get_shield():
+func get_shield(on_ready):
 	# Same format as get_weaponry(), but for shields
 	var shield_path = item_db.SHIELD[$inventory.equipment["Shield"][0]]
 	var shield = load(shield_path)
@@ -182,8 +182,13 @@ func get_shield():
 	shield_instance.name = "shield"
 	shield_instance.hide()
 	
-	call_deferred("add_child", shield_instance)
-	call_deferred("connect_shield")
+	if on_ready:
+		call_deferred("add_child", shield_instance)
+		call_deferred("connect_shield")
+	else:
+		add_child(shield_instance)
+		call_deferred("connect_shield")
+	has_shield = true
 
 
 func reset_weaponry():
@@ -192,4 +197,10 @@ func reset_weaponry():
 		$weapon.free()
 	if (has_node("sheathed_weapon")):
 		$sheathed_weapon.free()
+
+
+func reset_shield():
+	if (has_node("shield")):
+		$shield.free()
+		has_shield = false
 
