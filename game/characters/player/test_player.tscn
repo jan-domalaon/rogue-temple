@@ -16,11 +16,8 @@ extents = Vector2( 14, 16 )
 custom_solver_bias = 0.0
 extents = Vector2( 6, 7 )
 
-[node name="player" groups=[
-<<<<<<< HEAD
+[node name="player" index="0" groups=[
 "persistent",
-=======
->>>>>>> refs/remotes/origin/master
 "player",
 ] instance=ExtResource( 1 )]
 
