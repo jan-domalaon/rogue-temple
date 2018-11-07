@@ -29,6 +29,7 @@ var old_player_pos
 var can_attack = true
 
 # Mob stats
+# Amount of XP given
 var mob_xp = 0
 
 

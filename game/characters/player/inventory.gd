@@ -11,6 +11,7 @@ signal update_slot_tex(texture, slot_name)
 signal inventory_item_select(item_name, primary_dmg, primary_dmg_type, secondary_dmg, secondary_dmg_type, tex, type, slot_name)
 signal hide_item_description
 
+
 const EQUIPMENT_SLOTS = ["Primary", "Secondary", "Shield", "Helmet", "Armor", "Gloves", "Boots"]
 
 var inventory_size = 24
@@ -196,15 +197,24 @@ func pickup_item(item_node):
 func get_armor_value():
 	# Gets the armor value. To be retrieved by player
 	# Instance all armor pieces and get its armor value. Queue_free after
-	var helmet = instance_item(equipment["Helmet"])
-	var armor = instance_item(equipment["Armor"])
-	var boots = instance_item(equipment["Boots"])
-	var gloves = instance_item(equipment["Gloves"])
-	return helmet.get("armor_value") + armor.get("armor_value") + boots.get("armor_value") + gloves.get("armor_value")
-	helmet.queue_free()
-	armor.queue_free()
-	boots.queue_free()
-	gloves.queue_free()
+	var armor_value = 0
+	if (equipment["Helmet"] != null):
+		var helmet = instance_item(equipment["Helmet"])
+		armor_value = armor_value + helmet.get("armor_value")
+		helmet.queue_free()
+	if (equipment["Armor"] != null):
+		var armor = instance_item(equipment["Armor"])
+		armor_value = armor_value + armor.get("armor_value")
+		armor.queue_free()
+	if (equipment["Boots"] != null):
+		var boots = instance_item(equipment["Boots"])
+		armor_value = armor_value + boots.get("armor_value")
+		boots.queue_free()
+	if (equipment["Gloves"] != null):
+		var gloves = instance_item(equipment["Gloves"])
+		armor_value = armor_value + gloves.get("armor_value")
+		gloves.queue_free()
+	return armor_value
 
 
 func swap_weapon():
@@ -235,6 +245,7 @@ func on_item_dropped():
 	get_parent().get_weaponry(false)
 	if (selected_slot == "Shield"):
 		get_parent().reset_shield()
+	get_parent().armor = get_armor_value()
 
 
 func on_item_unequipped():
@@ -244,6 +255,7 @@ func on_item_unequipped():
 	get_parent().get_weaponry(false)
 	if (selected_slot == "Shield"):
 		get_parent().reset_shield()
+	get_parent().armor = get_armor_value()
 
 
 func on_item_equipped():
@@ -254,6 +266,7 @@ func on_item_equipped():
 	if (selected_slot == "Shield"):
 		get_parent().reset_shield()
 		get_parent().get_shield(false)
+	get_parent().armor = get_armor_value()
 
 
 func primary_unequipped(slot_name):

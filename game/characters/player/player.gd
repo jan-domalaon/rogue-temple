@@ -23,7 +23,6 @@ var current_weapon = "primary"
 # Stats
 var player_xp = 0
 var player_level = 1
-var player_armor = 0
 # Will change as the player levels
 var next_lvl_xp = 100
 
@@ -40,7 +39,7 @@ func _ready():
 	get_shield(true)
 	
 	# Set appropriate stats from inventory
-	player_armor = $inventory.get_armor_value()
+	armor = $inventory.get_armor_value()
 	
 	print("player.gd health " + str(health))
 
@@ -68,7 +67,7 @@ func _process(delta):
 	else:
 		find_node("sprite").set_flip_h(false)
 	
-	emit_signal("update_player_stats", health, max_health, player_armor, max_move_speed, player_xp, next_lvl_xp, player_level)
+	emit_signal("update_player_stats", health, max_health, armor, max_move_speed, player_xp, next_lvl_xp, player_level)
 
 
 func _input(event):
