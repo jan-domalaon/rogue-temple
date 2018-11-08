@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://menu/save_menu/save.gd" type="Script" id=1]
+[ext_resource path="res://menu/save_menu/save_screen.gd" type="Script" id=1]
 [ext_resource path="res://fonts/cinzel-bold.font" type="BitmapFont" id=2]
 
-[node name="save" type="Container" index="0"]
+[node name="save" type="Container"]
 
 anchor_left = 0.0
 anchor_top = 0.0

@@ -25,6 +25,8 @@ var player_xp = 0
 var player_level = 1
 # Will change as the player levels
 var next_lvl_xp = 100
+# Current level indicator
+var current_game_level = 0
 
 
 func _ready():
@@ -203,3 +205,21 @@ func reset_shield():
 		$shield.free()
 		has_shield = false
 
+
+func save():
+	# Save stats wanted when changing levels
+	var save_dict = {
+		max_health = max_health,
+		current_health = health,
+		move_speed = move_speed,
+		current_game_level = current_game_level
+	}
+	return save_dict
+
+
+func load(dict):
+	# Set attributes from dictionary
+	max_health = dict["max_health"]
+	health = dict["current_health"]
+	move_speed = dict["move_speed"]
+	current_game_level = dict["current_game_level"]

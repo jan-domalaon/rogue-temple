@@ -2,6 +2,12 @@
 
 extends Container
 
+
+func _ready():
+	# Reset the continue_game flag in save singleton
+	save.continue_game = false
+
+
 func _on_new_game_pressed():
 	# Go to build scene
 	# For now, switch to first level.
@@ -9,6 +15,8 @@ func _on_new_game_pressed():
 
 
 func _on_load_pressed():
-	# Call global.gd to load game
-	pass # replace with function body
+	# Tell level to load game, rather than make a new game
+	save.continue_game = true
+	
+	# Load game based on the current level in the save
 

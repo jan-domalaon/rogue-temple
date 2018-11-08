@@ -6,6 +6,8 @@ extends Node
 
 
 const SAVE_PATH = "res://game/saves/save.json"
+# Variable to tell if the level should load game
+export var continue_game = false
 
 
 func save_game():
@@ -42,3 +44,17 @@ func load_game():
 	# Close file
 	save_file.close()
 
+
+func get_game_level():
+	# Try loading a save file
+	var save_file = File.new()
+	if save_file.file_exists(SAVE_PATH):
+		# Parse data
+		save_file.open(SAVE_PATH, File.READ)
+		var data_dict = {}
+		data_dict = parse_json(save_file.get_as_text())
+		# Get the game level from player node
+		
+		pass
+	# Close file
+	# Return game level
