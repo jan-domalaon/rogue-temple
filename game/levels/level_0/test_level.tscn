@@ -108,6 +108,6 @@ position = Vector2( 59, 113 )
 [node name="level_change" parent="level_change_container" index="0" instance=ExtResource( 10 )]
 
 position = Vector2( 72, -24 )
-next_level = "res://game/levels/level_0/test_level.tscn"
+next_level = "res://game/levels/level_0/test_level_2.tscn"
 
 
