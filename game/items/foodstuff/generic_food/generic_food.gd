@@ -19,7 +19,7 @@ func consume(character):
 		print("character health maxed by food")
 		character.health = character.max_health
 	print(item_name + " food consumed!")
-	
+
 
 func can_consume(character):
 	# If false, then this character is still at full health

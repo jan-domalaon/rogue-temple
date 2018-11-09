@@ -10,6 +10,7 @@ const PRIMARY_DMG_TEXT = "Primary Damage: "
 const SECONDARY_DMG_TEXT = "Secondary Damage: "
 const SHIELD_TEXT = "Shield HP: "
 const ARMOR_TEXT = "Armor Value: "
+const FOOD_TEXT = "Nutritional Value: "
 
 # Current slot in the description
 var slot_name
@@ -46,22 +47,26 @@ func on_inventory_item_select(item_instance, inv_type):
 	$CenterContainer/description_container/VBoxContainer/CenterContainer/item_text/attributes_container/primary_dmg.set_text("")
 	$CenterContainer/description_container/VBoxContainer/CenterContainer/item_text/attributes_container/secondary_dmg.set_text("")
 	
-	# Weapon specific description
+	
+	# Show attributes container
+	$CenterContainer/description_container/VBoxContainer/CenterContainer/item_text/attributes_container.show()
 	if (item_instance.is_in_group("weapons")):
-		$CenterContainer/description_container/VBoxContainer/CenterContainer/item_text/attributes_container.show()
+		# Weapon specific description
 		$CenterContainer/description_container/VBoxContainer/CenterContainer/item_text/attributes_container/primary_dmg.set_text(PRIMARY_DMG_TEXT +
 		str(primary_dmg) + " " + str(primary_dmg_type))
 		$CenterContainer/description_container/VBoxContainer/CenterContainer/item_text/attributes_container/secondary_dmg.set_text(SECONDARY_DMG_TEXT +
 		str(secondary_dmg) + " " + str(secondary_dmg_type))
 	elif (item_instance.is_in_group("shields")):
 		# Show defense value
-		$CenterContainer/description_container/VBoxContainer/CenterContainer/item_text/attributes_container.show()
 		$CenterContainer/description_container/VBoxContainer/CenterContainer/item_text/attributes_container/primary_dmg.set_text(SHIELD_TEXT + str(item_instance.shield_hp))
+	elif (item_instance.is_in_group("foodstuff")):
+		# Show food heal value
+		$CenterContainer/description_container/VBoxContainer/CenterContainer/item_text/attributes_container/primary_dmg.set_text(FOOD_TEXT + str(item_instance.food_heal) + " HP")
 	elif (item_instance.is_in_group("armor_pieces")):
 		# Show armor value
-		$CenterContainer/description_container/VBoxContainer/CenterContainer/item_text/attributes_container.show()
 		$CenterContainer/description_container/VBoxContainer/CenterContainer/item_text/attributes_container/primary_dmg.set_text(ARMOR_TEXT + str(item_instance.armor_value))
 	else:
+		# If this item has no attributes, then hide attributes container
 		$CenterContainer/description_container/VBoxContainer/CenterContainer/item_text/attributes_container.hide()
 	$CenterContainer/description_container/NinePatchRect/MarginContainer/item_sprite.set_texture(tex)
 	
