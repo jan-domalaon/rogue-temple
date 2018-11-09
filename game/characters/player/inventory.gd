@@ -57,6 +57,8 @@ func _ready():
 			button.connect("interact_inventory", self, "on_item_equipped")
 		elif button.function == "Drop":
 			button.connect("interact_inventory", self, "on_item_dropped")
+		elif button.function == "Use":
+			button.connect("interact_inventory", self, "on_item_used")
 
 
 func _input(event):
@@ -234,8 +236,24 @@ func instance_item(item):
 
 
 func on_item_used():
-	# To be added when potions and foodstuff are implemented
-	pass
+	# Instance item given by inventory
+	var item = inventory_space[int(selected_slot)]
+	var item_instance = instance_item(item)
+	# If consumable, consume item
+	if (item_instance.is_in_group("consumables")):
+		# Item's effects goes to the player
+		# If food, check if it can be consumed
+		if (item_instance.can_consume(get_parent())):
+			item_instance.consume(get_parent())
+			# Clear selected slot
+			inventory_space[int(selected_slot)] = null
+			item_instance.queue_free()
+			# Hide item_description box (to prevent player inputs)
+			emit_signal("hide_item_description")
+			# Update inventory space textures
+			display_inventory_space()
+		else:
+			print("player is still at full health! can't eat!")
 
 
 func on_item_dropped():

@@ -73,14 +73,14 @@ func on_inventory_item_select(item_instance, inv_type):
 		$CenterContainer/description_container/VBoxContainer/buttons_container/drop_button.show()
 		$CenterContainer/description_container/VBoxContainer/buttons_container/unequip_button.show()
 	elif (inv_type == "inventory"):
-		# For now, equip, drop
 		# For specific items, need to add Use button
 		$CenterContainer/description_container/VBoxContainer/buttons_container/drop_button.show()
 		if (item_instance.is_in_group("shields") or item_instance.is_in_group("weapons") or item_instance.is_in_group("armor_pieces")):
+			# Show equip button for equippable items
 			$CenterContainer/description_container/VBoxContainer/buttons_container/equip_button.show()
 		if (item_instance.is_in_group("consumables")):
-			# For foodstuff, potions, scrolls
-			pass
+			# Show use button to consume item
+			$CenterContainer/description_container/VBoxContainer/buttons_container/use_button.show()
 	
 	self.slot_name = slot_name
 	
@@ -96,7 +96,7 @@ func reset_buttons():
 
 
 func _on_use_button_pressed():
-	pass # replace with function body
+	emit_signal("item_used", self.slot_name)
 
 
 func _on_drop_button_pressed():
