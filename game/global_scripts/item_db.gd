@@ -14,7 +14,9 @@ const POTION = 	{'Bandages': '', 'Burgundy Potion': '', 'Cerulean Potion': '', '
 
 
 const FOODSTUFF = 	{'Anam': '',
-					 'Fruits': 'res://game/items/foodstuff/fruits/fruits.tscn'}
+					 'Fruits': 'res://game/items/foodstuff/fruits/fruits.tscn',
+					 'Crab Rangoon': 'res://game/items/foodstuff/crab_rangoon/crab_rangoon.tscn',
+					 'Captain Redmans Rum': 'res://game/items/foodstuff/captain_redmans_rums'}
 
 
 const ARMOR = 		{'Chainmail Armor': 'res://game/items/armors/chainmail/chainmail.tscn'}

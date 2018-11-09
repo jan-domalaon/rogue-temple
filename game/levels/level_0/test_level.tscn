@@ -1,17 +1,18 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://game/levels/level_0/test_level.gd" type="Script" id=1]
 [ext_resource path="res://game/levels/level_0/tileset/tileset.tres" type="TileSet" id=2]
 [ext_resource path="res://game/levels/level_0/tileset/level_0_door.tscn" type="PackedScene" id=3]
-[ext_resource path="res://game/characters/generic_character.tscn" type="PackedScene" id=4]
-[ext_resource path="res://game/characters/player/test_player.tscn" type="PackedScene" id=5]
-[ext_resource path="res://game/characters/mobs/bandit_scavenger/bandit_scavenger.tscn" type="PackedScene" id=6]
-[ext_resource path="res://game/characters/mobs/stacked_water_jelly/stacked_water_jelly.tscn" type="PackedScene" id=7]
-[ext_resource path="res://game/items/foodstuff/fruits/fruits.tscn" type="PackedScene" id=8]
-[ext_resource path="res://game/items/weapons/wooden_staff/wooden_staff.tscn" type="PackedScene" id=9]
-[ext_resource path="res://game/levels/level_change/level_change.tscn" type="PackedScene" id=10]
+[ext_resource path="res://game/items/foodstuff/fruits/fruits.tscn" type="PackedScene" id=4]
+[ext_resource path="res://game/items/weapons/wooden_staff/wooden_staff.tscn" type="PackedScene" id=5]
+[ext_resource path="res://game/items/foodstuff/crab_rangoon/crab_rangoon.tscn" type="PackedScene" id=6]
+[ext_resource path="res://game/characters/generic_character.tscn" type="PackedScene" id=7]
+[ext_resource path="res://game/characters/player/test_player.tscn" type="PackedScene" id=8]
+[ext_resource path="res://game/characters/mobs/bandit_scavenger/bandit_scavenger.tscn" type="PackedScene" id=9]
+[ext_resource path="res://game/characters/mobs/stacked_water_jelly/stacked_water_jelly.tscn" type="PackedScene" id=10]
+[ext_resource path="res://game/levels/level_change/level_change.tscn" type="PackedScene" id=11]
 
-[node name="prototype_level" type="Node"]
+[node name="prototype_level" type="Node" index="0"]
 
 script = ExtResource( 1 )
 
@@ -47,6 +48,8 @@ _sections_unfolded = [ "Cell", "Collision" ]
 
 [node name="doors" type="Node" parent="." index="1"]
 
+editor/display_folded = true
+
 [node name="level_0_door" parent="doors" index="0" instance=ExtResource( 3 )]
 
 position = Vector2( 152, 152 )
@@ -55,49 +58,49 @@ position = Vector2( 152, 152 )
 
 position = Vector2( -8, -40 )
 
-[node name="generic_character" parent="." index="2" instance=ExtResource( 4 )]
-
-position = Vector2( -103, -23 )
-_sections_unfolded = [ "Collision", "Pickable", "Transform", "Visibility" ]
-
-[node name="player" parent="." index="3" instance=ExtResource( 5 )]
-
-position = Vector2( 44, 78 )
-
-[node name="bandit_scavenger" parent="." index="4" instance=ExtResource( 6 )]
-
-position = Vector2( -9, -56 )
-health = 10
-
-[node name="stacked_water_jelly" parent="." index="5" instance=ExtResource( 7 )]
-
-position = Vector2( 232, 244 )
-
-[node name="stacked_water_jelly2" parent="." index="6" instance=ExtResource( 7 )]
-
-position = Vector2( 176, 236 )
-
-[node name="item_container" type="Node" parent="." index="7"]
+[node name="item_container" type="Node" parent="." index="2"]
 
 editor/display_folded = true
 
-[node name="fruits" parent="item_container" index="0" instance=ExtResource( 8 )]
+[node name="fruits" parent="item_container" index="0" instance=ExtResource( 4 )]
 
-position = Vector2( -57, 35 )
+position = Vector2( -52, 44 )
 
-[node name="fruits2" parent="item_container" index="1" instance=ExtResource( 8 )]
+[node name="fruits2" parent="item_container" index="1" instance=ExtResource( 4 )]
 
-position = Vector2( -55, 54 )
+position = Vector2( -52, 60 )
 
-[node name="fruits3" parent="item_container" index="2" instance=ExtResource( 8 )]
-
-position = Vector2( -55, 70 )
-
-[node name="wooden_staff" parent="item_container" index="3" instance=ExtResource( 9 )]
+[node name="wooden_staff" parent="item_container" index="2" instance=ExtResource( 5 )]
 
 position = Vector2( -47, 103 )
 scale = Vector2( 0.5, 0.5 )
 dropped_item = true
+
+[node name="crab_rangoon" parent="item_container" index="3" instance=ExtResource( 6 )]
+
+position = Vector2( -52, 80 )
+
+[node name="generic_character" parent="." index="3" instance=ExtResource( 7 )]
+
+position = Vector2( -103, -23 )
+_sections_unfolded = [ "Collision", "Pickable", "Transform", "Visibility" ]
+
+[node name="player" parent="." index="4" instance=ExtResource( 8 )]
+
+position = Vector2( 44, 78 )
+
+[node name="bandit_scavenger" parent="." index="5" instance=ExtResource( 9 )]
+
+position = Vector2( -9, -56 )
+health = 10
+
+[node name="stacked_water_jelly" parent="." index="6" instance=ExtResource( 10 )]
+
+position = Vector2( 232, 244 )
+
+[node name="stacked_water_jelly2" parent="." index="7" instance=ExtResource( 10 )]
+
+position = Vector2( 176, 236 )
 
 [node name="player_start" type="Position2D" parent="." index="8"]
 
@@ -105,7 +108,7 @@ position = Vector2( 59, 113 )
 
 [node name="level_change_container" type="Node" parent="." index="9"]
 
-[node name="level_change" parent="level_change_container" index="0" instance=ExtResource( 10 )]
+[node name="level_change" parent="level_change_container" index="0" instance=ExtResource( 11 )]
 
 position = Vector2( 72, -24 )
 next_level = "res://game/levels/level_0/test_level_2.tscn"
