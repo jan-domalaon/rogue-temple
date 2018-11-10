@@ -8,7 +8,7 @@
 custom_solver_bias = 0.0
 extents = Vector2( 10, 10 )
 
-[node name="level_change" type="Area2D" groups=[
+[node name="level_change" type="Area2D" index="0" groups=[
 "level_change",
 ]]
 
@@ -17,9 +17,12 @@ gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
+collision_layer = 16
+collision_mask = 15
 audio_bus_override = false
 audio_bus_name = "Master"
 script = ExtResource( 1 )
+_sections_unfolded = [ "Collision" ]
 next_level = ""
 
 [node name="sprite" type="Sprite" parent="." index="0"]

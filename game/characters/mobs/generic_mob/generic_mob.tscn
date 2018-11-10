@@ -10,6 +10,7 @@
 
 script = ExtResource( 2 )
 health = 6
+detection_range = 100000
 
 [node name="sprite" parent="." index="0"]
 
