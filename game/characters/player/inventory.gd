@@ -26,9 +26,11 @@ onready var equipped_weaponry = false
 func _enter_tree():
 	# Create the inventory space array
 	inventory_space = create_inventory_space(inventory_size)
-	
+
+
+func _ready():
 	# If this is a new game, load a build
-	if (not save.continue_game):
+	if (not (save.continue_game or save.next_level)):
 		# Create inventory_space from builds.
 		for i in range(inventory_size):
 			if (i <= builds.get(builds.chosen_build)["Inventory Space"].size() - 1):
@@ -40,11 +42,9 @@ func _enter_tree():
 	# Else, the player is switching levels or continuing from a previous save
 	elif (save.continue_game or save.next_level):
 		# Load inventory from the save
-		pass
-	print(inventory_space)
-
-
-func _ready():
+		save.load_inventory()
+	print("inventory space: " + str(inventory_space))
+	
 	# Update the inventory's item textures
 	display_equipment()
 	display_inventory_space()
@@ -390,10 +390,16 @@ func get_item_texture(tex):
 	return tex_subregion
 
 
-func save_inventory():
-	pass
+func save_data():
+	# Save inventory: items in inventory space, and items in equipment
+	var save_dict = {
+		inventory_space = inventory_space,
+		equipment_space = equipment
+	}
+	return save_dict
 
 
-func load_inventory():
-	pass
+func load_inventory_data(dict):
+	inventory_space = dict["inventory_space"]
+	equipment = dict["equipment_space"]
 

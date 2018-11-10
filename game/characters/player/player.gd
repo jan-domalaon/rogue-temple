@@ -16,9 +16,6 @@ signal player_moved
 signal max_health_changed(max_health)
 signal update_player_stats(hp, max_hp, armor, max_ms, xp, next_lvl_xp, lvl)
 
-# Inventory
-var inventory_size = 2
-var inventory_space = []
 var current_weapon = "primary"
 # Stats
 var player_xp = 0
@@ -210,7 +207,7 @@ func reset_shield():
 		has_shield = false
 
 
-func save():
+func save_data():
 	# Save stats wanted when changing levels
 	var save_dict = {
 		max_health = max_health,
@@ -221,10 +218,9 @@ func save():
 	return save_dict
 
 
-func load(dict):
+func load_data(dict):
 	# Set attributes from dictionary
 	max_health = dict["max_health"]
 	health = dict["current_health"]
-	print("load health " + str(health))
 	move_speed = dict["move_speed"]
 	current_game_level = dict["current_game_level"]

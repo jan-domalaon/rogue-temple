@@ -18,7 +18,7 @@ func save_game():
 	var save_dict = {}
 	var persistent_nodes = get_tree().get_nodes_in_group("persistent")
 	for node in persistent_nodes:
-		save_dict[node.get_name()] = node.save()
+		save_dict[node.get_name()] = node.save_data()
 	
 	# Create file
 	var save_file = File.new()
@@ -42,7 +42,26 @@ func load_game():
 		
 		# Load the data into persistent nodes
 		for node_path in data_dict.keys():
-			get_tree().get_current_scene().find_node(str(node_path)).load(data_dict[node_path])
+			# Load nodes that aren't data
+			if (node_path != "inventory"):
+				get_tree().get_current_scene().find_node(str(node_path)).load_data(data_dict[node_path])
+	
+	# Close file
+	save_file.close()
+
+
+func load_inventory():
+	# To be called by inventory.gd when inventory is ready.
+	# Try loading a save file
+	var save_file = File.new()
+	if save_file.file_exists(SAVE_PATH):
+		# Parse data
+		save_file.open(SAVE_PATH, File.READ)
+		var data_dict = {}
+		data_dict = parse_json(save_file.get_as_text())
+		
+		# Load inventory
+		get_tree().get_current_scene().find_node("inventory").load_inventory_data(data_dict["inventory"])
 	
 	# Close file
 	save_file.close()
@@ -61,3 +80,4 @@ func get_game_level():
 		pass
 	# Close file
 	# Return game level
+
