@@ -6,6 +6,7 @@ extends Node
 
 
 const SAVE_PATH = "res://game/saves/save.json"
+# The player can load a save two ways: by loading from the main menu, or by changing levels (level changes trigger saves)
 # Variable to tell if the level should load game
 export var continue_game = false
 # Indicates that player is changing level

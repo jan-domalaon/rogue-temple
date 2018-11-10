@@ -24,18 +24,19 @@ onready var equipped_weaponry = false
 
 
 func _enter_tree():
-	# Get all items when the player enters the tree
-	# For now, the items are hard coded
-	equipment["Primary"] = ["Iron Mace", "WEAPON"]
-	equipment["Secondary"] = ["Ranger Bow", "WEAPON"]
-	equipment["Shield"] = ["Iron Shield", "SHIELD"]
-	equipment["Helmet"] = ["Bucket Helm", "HELMET"]
-	equipment["Armor"] = ["Chainmail Armor", "ARMOR"]
-	equipment["Gloves"] = ["Chainmail Gloves", "GLOVES"]
-	equipment["Boots"] = ["Leather Boots", "BOOTS"]
-	
-	# Add items to inventory space
+	# Create the inventory space array
 	inventory_space = create_inventory_space(inventory_size)
+	
+	# If this is a new game, load a build
+	if (not save.continue_game):
+		# Get inventory from builds.chosen build name
+		inventory_space = builds.get(builds.chosen_build)["Inventory Space"]
+		equipment = builds.get(builds.chosen_build)["Equipment"]
+	# Else, the player is switching levels or continuing from a previous save
+	elif (save.continue_game or save.next_level):
+		# Load inventory from the save
+		pass
+	print(inventory_space)
 
 
 func _ready():
