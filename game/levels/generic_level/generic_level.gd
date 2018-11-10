@@ -7,4 +7,3 @@ func _ready():
 	# Load data from previous level or save
 	if (save.continue_game or save.next_level):
 		save.load_game()
-	pass

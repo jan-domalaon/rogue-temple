@@ -81,3 +81,8 @@ func get_game_level():
 	# Close file
 	# Return game level
 
+
+func clear_save():
+	var dir = Directory.new()
+	dir.remove(SAVE_PATH)
+
