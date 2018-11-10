@@ -33,7 +33,11 @@ func _ready():
 	set_physics_process(true)
 	set_process_input(true)
 	set_process(true)
-	emit_signal("max_health_changed", max_health)
+	
+	# If new game, give build stats
+	if (not save.continue_game):
+		health = builds.HAA_MACEMAN["Health"]
+		max_health = builds.HAA_MACEMAN["Max Health"]
 	
 	# Get equipment from inventory
 	get_weaponry(true)
@@ -42,7 +46,7 @@ func _ready():
 	# Set appropriate stats from inventory
 	armor = $inventory.get_armor_value()
 	
-	print("player.gd health " + str(health))
+	emit_signal("max_health_changed", max_health)
 
 
 func _physics_process(delta):

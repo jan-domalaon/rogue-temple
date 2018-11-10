@@ -29,8 +29,13 @@ func _enter_tree():
 	
 	# If this is a new game, load a build
 	if (not save.continue_game):
-		# Get inventory from builds.chosen build name
-		inventory_space = builds.get(builds.chosen_build)["Inventory Space"]
+		# Create inventory_space from builds.
+		for i in range(inventory_size):
+			if (i <= builds.get(builds.chosen_build)["Inventory Space"].size() - 1):
+				inventory_space[i] = builds.get(builds.chosen_build)["Inventory Space"][i]
+			else:
+				inventory_space[i] = null
+		# Copy equipment from builds to player's inventory equipment
 		equipment = builds.get(builds.chosen_build)["Equipment"]
 	# Else, the player is switching levels or continuing from a previous save
 	elif (save.continue_game or save.next_level):
