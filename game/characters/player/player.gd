@@ -33,8 +33,7 @@ func _ready():
 	set_physics_process(true)
 	set_process_input(true)
 	set_process(true)
-	emit_signal("max_health_changed", health)
-	emit_signal("health_changed", health)
+	emit_signal("max_health_changed", max_health)
 	
 	# Get equipment from inventory
 	get_weaponry(true)
@@ -69,6 +68,7 @@ func _process(delta):
 	else:
 		find_node("sprite").set_flip_h(false)
 	
+	emit_signal("health_changed", health)
 	emit_signal("update_player_stats", health, max_health, armor, max_move_speed, player_xp, next_lvl_xp, player_level)
 
 
@@ -221,5 +221,6 @@ func load(dict):
 	# Set attributes from dictionary
 	max_health = dict["max_health"]
 	health = dict["current_health"]
+	print("load health " + str(health))
 	move_speed = dict["move_speed"]
 	current_game_level = dict["current_game_level"]

@@ -50,6 +50,8 @@ func _ready():
 	if (has_node("shield")):
 		connect_shield()
 	emit_signal("health_changed", health)
+	
+	print("character.gd health " + str(health))
 
 
 func _process(delta):
@@ -129,7 +131,6 @@ func receive_phys_damage(dmg, dmg_type):
 			blunt_hit = true
 			health -= dmg
 			print($".".get_name() + " got hit with blunt dmg")
-		emit_signal("health_changed", health)
 
 
 func flicker():

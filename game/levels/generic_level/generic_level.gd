@@ -1,10 +1,10 @@
 extends Node
 
+
 func _ready():
-	# Load game with player data from previous level
-	save.load_game()
-	
-	# Load player
-	var player = preload("res://game/characters/player/test_player.tscn").instance()
-	player.position = $player_start.position
-	add_child(player)
+	# Place player at start pos
+	$player.position = $player_start.position
+	# Load data from previous level or save
+	if (save.continue_game or save.next_level):
+		save.load_game()
+	pass

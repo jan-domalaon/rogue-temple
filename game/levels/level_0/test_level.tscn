@@ -12,7 +12,7 @@
 [ext_resource path="res://game/characters/mobs/stacked_water_jelly/stacked_water_jelly.tscn" type="PackedScene" id=10]
 [ext_resource path="res://game/levels/level_change/level_change.tscn" type="PackedScene" id=11]
 
-[node name="prototype_level" type="Node" index="0"]
+[node name="prototype_level" type="Node"]
 
 script = ExtResource( 1 )
 
@@ -47,8 +47,6 @@ tile_data = PoolIntArray( -655356, 0, 0, -655355, 0, 0, -655354, 0, 0, -655353, 
 _sections_unfolded = [ "Cell", "Collision" ]
 
 [node name="doors" type="Node" parent="." index="1"]
-
-editor/display_folded = true
 
 [node name="level_0_door" parent="doors" index="0" instance=ExtResource( 3 )]
 

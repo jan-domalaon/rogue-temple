@@ -13,5 +13,8 @@ func on_level_change():
 	# Save game
 	save.save_game()
 	
+	# Indicate that player is changing level
+	save.next_level = true
+	
 	# Load the new level
 	get_tree().change_scene(next_level)

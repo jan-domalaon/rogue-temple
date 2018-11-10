@@ -16,7 +16,7 @@ extents = Vector2( 14, 16 )
 custom_solver_bias = 0.0
 extents = Vector2( 6, 7 )
 
-[node name="player" groups=[
+[node name="player" index="0" groups=[
 "persistent",
 "player",
 ] instance=ExtResource( 1 )]

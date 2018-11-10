@@ -8,6 +8,8 @@ extends Node
 const SAVE_PATH = "res://game/saves/save.json"
 # Variable to tell if the level should load game
 export var continue_game = false
+# Indicates that player is changing level
+export var next_level = false
 
 
 func save_game():
@@ -15,7 +17,7 @@ func save_game():
 	var save_dict = {}
 	var persistent_nodes = get_tree().get_nodes_in_group("persistent")
 	for node in persistent_nodes:
-		save_dict[node.get_path()] = node.save()
+		save_dict[node.get_name()] = node.save()
 	
 	# Create file
 	var save_file = File.new()
@@ -39,7 +41,7 @@ func load_game():
 		
 		# Load the data into persistent nodes
 		for node_path in data_dict.keys():
-			get_node(node_path).load(data_dict[node_path])
+			get_tree().get_current_scene().find_node(str(node_path)).load(data_dict[node_path])
 	
 	# Close file
 	save_file.close()
