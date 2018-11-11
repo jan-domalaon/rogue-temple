@@ -31,11 +31,14 @@ health = 100
 
 texture = ExtResource( 3 )
 
-[node name="knockback_area" parent="." index="1"]
+[node name="knockback_area" parent="." index="1" groups=[
+"player",
+]]
 
 visible = true
 scale = Vector2( 0.5, 0.5 )
 collision_layer = 1
+collision_mask = 14
 _sections_unfolded = [ "Collision", "Transform" ]
 
 [node name="knockback_hitbox" parent="knockback_area" index="0"]

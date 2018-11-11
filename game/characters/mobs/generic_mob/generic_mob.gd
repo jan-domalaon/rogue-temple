@@ -19,6 +19,7 @@ onready var player_health = get_parent().get_node("player").get("health")
 # Detected flag used to push CHASING state only once when detected
 var detected = false
 export var detection_range = 100000
+var detected_pos = Vector2(0, 0)
 
 # State variables
 var state_stack = []
@@ -66,6 +67,8 @@ func _physics_process(delta):
 	if (get_current_state() != STATES[0] and get_current_state() != STATES[1] and get_current_state() != STATES[3]):
 		update_state()
 	old_player_pos = player_pos
+	# To update draw
+#	update()
 
 
 func _on_wander_timer_timeout():
@@ -83,6 +86,11 @@ func _on_wander_timer_timeout():
 
 func _update_path():
 	path = nav.get_simple_path(get_global_position(), player_pos, false)
+
+
+#func _draw():
+#	draw_circle((detected_pos - position), 5, Color(1,0,0))
+#	draw_line(Vector2(), get_parent().get_node("player").position - get_global_position(), Color(1, 0, 0))
 
 
 func update_state():
@@ -208,22 +216,21 @@ func detection_ray():
 	var physics_space = get_world_2d().direct_space_state
 	var ignore_areas
 	if ("humanoids" in get_groups()):
-		ignore_areas = [self, $knockback_area, $weapon]
+		ignore_areas = [self, $knockback_area, $weapon, $weapon/weapon_area]
 	else:
 		ignore_areas = [self, $knockback_area]
 	
-	# Ignore mob mask (1101 == 13). Bit mask is in binary
-	var detect_ray = physics_space.intersect_ray(get_global_position(), player_pos, ignore_areas)
-	#print(detect_ray.collider.get_parent().get_groups())
+	# Ignore mob mask (00101 == 5). Bit mask is in binary. Collides with players and walls only.
+	var detect_ray = physics_space.intersect_ray(get_global_position(), player_pos, ignore_areas, 5)
 	return detect_ray
 
 
 func detect_player():
 	var detect_ray = detection_ray()
 	var dist_to_player = get_global_position().distance_to(player_pos)
-	print(detect_ray.collider.get_parent().get_groups())
+	detected_pos = detect_ray.position
 	# Check if raycast hits player and is within detection range
-	if ("player" in detect_ray.collider.get_parent().get_groups() and dist_to_player <= detection_range):
+	if (detect_ray.collider.is_in_group("player") and dist_to_player <= detection_range):
 		# Player is detected. Push CHASING state to trigger aggressive behaviour
 		$wander_timer.stop()
 		# Pop current passive state

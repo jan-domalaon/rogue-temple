@@ -18,6 +18,7 @@ extents = Vector2( 6, 7 )
 script = ExtResource( 2 )
 health = 1
 move_speed = 85
+detection_range = 50
 melee_weapon_path = ""
 ranged_weapon_path = ""
 weapon_type = ""
