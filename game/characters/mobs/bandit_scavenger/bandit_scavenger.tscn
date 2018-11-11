@@ -10,15 +10,15 @@
 custom_solver_bias = 0.0
 extents = Vector2( 6, 7 )
 
-[node name="bandit_scavenger" groups=[
-"humanoids",
+[node name="bandit_scavenger" index="0" groups=[
 "melee_mobs",
+"humanoids",
 ] instance=ExtResource( 1 )]
 
 script = ExtResource( 2 )
 health = 1
 move_speed = 85
-detection_range = 50
+detection_range = 400
 melee_weapon_path = ""
 ranged_weapon_path = ""
 weapon_type = ""
