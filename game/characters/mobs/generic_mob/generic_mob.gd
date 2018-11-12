@@ -245,12 +245,13 @@ func set_nav(new_nav):
 
 
 func pathfinding():
+	path = []
 	path = nav.get_simple_path(position, player_pos, false)
 	# Go to each node of the path
 	if path.size() > 1:
 		print("chasing with pathfinding")
 		var dist = path[1] - get_global_position()
-		if dist.length() > 10:
+		if dist.length() > 5:
 			# Move to next path node
 			movement_dir = dist.normalized()
 		else:
@@ -276,4 +277,3 @@ func _on_attack_timer_timeout():
 func on_update_player_to_mob(pos, hp):
 	player_pos = pos
 	player_health = hp
-	path = []
