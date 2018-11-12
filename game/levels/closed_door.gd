@@ -20,6 +20,11 @@ func open_door():
 		$interact_area/interact_shape.set_disabled(true)
 		$interact_area.set_collision_layer_bit(4, 1)
 		$interact_area.set_collision_layer_bit(2, 0)
+		# Set wall under the door into a floor
+		var tilemap = get_parent().get_parent().find_node("tilemap")
+		var tile_pos = tilemap.world_to_map(position)
+		# Tile 5 (4) is the floor tile
+		tilemap.set_cellv(tile_pos, 4)
 		# Turn on navigation through this door
 		$AnimationPlayer.play("open_door")
 		closed = false

@@ -15,6 +15,7 @@ onready var old_hp = health
 signal player_moved
 signal max_health_changed(max_health)
 signal update_player_stats(hp, max_hp, armor, max_ms, xp, next_lvl_xp, lvl)
+signal update_player_to_mob(pos, hp)
 
 var current_weapon = "primary"
 # Stats
@@ -44,6 +45,7 @@ func _ready():
 	armor = $inventory.get_armor_value()
 	
 	emit_signal("max_health_changed", max_health)
+	emit_signal("update_player_to_mob", position, health)
 
 
 func _physics_process(delta):
@@ -56,8 +58,8 @@ func _physics_process(delta):
 	knockback()
 	
 	# Emit signal to update player position. Meant for mob pathfinding when aggressive
-	if (movement_dir != Vector2(0,0)):
-		emit_signal("player_moved", get_global_position())
+#	if (movement_dir != Vector2(0,0)):
+#		emit_signal("player_moved", get_global_position())
 
 
 func _process(delta):
@@ -71,6 +73,7 @@ func _process(delta):
 	
 	emit_signal("health_changed", health)
 	emit_signal("update_player_stats", health, max_health, armor, max_move_speed, player_xp, next_lvl_xp, player_level)
+	emit_signal("update_player_to_mob", position, health)
 
 
 func _input(event):

@@ -4,7 +4,7 @@
 [ext_resource path="res://game/characters/mobs/generic_mob/generic_mob.gd" type="Script" id=2]
 [ext_resource path="res://game/characters/mobs/armored_dummy/armored_dummy.png" type="Texture" id=3]
 
-[node name="generic_mob" groups=[
+[node name="generic_mob" index="0" groups=[
 "enemies",
 ] instance=ExtResource( 1 )]
 
