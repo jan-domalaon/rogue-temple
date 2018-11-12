@@ -20,6 +20,7 @@ var no_shield_hp = false
 signal shield_broken
 signal shield_ready
 
+
 func _ready():
 	# Check if this is a child of a character
 	# If so, this shield will be renamed "shield"
@@ -44,6 +45,7 @@ func shield_absorb(dmg, dmg_type):
 		$shield_regen_timer.stop()
 		$partial_regen_timer.start()
 	else:
+		# Case when shield is completely destroyed (dmg is greater than shield hp)
 		get_parent().use_shield(false)
 		# Give damage to its parent
 		get_parent().receive_phys_damage(dmg - shield_hp, dmg_type)
@@ -51,7 +53,7 @@ func shield_absorb(dmg, dmg_type):
 		shield_hp = 0
 		# Characters cannot use their shield when their shield is down
 		emit_signal("shield_broken")
-		# Stop partial timer, start complete timer
+		# Stop partial timer, start complete timer to completely regen shield
 		$partial_regen_timer.stop()
 		$complete_regen_timer.start()
 
@@ -63,9 +65,10 @@ func _on_partial_regen_timer_timeout():
 
 
 func _on_complete_regen_timer_timeout():
-	# Shield HP is back to normal
+	# When regen timer is complete, give full shield HP back
 	shield_hp = shield_max_hp
 	no_shield_hp = false
+	print("complete shield regen!")
 	emit_signal("shield_ready")
 
 
@@ -75,5 +78,7 @@ func _on_shield_regen_timer_timeout():
 		shield_hp += 1
 		$shield_regen_timer.start()
 	else:
+		# Stop regenerating shield.
 		$shield_regen_timer.stop()
+		$partial_regen_timer.stop()
 	print(shield_hp)
