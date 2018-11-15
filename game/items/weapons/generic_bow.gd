@@ -16,7 +16,13 @@ var arrow = load(projectile)
 
 func make_draw_bow():
 	self.show()
-	$".".look_at(get_global_mouse_position())
+	
+	if (user_type == "player"):
+		$".".look_at(get_global_mouse_position())
+	else:
+		# Update look direction. Look at player
+		update_look_dir()
+		$".".look_at(look_dir)
 	$draw_timer.set_wait_time(primary_as)
 	# Disable weapon_area. The bow shouldn't damage if it is being drawn
 	

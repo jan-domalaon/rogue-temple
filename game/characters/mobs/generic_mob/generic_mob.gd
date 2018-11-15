@@ -33,6 +33,7 @@ var old_player_pos
 
 # Attacking logic
 var can_attack = true
+var shooting_range = 200	# Distance where mob can shoot at player
 
 # Mob stats
 # Amount of XP given
@@ -65,7 +66,7 @@ func _physics_process(delta):
 		if (not detected):
 			detect_player()
 		# Only update state per frame when not in passive states
-	if (get_current_state() != STATES[0] and get_current_state() != STATES[1] and get_current_state() != STATES[3]):
+	if (get_current_state() != STATES[0] and get_current_state() != STATES[1]):
 		update_state()
 	# To update draw
 	update()
@@ -182,7 +183,11 @@ func state_chasing():
 	# If not a bouncy_mob, this mob will have a weapon
 	# Choose preferred weapon depending on distance
 	if ("ranged_mobs" in get_groups()):
-		pass
+		# Only shoot if player is in sight and in range
+		if (detect_ray.collider.is_in_group("player") and position.distance_to(player_pos) <= shooting_range):
+			pop_state()
+			push_state("RANGED_ATTACKING")
+			print(state_stack)
 	if ("melee_mobs" in get_groups() and not ("ranged_mobs" in get_groups())):
 		# If in melee range, switch to melee attack
 		var weapon_length = get_node("weapon/weapon_area/hitbox").shape.extents.x

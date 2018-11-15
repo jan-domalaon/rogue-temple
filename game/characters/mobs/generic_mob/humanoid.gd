@@ -8,15 +8,16 @@ extends "res://game/characters/mobs/generic_mob/generic_mob.gd"
 # Weapon choices
 export var melee_weapon_path = ""
 export var ranged_weapon_path = ""
-export var weapon_type = ""
 
 # Weapon range retrieved from weapon's length/weapon_range
 # (size of weapon.x)
 onready var weapon_length = get_node("weapon/weapon_area/hitbox").shape.extents.x
 
+
 func _ready():
 	randomize()
 	$attack_timer.set_wait_time($weapon.get("secondary_as"))
+
 
 func state_melee_attack():
 	# Keep the weapon hitbox disabled if the mob is not attacking
@@ -31,8 +32,14 @@ func state_melee_attack():
 		pop_state()
 		push_state("CHASING")
 
+
 func state_ranged_attack():
-	pass
+	print("attacking as ranged!")
+	# Each ranged weapon has a different shoot function
+	if ($weapon.weapon_type == "BOW"):
+		$weapon.make_draw_bow()
+
+
 
 func _on_attack_timer_timeout():
 	can_attack = true
