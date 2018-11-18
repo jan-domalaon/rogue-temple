@@ -34,10 +34,16 @@ func state_melee_attack():
 
 
 func state_ranged_attack():
-	print("attacking as ranged!")
 	# Each ranged weapon has a different shoot function
 	if ($weapon.weapon_type == "BOW"):
-		$weapon.make_draw_bow()
+		# Fire bow when can_fire is true
+		if ($weapon.can_fire):
+			$weapon.fire_bow()
+		else:
+			# Draw bow if bow can't fire
+			$weapon.make_draw_bow()
+			if ($weapon/draw_timer.is_stopped()):
+				$weapon/draw_timer.start()
 
 
 

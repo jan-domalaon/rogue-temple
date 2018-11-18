@@ -55,7 +55,12 @@ func fire_bow():
 		var arrow_instance = arrow.instance()
 		# Add arrow to the world (level)
 		get_parent().get_parent().add_child(arrow_instance)
-		# Arrow spawns on the player's position
+		# Arrow spawns on the characters's position
 		arrow_instance.position = get_parent().get_global_position()
 		# Arrow will go towards the mouse position (based on player's position, not global pos)
-		arrow_instance.set_vars(get_parent().get_local_mouse_position(), projectile_speed, user_type, primary_damage, primary_dmg_type, piercing)
+		if (user_type == "player"):
+			arrow_instance.set_vars(get_parent().get_local_mouse_position(), projectile_speed, user_type, primary_damage, primary_dmg_type, piercing)
+		else:
+			# User type is a mob. Set vars accordingly
+			arrow_instance.set_vars(Vector2(0,1), projectile_speed, user_type, primary_damage, primary_dmg_type, piercing)
+

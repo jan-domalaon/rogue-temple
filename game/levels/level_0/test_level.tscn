@@ -10,8 +10,8 @@
 [ext_resource path="res://game/characters/player/test_player.tscn" type="PackedScene" id=8]
 [ext_resource path="res://game/characters/mobs/bandit_scavenger/bandit_scavenger.tscn" type="PackedScene" id=9]
 [ext_resource path="res://game/characters/mobs/stacked_water_jelly/stacked_water_jelly.tscn" type="PackedScene" id=10]
-[ext_resource path="res://game/levels/level_change/level_change.tscn" type="PackedScene" id=11]
-[ext_resource path="res://game/characters/mobs/bandit_archer/bandit_archer.tscn" type="PackedScene" id=12]
+[ext_resource path="res://game/characters/mobs/bandit_archer/bandit_archer.tscn" type="PackedScene" id=11]
+[ext_resource path="res://game/levels/level_change/level_change.tscn" type="PackedScene" id=12]
 
 [node name="prototype_level" type="Node"]
 
@@ -105,21 +105,21 @@ position = Vector2( 232, 244 )
 
 position = Vector2( 176, 236 )
 
-[node name="player_start" type="Position2D" parent="." index="8"]
+[node name="bandit_archer" parent="." index="8" instance=ExtResource( 11 )]
+
+position = Vector2( 408, -72 )
+
+[node name="player_start" type="Position2D" parent="." index="9"]
 
 position = Vector2( 59, 113 )
 
-[node name="level_change_container" type="Node" parent="." index="9"]
+[node name="level_change_container" type="Node" parent="." index="10"]
 
 editor/display_folded = true
 
-[node name="level_change" parent="level_change_container" index="0" instance=ExtResource( 11 )]
+[node name="level_change" parent="level_change_container" index="0" instance=ExtResource( 12 )]
 
 position = Vector2( 72, -24 )
 next_level = "res://game/levels/level_0/test_level_2.tscn"
-
-[node name="bandit_archer" parent="." index="10" instance=ExtResource( 12 )]
-
-position = Vector2( 408, -72 )
 
 
