@@ -1,19 +1,21 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://game/characters/mobs/generic_mob/generic_mob.tscn" type="PackedScene" id=1]
-[ext_resource path="res://game/characters/mobs/stacked_water_jelly/smart_water_jelly.gd" type="Script" id=2]
-[ext_resource path="res://game/characters/mobs/stacked_water_jelly/stacked_water_jelly.png" type="Texture" id=3]
+[ext_resource path="res://game/characters/mobs/stacked_water_jelly/stacked_water_jelly.png" type="Texture" id=2]
 
-[node name="smart_water_jelly" groups=[
+[node name="smart_water_jelly" index="0" groups=[
 "bouncy_mobs",
 ] instance=ExtResource( 1 )]
 
-script = ExtResource( 2 )
-health = 5
-move_speed = 85
+health = 1
 
 [node name="sprite" parent="." index="0"]
 
-texture = ExtResource( 3 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Region", "Transform" ]
+
+[node name="hitbox" parent="." index="2"]
+
+visible = true
 
 

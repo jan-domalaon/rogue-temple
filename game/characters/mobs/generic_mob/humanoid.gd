@@ -45,7 +45,13 @@ func state_ranged_attack():
 			$weapon.make_draw_bow()
 			if ($weapon/draw_timer.is_stopped()):
 				$weapon/draw_timer.start()
-
+		
+		# Switch to CHASING state if humanoid can't see player
+		if (not detection_ray().collider.is_in_group("player")):
+			# Reset bow
+			$weapon.make_reset_bow()
+			pop_state()
+			push_state("CHASING")
 
 
 func _on_attack_timer_timeout():
