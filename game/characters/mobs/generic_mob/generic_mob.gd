@@ -38,6 +38,8 @@ var shooting_range = 200	# Distance where mob can shoot at player
 # Mob stats
 # Amount of XP given
 var mob_xp = 0
+# Color to modulate weapon and projectiles. By default, set as white
+export (Color) var mob_color = Color(1,1,1)
 
 
 func _ready():

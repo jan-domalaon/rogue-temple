@@ -38,6 +38,7 @@ func state_ranged_attack():
 	if ($weapon.weapon_type == "BOW"):
 		# Fire bow when can_fire is true
 		if ($weapon.can_fire):
+			movement_dir = Vector2(0,0)
 			$weapon.fire_bow()
 		else:
 			# Draw bow if bow can't fire
