@@ -55,6 +55,8 @@ func _ready():
 	# Get player's signal
 	get_parent().get_node("player").connect("player_moved", self, "on_player_movement")
 	get_parent().get_node("player").connect("update_player_to_mob", self, "on_update_player_to_mob")
+	$mob_healthbar.value = health
+	$mob_healthbar.max_value = max_health
 
 
 func _physics_process(delta):
@@ -70,8 +72,23 @@ func _physics_process(delta):
 		# Only update state per frame when not in passive states
 	if (get_current_state() != STATES[0] and get_current_state() != STATES[1]):
 		update_state()
+	
+	# Update mob health bar
+	$mob_healthbar.value = health
+	$mob_healthbar.max_value = max_health
+	
 	# To update draw
-	update()
+#	update()
+
+
+#func _draw():
+#	draw_circle((detected_pos - position), 5, Color(1,0,0))
+#	draw_line(Vector2(), get_parent().get_node("player").position - get_global_position(), Color(1, 0, 0))
+#
+#	# Draw path
+#	if path.size() > 1:
+#		for node in path:
+#			draw_circle(node - position, 5, Color(0, 1, 1)
 
 
 func _on_wander_timer_timeout():
@@ -86,16 +103,6 @@ func _on_wander_timer_timeout():
 	else:
 		push_state("IDLE")
 	update_state()
-
-
-func _draw():
-	draw_circle((detected_pos - position), 5, Color(1,0,0))
-	draw_line(Vector2(), get_parent().get_node("player").position - get_global_position(), Color(1, 0, 0))
-	
-	# Draw path
-	if path.size() > 1:
-		for node in path:
-			draw_circle(node - position, 5, Color(0, 1, 1))
 
 
 func update_state():
