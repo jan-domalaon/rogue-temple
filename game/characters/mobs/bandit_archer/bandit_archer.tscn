@@ -11,8 +11,10 @@
 ] instance=ExtResource( 1 )]
 
 script = ExtResource( 2 )
-max_health = 6
+health = 6.0
+max_health = 6.0
 move_speed = 85
+detection_range = 400
 mob_color = Color( 0.501961, 0.501961, 0.501961, 1 )
 melee_weapon_path = ""
 ranged_weapon_path = ""

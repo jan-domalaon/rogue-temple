@@ -32,7 +32,7 @@ tracks/0/keys = {
 "values": [ true, false, true, false, true, false, false, true, false, true, false, true ]
 }
 
-[node name="generic_character" type="KinematicBody2D" index="0"]
+[node name="generic_character" type="KinematicBody2D"]
 
 input_pickable = false
 collision_layer = 2

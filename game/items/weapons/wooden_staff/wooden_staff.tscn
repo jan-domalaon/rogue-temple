@@ -11,6 +11,8 @@ extents = Vector2( 24, 2 )
 [node name="wooden_staff" instance=ExtResource( 1 )]
 
 weapon_name = "Wooden Staff"
+primary_damage = 4
+secondary_damage = 4
 primary_dmg_type = "b"
 primary_as = 0.7
 secondary_as = 0.6

@@ -13,7 +13,7 @@
 [ext_resource path="res://game/characters/mobs/bandit_archer/bandit_archer.tscn" type="PackedScene" id=11]
 [ext_resource path="res://game/levels/level_change/level_change.tscn" type="PackedScene" id=12]
 
-[node name="prototype_level" type="Node"]
+[node name="prototype_level" type="Node" index="0"]
 
 script = ExtResource( 1 )
 
@@ -95,15 +95,16 @@ move_speed = 200
 [node name="bandit_scavenger" parent="." index="5" instance=ExtResource( 9 )]
 
 position = Vector2( -9, -56 )
-health = 10
 
 [node name="stacked_water_jelly" parent="." index="6" instance=ExtResource( 10 )]
 
 position = Vector2( 232, 244 )
+health = 1
 
 [node name="stacked_water_jelly2" parent="." index="7" instance=ExtResource( 10 )]
 
 position = Vector2( 176, 236 )
+health = 1
 
 [node name="bandit_archer" parent="." index="8" instance=ExtResource( 11 )]
 

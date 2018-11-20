@@ -8,8 +8,8 @@ extends KinematicBody2D
 const FLICKER_TIME = 0.25
 
 # Various stats for characters
-export (int) var health = 1
-export (int) var max_health = 100
+export (float) var health = 1
+export (float) var max_health = 100
 export (int) var armor = 0
 export (int) var move_speed = 100
 
@@ -118,10 +118,10 @@ func receive_phys_damage(dmg, dmg_type):
 		# Any type of damage should trigger flickering
 		flicker()
 		# Remove HP from this character based on the damage stat of weapon
-		# TODO: Armor reduction formula
+		# Armor reduction formula: (dmg * multiplier) / (armor + 1) (at most, the damage dealt is the weapon's flat damage)
 		if (dmg_type == 'c'):
-			health -= dmg
-			print($".".get_name() + " got hit with cut dmg")
+			health -= ((dmg * 2) / (armor + 1))
+			print($".".get_name() + " got hit with cut dmg for " + str(((dmg * 2 ) / (armor + 1))) + " dmg")
 		elif (dmg_type == 'p'):
 			# Piercing damage. Goes through armor.
 			health -= dmg
@@ -129,8 +129,8 @@ func receive_phys_damage(dmg, dmg_type):
 		elif (dmg_type == 'b'):
 			# Blunt dmg. Do knockback
 			blunt_hit = true
-			health -= dmg
-			print($".".get_name() + " got hit with blunt dmg")
+			health -= ((dmg * 3) / (armor + 1))
+			print($".".get_name() + " got hit with blunt dmg for " + str(((dmg * 2 ) / (armor + 1))) + " dmg")
 
 
 func flicker():

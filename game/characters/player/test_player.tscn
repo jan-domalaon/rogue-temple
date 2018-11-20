@@ -25,7 +25,8 @@ pause_mode = 2
 collision_layer = 1
 script = ExtResource( 2 )
 _sections_unfolded = [ "Collision", "Pause", "Transform", "Visibility" ]
-health = 100
+health = 20.0
+max_health = 20.0
 
 [node name="sprite" parent="." index="0"]
 
