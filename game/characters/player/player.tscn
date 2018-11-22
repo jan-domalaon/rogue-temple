@@ -25,11 +25,12 @@ _sections_unfolded = [ "Material", "Pause", "Transform", "Visibility", "Z Index"
 __meta__ = {
 "_edit_group_": true
 }
-health = 20
-max_health = null
+health = 1
+max_health = 100
 armor = 4
 move_speed = 100
 knockback_factor = 1.0
+player_name = "Player"
 
 [node name="sprite" type="Sprite" parent="." index="0"]
 

@@ -32,7 +32,10 @@ tracks/0/keys = {
 "values": [ true, false, true, false, true, false, false, true, false, true, false, true ]
 }
 
-[node name="generic_character" type="KinematicBody2D"]
+[node name="generic_character" type="KinematicBody2D" groups=[
+"loggable",
+"characters",
+]]
 
 input_pickable = false
 collision_layer = 2
@@ -44,6 +47,7 @@ health = 1
 max_health = 100
 armor = 0
 move_speed = 100
+character_name = "Character"
 knockback_factor = 1.0
 
 [node name="sprite" type="Sprite" parent="." index="0"]

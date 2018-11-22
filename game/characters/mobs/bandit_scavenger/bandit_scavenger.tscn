@@ -20,6 +20,7 @@ health = 8.0
 max_health = 8.0
 armor = 2
 move_speed = 85
+character_name = "Bandit Scavenger"
 detection_range = 400
 melee_weapon_path = ""
 ranged_weapon_path = ""

@@ -11,6 +11,7 @@
 ] instance=ExtResource( 1 )]
 
 script = ExtResource( 2 )
+character_name = "Generic Mob"
 detection_range = 100000
 mob_color = Color( 1, 1, 1, 1 )
 

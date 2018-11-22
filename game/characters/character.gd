@@ -12,6 +12,7 @@ export (float) var health = 1
 export (float) var max_health = 100
 export (int) var armor = 0
 export (int) var move_speed = 100
+export (String) var character_name = "Character"
 
 # Physical resistance of all characters
 var phys_resist = armor * 0.8
@@ -41,6 +42,10 @@ enum State {IDLE, MOVING, ATTACKING, STUNNED}
 # Signals
 signal shoot(projectile, direction, location)
 signal health_changed(health)
+
+# Game log signals
+signal opened_door(user_name)
+signal damage_received(victim_name, attacker_name, dmg, dmg_type, is_dead)
 
 
 func _ready():
@@ -131,6 +136,9 @@ func receive_phys_damage(dmg, dmg_type):
 			blunt_hit = true
 			health -= ((dmg * 3) / (armor + 1))
 			print($".".get_name() + " got hit with blunt dmg for " + str(((dmg * 2 ) / (armor + 1))) + " dmg")
+		
+		# Emit signal for game log
+		emit_signal("character_damaged", character_name, dmg, dmg_type, (dmg >= health))
 
 
 func flicker():

@@ -6,14 +6,15 @@
 [ext_resource path="res://game/items/weapons/ranger_bow/ranger_bow.tscn" type="PackedScene" id=4]
 
 [node name="bandit_archer" groups=[
-"humanoids",
 "ranged_mobs",
+"humanoids",
 ] instance=ExtResource( 1 )]
 
 script = ExtResource( 2 )
 health = 6.0
 max_health = 6.0
 move_speed = 85
+character_name = "Bandit Archer"
 detection_range = 400
 mob_color = Color( 0.501961, 0.501961, 0.501961, 1 )
 melee_weapon_path = ""
