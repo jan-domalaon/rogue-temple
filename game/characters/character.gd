@@ -45,7 +45,7 @@ signal health_changed(health)
 
 # Game log signals
 signal opened_door(user_name)
-signal damage_received(victim_name, attacker_name, dmg, dmg_type, is_dead)
+signal character_damaged(victim_name, dmg, dmg_type, is_dead)
 
 
 func _ready():

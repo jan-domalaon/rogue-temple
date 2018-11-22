@@ -2,7 +2,7 @@
 # Game log script. Prints out statements from game_text.gd
 
 
-extends TextEdit
+extends RichTextLabel
 
 
 func _ready():
@@ -11,7 +11,7 @@ func _ready():
 	for node in printable_nodes:
 		if (node.is_in_group("characters")):
 			# Connect character specific signals (dmg)
-			node.connect("damage_received", self, "on_character_damaged")
+			node.connect("character_damaged", self, "on_character_damaged")
 			# Player specific signals
 			if (node.is_in_group("player")):
 				node.connect("opened_door", self, "on_opened_door")
@@ -24,8 +24,9 @@ func _ready():
 
 func print_text(text, text_color):
 	# Append text from game text
-	self.add_color_override("font_color", text_color)
-	self.text = self.text + text
+	push_color(text_color)
+	add_text(text)
+	newline()
 
 
 func on_character_damaged(victim_name, dmg, dmg_type, is_dead):

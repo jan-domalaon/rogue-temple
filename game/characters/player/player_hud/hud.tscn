@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://game/characters/player/player_hud/hud.gd" type="Script" id=1]
 [ext_resource path="res://game/pause/pause_menu.tscn" type="PackedScene" id=2]
@@ -7,9 +7,18 @@
 [ext_resource path="res://game/characters/player/player_hud/player_hud.tres" type="Theme" id=5]
 [ext_resource path="res://game/characters/player/player_hud/fps_counter.tscn" type="PackedScene" id=6]
 [ext_resource path="res://game/characters/player/player_hud/block_count.gd" type="Script" id=7]
-[ext_resource path="res://game/characters/player/player_hud/game_log.gd" type="Script" id=8]
+[ext_resource path="res://fonts/Kenney Pixel.tres" type="DynamicFontData" id=8]
+[ext_resource path="res://game/characters/player/player_hud/game_log.gd" type="Script" id=9]
 
-[node name="hud" type="Control"]
+[sub_resource type="DynamicFont" id=1]
+
+size = 25
+use_mipmaps = true
+use_filter = false
+font_data = ExtResource( 8 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[node name="hud" type="Control" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -275,7 +284,7 @@ max_lines_visible = -1
 script = ExtResource( 7 )
 _sections_unfolded = [ "Theme" ]
 
-[node name="game_log" type="TextEdit" parent="HBoxContainer/MarginContainer/HBox" index="2"]
+[node name="game_log" type="RichTextLabel" parent="HBoxContainer/MarginContainer/HBox" index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -286,30 +295,25 @@ margin_right = 1248.0
 margin_bottom = 654.0
 rect_min_size = Vector2( 0, 200 )
 rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
+rect_clip_content = true
 mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_enabled = false
+bbcode_text = ""
+visible_characters = -1
+percent_visible = 1.0
+meta_underlined = true
+tab_size = 4
 text = ""
-readonly = true
-highlight_current_line = false
-syntax_highlighting = false
-show_line_numbers = false
-highlight_all_occurrences = false
+scroll_active = true
+scroll_following = true
+selection_enabled = false
 override_selected_font_color = false
-context_menu_enabled = true
-smooth_scrolling = false
-v_scroll_speed = 80.0
-hiding_enabled = 0
-wrap_lines = false
-caret_block_mode = false
-caret_blink = false
-caret_blink_speed = 0.65
-caret_moving_by_right_click = true
-script = ExtResource( 8 )
-_sections_unfolded = [ "Rect" ]
+script = ExtResource( 9 )
+_sections_unfolded = [ "Theme", "custom_fonts" ]
 
 [node name="level_margin_cont" type="MarginContainer" parent="HBoxContainer/MarginContainer/HBox" index="3"]
 

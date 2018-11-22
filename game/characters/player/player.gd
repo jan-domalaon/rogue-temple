@@ -123,7 +123,7 @@ func _input(event):
 			# If the interactable is a door
 			elif (interactables[0].get_parent().is_in_group("doors")):
 				interactables[0].get_parent().open_door()
-				emit_signal("opened_door", name)
+				emit_signal("opened_door", character_name)
 	
 	if (event.is_action_pressed("weapon_swap")):
 		player_swap_weapon()
