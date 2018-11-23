@@ -8,7 +8,7 @@
 custom_solver_bias = 0.0
 extents = Vector2( 24, 2 )
 
-[node name="wooden_staff" instance=ExtResource( 1 )]
+[node name="wooden_staff" index="0" instance=ExtResource( 1 )]
 
 weapon_name = "Wooden Staff"
 primary_damage = 4

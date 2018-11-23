@@ -18,6 +18,7 @@ func _ready():
 			# Player specific signals
 			if (node.is_in_group("player")):
 				node.connect("opened_door", self, "on_opened_door")
+				node.connect("picked_up_item", self, "on_pickup_item")
 			elif (node.is_in_group("mobs")):
 				pass
 		elif (node.is_in_group("doors")):
@@ -71,7 +72,7 @@ func on_opened_door(user_name):
 	print_text(game_text.opened_door(user_name), game_text.COLOR_INTERACT)
 
 
-func flipped_switch(user_name):
+func on_flipped_switch(user_name):
 	# Print statement when a switch is flipped
 	pass
 
@@ -79,6 +80,10 @@ func flipped_switch(user_name):
 func on_triggered_trap(victim_name, trap_name):
 	# Print statement when a trap is triggered. Just indicate trap name and victim
 	pass
+
+
+func on_pickup_item(user_name, item_name):
+	print_text(game_text.picked_up_item(user_name, item_name), game_text.COLOR_DEFAULT)
 
 
 func show_game_log():

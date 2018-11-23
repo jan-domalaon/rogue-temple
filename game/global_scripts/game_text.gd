@@ -37,3 +37,8 @@ func opened_door(user_name):
 
 func flipped_switch(user_name):
 	return user_name + " has flipped a switch."
+
+
+func picked_up_item(user_name, item_name):
+	return user_name + " picked up " + item_name + "."
+

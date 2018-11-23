@@ -26,6 +26,8 @@ var next_lvl_xp = 100
 # Current level indicator
 var current_game_level = 0
 
+signal picked_up_item(user_name, item_name)
+
 
 func _ready():
 	set_physics_process(true)
@@ -114,6 +116,10 @@ func _input(event):
 			var interacted = false
 			# If the interactable is an item and is in item container
 			if ((interactables[0].is_in_group('items')) or interactables[0].is_in_group('dropped_weapons')):
+				if interactables[0].is_in_group('items'):
+					emit_signal("picked_up_item", character_name, interactables[0].item_name)
+				else:
+					emit_signal("picked_up_item", character_name, interactables[0].get_parent().weapon_name)
 				print("picked up " + str(interactables[0].get_name()))
 				$inventory.pickup_item(interactables[0])
 				interacted = true
