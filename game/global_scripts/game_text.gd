@@ -9,6 +9,7 @@ extends Node
 const COLOR_DEFAULT = Color(1,1,1)				# White
 const COLOR_KILLED = Color(1,0,0)				# Red
 const COLOR_INTERACT = Color(1,0,0.9)			# Purple
+const COLOR_BLOCK = Color (0.46,0.97,1)			# Aqua
 
 # Damage flavor text
 

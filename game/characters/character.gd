@@ -138,7 +138,7 @@ func receive_phys_damage(dmg, dmg_type):
 			print($".".get_name() + " got hit with blunt dmg for " + str(((dmg * 2 ) / (armor + 1))) + " dmg")
 		
 		# Emit signal for game log
-		emit_signal("character_damaged", character_name, dmg, dmg_type, (dmg >= health))
+		emit_signal("character_damaged", character_name, dmg, dmg_type, (health <= 0))
 
 
 func flicker():
