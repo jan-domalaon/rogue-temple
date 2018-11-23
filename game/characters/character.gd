@@ -45,7 +45,8 @@ signal health_changed(health)
 
 # Game log signals
 signal opened_door(user_name)
-signal character_damaged(victim_name, dmg, dmg_type, is_dead)
+signal character_damaged(victim_name, dmg, dmg_type)
+signal character_died(victim_name)
 
 
 func _ready():
@@ -117,7 +118,8 @@ func receive_phys_damage(dmg, dmg_type):
 	
 	print("hit!")
 	# If the user has a shield and it is up, the shield will absorb dmg
-	if (shield_ready and shield_up):
+	# If damage is pure, goes through damage
+	if (shield_ready and shield_up and dmg_type != "x"):
 		get_node("shield").shield_absorb(dmg, dmg_type)
 	else:
 		# Any type of damage should trigger flickering
@@ -136,9 +138,16 @@ func receive_phys_damage(dmg, dmg_type):
 			blunt_hit = true
 			health -= ((dmg * 3) / (armor + 1))
 			print($".".get_name() + " got hit with blunt dmg for " + str(((dmg * 2 ) / (armor + 1))) + " dmg")
+		elif (dmg_type == 'x'):
+			# Pure damage
+			health -= dmg
+			print($".".get_name() + " got hit with pure dmg for " + str(dmg))
 		
-		# Emit signal for game log
-		emit_signal("character_damaged", character_name, dmg, dmg_type, (health <= 0))
+		# Emit signals for game log
+		emit_signal("character_damaged", character_name, dmg, dmg_type)
+		if (health <= 0):
+			# Emit death signal when character has health <= 0
+			emit_signal("character_died", character_name)
 
 
 func flicker():

@@ -14,20 +14,24 @@ const COLOR_BLOCK = Color (0.46,0.97,1)			# Aqua
 # Damage flavor text
 
 
-func character_damaged(victim_name, dmg, dmg_type, is_dead):
+func character_damaged(victim_name, dmg, dmg_type):
+	# Indicate what kind of damage was dealt
+	var d_type
+	if (dmg_type == "b"):
+		d_type = "blunt"
+	elif (dmg_type == "c"):
+		d_type = "cut"
+	elif (dmg_type == "p"):
+		d_type = "piercing"
+	elif (dmg_type == "x"):
+		d_type = "pure"
+	# For now, default damage text
+	return victim_name + " has been hurt for " + str(dmg) + " " + d_type + " damage."
+
+
+func character_died(victim_name):
 	# Give appropriate death message
-	if is_dead:
-		return victim_name + " has died!"
-	else:
-		var d_type
-		if (dmg_type == "b"):
-			d_type = "blunt"
-		elif (dmg_type == "c"):
-			d_type = "cut"
-		else:
-			d_type = "piercing"
-		# For now, default damage text
-		return victim_name + " has been hurt for " + str(dmg) + " " + d_type + " damage."
+	return victim_name + " has died!"
 
 
 func opened_door(user_name):

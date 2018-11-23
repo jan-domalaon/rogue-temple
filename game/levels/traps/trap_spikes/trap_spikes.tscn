@@ -4,7 +4,7 @@
 [ext_resource path="res://game/levels/traps/trap_spikes/trap_spikes.gd" type="Script" id=2]
 [ext_resource path="res://game/levels/traps/trap_spikes/spiked_trap.png" type="Texture" id=3]
 
-[node name="trap_spikes" instance=ExtResource( 1 )]
+[node name="trap_spikes" index="0" instance=ExtResource( 1 )]
 
 script = ExtResource( 2 )
 trap_name = "Spikes"

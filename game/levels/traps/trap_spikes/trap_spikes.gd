@@ -11,7 +11,7 @@ func _on_trap_body_entered(body):
 		if (body.is_in_group("characters")):
 			# Trap is triggered
 			triggered = true
-			# Give physical damage to the character. Piercing damage type
-			body.receive_phys_damage(damage, "p")
+			# Give physical damage to the character. Pure damage type
+			body.receive_phys_damage(damage, "x")
 			# Switch textures to indicate that the spikes were triggered
 			$trap_sprite.set_region_rect(Rect2(16,0,16,16))

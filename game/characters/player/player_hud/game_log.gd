@@ -15,6 +15,7 @@ func _ready():
 		if (node.is_in_group("characters")):
 			# Connect character specific signals (dmg)
 			node.connect("character_damaged", self, "on_character_damaged")
+			node.connect("character_died", self, "on_character_died")
 			# Player specific signals
 			if (node.is_in_group("player")):
 				node.connect("opened_door", self, "on_opened_door")
@@ -58,13 +59,14 @@ func print_text(text, text_color):
 		$log_hide_timer.start()
 
 
-func on_character_damaged(victim_name, dmg, dmg_type, is_dead):
+func on_character_damaged(victim_name, dmg, dmg_type):
 	# If a character receives damage, print an appropriate statement
-	# If dead, change text color
-	if (is_dead):
-		print_text(game_text.character_damaged(victim_name, dmg, dmg_type, is_dead), game_text.COLOR_KILLED)
-	else:
-		print_text(game_text.character_damaged(victim_name, dmg, dmg_type, is_dead), game_text.COLOR_DEFAULT)
+	print_text(game_text.character_damaged(victim_name, dmg, dmg_type), game_text.COLOR_DEFAULT)
+
+
+func on_character_died(victim_name):
+	# Print appropriate death message
+	print_text(game_text.character_died(victim_name), game_text.COLOR_KILLED)
 
 
 func on_opened_door(user_name):
