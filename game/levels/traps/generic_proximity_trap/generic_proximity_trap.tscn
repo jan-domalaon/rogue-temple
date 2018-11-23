@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://game/levels/traps/generic_proximity_trap/generic_proximity_trap.gd" type="Script" id=1]
+[ext_resource path="res://game/levels/traps/trap_spikes/spiked_trap_default.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 10 )
+
+[node name="generic_proximity_trap" type="Area2D" index="0" groups=[
+"traps",
+]]
+
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 1 )
+trap_name = "Generic Proximity Trap"
+
+[node name="trap_sprite" type="Sprite" parent="." index="0"]
+
+texture = ExtResource( 2 )
+
+[node name="trigger_hitbox" type="CollisionShape2D" parent="." index="1"]
+
+shape = SubResource( 1 )
+
+[connection signal="body_entered" from="." to="." method="_on_trap_body_entered"]
+
+

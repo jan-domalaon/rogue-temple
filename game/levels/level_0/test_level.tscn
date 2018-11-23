@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://game/levels/level_0/test_level.gd" type="Script" id=1]
 [ext_resource path="res://game/levels/level_0/tileset/tileset.tres" type="TileSet" id=2]
@@ -6,14 +6,15 @@
 [ext_resource path="res://game/items/foodstuff/fruits/fruits.tscn" type="PackedScene" id=4]
 [ext_resource path="res://game/items/weapons/wooden_staff/wooden_staff.tscn" type="PackedScene" id=5]
 [ext_resource path="res://game/items/foodstuff/crab_rangoon/crab_rangoon.tscn" type="PackedScene" id=6]
-[ext_resource path="res://game/characters/generic_character.tscn" type="PackedScene" id=7]
-[ext_resource path="res://game/characters/player/test_player.tscn" type="PackedScene" id=8]
-[ext_resource path="res://game/characters/mobs/bandit_scavenger/bandit_scavenger.tscn" type="PackedScene" id=9]
-[ext_resource path="res://game/characters/mobs/stacked_water_jelly/stacked_water_jelly.tscn" type="PackedScene" id=10]
-[ext_resource path="res://game/characters/mobs/bandit_archer/bandit_archer.tscn" type="PackedScene" id=11]
-[ext_resource path="res://game/levels/level_change/level_change.tscn" type="PackedScene" id=12]
+[ext_resource path="res://game/levels/traps/trap_spikes/trap_spikes.tscn" type="PackedScene" id=7]
+[ext_resource path="res://game/characters/generic_character.tscn" type="PackedScene" id=8]
+[ext_resource path="res://game/characters/player/test_player.tscn" type="PackedScene" id=9]
+[ext_resource path="res://game/characters/mobs/bandit_scavenger/bandit_scavenger.tscn" type="PackedScene" id=10]
+[ext_resource path="res://game/characters/mobs/stacked_water_jelly/stacked_water_jelly.tscn" type="PackedScene" id=11]
+[ext_resource path="res://game/characters/mobs/bandit_archer/bandit_archer.tscn" type="PackedScene" id=12]
+[ext_resource path="res://game/levels/level_change/level_change.tscn" type="PackedScene" id=13]
 
-[node name="prototype_level" type="Node" index="0"]
+[node name="prototype_level" type="Node"]
 
 script = ExtResource( 1 )
 
@@ -82,43 +83,49 @@ dropped_item = true
 
 position = Vector2( -52, 80 )
 
-[node name="generic_character" parent="." index="3" instance=ExtResource( 7 )]
+[node name="traps" type="Node" parent="." index="3"]
+
+[node name="trap_spikes" parent="traps" index="0" instance=ExtResource( 7 )]
+
+position = Vector2( 40, -72 )
+
+[node name="generic_character" parent="." index="4" instance=ExtResource( 8 )]
 
 position = Vector2( -103, -23 )
 _sections_unfolded = [ "Collision", "Pickable", "Transform", "Visibility" ]
 
-[node name="player" parent="." index="4" instance=ExtResource( 8 )]
+[node name="player" parent="." index="5" instance=ExtResource( 9 )]
 
 position = Vector2( 44, 78 )
 move_speed = 200
 
-[node name="bandit_scavenger" parent="." index="5" instance=ExtResource( 9 )]
+[node name="bandit_scavenger" parent="." index="6" instance=ExtResource( 10 )]
 
 position = Vector2( -9, -56 )
 
-[node name="stacked_water_jelly" parent="." index="6" instance=ExtResource( 10 )]
+[node name="stacked_water_jelly" parent="." index="7" instance=ExtResource( 11 )]
 
 position = Vector2( 232, 244 )
 health = 1
 
-[node name="stacked_water_jelly2" parent="." index="7" instance=ExtResource( 10 )]
+[node name="stacked_water_jelly2" parent="." index="8" instance=ExtResource( 11 )]
 
 position = Vector2( 176, 236 )
 health = 1
 
-[node name="bandit_archer" parent="." index="8" instance=ExtResource( 11 )]
+[node name="bandit_archer" parent="." index="9" instance=ExtResource( 12 )]
 
 position = Vector2( 408, -72 )
 
-[node name="player_start" type="Position2D" parent="." index="9"]
+[node name="player_start" type="Position2D" parent="." index="10"]
 
 position = Vector2( 59, 113 )
 
-[node name="level_change_container" type="Node" parent="." index="10"]
+[node name="level_change_container" type="Node" parent="." index="11"]
 
 editor/display_folded = true
 
-[node name="level_change" parent="level_change_container" index="0" instance=ExtResource( 12 )]
+[node name="level_change" parent="level_change_container" index="0" instance=ExtResource( 13 )]
 
 position = Vector2( 72, -24 )
 next_level = "res://game/levels/level_0/test_level_2.tscn"
