@@ -173,9 +173,14 @@ func drop_item(slot_name):
 			equipment["Primary"] = equipment["Secondary"]
 			equipment["Secondary"] = null
 		# Set weapon to scale and turn on its interact area if this is a weapon
-		if (slot_name == "Primary" or slot_name == "Secondary"):
+		if (slot_name == "Primary" or slot_name == "Secondary" or slot_name == "Shield"):
 			item_instance.get_node("interact_area/interact_shape").set_disabled(false)
-			item_instance.set_scale(Vector2(0.5, 0.5))
+			if (slot_name == "Shield"):
+				# Shields are bigger than weapons when scaled
+				item_instance.set_scale(Vector2(0.75, 0.75))
+			else:
+				item_instance.set_scale(Vector2(0.5, 0.5))
+			item_instance.dropped_item = true
 		update_inventory_ui()
 
 
@@ -186,8 +191,12 @@ func pickup_item(item_node):
 	var inventory_slot
 	# Special case where item is a dropped weapon
 	if (item_node.is_in_group("dropped_weapons")):
+		# The node wanted is the parent node, not the interact_area of the weapon
 		new_item = item_node.get_parent()
 		inventory_slot = [new_item.weapon_name, "WEAPON"]
+	elif (item_node.is_in_group("dropped_shields")):
+		new_item = item_node.get_parent()
+		inventory_slot = [new_item.shield_name, "SHIELD"]
 	else:
 		inventory_slot = [new_item.item_name, new_item.item_type]
 	for i in range(inventory_space.size()):
@@ -285,11 +294,13 @@ func on_item_unequipped():
 func on_item_equipped():
 	print("equipping item!")
 	equip(selected_slot)
+	# Add weaponry nodes to player
 	get_parent().reset_weaponry()
 	get_parent().get_weaponry(false)
-	if (selected_slot == "Shield"):
-		get_parent().reset_shield()
-		get_parent().get_shield(false)
+	# Add shield nodes to player
+	get_parent().reset_shield()
+	get_parent().get_shield(false)
+	# Reset armor value of player
 	get_parent().armor = get_armor_value()
 
 

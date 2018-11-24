@@ -1,6 +1,9 @@
 extends Node
 
 
+export var level_name = "Generic Level"
+
+
 func _ready():
 	# Place player at start pos
 	$player.position = $player_start.position

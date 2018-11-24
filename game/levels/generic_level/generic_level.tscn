@@ -5,9 +5,10 @@
 [ext_resource path="res://game/levels/level_0/tileset/tileset.tres" type="TileSet" id=3]
 [ext_resource path="res://game/levels/level_change/level_change.tscn" type="PackedScene" id=4]
 
-[node name="generic_level" type="Node" index="0"]
+[node name="generic_level" type="Node"]
 
 script = ExtResource( 1 )
+level_name = "Generic Level"
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." index="0"]
 

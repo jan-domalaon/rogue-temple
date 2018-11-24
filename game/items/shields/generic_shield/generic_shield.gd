@@ -11,6 +11,7 @@ export var complete_regen_cooldown = 4
 export var partial_regen_cooldown = 2
 export var regen_time = 0.5
 export var shield_name = "Shield (Generic)"
+export var dropped_item = false
 
 # Upper limit of shield
 onready var shield_max_hp = shield_hp
@@ -25,14 +26,22 @@ func _ready():
 	# Check if this is a child of a character
 	# If so, this shield will be renamed "shield"
 	$shield_hitbox.set_disabled(true)
-	if (get_name() == "shield"):
-		# Get shape of the parent knockback_area to use as its shape
-		var shield_shape = get_parent().get_node("knockback_area/knockback_hitbox").get_shape()
-		$shield_hitbox.set_shape(shield_shape)
-		# Set timers
-		$partial_regen_timer.set_wait_time(partial_regen_cooldown)
-		$complete_regen_timer.set_wait_time(complete_regen_cooldown)
-		$shield_regen_timer.set_wait_time(regen_time)
+	
+	# If this is a dropped item, set interact area. Don't give shield functions
+	if dropped_item:
+		# This item is equipped. No need for picking item up.
+		$interact_area/interact_shape.set_disabled(false)
+		if (get_name() == "shield"):
+			# Get shape of the parent knockback_area to use as its shape
+			var shield_shape = get_parent().get_node("knockback_area/knockback_hitbox").get_shape()
+			$shield_hitbox.set_shape(shield_shape)
+			# Set timers
+			$partial_regen_timer.set_wait_time(partial_regen_cooldown)
+			$complete_regen_timer.set_wait_time(complete_regen_cooldown)
+			$shield_regen_timer.set_wait_time(regen_time)
+	elif not dropped_item:
+		$interact_area/interact_shape.set_disabled(true)
+	
 
 
 func shield_absorb(dmg, dmg_type):

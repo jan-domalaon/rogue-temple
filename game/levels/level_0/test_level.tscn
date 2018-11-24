@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=2]
 
-[ext_resource path="res://game/levels/level_0/test_level.gd" type="Script" id=1]
+[ext_resource path="res://game/levels/generic_level/generic_level.gd" type="Script" id=1]
 [ext_resource path="res://game/levels/level_0/tileset/tileset.tres" type="TileSet" id=2]
 [ext_resource path="res://game/levels/level_0/tileset/level_0_door.tscn" type="PackedScene" id=3]
 [ext_resource path="res://game/items/foodstuff/fruits/fruits.tscn" type="PackedScene" id=4]
@@ -17,6 +17,7 @@
 [node name="prototype_level" type="Node"]
 
 script = ExtResource( 1 )
+level_name = "Test Level 0"
 
 [node name="nav" type="Navigation2D" parent="." index="0"]
 

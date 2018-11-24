@@ -1,9 +1,14 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://game/items/shields/generic_shield/generic_shield.gd" type="Script" id=1]
 [ext_resource path="res://game/items/shields/iron_shield/iron_shield.png" type="Texture" id=2]
 
-[node name="generic_shield" type="Area2D" index="0" groups=[
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 10 )
+
+[node name="generic_shield" type="Area2D" groups=[
 "shields",
 ]]
 
@@ -23,6 +28,7 @@ complete_regen_cooldown = 4
 partial_regen_cooldown = 2
 regen_time = 0.5
 shield_name = "Shield (Generic)"
+dropped_item = false
 
 [node name="sprite" type="Sprite" parent="." index="0"]
 
@@ -52,6 +58,23 @@ process_mode = 1
 wait_time = 1.0
 one_shot = false
 autostart = false
+
+[node name="interact_area" type="Area2D" parent="." index="5" groups=[
+"dropped_shields",
+"dropped_equipment",
+]]
+
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+
+[node name="interact_shape" type="CollisionShape2D" parent="interact_area" index="0"]
+
+shape = SubResource( 1 )
 
 [connection signal="timeout" from="complete_regen_timer" to="." method="_on_complete_regen_timer_timeout"]
 

@@ -71,6 +71,7 @@ autostart = false
 
 [node name="interact_area" type="Area2D" parent="." index="2" groups=[
 "dropped_weapons",
+"dropped_equipment",
 ]]
 
 position = Vector2( 32, 0 )

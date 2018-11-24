@@ -115,11 +115,13 @@ func _input(event):
 			print(interactables[0].get_groups())
 			var interacted = false
 			# If the interactable is an item and is in item container
-			if ((interactables[0].is_in_group('items')) or interactables[0].is_in_group('dropped_weapons')):
+			if ((interactables[0].is_in_group('items')) or interactables[0].is_in_group('dropped_equipment')):
 				if interactables[0].is_in_group('items'):
 					emit_signal("picked_up_item", character_name, interactables[0].item_name)
-				else:
+				elif interactables[0].is_in_group('dropped_weapons'):
 					emit_signal("picked_up_item", character_name, interactables[0].get_parent().weapon_name)
+				elif interactables[0].is_in_group('dropped_shields'):
+					emit_signal("picked_up_item", character_name, interactables[0].get_parent().shield_name)
 				print("picked up " + str(interactables[0].get_name()))
 				$inventory.pickup_item(interactables[0])
 				interacted = true

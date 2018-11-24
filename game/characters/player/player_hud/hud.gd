@@ -12,7 +12,7 @@ func _ready():
 	set_process_input(true)
 	set_process(false)
 	# Get level name from player scene
-	#get_node('game_level').set_text(get_parent().level_name)
+	$HBoxContainer/MarginContainer/HBox/level_margin_cont/game_level.set_text(get_owner().get_owner().level_name)
 	# Hide appropriate UI elements
 	#get_node("inventory").hide()
 	#get_node("debug_container").hide()
