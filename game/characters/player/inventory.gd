@@ -165,22 +165,29 @@ func drop_item(slot_name):
 		# Add item to world
 		var load_item = load(to_drop)
 		var item_instance = load_item.instance()
+		
 		# Add to item container of level
-		get_node("../../item_container").call_deferred("add_child", item_instance)
+		get_node("../../item_container").add_child(item_instance)
+		
+		# If item instance is a weapon or shield, turn on interact shape
+		if (item_instance.is_in_group("weapons") or item_instance.is_in_group("shields")):
+			item_instance.get_node("interact_area/interact_shape").set_disabled(false)
+			# Indicate that this equipment is a dropped item
+			item_instance.dropped_item = true
+			# Set scale according to what type of equipment
+			if (item_instance.is_in_group("weapons")):
+				item_instance.set_scale(Vector2(0.5, 0.5))
+			elif (item_instance.is_in_group("shields")):
+				item_instance.set_scale(Vector2(0.75, 0.75))
+		
+		# Set item instance on player's position
 		item_instance.position = get_parent().get_global_position()
+		
 		# Use secondary weapon as primary if this slot is primary
 		if (slot_name == "Primary"):
 			equipment["Primary"] = equipment["Secondary"]
 			equipment["Secondary"] = null
-		# Set weapon to scale and turn on its interact area if this is a weapon
-		if (slot_name == "Primary" or slot_name == "Secondary" or slot_name == "Shield"):
-			item_instance.get_node("interact_area/interact_shape").set_disabled(false)
-			if (slot_name == "Shield"):
-				# Shields are bigger than weapons when scaled
-				item_instance.set_scale(Vector2(0.75, 0.75))
-			else:
-				item_instance.set_scale(Vector2(0.5, 0.5))
-			item_instance.dropped_item = true
+			
 		update_inventory_ui()
 
 

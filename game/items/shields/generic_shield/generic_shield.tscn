@@ -60,8 +60,8 @@ one_shot = false
 autostart = false
 
 [node name="interact_area" type="Area2D" parent="." index="5" groups=[
-"dropped_shields",
 "dropped_equipment",
+"dropped_shields",
 ]]
 
 input_pickable = true
