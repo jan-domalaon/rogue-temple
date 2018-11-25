@@ -70,6 +70,7 @@ show_game_log=[ Object(InputEventKey,"resource_local_to_scene":false,"resource_n
 2d_physics/layer_3="walls"
 2d_physics/layer_4="weapons"
 2d_physics/layer_5="opened_doors_and_level_change"
+2d_physics/layer_6="dropped_equipment"
 
 [rendering]
 

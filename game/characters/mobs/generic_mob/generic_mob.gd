@@ -243,6 +243,7 @@ func detect_player():
 	var detect_ray = detection_ray()
 	var dist_to_player = get_global_position().distance_to(player_pos)
 	detected_pos = detect_ray.position
+	print(detect_ray.collider.get_groups())
 	# Check if raycast hits player and is within detection range
 	if (detect_ray.collider.is_in_group("player") and dist_to_player <= detection_range):
 		# Player is detected. Push CHASING state to trigger aggressive behaviour

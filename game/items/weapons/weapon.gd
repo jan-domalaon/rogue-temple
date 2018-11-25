@@ -44,6 +44,9 @@ func _ready():
 	# Interact area is only on if this is a dropped item
 	if dropped_item:
 		$interact_area/interact_shape.set_disabled(false)
+		# Add this item to dropped_shields, dropped_equipment groups
+		$interact_area.add_to_group("dropped_equipment")
+		$interact_area.add_to_group("dropped_shields")
 	elif not dropped_item:
 		$interact_area/interact_shape.set_disabled(true)
 

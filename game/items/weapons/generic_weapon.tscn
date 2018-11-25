@@ -70,8 +70,8 @@ one_shot = false
 autostart = false
 
 [node name="interact_area" type="Area2D" parent="." index="2" groups=[
-"dropped_equipment",
 "dropped_weapons",
+"dropped_equipment",
 ]]
 
 position = Vector2( 32, 0 )
@@ -80,7 +80,7 @@ gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
-collision_layer = 8
+collision_layer = 32
 audio_bus_override = false
 audio_bus_name = "Master"
 _sections_unfolded = [ "Collision" ]

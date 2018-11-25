@@ -6,7 +6,7 @@
 [ext_resource path="res://game/characters/mobs/generic_mob/mob_healthbar_under.png" type="Texture" id=4]
 [ext_resource path="res://game/characters/mobs/generic_mob/mob_healthbar_progress.png" type="Texture" id=5]
 
-[node name="generic_mob" groups=[
+[node name="generic_mob" index="0" groups=[
 "enemies",
 ] instance=ExtResource( 1 )]
 
