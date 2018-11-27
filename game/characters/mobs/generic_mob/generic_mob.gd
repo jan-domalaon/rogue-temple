@@ -29,7 +29,8 @@ var current_state
 var nav = null setget set_nav
 var path = [] 
 onready var nav_map = get_parent().get_node("nav")
-var old_player_pos
+var last_seen_pos
+var get_new_path = false
 
 # Attacking logic
 var can_attack = true
@@ -78,17 +79,21 @@ func _physics_process(delta):
 	$mob_healthbar.max_value = max_health
 	
 	# To update draw
-#	update()
+	update()
 
 
-#func _draw():
-#	draw_circle((detected_pos - position), 5, Color(1,0,0))
-#	draw_line(Vector2(), get_parent().get_node("player").position - get_global_position(), Color(1, 0, 0))
-#
-#	# Draw path
-#	if path.size() > 1:
-#		for node in path:
-#			draw_circle(node - position, 5, Color(0, 1, 1)
+func _draw():
+	draw_circle((detected_pos - position), 5, Color(1,0,0))
+	draw_line(Vector2(), get_parent().get_node("player").position - get_global_position(), Color(1, 0, 0))
+
+	# Draw path
+	if path.size() > 1:
+		for node in path:
+			draw_circle(node - position, 5, Color(0, 1, 1))
+	
+	# Draw last known position
+	if (last_seen_pos != null):
+		draw_circle(last_seen_pos - position, 10, Color(1, 0, 1))
 
 
 func _on_wander_timer_timeout():
@@ -183,10 +188,24 @@ func state_chasing():
 #			if (player_pos != old_player_pos):
 #				set_nav(nav_map)
 #			pathfinding()
+		# Last seen pos required when mob loses sight of player
+		set_last_seen_pos(player_pos)
 	else:
-	# Use pathfinding
-#	set_nav(nav_map)
-		pathfinding()
+		# Use pathfinding
+#		set_nav(nav_map)
+#		pathfinding()
+		
+		# If on last seen position, wait there and return to idle state.
+		# Also, set player detection = false
+		if position.distance_to(last_seen_pos) < 1:
+			print("on last seen pos of player")
+			movement_dir = Vector2(0,0)
+			pop_state()
+			push_state("IDLE")
+			detected = false
+		else:
+			# Go to last seen player position
+			pathfinding(last_seen_pos)
 	
 	# Stay in CHASING while the player is still alive
 	# If not a bouncy_mob, this mob will have a weapon
@@ -243,7 +262,7 @@ func detect_player():
 	var detect_ray = detection_ray()
 	var dist_to_player = get_global_position().distance_to(player_pos)
 	detected_pos = detect_ray.position
-	print(detect_ray.collider.get_groups())
+#	print(detect_ray.collider.get_groups())
 	# Check if raycast hits player and is within detection range
 	if (detect_ray.collider.is_in_group("player") and dist_to_player <= detection_range):
 		# Player is detected. Push CHASING state to trigger aggressive behaviour
@@ -259,21 +278,22 @@ func set_nav(new_nav):
 	nav = new_nav
 
 
-func pathfinding():
+func pathfinding(dest):
 	path = []
-	path = nav.get_simple_path(position, player_pos, false)
+	path = nav.get_simple_path(position, dest, false)
+	print(path)
 	# Go to each node of the path
 	if path.size() > 1:
 		print("chasing with pathfinding")
-		var dist = path[1] - get_global_position()
-		if dist.length() > 5:
+		var dist = path[0] - get_global_position()
+		if dist.length() > 2:
 			# Move to next path node
-			movement_dir = dist.normalized()
+			movement_dir = (path[0] - get_global_position()).normalized()
 		else:
 			path.remove(0)
 	else:
 		print("no more path nodes")
-#		movement_dir = Vector2(0,0)
+		movement_dir = Vector2(0,0)
 
 
 #func on_player_movement(pos):
@@ -292,3 +312,7 @@ func _on_attack_timer_timeout():
 func on_update_player_to_mob(pos, hp):
 	player_pos = pos
 	player_health = hp
+
+
+func set_last_seen_pos(pos):
+	last_seen_pos = pos
