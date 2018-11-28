@@ -98,6 +98,7 @@ func _draw():
 
 func _on_wander_timer_timeout():
 	var current_state = get_current_state()
+	print("wander timeout")
 	# Get another random value
 	wander_time = (randi()%3) + 1
 	# Pop WANDER/IDLE state
@@ -183,6 +184,7 @@ func state_chasing():
 	# Use pathfinding if the player is behind a wall
 	var detect_ray = detection_ray()
 	if (detect_ray.collider.is_in_group("player")):
+		print("chasing with move dir!")
 		movement_dir = player_pos - self.position
 #		if (not "player" in detect_ray.collider.get_parent().get_groups()):
 #			if (player_pos != old_player_pos):
@@ -202,6 +204,7 @@ func state_chasing():
 			movement_dir = Vector2(0,0)
 			pop_state()
 			push_state("IDLE")
+			print(state_stack)
 			detected = false
 		else:
 			# Go to last seen player position
@@ -281,14 +284,13 @@ func set_nav(new_nav):
 func pathfinding(dest):
 	path = []
 	path = nav.get_simple_path(position, dest, false)
-	print(path)
 	# Go to each node of the path
 	if path.size() > 1:
 		print("chasing with pathfinding")
 		var dist = path[0] - get_global_position()
 		if dist.length() > 2:
 			# Move to next path node
-			movement_dir = (path[0] - get_global_position()).normalized()
+			movement_dir = dist.normalized()
 		else:
 			path.remove(0)
 	else:

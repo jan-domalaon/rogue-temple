@@ -5,7 +5,7 @@
 [ext_resource path="res://game/characters/mobs/bandit_archer/bandit_archer.png" type="Texture" id=3]
 [ext_resource path="res://game/items/weapons/ranger_bow/ranger_bow.tscn" type="PackedScene" id=4]
 
-[node name="bandit_archer" groups=[
+[node name="bandit_archer" index="0" groups=[
 "ranged_mobs",
 "humanoids",
 ] instance=ExtResource( 1 )]
