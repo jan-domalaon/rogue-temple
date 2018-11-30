@@ -14,7 +14,7 @@
 [ext_resource path="res://game/levels/level_change/level_change.tscn" type="PackedScene" id=12]
 [ext_resource path="res://game/characters/mobs/generic_mob/new_generic_mob.tscn" type="PackedScene" id=13]
 
-[node name="prototype_level" type="Node"]
+[node name="prototype_level" type="Node" index="0"]
 
 script = ExtResource( 1 )
 level_name = "Test Level 0"
@@ -130,5 +130,13 @@ next_level = "res://game/levels/level_0/test_level_2.tscn"
 [node name="new_generic_mob" parent="." index="11" instance=ExtResource( 13 )]
 
 position = Vector2( -16, 192 )
+
+[node name="new_generic_mob2" parent="." index="12" instance=ExtResource( 13 )]
+
+position = Vector2( -56, 184 )
+
+[node name="new_generic_mob3" parent="." index="13" instance=ExtResource( 13 )]
+
+position = Vector2( -104, 216 )
 
 
