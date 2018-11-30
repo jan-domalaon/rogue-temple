@@ -46,27 +46,45 @@ func _ready():
 
 func _physics_process(delta):
 	movement()
-	# Use move dir if player can be seen
-	if ():
-		var current_player_pos = get_parent().get_node("player").get_global_position()
+	var current_player_pos = get_parent().get_node("player").get_global_position()
+	var player_extents = get_parent().get_node("player/hitbox").shape.extents - Vector2(3, 3)
+	
+	var nw = current_player_pos - player_extents
+	var se = current_player_pos + player_extents
+	var ne = current_player_pos + Vector2(player_extents.x, -player_extents.y)
+	var sw = current_player_pos + Vector2(-player_extents.x, player_extents.y)
+	# Use move dir if player can be seen by all corners
+	if (detect_ray(get_global_position(), nw) and detect_ray(get_global_position(), se) and detect_ray(get_global_position(), ne) and detect_ray(get_global_position(), sw)):
 		movement_dir = (current_player_pos - get_global_position()).normalized()
 		move_dir_chase = true
 	# Else use pathfinding. Go to each node of the path
 	else:
 		if (move_dir_chase):
 			# Get a new path by forcing pathfinding timer to time out
+			$pathfinding_timer.stop()
 			set_new_path()
 			move_dir_chase = false
 		else:
 			pathfinding()
-#	update()
-#
-#
-#func _draw():
-#	if path.size() > 1:
-#		for node in path:
-#			draw_circle(node - position, 5, Color(0, 1, 1))
-#	draw_line(Vector2(), get_parent().get_node("player").position - get_global_position(), Color(1, 0, 0))
+	update()
+
+
+func _draw():
+	if path.size() > 1:
+		for node in path:
+			draw_circle(node - position, 5, Color(0, 1, 1))
+	var current_player_pos = get_parent().get_node("player").get_global_position()
+	var player_extents = get_parent().get_node("player/hitbox").shape.extents - Vector2(3, 3)
+	
+	var nw = current_player_pos - player_extents
+	var se = current_player_pos + player_extents
+	var ne = current_player_pos + Vector2(player_extents.x, -player_extents.y)
+	var sw = current_player_pos + Vector2(-player_extents.x, player_extents.y)
+	
+	draw_line(Vector2(), nw - get_global_position(), Color(1, 0, 0))
+	draw_line(Vector2(), se - get_global_position(), Color(1, 0, 0))
+	draw_line(Vector2(), ne - get_global_position(), Color(1, 0, 0))
+	draw_line(Vector2(), sw - get_global_position(), Color(1, 0, 0))
 
 
 func set_nav(new_nav):
@@ -99,8 +117,6 @@ func pathfinding():
 
 func detection():
 	var current_player_pos = get_parent().get_node("player").get_global_position()
-	var physics_space = get_world_2d().direct_space_state
-	var ignore_areas = [self, $knockback_area]
 	var player_extents = get_parent().get_node("player/hitbox").shape.extents - Vector2(3, 3)
 	
 	var nw = current_player_pos - player_extents
@@ -109,11 +125,15 @@ func detection():
 	var sw = current_player_pos + Vector2(-player_extents.x, player_extents.y)
 	
 	for pos in [nw, ne, se, sw]:
-		detect_ray(pos, current_player_pos)
+		print(detect_ray(pos, current_player_pos))
 
 
 func detect_ray(target_position, player_pos):
+	var physics_space = get_world_2d().direct_space_state
+	var ignore_areas = [self, $knockback_area]
 	# Ignore mob mask (00101 == 5). Bit mask is in binary. Collides with players and walls only.
 	var detect_ray = physics_space.intersect_ray(target_position, player_pos, ignore_areas, 5)
 	if (detect_ray.collider.is_in_group("player")):
-		return
+		return true
+	else:
+		return false
