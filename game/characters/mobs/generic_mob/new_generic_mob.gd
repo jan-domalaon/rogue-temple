@@ -35,6 +35,7 @@ var shooting_range = 200	# Distance where mob can shoot at player
 # Mob stats
 # Amount of XP given
 var mob_xp = 0
+export var knockbackable = true
 
 
 func _ready():
@@ -42,37 +43,27 @@ func _ready():
 	player_pos = get_parent().get_node("player").get_global_position()
 	path = nav.get_simple_path(get_global_position(), player_pos, false)
 	$pathfinding_timer.start()
+	
+	# Start in passive states
+	current_state = "IDLE"
+	state_idle()
 
 
 func _physics_process(delta):
+	# Mobs have the ability to move
 	movement()
+	# Mobs can be knocked back
+	if (knockbackable):
+		knockback()
+	
 	var current_player_pos = get_parent().get_node("player").get_global_position()
-	var player_extents = get_parent().get_node("player/hitbox").shape.extents - Vector2(3, 3)
-	var mob_extents = $hitbox.shape.extents - Vector2(1, 1)
 	
-	var nw = current_player_pos - player_extents
-	var se = current_player_pos + player_extents
-	var ne = current_player_pos + Vector2(player_extents.x, -player_extents.y)
-	var sw = current_player_pos + Vector2(-player_extents.x, player_extents.y)
+	if (detect_ray(get_global_position(), current_player_pos) and not detected):
+		detected = true
 	
-	var mob_nw = get_global_position() - mob_extents
-	var mob_se = get_global_position() + mob_extents
-	var mob_ne = get_global_position() + Vector2(mob_extents.x, -mob_extents.y)
-	var mob_sw = get_global_position() + Vector2(-mob_extents.x, mob_extents.y)
-	
-	# Use move dir if player can be seen by all corners
-	if (detect_ray(mob_nw, nw) and detect_ray(mob_se, se) and detect_ray(mob_ne, ne) and detect_ray(mob_sw, sw)):
-		movement_dir = (current_player_pos - get_global_position()).normalized()
-		move_dir_chase = true
-	# Else use pathfinding. Go to each node of the path
-	else:
-		if (move_dir_chase):
-			# Get a new path by forcing pathfinding timer to time out
-			$pathfinding_timer.stop()
-			set_new_path()
-			move_dir_chase = false
-		else:
-			pathfinding()
+	# If detected, switch to aggressive states
+	if detected:
+		state_chasing()
 #	update()
 #
 #
@@ -150,3 +141,56 @@ func detect_ray(target_position, player_pos):
 		return true
 	else:
 		return false
+
+
+func state_chasing():
+	# Chasing state. Handles pathfinding going towards players
+	var current_player_pos = get_parent().get_node("player").get_global_position()
+	var player_extents = get_parent().get_node("player/hitbox").shape.extents - Vector2(3, 3)
+	var mob_extents = $hitbox.shape.extents - Vector2(1, 1)
+	
+	var nw = current_player_pos - player_extents
+	var se = current_player_pos + player_extents
+	var ne = current_player_pos + Vector2(player_extents.x, -player_extents.y)
+	var sw = current_player_pos + Vector2(-player_extents.x, player_extents.y)
+	
+	var mob_nw = get_global_position() - mob_extents
+	var mob_se = get_global_position() + mob_extents
+	var mob_ne = get_global_position() + Vector2(mob_extents.x, -mob_extents.y)
+	var mob_sw = get_global_position() + Vector2(-mob_extents.x, mob_extents.y)
+	
+	# Use move dir if player can be seen by all corners
+	if (detect_ray(mob_nw, nw) and detect_ray(mob_se, se) and detect_ray(mob_ne, ne) and detect_ray(mob_sw, sw)):
+		movement_dir = (current_player_pos - get_global_position()).normalized()
+		move_dir_chase = true
+	# Else use pathfinding. Go to each node of the path
+	else:
+		if (move_dir_chase):
+			# Get a new path by forcing pathfinding timer to time out
+			$pathfinding_timer.stop()
+			set_new_path()
+			move_dir_chase = false
+		else:
+			pathfinding()
+
+
+func state_idle():
+	# This mob is idle. Not moving
+	movement_dir = Vector2(0,0)
+
+
+func state_wander(random_move_dir):
+	movement_dir = random_move_dir
+	
+
+func get_random_movement_dir():
+	# Give a random movement direction
+	var random_dir
+	random_dir.x = -int(randi()%2) + int(randi()%2)
+	random_dir.y = -int(randi()%2) + int(randi()%2)
+	# If the random direction is (0, 0), randomize again
+	if (random_dir == Vector2(0,0)):
+		random_dir = random_move_dir()
+	return random_dir
+
+
