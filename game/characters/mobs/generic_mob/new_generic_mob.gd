@@ -58,8 +58,10 @@ func _physics_process(delta):
 	
 	var current_player_pos = get_parent().get_node("player").get_global_position()
 	
-	if (detect_ray(get_global_position(), current_player_pos) and not detected):
+	if (not detected and detect_ray(get_global_position(), current_player_pos)):
+		# Set detected flag to true. Set movement back to normal. Transition to aggressive states
 		detected = true
+		move_speed = original_move_speed
 	
 	# If detected, switch to aggressive states
 	if detected:
@@ -177,20 +179,44 @@ func state_chasing():
 func state_idle():
 	# This mob is idle. Not moving
 	movement_dir = Vector2(0,0)
+	
+	# Reduce movement speed by half
+	move_speed = int(original_move_speed * 0.5)
+	
+	# Get new passive wait time. Start timer
+	$passive_timer.set_wait_time((randi()%3) + 1)
+	$passive_timer.start()
 
 
 func state_wander(random_move_dir):
 	movement_dir = random_move_dir
 	
+	# Reduce movement speed by half
+	move_speed = int(original_move_speed * 0.5)
+	
+	# Get new passive wait time. Start timer
+	$passive_timer.set_wait_time((randi()%3) + 1)
+	$passive_timer.start()
+
 
 func get_random_movement_dir():
 	# Give a random movement direction
-	var random_dir
+	var random_dir = Vector2(0,0)
 	random_dir.x = -int(randi()%2) + int(randi()%2)
 	random_dir.y = -int(randi()%2) + int(randi()%2)
 	# If the random direction is (0, 0), randomize again
 	if (random_dir == Vector2(0,0)):
-		random_dir = random_move_dir()
+		random_dir = get_random_movement_dir()
 	return random_dir
 
+
+func _on_passive_timer_timeout():
+	# Handle state transition. Only transition between passive states
+	if not detected:
+		if (current_state == "IDLE"):
+			current_state = "WANDER"
+			state_wander(get_random_movement_dir())
+		elif (current_state == "WANDER"):
+			current_state = "IDLE"
+			state_idle()
 

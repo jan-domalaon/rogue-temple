@@ -25,4 +25,6 @@ autostart = false
 
 [connection signal="timeout" from="pathfinding_timer" to="." method="_on_pathfinding_timer_timeout"]
 
+[connection signal="timeout" from="passive_timer" to="." method="_on_passive_timer_timeout"]
+
 
