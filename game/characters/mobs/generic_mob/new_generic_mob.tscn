@@ -6,7 +6,7 @@
 [node name="new_generic_mob" index="0" instance=ExtResource( 1 )]
 
 script = ExtResource( 2 )
-detection_range = 100000
+detection_range = 100
 knockbackable = true
 
 [node name="pathfinding_timer" type="Timer" parent="." index="5"]

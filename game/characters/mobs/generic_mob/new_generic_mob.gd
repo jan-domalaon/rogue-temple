@@ -15,7 +15,7 @@ var player_health = 1
 
 # Detected flag used to push CHASING state only once when detected
 var detected = false
-export var detection_range = 100000
+export var detection_range = 100
 var detected_pos = Vector2(0, 0)
 
 # State variables
@@ -57,8 +57,8 @@ func _physics_process(delta):
 		knockback()
 	
 	var current_player_pos = get_parent().get_node("player").get_global_position()
-	
-	if (not detected and detect_ray(get_global_position(), current_player_pos)):
+	# If the player is within detection range and is seen, switch to aggressive mode. Detected = true
+	if (not detected and (get_global_position().distance_to(current_player_pos) <= detection_range) and detect_ray(get_global_position(), current_player_pos) ):
 		# Set detected flag to true. Set movement back to normal. Transition to aggressive states
 		detected = true
 		move_speed = original_move_speed
@@ -174,6 +174,16 @@ func state_chasing():
 			move_dir_chase = false
 		else:
 			pathfinding()
+	
+	# Set transitions if humanoid
+	if (is_in_group("melee_mobs")):
+		var weapon_length = get_node("weapon/weapon_area/hitbox").shape.extents.x
+		var distance_vector = (get_global_transform().origin - player_pos).length()
+		if (distance_vector <= weapon_length):
+			state_melee_attacking()
+	elif (is_in_group("ranged_mobs")):
+		if (detect_ray(get_global_position(), current_player_pos) and position.distance_to(player_pos) <= shooting_range):
+			state_ranged_attacking()
 
 
 func state_idle():
