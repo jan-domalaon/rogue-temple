@@ -22,7 +22,6 @@ armor = 2
 move_speed = 85
 character_name = "Bandit Scavenger"
 detection_range = 400
-knockbackable = true
 melee_weapon_path = ""
 ranged_weapon_path = ""
 

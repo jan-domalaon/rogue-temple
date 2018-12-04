@@ -35,6 +35,7 @@ var shooting_range = 200	# Distance where mob can shoot at player
 # Mob stats
 # Amount of XP given
 var mob_xp = 0
+export (Color) var mob_color = Color(1,1,1)
 export var knockbackable = true
 
 
@@ -66,6 +67,7 @@ func _physics_process(delta):
 	# If detected, switch to aggressive states
 	if detected:
 		state_chasing()
+		current_state = "CHASE"
 #	update()
 #
 #
@@ -178,12 +180,14 @@ func state_chasing():
 	# Set transitions if humanoid
 	if (is_in_group("melee_mobs")):
 		var weapon_length = get_node("weapon/weapon_area/hitbox").shape.extents.x
-		var distance_vector = (get_global_transform().origin - player_pos).length()
+		var distance_vector = (get_global_transform().origin - current_player_pos).length()
 		if (distance_vector <= weapon_length):
-			state_melee_attacking()
+			state_melee_attack()
+			current_state = "MELEE_ATTACK"
 	elif (is_in_group("ranged_mobs")):
 		if (detect_ray(get_global_position(), current_player_pos) and position.distance_to(player_pos) <= shooting_range):
-			state_ranged_attacking()
+			state_ranged_attack()
+			current_state = "RANGED_ATTACK"
 
 
 func state_idle():
