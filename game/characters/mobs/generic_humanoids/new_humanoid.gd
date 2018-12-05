@@ -9,7 +9,9 @@ export var ranged_weapon_path = ""
 
 
 func _ready():
+	# Set attack timer time and connectiom
 	$attack_timer.set_wait_time($weapon.get("secondary_as"))
+	$attack_timer.connect("timeout", self, "on_attack_timer_timeout")
 
 
 func state_melee_attack():
@@ -28,5 +30,5 @@ func state_ranged_attack():
 	pass
 
 
-func _on_attack_timer_timeout():
+func on_attack_timer_timeout():
 	can_attack = true

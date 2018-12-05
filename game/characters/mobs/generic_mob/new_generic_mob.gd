@@ -38,6 +38,9 @@ var mob_xp = 0
 export (Color) var mob_color = Color(1,1,1)
 export var knockbackable = true
 
+# For weapon wielding mobs
+var weapon_length = 0
+
 
 func _ready():
 	set_nav(nav_map)
@@ -48,6 +51,10 @@ func _ready():
 	# Start in passive states
 	current_state = "IDLE"
 	state_idle()
+	
+	# Get weapon range for ability to attack
+	if (is_in_group("melee_mobs")):
+		weapon_length = get_node("weapon/weapon_area/hitbox").shape.extents.x
 
 
 func _physics_process(delta):
@@ -163,10 +170,22 @@ func state_chasing():
 	var mob_ne = get_global_position() + Vector2(mob_extents.x, -mob_extents.y)
 	var mob_sw = get_global_position() + Vector2(-mob_extents.x, mob_extents.y)
 	
-	# Use move dir if player can be seen by all corners
+	# If player can be seen, use move dir
+	# If mob is humanoid and can see player and is within weapon range, do weapon attack
 	if (detect_ray(mob_nw, nw) and detect_ray(mob_se, se) and detect_ray(mob_ne, ne) and detect_ray(mob_sw, sw)):
-		movement_dir = (current_player_pos - get_global_position()).normalized()
-		move_dir_chase = true
+		# If this mob is a humanoid
+		# Only chase if the player is not within weapon range
+		if (is_in_group("melee_mobs") and (get_global_transform().origin - current_player_pos).length() <= weapon_length):
+			state_melee_attack()
+			current_state = "MELEE_ATTACK"
+		elif (is_in_group("ranged_mobs") and position.distance_to(player_pos) <= shooting_range):
+			state_ranged_attack()
+			current_state = "RANGED_ATTACK"
+		else:
+			# Use move dir if player can be seen by all corners
+			# Mobs without weapons will "bounce" off the player, dealing damage when touching
+			movement_dir = (current_player_pos - get_global_position()).normalized()
+			move_dir_chase = true
 	# Else use pathfinding. Go to each node of the path
 	else:
 		if (move_dir_chase):
@@ -176,18 +195,6 @@ func state_chasing():
 			move_dir_chase = false
 		else:
 			pathfinding()
-	
-	# Set transitions if humanoid
-	if (is_in_group("melee_mobs")):
-		var weapon_length = get_node("weapon/weapon_area/hitbox").shape.extents.x
-		var distance_vector = (get_global_transform().origin - current_player_pos).length()
-		if (distance_vector <= weapon_length):
-			state_melee_attack()
-			current_state = "MELEE_ATTACK"
-	elif (is_in_group("ranged_mobs")):
-		if (detect_ray(get_global_position(), current_player_pos) and position.distance_to(player_pos) <= shooting_range):
-			state_ranged_attack()
-			current_state = "RANGED_ATTACK"
 
 
 func state_idle():
@@ -233,4 +240,3 @@ func _on_passive_timer_timeout():
 		elif (current_state == "WANDER"):
 			current_state = "IDLE"
 			state_idle()
-

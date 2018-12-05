@@ -13,7 +13,7 @@
 [ext_resource path="res://game/characters/mobs/stacked_water_jelly/stacked_water_jelly.tscn" type="PackedScene" id=11]
 [ext_resource path="res://game/levels/level_change/level_change.tscn" type="PackedScene" id=12]
 [ext_resource path="res://game/characters/mobs/generic_mob/new_generic_mob.tscn" type="PackedScene" id=13]
-[ext_resource path="res://game/characters/mobs/bandit_scavenger/new_bandit_scavenger.tscn" type="PackedScene" id=14]
+[ext_resource path="res://game/characters/mobs/generic_humanoids/generic_melee_humanoid.tscn" type="PackedScene" id=14]
 
 [node name="prototype_level" type="Node"]
 
@@ -103,9 +103,18 @@ _sections_unfolded = [ "Collision", "Pickable", "Transform", "Visibility" ]
 position = Vector2( 44, 78 )
 move_speed = 200
 
-[node name="bandit_scavenger" parent="." index="6" instance=ExtResource( 10 )]
+[node name="bandit_scavenger" parent="." index="6" groups=[
+"loggable",
+"characters",
+] instance=ExtResource( 10 )]
 
 position = Vector2( -9, -56 )
+input_pickable = false
+collision_layer = 2
+collision_mask = 15
+collision/safe_margin = 0.08
+_sections_unfolded = [ "Collision", "Transform", "Visibility" ]
+knockback_factor = 1.0
 
 [node name="stacked_water_jelly" parent="." index="7" instance=ExtResource( 11 )]
 
@@ -145,19 +154,22 @@ mob_color = Color( 1, 1, 1, 1 )
 position = Vector2( -104, 216 )
 mob_color = Color( 1, 1, 1, 1 )
 
-[node name="new_bandit_scavenger" parent="." index="14" groups=[
+[node name="generic_melee_humanoid" parent="." index="14" groups=[
 "loggable",
-"enemies",
 "characters",
 ] instance=ExtResource( 14 )]
 
-position = Vector2( 392, -72 )
+position = Vector2( 392, -68 )
 input_pickable = false
 collision_layer = 2
 collision_mask = 15
 collision/safe_margin = 0.08
 _sections_unfolded = [ "Collision", "Transform", "Visibility" ]
+health = 1
+max_health = 100
+armor = 0
+move_speed = 100
+character_name = "Character"
 knockback_factor = 1.0
-mob_color = Color( 1, 1, 1, 1 )
 
 

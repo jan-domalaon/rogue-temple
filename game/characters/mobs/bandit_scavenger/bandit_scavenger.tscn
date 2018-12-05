@@ -11,8 +11,8 @@ custom_solver_bias = 0.0
 extents = Vector2( 6, 7 )
 
 [node name="bandit_scavenger" groups=[
-"humanoids",
 "melee_mobs",
+"humanoids",
 ] instance=ExtResource( 1 )]
 
 script = ExtResource( 2 )
