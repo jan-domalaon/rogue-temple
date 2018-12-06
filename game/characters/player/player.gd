@@ -24,7 +24,7 @@ var player_level = 1
 # Will change as the player levels
 var next_lvl_xp = 100
 # Current level indicator
-var current_game_level = 0
+var current_game_level = ""
 
 signal picked_up_item(user_name, item_name)
 

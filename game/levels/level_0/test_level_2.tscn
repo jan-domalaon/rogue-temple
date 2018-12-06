@@ -6,7 +6,7 @@
 
 [node name="prototype_level_2" instance=ExtResource( 1 )]
 
-level_name = "Prototype Level 2"
+level_name = "Test Level 2"
 
 [node name="tilemap" parent="nav" index="0"]
 

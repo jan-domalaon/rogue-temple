@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://game/levels/generic_level/generic_level.tscn" type="PackedScene" id=1]
+
+[node name="generic_level" instance=ExtResource( 1 )]
+
+
