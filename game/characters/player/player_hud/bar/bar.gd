@@ -7,7 +7,7 @@ func update_bar_label():
 
 
 func _on_hud_update_max_health_bar(max_health):
-	$".".set_max(max_health)
+	$".".max_value = max_health
 	update_bar_label()
 
 

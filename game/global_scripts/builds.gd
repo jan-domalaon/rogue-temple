@@ -26,8 +26,8 @@ export var HAA_MACEMAN				= {'Equipment': {"Primary": ["Iron Mace", "WEAPON"],
 												 	 "Boots": ["Leather Boots", "BOOTS"]}, 
 								    'Inventory Space': [["Crab Rangoon", "FOODSTUFF"], 
 													   ["Crab Rangoon", "FOODSTUFF"]],
-									'Health': 100,
-									'Max Health': 100}
+									'Health': 20,
+									'Max Health': 20}
 
 
 # Chosen build

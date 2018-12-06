@@ -93,4 +93,6 @@ _sections_unfolded = [ "Anchor", "Margin" ]
 
 [connection signal="health_changed" from="." to="hud_canvas_layer/hud" method="_on_player_health_changed"]
 
+[connection signal="max_health_changed" from="." to="hud_canvas_layer/hud" method="_on_player_max_health_changed"]
+
 
