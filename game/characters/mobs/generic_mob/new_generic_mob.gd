@@ -30,7 +30,7 @@ var move_dir_chase = false
 
 # Attacking logic
 var can_attack = true
-var shooting_range = 200	# Distance where mob can shoot at player
+export var shooting_range = 200		# Distance where mob can shoot at player
 
 # Mob stats
 # Amount of XP given

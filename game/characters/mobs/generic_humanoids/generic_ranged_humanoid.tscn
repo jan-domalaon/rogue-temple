@@ -2,19 +2,20 @@
 
 [ext_resource path="res://game/characters/mobs/generic_mob/new_generic_mob.tscn" type="PackedScene" id=1]
 [ext_resource path="res://game/characters/mobs/generic_humanoids/new_humanoid.gd" type="Script" id=2]
-[ext_resource path="res://game/characters/mobs/bandit_scavenger/bandit_scavenger.png" type="Texture" id=3]
-[ext_resource path="res://game/items/weapons/wooden_staff/wooden_staff.tscn" type="PackedScene" id=4]
+[ext_resource path="res://game/characters/mobs/bandit_archer/bandit_archer.png" type="Texture" id=3]
+[ext_resource path="res://game/items/weapons/ranger_bow/ranger_bow.tscn" type="PackedScene" id=4]
 
-[node name="generic_melee_humanoid" groups=[
-"humanoids",
-"melee_mobs",
+[node name="generic_ranged_humanoid" groups=[
+"ranged_mobs",
 ] instance=ExtResource( 1 )]
 
 script = ExtResource( 2 )
 health = 2.0
 max_health = 2.0
 move_speed = 85
-character_name = "Melee Humanoid"
+character_name = "Ranged Humanoid"
+detection_range = 200
+shooting_range = 200
 melee_weapon_path = ""
 ranged_weapon_path = ""
 
@@ -22,7 +23,7 @@ ranged_weapon_path = ""
 
 texture = ExtResource( 3 )
 
-[node name="weapon" parent="." index="7" instance=ExtResource( 4 )]
+[node name="weapon" parent="." index="8" instance=ExtResource( 4 )]
 
 visible = false
 modulate = Color( 0.501961, 0.501961, 0.501961, 1 )

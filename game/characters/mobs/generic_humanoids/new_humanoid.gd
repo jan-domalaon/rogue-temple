@@ -27,7 +27,23 @@ func state_melee_attack():
 
 
 func state_ranged_attack():
-	pass
+	# Each ranged weapon has a different shoot function
+	if ($weapon.weapon_type == "BOW"):
+		# Fire bow when can_fire is true
+		if ($weapon.can_fire):
+			movement_dir = Vector2(0,0)
+			$weapon.fire_bow()
+		else:
+			# Draw bow if bow can't fire
+			$weapon.make_draw_bow()
+			if ($weapon/draw_timer.is_stopped()):
+				$weapon/draw_timer.start()
+		
+		# Switch to CHASING state if humanoid can't see player
+		if (not detect_ray(get_global_position(), get_parent().get_node("player").get_global_position())):
+			# Reset bow
+			$weapon.make_reset_bow()
+			current_state = "CHASE"
 
 
 func on_attack_timer_timeout():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://game/levels/generic_level/generic_level.gd" type="Script" id=1]
 [ext_resource path="res://game/levels/level_0/tileset/tileset.tres" type="TileSet" id=2]
@@ -14,8 +14,9 @@
 [ext_resource path="res://game/levels/level_change/level_change.tscn" type="PackedScene" id=12]
 [ext_resource path="res://game/characters/mobs/generic_mob/new_generic_mob.tscn" type="PackedScene" id=13]
 [ext_resource path="res://game/characters/mobs/generic_humanoids/generic_melee_humanoid.tscn" type="PackedScene" id=14]
+[ext_resource path="res://game/characters/mobs/generic_humanoids/generic_ranged_humanoid.tscn" type="PackedScene" id=15]
 
-[node name="prototype_level" type="Node"]
+[node name="prototype_level" type="Node" index="0"]
 
 script = ExtResource( 1 )
 level_name = "Test Level 0"
@@ -103,18 +104,9 @@ _sections_unfolded = [ "Collision", "Pickable", "Transform", "Visibility" ]
 position = Vector2( 44, 78 )
 move_speed = 200
 
-[node name="bandit_scavenger" parent="." index="6" groups=[
-"loggable",
-"characters",
-] instance=ExtResource( 10 )]
+[node name="bandit_scavenger" parent="." index="6" instance=ExtResource( 10 )]
 
 position = Vector2( -9, -56 )
-input_pickable = false
-collision_layer = 2
-collision_mask = 15
-collision/safe_margin = 0.08
-_sections_unfolded = [ "Collision", "Transform", "Visibility" ]
-knockback_factor = 1.0
 
 [node name="stacked_water_jelly" parent="." index="7" instance=ExtResource( 11 )]
 
@@ -142,17 +134,14 @@ next_level = "res://game/levels/level_0/test_level_2.tscn"
 [node name="new_generic_mob" parent="." index="11" instance=ExtResource( 13 )]
 
 position = Vector2( -16, 192 )
-mob_color = Color( 1, 1, 1, 1 )
 
 [node name="new_generic_mob2" parent="." index="12" instance=ExtResource( 13 )]
 
 position = Vector2( -56, 184 )
-mob_color = Color( 1, 1, 1, 1 )
 
 [node name="new_generic_mob3" parent="." index="13" instance=ExtResource( 13 )]
 
 position = Vector2( -104, 216 )
-mob_color = Color( 1, 1, 1, 1 )
 
 [node name="generic_melee_humanoid" parent="." index="14" groups=[
 "loggable",
@@ -165,11 +154,21 @@ collision_layer = 2
 collision_mask = 15
 collision/safe_margin = 0.08
 _sections_unfolded = [ "Collision", "Transform", "Visibility" ]
-health = 1
-max_health = 100
 armor = 0
-move_speed = 100
-character_name = "Character"
+knockback_factor = 1.0
+
+[node name="generic_ranged_humanoid" parent="." index="15" groups=[
+"loggable",
+"characters",
+] instance=ExtResource( 15 )]
+
+position = Vector2( 256, 36 )
+input_pickable = false
+collision_layer = 2
+collision_mask = 15
+collision/safe_margin = 0.08
+_sections_unfolded = [ "Collision", "Transform", "Visibility" ]
+armor = 0
 knockback_factor = 1.0
 
 

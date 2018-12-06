@@ -9,6 +9,7 @@
 
 script = ExtResource( 2 )
 detection_range = 100
+shooting_range = 200
 mob_color = Color( 1, 1, 1, 1 )
 knockbackable = true
 
