@@ -68,6 +68,8 @@ func load_inventory():
 
 
 func get_game_level():
+	# For continuing game, load the game level filepath saved on save.json
+	var game_level_filepath
 	# Try loading a save file
 	var save_file = File.new()
 	if save_file.file_exists(SAVE_PATH):
@@ -75,11 +77,13 @@ func get_game_level():
 		save_file.open(SAVE_PATH, File.READ)
 		var data_dict = {}
 		data_dict = parse_json(save_file.get_as_text())
-		# Get the game level from player node
 		
-		pass
+		# Get the game level from player node
+		game_level_filepath = data_dict["player"].next_level_filepath
 	# Close file
+	save_file.close()
 	# Return game level
+	return game_level_filepath
 
 
 func clear_save():

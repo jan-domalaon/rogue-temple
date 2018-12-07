@@ -23,8 +23,8 @@ var player_xp = 0
 var player_level = 1
 # Will change as the player levels
 var next_lvl_xp = 100
-# Current level indicator
-var current_game_level = ""
+# Level filename to be saved
+var next_level_filepath = ""
 
 signal picked_up_item(user_name, item_name)
 
@@ -127,6 +127,8 @@ func _input(event):
 				interacted = true
 			# If the interactable is a level change
 			elif ((interactables[0].is_in_group("level_change"))):
+				# Save the level the player will be on
+				next_level_filepath = interactables[0].next_level
 				interactables[0].on_level_change()
 			# If the interactable is a door
 			elif (interactables[0].get_parent().is_in_group("doors")):
@@ -225,7 +227,7 @@ func save_data():
 		max_health = max_health,
 		current_health = health,
 		move_speed = move_speed,
-		current_game_level = current_game_level
+		next_level_filepath = next_level_filepath
 	}
 	return save_dict
 
@@ -235,4 +237,4 @@ func load_data(dict):
 	max_health = dict["max_health"]
 	health = dict["current_health"]
 	move_speed = dict["move_speed"]
-	current_game_level = dict["current_game_level"]
+	next_level_filepath = dict["next_level_filepath"]
