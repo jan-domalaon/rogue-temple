@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://game/characters/mobs/generic_mob/new_generic_mob.tscn" type="PackedScene" id=1]
 [ext_resource path="res://game/characters/mobs/generic_humanoids/new_humanoid.gd" type="Script" id=2]
 [ext_resource path="res://game/characters/mobs/bandit_scavenger/bandit_scavenger.png" type="Texture" id=3]
-[ext_resource path="res://game/items/weapons/wooden_staff/wooden_staff.tscn" type="PackedScene" id=4]
 
 [node name="generic_melee_humanoid" groups=[
 "humanoids",
@@ -15,19 +14,13 @@ health = 2.0
 max_health = 2.0
 move_speed = 85
 character_name = "Melee Humanoid"
-melee_weapon_path = ""
+mob_color = Color( 0.501961, 0.501961, 0.501961, 1 )
+melee_weapon_path = "res://game/items/weapons/wooden_staff/wooden_staff.tscn"
 ranged_weapon_path = ""
+unique_weapon = false
 
 [node name="sprite" parent="." index="0"]
 
 texture = ExtResource( 3 )
-
-[node name="weapon" parent="." index="7" instance=ExtResource( 4 )]
-
-visible = false
-modulate = Color( 0.501961, 0.501961, 0.501961, 1 )
-scale = Vector2( 0.5, 0.5 )
-_sections_unfolded = [ "Transform", "Visibility" ]
-user_type = "mob"
 
 

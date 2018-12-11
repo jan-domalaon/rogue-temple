@@ -52,10 +52,6 @@ func _ready():
 	current_state = "IDLE"
 	state_idle()
 	
-	# Get weapon range for ability to attack
-	if (is_in_group("melee_mobs")):
-		weapon_length = get_node("weapon/weapon_area/hitbox").shape.extents.x
-	
 	# Set mob health bar value
 	$mob_health_bar.max_value = max_health
 	$mob_health_bar.value = health
