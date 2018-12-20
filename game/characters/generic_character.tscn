@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://game/characters/character.gd" type="Script" id=1]
 [ext_resource path="res://game/characters/generic_character.png" type="Texture" id=2]
@@ -15,7 +15,37 @@ extents = Vector2( 6, 7 )
 
 [sub_resource type="Animation" id=3]
 
-resource_name = "flicker"
+resource_name = "character_death"
+length = 1.0
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("sprite:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 0.409159, 4 ),
+"update": 0,
+"values": [ 0.0, 90.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("sprite:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.390625, 0.390625, 0.390625, 1 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+
 length = 0.5
 loop = false
 step = 0.05
@@ -32,7 +62,52 @@ tracks/0/keys = {
 "values": [ true, false, true, false, true, false, false, true, false, true, false, true ]
 }
 
-[node name="generic_character" type="KinematicBody2D" groups=[
+[sub_resource type="Animation" id=5]
+
+resource_name = "player_death"
+length = 2.0
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("sprite:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 0.409159, 4 ),
+"update": 0,
+"values": [ 0.0, 90.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("sprite:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.390625, 0.390625, 0.390625, 1 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("hud_canvas_layer/death_screen")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "show"
+} ]
+}
+
+[node name="generic_character" type="KinematicBody2D" index="0" groups=[
 "characters",
 "loggable",
 ]]
@@ -53,7 +128,7 @@ knockback_factor = 1.0
 [node name="sprite" type="Sprite" parent="." index="0"]
 
 texture = ExtResource( 2 )
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Transform", "Visibility" ]
 
 [node name="knockback_area" type="Area2D" parent="." index="1"]
 
@@ -92,7 +167,9 @@ autoplay = ""
 playback_process_mode = 1
 playback_default_blend_time = 0.0
 playback_speed = 1.0
-anims/flicker = SubResource( 3 )
+anims/character_death = SubResource( 3 )
+anims/flicker = SubResource( 4 )
+anims/player_death = SubResource( 5 )
 blend_times = [  ]
 
 [connection signal="timeout" from="flicker_timer" to="." method="_on_flicker_timer_timeout"]

@@ -48,6 +48,9 @@ signal opened_door(user_name)
 signal character_damaged(victim_name, dmg, dmg_type)
 signal character_died(victim_name)
 
+# Death screen signal
+signal show_death_screen
+
 
 func _ready():
 	$flicker_timer.set_wait_time(FLICKER_TIME)
@@ -58,13 +61,6 @@ func _ready():
 	emit_signal("health_changed", health)
 	
 	print("character.gd health " + str(health))
-
-
-func _process(delta):
-	if (health <= 0):
-		print(get_name() + ' is deadaz')
-		if (not "player" in get_groups()):
-			queue_free()
 
 
 func movement():
@@ -145,9 +141,26 @@ func receive_phys_damage(dmg, dmg_type):
 		
 		# Emit signals for game log
 		emit_signal("character_damaged", character_name, dmg, dmg_type)
+		
+		# Character is dead
 		if (health <= 0):
-			# Emit death signal when character has health <= 0
+			print(get_name() + ' is deadaz')
+			# Emit death message to game log
 			emit_signal("character_died", character_name)
+			if (not is_in_group("player")):
+				# Free character node from memory
+				queue_free()
+			else:
+				# Player has died
+				# Turn off player input to player node
+				$hitbox.set_disabled(true)
+				# Play death animation
+				$animation_player.play("player_death")
+				emit_signal("health_changed", 0)
+				set_process_input(false)
+				set_process(false)
+				set_physics_process(false)
+				# Show death screen, pause game
 
 
 func flicker():
