@@ -19,13 +19,14 @@ func _ready():
 
 func on_player_death():
 	# Get a random death message and display to death message node
-	var death_text = DEATH_MESSAGES[randi()%DEATH_MESSAGES.size()+1]
+	var death_text = DEATH_MESSAGES[randi()%DEATH_MESSAGES.size()]
 	$VBoxContainer/message_container/death_message.set_text(death_text)
 
 
 func _on_load_button_pressed():
-	# Load previous save
-	save.load_game()
+	# Reload level by reloading the current level
+	var current_level_filepath = save.get_game_level()
+	get_tree().change_scene(current_level_filepath)
 
 
 func _on_return_button_pressed():

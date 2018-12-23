@@ -13,7 +13,6 @@ func _on_new_game_pressed():
 	# For now, load level and clear previous save
 	save.clear_save()
 	get_tree().change_scene('res://game/levels/level_0/test_level.tscn')
-	
 
 
 func _on_load_pressed():
