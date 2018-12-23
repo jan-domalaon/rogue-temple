@@ -90,3 +90,7 @@ func clear_save():
 	var dir = Directory.new()
 	dir.remove(SAVE_PATH)
 
+
+func save_file_exists():
+	var save_file = File.new()
+	return save_file.file_exists(SAVE_PATH)

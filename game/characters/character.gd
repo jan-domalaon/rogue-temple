@@ -49,7 +49,7 @@ signal character_damaged(victim_name, dmg, dmg_type)
 signal character_died(victim_name)
 
 # Death screen signal
-signal show_death_screen
+signal player_died
 
 
 func _ready():
@@ -157,6 +157,7 @@ func receive_phys_damage(dmg, dmg_type):
 				# Play death animation
 				$animation_player.play("player_death")
 				emit_signal("health_changed", 0)
+				emit_signal("player_died")
 				set_process_input(false)
 				set_process(false)
 				set_physics_process(false)
