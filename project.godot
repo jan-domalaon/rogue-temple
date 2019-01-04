@@ -24,6 +24,7 @@ player_variables="*res://game/characters/player/STUFF TO PORT AND REORGANIZE/pla
 save="*res://game/global_scripts/save.gd"
 builds="*res://game/global_scripts/builds.gd"
 game_text="*res://game/global_scripts/game_text.gd"
+pitfall="*res://game/levels/traps/pit_area/pitfall_global.gd"
 
 [display]
 

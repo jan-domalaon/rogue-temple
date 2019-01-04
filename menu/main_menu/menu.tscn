@@ -55,7 +55,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 0, 0, 1 ), Color( 0.945313, 0, 1, 1 ), Color( 0, 0.742188, 1, 1 ), Color( 0, 1, 0.296875, 1 ), Color( 1, 0.960938, 0, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[node name="menu" type="Container"]
+[node name="menu" type="Container" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -170,7 +170,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 0
 custom_fonts/font = ExtResource( 4 )
-text = "Public Build 1: \"Temple\""
+text = "Test Build #1"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1

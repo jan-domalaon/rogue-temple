@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://game/characters/character.gd" type="Script" id=1]
 [ext_resource path="res://game/characters/generic_character.png" type="Texture" id=2]
@@ -46,6 +46,63 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=4]
 
+resource_name = "fall_anim"
+length = 1.5
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 4 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.25, 0.25 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("sprite:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, -4 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("sprite:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 0.25 ),
+"update": 0,
+"values": [ 0.0, 285.0 ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 1.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
+
+[sub_resource type="Animation" id=5]
+
 length = 0.5
 loop = false
 step = 0.05
@@ -62,9 +119,8 @@ tracks/0/keys = {
 "values": [ true, false, true, false, true, false, false, true, false, true, false, true ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=6]
 
-resource_name = "player_death"
 length = 2.0
 loop = false
 step = 0.1
@@ -108,8 +164,8 @@ tracks/2/keys = {
 }
 
 [node name="generic_character" type="KinematicBody2D" index="0" groups=[
-"characters",
 "loggable",
+"characters",
 ]]
 
 input_pickable = false
@@ -127,6 +183,9 @@ knockback_factor = 1.0
 
 [node name="sprite" type="Sprite" parent="." index="0"]
 
+self_modulate = Color( 1, 1, 1, 0 )
+rotation = 4.97419
+scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 2 )
 _sections_unfolded = [ "Transform", "Visibility" ]
 
@@ -168,8 +227,9 @@ playback_process_mode = 1
 playback_default_blend_time = 0.0
 playback_speed = 1.0
 anims/character_death = SubResource( 3 )
-anims/flicker = SubResource( 4 )
-anims/player_death = SubResource( 5 )
+anims/fall_anim = SubResource( 4 )
+anims/flicker = SubResource( 5 )
+anims/player_death = SubResource( 6 )
 blend_times = [  ]
 
 [connection signal="timeout" from="flicker_timer" to="." method="_on_flicker_timer_timeout"]

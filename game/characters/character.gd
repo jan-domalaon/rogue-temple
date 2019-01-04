@@ -36,6 +36,9 @@ var has_shield = false
 var shield_up = false
 var shield_ready = false
 
+# Flag for pitfall trap
+var pitfall = false
+
 # Possible movement states for a character
 enum State {IDLE, MOVING, ATTACKING, STUNNED}
 
@@ -112,7 +115,6 @@ func receive_phys_damage(dmg, dmg_type):
 #	#print(ray.collider.get_parent().get_groups())
 #	if ("player" in ray.collider.get_parent().get_groups() and get_parent().get_node(attacker).is_in_group("player")):
 	
-	print("hit!")
 	# If the user has a shield and it is up, the shield will absorb dmg
 	# If damage is pure, goes through damage
 	if (shield_ready and shield_up and dmg_type != "x"):
@@ -220,3 +222,21 @@ func connect_shield():
 	$shield.connect("shield_broken", self, "on_shield_broken")
 	$shield.connect("shield_ready", self, "on_shield_ready")
 
+
+func on_pitfall():
+	# Plays when the character enters a pit trap area (crevice, false trapdoor, etc.)
+	
+	# Disable processes and hitbox
+	set_process_input(false)
+	set_process(false)
+	set_physics_process(false)
+	$hitbox.set_disabled(true)
+	pitfall = true
+	
+	# Play fall anim
+	if is_in_group("player"):
+		$animation_player.play("player_fall_anim")
+	else:
+		$animation_player.play("fall_anim")
+	
+	

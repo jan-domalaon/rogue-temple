@@ -8,7 +8,7 @@
 custom_solver_bias = 0.0
 extents = Vector2( 10, 10 )
 
-[node name="level_change" type="Area2D" groups=[
+[node name="level_change" type="Area2D" index="0" groups=[
 "level_change",
 ]]
 
