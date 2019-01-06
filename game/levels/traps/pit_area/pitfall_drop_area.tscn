@@ -13,4 +13,6 @@ audio_bus_override = false
 audio_bus_name = "Master"
 script = ExtResource( 1 )
 
+[node name="drop_area_shape" type="CollisionShape2D" parent="." index="0"]
+
 

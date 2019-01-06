@@ -5,7 +5,7 @@
 [ext_resource path="res://game/levels/level_0/tileset/tileset.tres" type="TileSet" id=3]
 [ext_resource path="res://game/levels/level_change/level_change.tscn" type="PackedScene" id=4]
 
-[node name="generic_level" type="Node" index="0"]
+[node name="generic_level" type="Node"]
 
 script = ExtResource( 1 )
 level_name = "Generic Level"
@@ -71,11 +71,17 @@ _sections_unfolded = [ "Cell" ]
 
 [node name="level_change_container" type="Node" parent="." index="4"]
 
+editor/display_folded = true
+
 [node name="level_change" parent="level_change_container" index="0" instance=ExtResource( 4 )]
 
 position = Vector2( 224, 0 )
 
-[node name="player_start" type="Position2D" parent="." index="5"]
+[node name="traps" type="Node" parent="." index="5"]
+
+[node name="pit_drop_areas" type="Node" parent="." index="6"]
+
+[node name="player_start" type="Position2D" parent="." index="7"]
 
 position = Vector2( 16, 96 )
 

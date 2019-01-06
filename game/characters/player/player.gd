@@ -221,6 +221,15 @@ func reset_shield():
 		has_shield = false
 
 
+func pitfall_scene_change():
+	print("level changed!")
+	# Save game
+	save.save_game()
+	# Indicate that player is changing level
+	save.next_level = true
+	get_tree().change_scene(next_level_filepath)
+
+
 func save_data():
 	# Save stats wanted when changing levels
 	var save_dict = {

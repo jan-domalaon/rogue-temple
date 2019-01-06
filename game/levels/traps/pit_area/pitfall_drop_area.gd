@@ -5,5 +5,24 @@ extends Area2D
 
 
 func _ready():
+	# Get extents of drop area
+	var center_pos = $drop_area_shape.position + $".".position
+	var drop_area_extents = $drop_area_shape.shape.extents
+	
 	# Get all characters in pitfall list and place them on random positions in the area
-	pass
+	for char_filepath in pitfall.pitfallen_chars:
+		if (char_filepath != "res://game/characters/player/player.tscn"):
+			# Instance every character in pitfallen character
+			var char_instance = load(char_filepath).instance()
+			
+			# Choose a random position within the drop area
+			char_instance.position.x = fmod(randi(), drop_area_extents.x) - (drop_area_extents.x/2) + (center_pos.x)
+			char_instance.position.y = fmod(randi(), drop_area_extents.y) - (drop_area_extents.y/2) + (center_pos.y)
+			
+			# Add instance to scene
+			add_child(char_instance)
+		else:
+			# This node is the player
+			get_parent().get_parent().get_node("player").position.x = fmod(randi(), drop_area_extents.x) - (drop_area_extents.x/2) + (center_pos.x)
+			get_parent().get_parent().get_node("player").position.y = fmod(randi(), drop_area_extents.y) - (drop_area_extents.y/2) + (center_pos.y)
+		# Level change is in charge of clearing pitfall global vars

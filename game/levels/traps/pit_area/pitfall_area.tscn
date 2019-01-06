@@ -14,6 +14,8 @@ audio_bus_name = "Master"
 script = ExtResource( 1 )
 next_level = ""
 
+[node name="pit_collision_shape" type="CollisionShape2D" parent="." index="0"]
+
 [connection signal="body_entered" from="." to="." method="_on_pit_area_body_entered"]
 
 

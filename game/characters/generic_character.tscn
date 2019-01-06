@@ -183,9 +183,6 @@ knockback_factor = 1.0
 
 [node name="sprite" type="Sprite" parent="." index="0"]
 
-self_modulate = Color( 1, 1, 1, 0 )
-rotation = 4.97419
-scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 2 )
 _sections_unfolded = [ "Transform", "Visibility" ]
 

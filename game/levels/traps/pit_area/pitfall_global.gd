@@ -6,7 +6,5 @@ extends Node
 
 
 var player_pitfall = false
-
-
-func _ready():
-	pass
+# Stores the filepath of pitfallen characters
+var pitfallen_chars = []
