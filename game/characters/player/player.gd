@@ -26,6 +26,7 @@ var next_lvl_xp = 100
 # Level filename to be saved
 var next_level_filepath = ""
 
+# Player-specific game log signals
 signal picked_up_item(user_name, item_name)
 
 

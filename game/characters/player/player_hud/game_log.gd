@@ -13,9 +13,10 @@ func _ready():
 	var printable_nodes = get_tree().get_nodes_in_group("loggable")
 	for node in printable_nodes:
 		if (node.is_in_group("characters")):
-			# Connect character specific signals (dmg)
+			# Connect character specific signals (dmg, died, pitfallen)
 			node.connect("character_damaged", self, "on_character_damaged")
 			node.connect("character_died", self, "on_character_died")
+			node.connect("character_pitfallen", self, "on_character_pitfallen")
 			# Player specific signals
 			if (node.is_in_group("player")):
 				node.connect("opened_door", self, "on_opened_door")
@@ -82,6 +83,10 @@ func on_flipped_switch(user_name):
 func on_triggered_trap(victim_name, trap_name):
 	# Print statement when a trap is triggered. Just indicate trap name and victim
 	pass
+
+
+func on_character_pitfallen(victim_name):
+	print_text(game_text.character_pitfallen(victim_name), game_text.COLOR_INTERACT)
 
 
 func on_pickup_item(user_name, item_name):

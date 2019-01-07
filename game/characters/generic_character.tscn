@@ -163,9 +163,9 @@ tracks/2/keys = {
 } ]
 }
 
-[node name="generic_character" type="KinematicBody2D" index="0" groups=[
-"loggable",
+[node name="generic_character" type="KinematicBody2D" groups=[
 "characters",
+"loggable",
 ]]
 
 input_pickable = false

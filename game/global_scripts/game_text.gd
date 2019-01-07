@@ -34,6 +34,10 @@ func character_died(victim_name):
 	return victim_name + " has died!"
 
 
+func character_pitfallen(victim_name):
+	return victim_name + " has fallen into a hole!"
+
+
 func opened_door(user_name):
 	# For now, only player prints a statement when opening a door
 	return user_name + " has opened a door."

@@ -50,6 +50,7 @@ signal health_changed(health)
 signal opened_door(user_name)
 signal character_damaged(victim_name, dmg, dmg_type)
 signal character_died(victim_name)
+signal character_pitfallen(victim_name)
 
 # Death screen signal
 signal player_died
@@ -233,10 +234,12 @@ func on_pitfall():
 	$hitbox.set_disabled(true)
 	pitfall = true
 	
+	# Print message in game log
+	emit_signal("character_pitfallen", character_name)
+	
 	# Play fall anim
 	if is_in_group("player"):
 		$animation_player.play("player_fall_anim")
 	else:
 		$animation_player.play("fall_anim")
-	
 	
