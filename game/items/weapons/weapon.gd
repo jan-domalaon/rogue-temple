@@ -54,7 +54,7 @@ func _ready():
 func _on_weapon_area_body_entered(body):
 	var map_collision = false
 	var enemy_group
-	
+
 	# Verify the owner of this weapon. Get correct enemy group
 	if ("player" in get_parent().get_groups()):
 		enemy_group = "enemies"
@@ -63,10 +63,14 @@ func _on_weapon_area_body_entered(body):
 	# Deliver damage to the user's enemy group
 	# Do not deliver damage if the weapon touches a wall
 	if (body.is_in_group(enemy_group) and (body.get("flickering") == false)):
-		if (attack_type == "primary"):
-			body.receive_phys_damage(primary_damage, primary_dmg_type)
-		elif (attack_type == "secondary"):
-			body.receive_phys_damage(secondary_damage, secondary_dmg_type)
+		# Check if weapon's parent has a direct raycast towards the enemy
+		var wall_detect_ray  = get_world_2d().direct_space_state.intersect_ray(get_parent().get_global_position(), body.get_global_position(), get_parent().raycast_ignore_areas, $weapon_area.collision_mask)
+		print(wall_detect_ray.collider.get_groups())
+		if (wall_detect_ray.collider.is_in_group(enemy_group)):
+			if (attack_type == "primary"):
+				body.receive_phys_damage(primary_damage, primary_dmg_type)
+			elif (attack_type == "secondary"):
+				body.receive_phys_damage(secondary_damage, secondary_dmg_type)
 
 
 func make_swing():

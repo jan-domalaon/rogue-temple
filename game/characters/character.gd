@@ -42,6 +42,10 @@ var pitfall = false
 # Possible movement states for a character
 enum State {IDLE, MOVING, ATTACKING, STUNNED}
 
+# For "weapon hitting chars through wall"/weapon raycast detection
+onready var world_space = get_world_2d().direct_space_state
+onready var raycast_ignore_areas = [self, $knockback_area]
+
 # Signals
 signal shoot(projectile, direction, location)
 signal health_changed(health)
@@ -102,20 +106,6 @@ func knockback():
 
 
 func receive_phys_damage(dmg, dmg_type):
-	# Check if the damage given was through walls. No dmg should be given if true
-#	var attacker_pos = get_parent().get_node(attacker).get_global_position()
-#	var world = get_world_2d().direct_space_state
-#	var ignore_areas
-#	if ("humanoids" in get_groups()):
-#		ignore_areas = [self, $knockback_area]
-#	else:
-#		ignore_areas = [self, $knockback_area, $weapon]
-#	print(attacker_pos)
-#	# Ignore mob mask (1101 == 13). Bit mask is in binary
-#	var ray = world.intersect_ray(get_global_position(), attacker_pos, [self], 13)
-#	#print(ray.collider.get_parent().get_groups())
-#	if ("player" in ray.collider.get_parent().get_groups() and get_parent().get_node(attacker).is_in_group("player")):
-	
 	# If the user has a shield and it is up, the shield will absorb dmg
 	# If damage is pure, goes through damage
 	if (shield_ready and shield_up and dmg_type != "x"):

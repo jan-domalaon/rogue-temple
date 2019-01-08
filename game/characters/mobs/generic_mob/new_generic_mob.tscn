@@ -16,6 +16,10 @@ shooting_range = 200
 mob_color = Color( 1, 1, 1, 1 )
 knockbackable = true
 
+[node name="knockback_area" parent="." index="1" groups=[
+"enemies",
+]]
+
 [node name="pathfinding_timer" type="Timer" parent="." index="5"]
 
 process_mode = 1

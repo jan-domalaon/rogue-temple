@@ -55,7 +55,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 0, 0, 1 ), Color( 0.945313, 0, 1, 1 ), Color( 0, 0.742188, 1, 1 ), Color( 0, 1, 0.296875, 1 ), Color( 1, 0.960938, 0, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[node name="menu" type="Container" index="0"]
+[node name="menu" type="Container"]
 
 anchor_left = 0.0
 anchor_top = 0.0
