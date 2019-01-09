@@ -451,7 +451,6 @@ __meta__ = {
 
 [node name="player_equipment" type="NinePatchRect" parent="MarginContainer/HBoxContainer/player_info_container" index="0"]
 
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -474,6 +473,7 @@ __meta__ = {
 
 [node name="CenterContainer2" type="CenterContainer" parent="MarginContainer/HBoxContainer/player_info_container/player_equipment" index="0"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0

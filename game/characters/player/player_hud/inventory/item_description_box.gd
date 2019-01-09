@@ -11,6 +11,7 @@ const SECONDARY_DMG_TEXT = "Secondary Damage: "
 const SHIELD_TEXT = "Shield HP: "
 const ARMOR_TEXT = "Armor Value: "
 const FOOD_TEXT = "Nutritional Value: "
+const WEAPON_LEVEL_TEXT = "Level Requirement: "
 
 # Current slot in the description
 var slot_name

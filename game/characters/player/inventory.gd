@@ -97,26 +97,34 @@ func equip(slot_name):
 	var inventory_item = inventory_space[int(slot_name)]
 	var item_instance = instance_item(inventory_item)
 	
-	# Determine whether armor or weapon
-	var equipment_slot
-	if item_instance.is_in_group("armor_pieces"):
-		# Get appropriate armor piece type (gloves, boots, etc) for equipment slot
-		equipment_slot = item_instance.get("item_type").capitalize()
-	elif item_instance.is_in_group("shields"):
-		equipment_slot = "Shield"
+	# Check if the player meets the equipment's level requirement. Only equip if >= level req
+	if (get_parent().player_level >= item_instance.level_req):
+		# Determine whether armor or weapon
+		var equipment_slot
+		if item_instance.is_in_group("armor_pieces"):
+			# Get appropriate armor piece type (gloves, boots, etc) for equipment slot
+			equipment_slot = item_instance.get("item_type").capitalize()
+		elif item_instance.is_in_group("shields"):
+			equipment_slot = "Shield"
+		else:
+			# This item is a weapon. Put in secondary slot.
+			equipment_slot = "Secondary"
+		
+		# Unequip current equipment slot, if there's an item in that slot
+		if (equipment[equipment_slot] != null):
+			unequip(equipment_slot)
+		# Equip desired item to slot
+		equipment[equipment_slot] = inventory_item
+		# Remove item from inventory_space
+		inventory_space[int(slot_name)] = null
+		# Update UI and update player
+		update_inventory_ui()
+		return true
 	else:
-		# This item is a weapon. Put in secondary slot.
-		equipment_slot = "Secondary"
-	
-	# Unequip current equipment slot, if there's an item in that slot
-	if (equipment[equipment_slot] != null):
-		unequip(equipment_slot)
-	# Equip desired item to slot
-	equipment[equipment_slot] = inventory_item
-	# Remove item from inventory_space
-	inventory_space[int(slot_name)] = null
-	# Update UI and update player
-	update_inventory_ui()
+		# Emit signal for displaying level locked message
+		emit_signal("equipment_level_locked_from_player")
+		print("player level lower than equipment level requirement!")
+		return false
 
 
 func unequip(slot_name):
@@ -299,16 +307,16 @@ func on_item_unequipped():
 
 
 func on_item_equipped():
-	print("equipping item!")
-	equip(selected_slot)
-	# Add weaponry nodes to player
-	get_parent().reset_weaponry()
-	get_parent().get_weaponry(false)
-	# Add shield nodes to player
-	get_parent().reset_shield()
-	get_parent().get_shield(false)
-	# Reset armor value of player
-	get_parent().armor = get_armor_value()
+	if (equip(selected_slot)):
+		print("equipping item!")
+		# Add weaponry nodes to player
+		get_parent().reset_weaponry()
+		get_parent().get_weaponry(false)
+		# Add shield nodes to player
+		get_parent().reset_shield()
+		get_parent().get_shield(false)
+		# Reset armor value of player
+		get_parent().armor = get_armor_value()
 
 
 func primary_unequipped(slot_name):

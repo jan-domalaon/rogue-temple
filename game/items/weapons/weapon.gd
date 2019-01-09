@@ -29,6 +29,8 @@ export var secondary_as = 0.5
 export var weapon_type = "mace"
 # Indicates if this weapon is a dropped item
 export var dropped_item = false
+# Level required for player to use this weapon (0 indicates no requirement)
+export var level_req = 0
 
 # Hitbox shape used for disable/enable collision
 var old_shape = null

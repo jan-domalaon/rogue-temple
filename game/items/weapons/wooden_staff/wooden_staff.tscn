@@ -8,7 +8,7 @@
 custom_solver_bias = 0.0
 extents = Vector2( 24, 2 )
 
-[node name="wooden_staff" index="0" instance=ExtResource( 1 )]
+[node name="wooden_staff" instance=ExtResource( 1 )]
 
 weapon_name = "Wooden Staff"
 primary_damage = 4
@@ -17,6 +17,7 @@ primary_dmg_type = "b"
 primary_as = 0.7
 secondary_as = 0.6
 weapon_type = "STAFF"
+level_req = 0
 
 [node name="hitbox" parent="weapon_area" index="0"]
 

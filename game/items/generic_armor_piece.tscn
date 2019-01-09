@@ -12,6 +12,7 @@ script = ExtResource( 2 )
 item_name = "Armor Piece (Generic)"
 item_type = "ARMOR"
 armor_value = 1
+level_req = 0
 
 [node name="sprite" parent="." index="0"]
 

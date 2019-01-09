@@ -1,6 +1,6 @@
 # By Jan Domalaon
 
-# Player script. Mostly controls input.
+# Player script. Controls player input, experience, health, camera
 
 
 extends "res://game/characters/character.gd"
