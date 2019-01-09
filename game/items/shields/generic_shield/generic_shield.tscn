@@ -9,6 +9,7 @@ custom_solver_bias = 0.0
 extents = Vector2( 10, 10 )
 
 [node name="generic_shield" type="Area2D" groups=[
+"equipment",
 "shields",
 ]]
 
@@ -29,6 +30,7 @@ partial_regen_cooldown = 2
 regen_time = 0.5
 shield_name = "Shield (Generic)"
 dropped_item = false
+level_req = 0
 
 [node name="sprite" type="Sprite" parent="." index="0"]
 

@@ -13,8 +13,9 @@ extents = Vector2( 16, 3 )
 custom_solver_bias = 0.0
 extents = Vector2( 16, 16 )
 
-[node name="generic_weapon" type="Node2D" index="0" groups=[
+[node name="generic_weapon" type="Node2D" groups=[
 "weapons",
+"equipment",
 ]]
 
 script = ExtResource( 1 )
@@ -29,6 +30,7 @@ primary_as = 0.75
 secondary_as = 0.5
 weapon_type = "MACE"
 dropped_item = false
+level_req = 0
 
 [node name="weapon_area" type="Area2D" parent="." index="0"]
 

@@ -16,7 +16,7 @@ use_filter = false
 font_data = ExtResource( 5 )
 _sections_unfolded = [ "Font", "Settings" ]
 
-[node name="item_info" type="NinePatchRect"]
+[node name="item_info" type="NinePatchRect" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -75,7 +75,6 @@ __meta__ = {
 
 [node name="NinePatchRect" type="NinePatchRect" parent="CenterContainer/description_container" index="0"]
 
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -97,6 +96,7 @@ __meta__ = {
 
 [node name="MarginContainer" type="MarginContainer" parent="CenterContainer/description_container/NinePatchRect" index="0"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
@@ -157,7 +157,6 @@ _sections_unfolded = [ "Size Flags" ]
 
 [node name="CenterContainer" type="CenterContainer" parent="CenterContainer/description_container/VBoxContainer" index="0"]
 
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -184,9 +183,9 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 104.0
-margin_top = 29.0
+margin_top = 16.0
 margin_right = 296.0
-margin_bottom = 140.0
+margin_bottom = 153.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -228,7 +227,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 37.0
 margin_right = 192.0
-margin_bottom = 111.0
+margin_bottom = 137.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -302,6 +301,28 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_fonts" ]
 
+[node name="level_req" type="Label" parent="CenterContainer/description_container/VBoxContainer/CenterContainer/item_text/attributes_container" index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 78.0
+margin_right = 192.0
+margin_bottom = 100.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 6 )
+text = "Level Requirement:"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_fonts" ]
+
 [node name="buttons_container" type="HBoxContainer" parent="CenterContainer/description_container/VBoxContainer" index="1"]
 
 anchor_left = 0.0
@@ -320,8 +341,6 @@ size_flags_vertical = 1
 alignment = 0
 
 [node name="use_button" parent="CenterContainer/description_container/VBoxContainer/buttons_container" index="0" instance=ExtResource( 7 )]
-
-margin_right = 97.0
 
 [node name="equip_button" parent="CenterContainer/description_container/VBoxContainer/buttons_container" index="1" instance=ExtResource( 7 )]
 

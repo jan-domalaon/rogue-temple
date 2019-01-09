@@ -12,6 +12,7 @@ export var partial_regen_cooldown = 2
 export var regen_time = 0.5
 export var shield_name = "Shield (Generic)"
 export var dropped_item = false
+export var level_req = 0
 
 # Upper limit of shield
 onready var shield_max_hp = shield_hp

@@ -5,6 +5,7 @@
 [ext_resource path="res://game/items/armors/chainmail/chainmail_armor.png" type="Texture" id=3]
 
 [node name="generic_armor_piece" groups=[
+"equipment",
 "armor_pieces",
 ] instance=ExtResource( 1 )]
 

@@ -47,10 +47,17 @@ func on_inventory_item_select(item_instance, inv_type):
 	# Clear label text
 	$CenterContainer/description_container/VBoxContainer/CenterContainer/item_text/attributes_container/primary_dmg.set_text("")
 	$CenterContainer/description_container/VBoxContainer/CenterContainer/item_text/attributes_container/secondary_dmg.set_text("")
+	$CenterContainer/description_container/VBoxContainer/CenterContainer/item_text/attributes_container/level_req.set_text("")
 	
 	
 	# Show attributes container
 	$CenterContainer/description_container/VBoxContainer/CenterContainer/item_text/attributes_container.show()
+	
+	# Show level requirement for equipment (weapons, shields, armor pieces)
+	if (item_instance.is_in_group("equipment")):
+		$CenterContainer/description_container/VBoxContainer/CenterContainer/item_text/attributes_container/level_req.set_text(WEAPON_LEVEL_TEXT + " " 
+		+ str(item_instance.level_req))
+	
 	if (item_instance.is_in_group("weapons")):
 		# Weapon specific description
 		$CenterContainer/description_container/VBoxContainer/CenterContainer/item_text/attributes_container/primary_dmg.set_text(PRIMARY_DMG_TEXT +
