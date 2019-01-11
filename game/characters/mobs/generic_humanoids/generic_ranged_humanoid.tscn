@@ -4,8 +4,9 @@
 [ext_resource path="res://game/characters/mobs/generic_humanoids/new_humanoid.gd" type="Script" id=2]
 [ext_resource path="res://game/characters/mobs/bandit_archer/bandit_archer.png" type="Texture" id=3]
 
-[node name="generic_ranged_humanoid" index="0" groups=[
+[node name="generic_ranged_humanoid" groups=[
 "ranged_mobs",
+"humanoids",
 ] instance=ExtResource( 1 )]
 
 script = ExtResource( 2 )

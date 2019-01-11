@@ -141,8 +141,17 @@ func receive_phys_damage(dmg, dmg_type):
 			# Emit death message to game log
 			emit_signal("character_died", character_name)
 			if (not is_in_group("player")):
-				# Free character node from memory
-				queue_free()
+				# This character is a mob. Play death animation, disable physics and free from memory
+				$hitbox.set_disabled(true)
+				set_process(false)
+				set_physics_process(false)
+				if (is_in_group("enemies")):
+					# Disable healthbar
+					$mob_health_bar.hide()
+				if (is_in_group("humanoids")):
+					# Hide weapon
+					$weapon.hide()
+				$animation_player.play("character_death")
 			else:
 				# Player has died
 				# Turn off player input to player node
