@@ -10,7 +10,7 @@
 custom_solver_bias = 0.0
 extents = Vector2( 24, 32 )
 
-[node name="prototype_level_2" index="0" instance=ExtResource( 1 )]
+[node name="prototype_level_2" instance=ExtResource( 1 )]
 
 level_name = "Test Level 2"
 

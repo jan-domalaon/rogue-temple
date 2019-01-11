@@ -155,47 +155,17 @@ position = Vector2( -56, 184 )
 
 position = Vector2( -104, 216 )
 
-[node name="generic_melee_humanoid" parent="." index="13" groups=[
-"characters",
-"loggable",
-] instance=ExtResource( 14 )]
+[node name="generic_melee_humanoid" parent="." index="13" instance=ExtResource( 14 )]
 
 position = Vector2( 392, -68 )
-input_pickable = false
-collision_layer = 2
-collision_mask = 15
-collision/safe_margin = 0.08
-_sections_unfolded = [ "Collision", "Transform", "Visibility" ]
-armor = 0
-knockback_factor = 1.0
 
-[node name="generic_melee_humanoid2" parent="." index="14" groups=[
-"characters",
-"loggable",
-] instance=ExtResource( 14 )]
+[node name="generic_melee_humanoid2" parent="." index="14" instance=ExtResource( 14 )]
 
 position = Vector2( -16, -64 )
-input_pickable = false
-collision_layer = 2
-collision_mask = 15
-collision/safe_margin = 0.08
-_sections_unfolded = [ "Collision", "Transform", "Visibility" ]
-armor = 0
-knockback_factor = 1.0
 
-[node name="generic_ranged_humanoid" parent="." index="15" groups=[
-"characters",
-"loggable",
-] instance=ExtResource( 15 )]
+[node name="generic_ranged_humanoid" parent="." index="15" instance=ExtResource( 15 )]
 
 position = Vector2( 256, 36 )
-input_pickable = false
-collision_layer = 2
-collision_mask = 15
-collision/safe_margin = 0.08
-_sections_unfolded = [ "Collision", "Transform", "Visibility" ]
-armor = 0
-knockback_factor = 1.0
 
 
 [editable path="traps/pit_area"]
