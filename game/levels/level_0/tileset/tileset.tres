@@ -1,12 +1,16 @@
-[gd_resource type="TileSet" load_steps=9 format=2]
+[gd_resource type="TileSet" load_steps=13 format=2]
 
 [ext_resource path="res://game/levels/level_0/tileset/tile_shape.tres" type="Shape2D" id=1]
 [ext_resource path="res://game/levels/level_0/tileset/tile1.png" type="Texture" id=2]
 [ext_resource path="res://game/levels/level_0/tileset/tile_navigation_shape.tres" type="NavigationPolygon" id=3]
 [ext_resource path="res://game/levels/level_0/tileset/floor.png" type="Texture" id=4]
-[ext_resource path="res://game/levels/level_0/tileset/door1.png" type="Texture" id=5]
-[ext_resource path="res://game/levels/level_0/tileset/ladder.png" type="Texture" id=6]
-[ext_resource path="res://game/levels/level_0/tileset/door.png" type="Texture" id=7]
+[ext_resource path="res://game/levels/traps/pit_area/tiles/temple/pit_temple_area_center.png" type="Texture" id=5]
+[ext_resource path="res://game/levels/level_0/tileset/door1.png" type="Texture" id=6]
+[ext_resource path="res://game/levels/level_0/tileset/ladder.png" type="Texture" id=7]
+[ext_resource path="res://game/levels/level_0/tileset/door.png" type="Texture" id=8]
+[ext_resource path="res://game/levels/traps/pit_area/tiles/temple/pit_temple_area_side_1.png" type="Texture" id=9]
+[ext_resource path="res://game/levels/traps/pit_area/tiles/temple/pit_temple_area_side_2.png" type="Texture" id=10]
+[ext_resource path="res://game/levels/traps/pit_area/tiles/temple/pit_temple_area_corner.png" type="Texture" id=11]
 
 [sub_resource type="NavigationPolygon" id=1]
 
@@ -41,7 +45,7 @@ outlines = [ PoolVector2Array( 8, 8, -8, 8, -8, -8, 8, -8 ) ]
 1/navigation = ExtResource( 3 )
 1/shapes = [  ]
 2/name = "door"
-2/texture = ExtResource( 5 )
+2/texture = ExtResource( 6 )
 2/tex_offset = Vector2( 0, 0 )
 2/modulate = Color( 1, 1, 1, 1 )
 2/region = Rect2( 0, 0, 16, 16 )
@@ -55,7 +59,7 @@ outlines = [ PoolVector2Array( 8, 8, -8, 8, -8, -8, 8, -8 ) ]
 "shape_transform": Transform2D( 1, 0, 0, 1, 8, 8 )
 } ]
 3/name = "ladder"
-3/texture = ExtResource( 6 )
+3/texture = ExtResource( 7 )
 3/tex_offset = Vector2( 0, 0 )
 3/modulate = Color( 1, 1, 1, 1 )
 3/region = Rect2( 0, 0, 16, 16 )
@@ -74,7 +78,7 @@ outlines = [ PoolVector2Array( 8, 8, -8, 8, -8, -8, 8, -8 ) ]
 4/navigation = SubResource( 1 )
 4/shapes = [  ]
 5/name = "closed_door"
-5/texture = ExtResource( 7 )
+5/texture = ExtResource( 8 )
 5/tex_offset = Vector2( 0, 0 )
 5/modulate = Color( 1, 1, 1, 1 )
 5/region = Rect2( 0, 0, 16, 16 )
@@ -88,5 +92,50 @@ outlines = [ PoolVector2Array( 8, 8, -8, 8, -8, -8, 8, -8 ) ]
 "shape": ExtResource( 1 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 8, 8 )
 } ]
+6/name = "pit_side_1"
+6/texture = ExtResource( 9 )
+6/tex_offset = Vector2( 0, 0 )
+6/modulate = Color( 1, 1, 1, 1 )
+6/region = Rect2( 0, 0, 16, 16 )
+6/is_autotile = false
+6/occluder_offset = Vector2( 8, 8 )
+6/navigation_offset = Vector2( 8, 8 )
+6/shapes = [  ]
+7/name = "pit_side_2"
+7/texture = ExtResource( 10 )
+7/tex_offset = Vector2( 0, 0 )
+7/modulate = Color( 1, 1, 1, 1 )
+7/region = Rect2( 0, 0, 16, 16 )
+7/is_autotile = false
+7/occluder_offset = Vector2( 8, 8 )
+7/navigation_offset = Vector2( 8, 8 )
+7/shapes = [  ]
+8/name = "pit_side_3"
+8/texture = ExtResource( 11 )
+8/tex_offset = Vector2( 0, 0 )
+8/modulate = Color( 1, 1, 1, 1 )
+8/region = Rect2( 0, 0, 16, 16 )
+8/is_autotile = false
+8/occluder_offset = Vector2( 8, 8 )
+8/navigation_offset = Vector2( 8, 8 )
+8/shapes = [  ]
+9/name = "pit_corner"
+9/texture = ExtResource( 11 )
+9/tex_offset = Vector2( 0, 0 )
+9/modulate = Color( 1, 1, 1, 1 )
+9/region = Rect2( 0, 0, 16, 16 )
+9/is_autotile = false
+9/occluder_offset = Vector2( 8, 8 )
+9/navigation_offset = Vector2( 8, 8 )
+9/shapes = [  ]
+10/name = "pit_center"
+10/texture = ExtResource( 5 )
+10/tex_offset = Vector2( 0, 0 )
+10/modulate = Color( 1, 1, 1, 1 )
+10/region = Rect2( 0, 0, 16, 16 )
+10/is_autotile = false
+10/occluder_offset = Vector2( 8, 8 )
+10/navigation_offset = Vector2( 8, 8 )
+10/shapes = [  ]
 _sections_unfolded = [ "0", "Resource" ]
 
