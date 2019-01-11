@@ -1,4 +1,3 @@
-extends Control
+# By Jan Domalaon
 
-func _ready():
-	pass
+extends Control

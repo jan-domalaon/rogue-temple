@@ -70,13 +70,20 @@ func _ready():
 func _input(event):
 	# Open inventory UI
 	if (event.is_action_pressed("open_inventory")):
-		if not $CanvasLayer/inventory_hud.is_visible_in_tree():
-			$CanvasLayer/inventory_hud.show() 
+		if not ($CanvasLayer/inventory_hud.modulate == Color(1,1,1,1)):
 			get_tree().paused = true
+			# Play inventory open animation, stop any animationss if running
+			$inventory_animation_player.stop()
+			$inventory_animation_player.play("inventory_open")
+			# Disable player input
 			get_parent().set_process_input(false)
 		else:
-			$CanvasLayer/inventory_hud.hide()
+			# $CanvasLayer/inventory_hud.hide()
 			get_tree().paused = false
+			# Play inventory open animation backwards, stop any animations if running
+			$inventory_animation_player.stop()
+			$inventory_animation_player.play_backwards("inventory_open")
+			# Enable player input
 			get_parent().set_process_input(true)
 
 
