@@ -25,6 +25,9 @@ func _ready():
 				pass
 		elif (node.is_in_group("doors")):
 			pass
+		elif (node.is_in_group("levels")):
+			node.connect("level_welcome", self, "on_level_welcome")
+			node.connect("player_pitfallen_drop", self, "on_player_pitfallen_drop")
 	# Get current level
 	
 	# Start timer to hide after showing level entering
@@ -91,6 +94,14 @@ func on_character_pitfallen(victim_name):
 
 func on_pickup_item(user_name, item_name):
 	print_text(game_text.picked_up_item(user_name, item_name), game_text.COLOR_DEFAULT)
+
+
+func on_level_welcome(level_name):
+	print_text(game_text.level_welcome(level_name), game_text.COLOR_NOTIFICATION)
+
+
+func on_player_pitfallen_drop():
+	print_text(game_text.player_pitfallen(), game_text.COLOR_INTERACT)
 
 
 func show_game_log():

@@ -10,6 +10,7 @@ const COLOR_DEFAULT = Color(1,1,1)				# White
 const COLOR_KILLED = Color(1,0,0)				# Red
 const COLOR_INTERACT = Color(1,0,0.9)			# Purple
 const COLOR_BLOCK = Color (0.46,0.97,1)			# Aqua
+const COLOR_NOTIFICATION = Color(1,0.52,0.04)	# Orange
 
 # Damage flavor text
 
@@ -38,6 +39,10 @@ func character_pitfallen(victim_name):
 	return victim_name + " has fallen into a hole!"
 
 
+func player_pitfallen():
+	return "Ooof! That was a long drop!"
+
+
 func opened_door(user_name):
 	# For now, only player prints a statement when opening a door
 	return user_name + " has opened a door."
@@ -50,3 +55,6 @@ func flipped_switch(user_name):
 func picked_up_item(user_name, item_name):
 	return user_name + " picked up " + item_name + "."
 
+
+func level_welcome(level_name):
+	return "Welcome to the " + level_name + "."

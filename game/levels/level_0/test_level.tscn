@@ -21,7 +21,7 @@
 custom_solver_bias = 0.0
 extents = Vector2( 20, 26 )
 
-[node name="prototype_level" type="Node"]
+[node name="prototype_level" type="Node" index="0"]
 
 script = ExtResource( 1 )
 level_name = "Test Level 1"
