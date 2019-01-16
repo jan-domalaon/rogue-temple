@@ -241,4 +241,7 @@ func on_pitfall():
 		$animation_player.play("player_fall_anim")
 	else:
 		$animation_player.play("fall_anim")
-	
+
+
+func get_effect(effect_name):
+	pass
