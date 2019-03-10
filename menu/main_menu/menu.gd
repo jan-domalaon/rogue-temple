@@ -16,8 +16,8 @@ func _on_play_button_pressed():
 
 
 func _on_options_pressed():
-	# get_tree().change_scene("res://scenes/menu/options.tscn")
-	pass
+	get_tree().change_scene("res://menu/options/options.tscn")
+
 
 func _on_quit_button_pressed():
 	# Quit the game

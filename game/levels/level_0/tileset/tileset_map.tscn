@@ -21,7 +21,7 @@ vertices = PoolVector2Array( 8, 8, -8, 8, -8, -8, 8, -8 )
 polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 outlines = [ PoolVector2Array( 8, 8, -8, 8, -8, -8, 8, -8 ) ]
 
-[node name="Node" type="Node"]
+[node name="Node" type="Node" index="0"]
 
 [node name="wall" type="Sprite" parent="." index="0"]
 
