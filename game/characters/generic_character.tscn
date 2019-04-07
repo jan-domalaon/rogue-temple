@@ -4,21 +4,13 @@
 [ext_resource path="res://game/characters/generic_character.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-
-custom_solver_bias = 0.0
 extents = Vector2( 7, 8 )
 
 [sub_resource type="RectangleShape2D" id=2]
-
-custom_solver_bias = 0.0
 extents = Vector2( 6, 7 )
 
 [sub_resource type="Animation" id=3]
-
 resource_name = "character_death"
-length = 1.0
-loop = false
-step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("sprite:rotation_degrees")
 tracks/0/interp = 1
@@ -45,11 +37,8 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=4]
-
 resource_name = "fall_anim"
 length = 1.5
-loop = false
-step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("sprite:scale")
 tracks/0/interp = 1
@@ -102,9 +91,7 @@ tracks/3/keys = {
 }
 
 [sub_resource type="Animation" id=5]
-
 length = 0.5
-loop = false
 step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:visible")
@@ -120,10 +107,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=6]
-
 length = 2.0
-loop = false
-step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("sprite:rotation_degrees")
 tracks/0/interp = 1
@@ -164,71 +148,33 @@ tracks/2/keys = {
 }
 
 [node name="generic_character" type="KinematicBody2D" groups=[
-"loggable",
 "characters",
+"loggable",
 ]]
-
-input_pickable = false
 collision_layer = 2
 collision_mask = 15
-collision/safe_margin = 0.08
 script = ExtResource( 1 )
-_sections_unfolded = [ "Collision", "Transform", "Visibility" ]
-health = 1
-max_health = 100
-armor = 0
-move_speed = 100
-character_name = "Character"
-knockback_factor = 1.0
 
-[node name="sprite" type="Sprite" parent="." index="0"]
-
+[node name="sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
-_sections_unfolded = [ "Transform", "Visibility" ]
 
-[node name="knockback_area" type="Area2D" parent="." index="1"]
-
+[node name="knockback_area" type="Area2D" parent="."]
 visible = false
-input_pickable = true
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
 collision_layer = 2
 collision_mask = 15
-audio_bus_override = false
-audio_bus_name = "Master"
-_sections_unfolded = [ "Collision" ]
 
-[node name="knockback_hitbox" type="CollisionShape2D" parent="knockback_area" index="0"]
-
+[node name="knockback_hitbox" type="CollisionShape2D" parent="knockback_area"]
 shape = SubResource( 1 )
-_sections_unfolded = [ "Transform" ]
 
-[node name="hitbox" type="CollisionShape2D" parent="." index="2"]
-
+[node name="hitbox" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
 
-[node name="flicker_timer" type="Timer" parent="." index="3"]
+[node name="flicker_timer" type="Timer" parent="."]
 
-process_mode = 1
-wait_time = 1.0
-one_shot = false
-autostart = false
-
-[node name="animation_player" type="AnimationPlayer" parent="." index="4"]
-
-root_node = NodePath("..")
-autoplay = ""
-playback_process_mode = 1
-playback_default_blend_time = 0.0
-playback_speed = 1.0
+[node name="animation_player" type="AnimationPlayer" parent="."]
 anims/character_death = SubResource( 3 )
 anims/fall_anim = SubResource( 4 )
 anims/flicker = SubResource( 5 )
 anims/player_death = SubResource( 6 )
-blend_times = [  ]
 
 [connection signal="timeout" from="flicker_timer" to="." method="_on_flicker_timer_timeout"]
-
-

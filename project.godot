@@ -31,6 +31,13 @@ builds="*res://game/global_scripts/builds.gd"
 game_text="*res://game/global_scripts/game_text.gd"
 pitfall="*res://game/levels/traps/pit_area/pitfall_global.gd"
 
+[debug]
+
+gdscript/warnings/unused_variable=false
+gdscript/warnings/unused_class_variable=false
+gdscript/warnings/unused_argument=false
+gdscript/warnings/return_value_discarded=false
+
 [display]
 
 window/size/width=1280
@@ -125,5 +132,6 @@ show_game_log={
 
 [rendering]
 
+quality/driver/driver_name="GLES2"
 environment/default_clear_color=Color( 0.289917, 0.335579, 0.371094, 1 )
 environment/default_environment="res://default_env.tres"

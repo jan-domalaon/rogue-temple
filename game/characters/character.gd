@@ -140,11 +140,11 @@ func receive_phys_damage(dmg, dmg_type):
 			print(get_name() + ' is deadaz')
 			# Emit death message to game log
 			emit_signal("character_died", character_name)
+			set_process(false)
+			set_physics_process(false)
+			$hitbox.call_deferred("set_disabled", true)
 			if (not is_in_group("player")):
 				# This character is a mob. Play death animation, disable physics and free from memory
-				$hitbox.set_disabled(true)
-				set_process(false)
-				set_physics_process(false)
 				if (is_in_group("enemies")):
 					# Disable healthbar
 					$mob_health_bar.hide()
@@ -155,14 +155,11 @@ func receive_phys_damage(dmg, dmg_type):
 			else:
 				# Player has died
 				# Turn off player input to player node
-				$hitbox.set_disabled(true)
 				# Play death animation
 				$animation_player.play("player_death")
 				emit_signal("health_changed", 0)
 				emit_signal("player_died")
 				set_process_input(false)
-				set_process(false)
-				set_physics_process(false)
 				# Show death screen, pause game
 
 
@@ -170,7 +167,7 @@ func flicker():
 	# Disable hitboxes
 	#$hitbox.set_disabled(true)
 	# Disable collision between weapons or other bodies
-	$knockback_area/knockback_hitbox.set_disabled(true)
+	$knockback_area/knockback_hitbox.call_deferred("set_disabled", true)
 	$animation_player.play("flicker")
 	$flicker_timer.start()
 	flickering = true
@@ -189,19 +186,19 @@ func use_shield(blocking):
 	if (has_shield and blocking):
 		# "Turn on" shield
 		get_node("shield").show()
-		$shield/shield_hitbox.set_disabled(false)
+		$shield/shield_hitbox.call_deferred("set_disabled", false)
 		shield_up = true
 		# Disable knockback area
-		$knockback_area/knockback_hitbox.set_disabled(true)
+		$knockback_area/knockback_hitbox.call_deferred("set_disabled", true)
 		# Slow down movement speed
 		move_speed = move_speed * 0.66
 	elif (has_shield):
 		# The character is not blocking
 		# Play animation that brings down shield
 		get_node("shield").hide()
-		$shield/shield_hitbox.set_disabled(true)
+		$shield/shield_hitbox.call_deferred("set_disabled", true)
 		shield_up = false
-		$knockback_area/knockback_hitbox.set_disabled(false)
+		$knockback_area/knockback_hitbox.call_deferred("set_disabled", false)
 		# Return move_speed back to normal
 		move_speed = starting_move_speed
 
