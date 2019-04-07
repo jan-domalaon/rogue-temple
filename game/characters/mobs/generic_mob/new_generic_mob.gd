@@ -140,17 +140,17 @@ func pathfinding():
 		movement_dir = Vector2(0,0)
 
 
-func detection():
-	var current_player_pos = get_parent().get_node("player").get_global_position()
-	var player_extents = get_parent().get_node("player/hitbox").shape.extents - Vector2(3, 3)
-	
-	var nw = current_player_pos - player_extents
-	var se = current_player_pos + player_extents
-	var ne = current_player_pos + Vector2(player_extents.x, -player_extents.y)
-	var sw = current_player_pos + Vector2(-player_extents.x, player_extents.y)
-	
-	for pos in [nw, ne, se, sw]:
-		print(detect_ray(pos, current_player_pos))
+#func detection():
+#	var current_player_pos = get_parent().get_node("player").get_global_position()
+#	var player_extents = get_parent().get_node("player/hitbox").shape.extents - Vector2(3, 3)
+#
+#	var nw = current_player_pos - player_extents
+#	var se = current_player_pos + player_extents
+#	var ne = current_player_pos + Vector2(player_extents.x, -player_extents.y)
+#	var sw = current_player_pos + Vector2(-player_extents.x, player_extents.y)
+#
+#	for pos in [nw, ne, se, sw]:
+#		print(detect_ray(pos, current_player_pos))
 
 
 func detect_ray(target_position, player_pos):
@@ -161,12 +161,18 @@ func detect_ray(target_position, player_pos):
 	if detect_ray != null:
 		print("detect ray not null")
 		if (detect_ray.collider.is_in_group("player")):
+			print("player seen!")
 			return true
-		else:
-			return false
 	else:
 		print("detect ray null")
 		return false
+
+
+func detect_ray_2(target_pos, player_pos):
+	var physics_space = get_world_2d().direct_space_state
+	var ignore_areas = [self, $knockback_area]
+	# Ignore mob mask (00101 == 5). Bit mask is in binary. Collides with players and walls only.
+	return physics_space.intersect_ray(target_pos, player_pos, ignore_areas, 5)
 
 
 func state_chasing():
@@ -187,29 +193,31 @@ func state_chasing():
 	
 	# If player can be seen, use move dir
 	# If mob is humanoid and can see player and is within weapon range, do weapon attack
-	if (detect_ray(mob_nw, nw) and detect_ray(mob_se, se) and detect_ray(mob_ne, ne) and detect_ray(mob_sw, sw)):
-		# If this mob is a humanoid
-		# Only chase if the player is not within weapon range
-		if (is_in_group("melee_mobs") and (get_global_transform().origin - current_player_pos).length() <= weapon_length):
-			state_melee_attack()
-			current_state = "MELEE_ATTACK"
-		elif (is_in_group("ranged_mobs") and position.distance_to(player_pos) <= shooting_range):
-			state_ranged_attack()
-			current_state = "RANGED_ATTACK"
-		else:
-			# Use move dir if player can be seen by all corners
-			# Mobs without weapons will "bounce" off the player, dealing damage when touching
-			movement_dir = (current_player_pos - get_global_position()).normalized()
-			move_dir_chase = true
+	for ray_target in [nw, se, ne, sw]:
+		var result = detect_ray_2(ray_target, current_player_pos)
+		if result:
+			if result.collider.is_in_group("player"):
+				# If this mob is a humanoid
+				# Only chase if the player is not within weapon range
+				if (is_in_group("melee_mobs") and (get_global_transform().origin - current_player_pos).length() <= weapon_length):
+					state_melee_attack()
+					current_state = "MELEE_ATTACK"
+				elif (is_in_group("ranged_mobs") and position.distance_to(player_pos) <= shooting_range):
+					state_ranged_attack()
+					current_state = "RANGED_ATTACK"
+				else:
+					# Use move dir if player can be seen by all corners
+					# Mobs without weapons will "bounce" off the player, dealing damage when touching
+					movement_dir = (current_player_pos - get_global_position()).normalized()
+					move_dir_chase = true
 	# Else use pathfinding. Go to each node of the path
+	if (move_dir_chase):
+		# Get a new path by forcing pathfinding timer to time out
+		$pathfinding_timer.stop()
+		set_new_path()
+		move_dir_chase = false
 	else:
-		if (move_dir_chase):
-			# Get a new path by forcing pathfinding timer to time out
-			$pathfinding_timer.stop()
-			set_new_path()
-			move_dir_chase = false
-		else:
-			pathfinding()
+		pathfinding()
 
 
 func state_idle():
