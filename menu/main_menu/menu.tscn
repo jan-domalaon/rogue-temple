@@ -7,10 +7,6 @@
 [ext_resource path="res://fonts/cinzel-bold.font" type="BitmapFont" id=5]
 
 [sub_resource type="Animation" id=1]
-
-length = 1.0
-loop = false
-step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
@@ -37,11 +33,8 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=2]
-
 resource_name = "splash_interact_anim"
 length = 5.0
-loop = false
-step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
@@ -56,210 +49,79 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=3]
-
 resource_name = "switch_screen_anim"
-length = 1.0
-loop = false
-step = 0.1
 
-[node name="menu" type="Container" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="menu" type="Container"]
 rect_min_size = Vector2( 1280, 720 )
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 script = ExtResource( 1 )
-_sections_unfolded = [ "Rect", "Size Flags" ]
 
-[node name="Label" type="Label" parent="." index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="Label" type="Label" parent="."]
 margin_left = 3.0
 margin_top = 2.0
 margin_right = 550.0
 margin_bottom = 137.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
 mouse_filter = 1
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
 size_flags_vertical = 0
 custom_fonts/font = ExtResource( 2 )
 text = "Test Build #1"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="splash" type="Sprite" parent="." index="1"]
-
+[node name="splash" type="Sprite" parent="."]
 modulate = Color( 1, 1, 1, 0 )
 position = Vector2( 635, 140 )
 texture = ExtResource( 3 )
-_sections_unfolded = [ "Offset", "Transform", "Visibility" ]
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="splash" index="0"]
-
-root_node = NodePath("..")
-autoplay = ""
-playback_process_mode = 1
-playback_default_blend_time = 0.0
-playback_speed = 1.0
+[node name="AnimationPlayer" type="AnimationPlayer" parent="splash"]
 anims/splash_anim = SubResource( 1 )
 anims/splash_interact_anim = SubResource( 2 )
-blend_times = [  ]
 
-[node name="CenterContainer" type="CenterContainer" parent="." index="2"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="CenterContainer" type="CenterContainer" parent="."]
 margin_top = 120.0
 margin_right = 1280.0
 margin_bottom = 720.0
 rect_min_size = Vector2( 1280, 600 )
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-use_top_left = false
-_sections_unfolded = [ "Rect", "Size Flags" ]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
 margin_left = 352.0
 margin_top = 130.0
 margin_right = 927.0
 margin_bottom = 470.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 custom_constants/separation = 20
-alignment = 0
-_sections_unfolded = [ "custom_constants" ]
 
-[node name="play_button" type="Button" parent="CenterContainer/VBoxContainer" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="play_button" type="Button" parent="CenterContainer/VBoxContainer"]
 margin_right = 575.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 575, 100 )
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 5 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
 text = "Play"
-flat = false
-align = 1
-_sections_unfolded = [ "Material", "Rect", "Theme", "Visibility", "custom_colors", "custom_constants", "custom_fonts", "custom_styles" ]
 
-[node name="option_button" type="Button" parent="CenterContainer/VBoxContainer" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="option_button" type="Button" parent="CenterContainer/VBoxContainer"]
 margin_top = 120.0
 margin_right = 575.0
 margin_bottom = 220.0
 rect_min_size = Vector2( 575, 100 )
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 5 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
 text = "Options"
-flat = false
-align = 1
-_sections_unfolded = [ "Rect", "Theme" ]
 
-[node name="quit_button" type="Button" parent="CenterContainer/VBoxContainer" index="2"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="quit_button" type="Button" parent="CenterContainer/VBoxContainer"]
 margin_top = 240.0
 margin_right = 575.0
 margin_bottom = 340.0
 rect_min_size = Vector2( 575, 100 )
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 5 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
 text = "Quit"
-flat = false
-align = 1
-_sections_unfolded = [ "Rect", "Theme", "custom_styles" ]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
-
-root_node = NodePath("..")
-autoplay = ""
-playback_process_mode = 1
-playback_default_blend_time = 0.0
-playback_speed = 1.0
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/switch_screen_anim = SubResource( 3 )
-blend_times = [  ]
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/play_button" to="." method="_on_play_button_pressed"]
-
 [connection signal="pressed" from="CenterContainer/VBoxContainer/option_button" to="." method="_on_options_pressed"]
-
 [connection signal="pressed" from="CenterContainer/VBoxContainer/quit_button" to="." method="_on_quit_button_pressed"]
-
-

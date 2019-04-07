@@ -80,31 +80,36 @@ func _physics_process(delta):
 	$mob_health_bar.value = health
 	$mob_health_bar.max_value = max_health
 	
-#	update()
-#
-#
-#func _draw():
+	update()
+
+
+func _draw():
+	# Draw path
 #	if path.size() > 1:
 #		for node in path:
 #			draw_circle(node - position, 5, Color(0, 1, 1))
-#	var current_player_pos = get_parent().get_node("player").get_global_position()
-#	var player_extents = get_parent().get_node("player/hitbox").shape.extents - Vector2(3, 3)
-#	var mob_extents = $hitbox.shape.extents - Vector2(1, 1)
-#
-#	var nw = current_player_pos - player_extents
-#	var se = current_player_pos + player_extents
-#	var ne = current_player_pos + Vector2(player_extents.x, -player_extents.y)
-#	var sw = current_player_pos + Vector2(-player_extents.x, player_extents.y)
-#
-#	var mob_nw = get_global_position() - mob_extents
-#	var mob_se = get_global_position() + mob_extents
-#	var mob_ne = get_global_position() + Vector2(mob_extents.x, -mob_extents.y)
-#	var mob_sw = get_global_position() + Vector2(-mob_extents.x, mob_extents.y)
-#
-#	draw_line(Vector2(), nw - mob_nw, Color(1, 0, 0))
-#	draw_line(Vector2(), se - mob_se, Color(1, 0, 0))
-#	draw_line(Vector2(), ne - mob_ne, Color(1, 0, 0))
-#	draw_line(Vector2(), sw - mob_sw, Color(1, 0, 0))
+	var current_player_pos = get_parent().get_node("player").get_global_position()
+	var player_extents = get_parent().get_node("player/hitbox").shape.extents - Vector2(3, 3)
+	var mob_extents = $hitbox.shape.extents - Vector2(1, 1)
+
+	var nw = current_player_pos - player_extents
+	var se = current_player_pos + player_extents
+	var ne = current_player_pos + Vector2(player_extents.x, -player_extents.y)
+	var sw = current_player_pos + Vector2(-player_extents.x, player_extents.y)
+
+	var mob_nw = get_global_position() - mob_extents
+	var mob_se = get_global_position() + mob_extents
+	var mob_ne = get_global_position() + Vector2(mob_extents.x, -mob_extents.y)
+	var mob_sw = get_global_position() + Vector2(-mob_extents.x, mob_extents.y)
+	
+	if get_global_position().distance_to(current_player_pos) <= detection_range:
+		draw_line(Vector2(), nw - mob_nw, Color(1, 0, 0))
+		draw_line(Vector2(), se - mob_se, Color(1, 0, 0))
+		draw_line(Vector2(), ne - mob_ne, Color(1, 0, 0))
+		draw_line(Vector2(), sw - mob_sw, Color(1, 0, 0))
+	
+	# Draw vision radius
+	draw_circle(Vector2(), detection_range, Color(0.78, 0.91, 0, 0.3))
 
 
 func set_nav(new_nav):
@@ -153,9 +158,14 @@ func detect_ray(target_position, player_pos):
 	var ignore_areas = [self, $knockback_area]
 	# Ignore mob mask (00101 == 5). Bit mask is in binary. Collides with players and walls only.
 	var detect_ray = physics_space.intersect_ray(target_position, player_pos, ignore_areas, 5)
-	if (detect_ray.collider.is_in_group("player")):
-		return true
+	if detect_ray != null:
+		print("detect ray not null")
+		if (detect_ray.collider.is_in_group("player")):
+			return true
+		else:
+			return false
 	else:
+		print("detect ray null")
 		return false
 
 
@@ -223,6 +233,14 @@ func state_wander(random_move_dir):
 	# Get new passive wait time. Start timer
 	$passive_timer.set_wait_time((randi()%3) + 1)
 	$passive_timer.start()
+
+
+func state_melee_attack():
+	pass
+
+
+func state_ranged_attack():
+	pass
 
 
 func get_random_movement_dir():

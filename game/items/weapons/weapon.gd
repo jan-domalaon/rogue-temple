@@ -4,6 +4,7 @@
 
 extends Node2D
 
+
 enum WEAPON_TYPES {
 	axe,
 	mace,
@@ -132,6 +133,10 @@ func make_thrust():
 	# Fade out when retracting
 	weapon_tween.interpolate_method($weapon_area, "set_modulate", Color(1, 1, 1, 1), Color(1,1,1,0), secondary_as, weapon_tween.TRANS_CUBIC, Tween.EASE_OUT, secondary_as / 2)
 	weapon_tween.start()
+
+
+func make_draw_bow():
+	pass
 
 
 func reset_weapon():

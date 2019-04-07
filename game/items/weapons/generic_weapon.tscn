@@ -4,98 +4,47 @@
 [ext_resource path="res://game/items/weapons/generic_weapon.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-
-custom_solver_bias = 0.0
 extents = Vector2( 16, 3 )
 
 [sub_resource type="RectangleShape2D" id=2]
-
-custom_solver_bias = 0.0
 extents = Vector2( 16, 16 )
 
 [node name="generic_weapon" type="Node2D" groups=[
-"weapons",
 "equipment",
+"weapons",
 ]]
-
 script = ExtResource( 1 )
-_sections_unfolded = [ "Transform" ]
-weapon_name = "Test Mace"
-primary_damage = 1
-secondary_damage = 1
-primary_dmg_type = "c"
-secondary_dmg_type = "b"
 user_type = ""
-primary_as = 0.75
-secondary_as = 0.5
 weapon_type = "MACE"
-dropped_item = false
-level_req = 0
 
-[node name="weapon_area" type="Area2D" parent="." index="0"]
-
+[node name="weapon_area" type="Area2D" parent="."]
 position = Vector2( 32, 0 )
-input_pickable = true
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
 collision_layer = 8
 collision_mask = 7
-audio_bus_override = false
-audio_bus_name = "Master"
-_sections_unfolded = [ "Collision", "Transform", "Visibility" ]
 
-[node name="hitbox" type="CollisionShape2D" parent="weapon_area" index="0"]
-
+[node name="hitbox" type="CollisionShape2D" parent="weapon_area"]
 shape = SubResource( 1 )
 
-[node name="weapon_tween" type="Tween" parent="weapon_area" index="1"]
+[node name="weapon_tween" type="Tween" parent="weapon_area"]
 
-repeat = false
-playback_process_mode = 1
-playback_speed = 1.0
-playback/active = false
-playback/repeat = false
-playback/speed = 1.0
-
-[node name="sprite" type="Sprite" parent="weapon_area" index="2"]
-
+[node name="sprite" type="Sprite" parent="weapon_area"]
 scale = Vector2( 2, 1 )
 texture = ExtResource( 2 )
 
-[node name="weapon_cooldown" type="Timer" parent="." index="1"]
+[node name="weapon_cooldown" type="Timer" parent="."]
 
-process_mode = 1
-wait_time = 1.0
-one_shot = false
-autostart = false
-
-[node name="interact_area" type="Area2D" parent="." index="2" groups=[
-"dropped_weapons",
+[node name="interact_area" type="Area2D" parent="." groups=[
 "dropped_equipment",
+"dropped_weapons",
 ]]
-
 position = Vector2( 32, 0 )
-input_pickable = true
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
 collision_layer = 32
-audio_bus_override = false
-audio_bus_name = "Master"
-_sections_unfolded = [ "Collision" ]
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="interact_shape" type="CollisionShape2D" parent="interact_area" index="0"]
-
+[node name="interact_shape" type="CollisionShape2D" parent="interact_area"]
 shape = SubResource( 2 )
 
 [connection signal="body_entered" from="weapon_area" to="." method="_on_weapon_area_body_entered"]
-
 [connection signal="timeout" from="weapon_cooldown" to="." method="_on_weapon_cooldown_timeout"]
-
-
