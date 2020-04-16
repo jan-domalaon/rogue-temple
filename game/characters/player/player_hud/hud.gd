@@ -13,27 +13,21 @@ func _ready():
 	set_process(false)
 	# Get level name from player scene
 	$HBoxContainer/MarginContainer/HBox/level_margin_cont/game_level.set_text(get_owner().get_owner().level_name)
+	
+	# Get signal from level
+	
+	get_tree().get_root().get_node("level").connect("show_debug", self, "_on_show_debug")
+	
 	# Hide appropriate UI elements
 	#get_node("inventory").hide()
 	#get_node("debug_container").hide()
 	# Allow inventory to be selected with rmb
 	#get_node("inventory").set_allow_rmb_select(true)
 
-func _input(event):
-	# Use event.is_action_pressed() to avoid key repeats
-#	if (event.is_action_pressed("access_inventory")):
-#		if get_node("inventory").is_visible():
-#			get_node("inventory").hide()
-#		else:
-#			show_inventory()
-	if (event.is_action_pressed("access_debug")):
-		if $HBoxContainer/MarginContainer/HBox/debug_container.is_visible():
-			$HBoxContainer/MarginContainer/HBox/debug_container.hide()
-		else:
-			$HBoxContainer/MarginContainer/HBox/debug_container.show()
 
 func _process(delta):
-	get_node('debug_container/debug_ms').set_text('Movement speed: ' + str(get_parent().move_speed))
+	get_node('debug_container/debug_ms').set_text('Movement speed: ' + \
+	str(get_parent().get_parent().move_speed))
 
 #func show_inventory():
 #	# Clears inventory (to remove duplicates) and updates current inventory.
@@ -74,3 +68,10 @@ func _on_player_max_health_changed(max_health):
 
 func _on_player_health_changed(health):
 	emit_signal("update_health_bar", health)
+
+
+func _on_show_debug():
+	if ($HBoxContainer/MarginContainer/HBox/debug_container.get_modulate() == Color(1,1,1,0)):
+		$HBoxContainer/MarginContainer/HBox/debug_container.set_modulate(Color(1,1,1,1))
+	else:
+		$HBoxContainer/MarginContainer/HBox/debug_container.set_modulate(Color(1,1,1,0))

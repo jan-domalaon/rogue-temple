@@ -6,6 +6,7 @@ export var level_name = "Generic Level"
 # Game log signals
 signal player_pitfallen_drop
 signal level_welcome(level_name)
+signal show_debug
 
 
 func _ready():
@@ -35,3 +36,7 @@ func _ready():
 	pitfall.player_pitfall = false
 	
 	
+func _input(event):
+	# Check for key input for debug view
+	if (event.is_action_pressed("access_debug")):
+		emit_signal("show_debug")

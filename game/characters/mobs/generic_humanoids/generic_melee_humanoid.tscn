@@ -18,4 +18,3 @@ melee_weapon_path = "res://game/items/weapons/wooden_staff/wooden_staff.tscn"
 
 [node name="sprite" parent="." index="0"]
 texture = ExtResource( 3 )
-

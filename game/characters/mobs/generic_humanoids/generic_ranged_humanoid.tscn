@@ -5,10 +5,9 @@
 [ext_resource path="res://game/characters/mobs/bandit_archer/bandit_archer.png" type="Texture" id=3]
 
 [node name="generic_ranged_humanoid" groups=[
-"ranged_mobs",
 "humanoids",
+"ranged_mobs",
 ] instance=ExtResource( 1 )]
-
 script = ExtResource( 2 )
 health = 2.0
 max_health = 2.0
@@ -16,12 +15,7 @@ move_speed = 85
 character_name = "Ranged Humanoid"
 detection_range = 200
 mob_color = Color( 0.501961, 0.501961, 0.501961, 1 )
-melee_weapon_path = ""
 ranged_weapon_path = "res://game/items/weapons/ranger_bow/ranger_bow.tscn"
-unique_weapon = false
 
 [node name="sprite" parent="." index="0"]
-
 texture = ExtResource( 3 )
-
-

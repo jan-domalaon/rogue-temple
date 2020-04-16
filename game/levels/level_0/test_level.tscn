@@ -18,7 +18,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 20, 26 )
 
-[node name="prototype_level" type="Node"]
+[node name="level" type="Node"]
 script = ExtResource( 1 )
 level_name = "Test Level 1"
 
