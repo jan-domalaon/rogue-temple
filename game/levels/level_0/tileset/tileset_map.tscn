@@ -15,10 +15,10 @@
 [ext_resource path="res://game/levels/traps/pit_area/tiles/temple/pit_temple_area_corner.png" type="Texture" id=13]
 [ext_resource path="res://game/levels/traps/pit_area/tiles/temple/pit_temple_area_center.png" type="Texture" id=14]
 
-[sub_resource type="OccluderPolygon2D" id=2]
-polygon = PoolVector2Array( -4, 4, 4, 4, 4, -4, -4, -4 )
+[sub_resource type="OccluderPolygon2D" id=1]
+polygon = PoolVector2Array( -8, 8, 8, 8, 8, -8, -8, -8 )
 
-[sub_resource type="NavigationPolygon" id=1]
+[sub_resource type="NavigationPolygon" id=2]
 vertices = PoolVector2Array( 8, 8, -8, 8, -8, -8, 8, -8 )
 polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 outlines = [ PoolVector2Array( 8, 8, -8, 8, -8, -8, 8, -8 ) ]
@@ -42,7 +42,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="wall/StaticBody2D"]
-position = Vector2( 1.90735e-006, 1.90735e-006 )
+position = Vector2( 1.90735e-06, 1.90735e-06 )
 shape = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true
@@ -50,11 +50,10 @@ __meta__ = {
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="wall"]
 light_mask = 2
-occluder = SubResource( 2 )
+occluder = SubResource( 1 )
 light_mask = 2
 
 [node name="floor_tile" type="Sprite" parent="."]
-editor/display_folded = true
 position = Vector2( 40, 8 )
 texture = ExtResource( 1 )
 region_enabled = true
@@ -64,10 +63,9 @@ __meta__ = {
 }
 
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="floor_tile"]
-navpoly = SubResource( 1 )
+navpoly = SubResource( 2 )
 
 [node name="door" type="Sprite" parent="."]
-editor/display_folded = true
 position = Vector2( 72, 8 )
 texture = ExtResource( 3 )
 region_rect = Rect2( 22.25, 4.5, 44.375, 10.875 )
@@ -84,7 +82,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="door/StaticBody2D1"]
-position = Vector2( 1.90735e-006, 1.90735e-006 )
+position = Vector2( 1.90735e-06, 1.90735e-06 )
 shape = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true
@@ -98,7 +96,6 @@ __meta__ = {
 }
 
 [node name="floor" type="Sprite" parent="."]
-editor/display_folded = true
 position = Vector2( 8, 40 )
 texture = ExtResource( 5 )
 __meta__ = {
@@ -109,7 +106,6 @@ __meta__ = {
 navpoly = ExtResource( 6 )
 
 [node name="closed_door" type="Sprite" parent="."]
-editor/display_folded = true
 position = Vector2( 40, 40 )
 texture = ExtResource( 7 )
 region_enabled = true

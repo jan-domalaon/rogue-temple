@@ -98,7 +98,7 @@ func _draw():
 
 func _on_wander_timer_timeout():
 	var current_state = get_current_state()
-	print("wander timeout")
+	# print("wander timeout")
 	# Get another random value
 	wander_time = (randi()%3) + 1
 	# Pop WANDER/IDLE state
@@ -184,7 +184,7 @@ func state_chasing():
 	# Use pathfinding if the player is behind a wall
 	var detect_ray = detection_ray()
 	if (detect_ray.collider.is_in_group("player")):
-		print("chasing with move dir!")
+		# print("chasing with move dir!")
 		movement_dir = player_pos - self.position
 #		if (not "player" in detect_ray.collider.get_parent().get_groups()):
 #			if (player_pos != old_player_pos):
@@ -200,11 +200,11 @@ func state_chasing():
 		# If on last seen position, wait there and return to idle state.
 		# Also, set player detection = false
 		if position.distance_to(last_seen_pos) < 1:
-			print("on last seen pos of player")
+			# print("on last seen pos of player")
 			movement_dir = Vector2(0,0)
 			pop_state()
 			push_state("IDLE")
-			print(state_stack)
+			# print(state_stack)
 			detected = false
 		else:
 			# Go to last seen player position
@@ -218,7 +218,7 @@ func state_chasing():
 		if (detect_ray.collider.is_in_group("player") and position.distance_to(player_pos) <= shooting_range):
 			pop_state()
 			push_state("RANGED_ATTACKING")
-			print(state_stack)
+			# print(state_stack)
 	if ("melee_mobs" in get_groups() and not ("ranged_mobs" in get_groups())):
 		# If in melee range, switch to melee attack
 		var weapon_length = get_node("weapon/weapon_area/hitbox").shape.extents.x
@@ -286,15 +286,17 @@ func pathfinding(dest):
 	path = nav.get_simple_path(position, dest, false)
 	# Go to each node of the path
 	if path.size() > 1:
-		print("chasing with pathfinding")
+		# print("chasing with pathfinding")
+		# Check the distance between the mob and the
+		# path node to determine movement direction
 		var dist = path[0] - get_global_position()
-		if dist.length() > 2:
+		if get_global_position().distance_to(path[0]) < 1:
 			# Move to next path node
 			movement_dir = dist.normalized()
 		else:
 			path.remove(0)
 	else:
-		print("no more path nodes")
+		# print("no more path nodes")
 		movement_dir = Vector2(0,0)
 
 

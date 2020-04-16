@@ -176,5 +176,4 @@ anims/character_death = SubResource( 3 )
 anims/fall_anim = SubResource( 4 )
 anims/flicker = SubResource( 5 )
 anims/player_death = SubResource( 6 )
-
 [connection signal="timeout" from="flicker_timer" to="." method="_on_flicker_timer_timeout"]
