@@ -1,10 +1,9 @@
 # Rogue Temple (working title)
 **By Maritimes Gameworks**
-*Code* by Jan Domalaon
 
-*Art* by Jan Domalaon
-
-*Various art assets* from https://www.kenney.nl/assets. Notably, the UI elements.
+Code by Jan Domalaon
+Art by Jan Domalaon
+Various art assets from https://www.kenney.nl/assets. Notably, the UI elements.
 
 I'm currently working on porting my Godot 2 code to Godot 3. Some of the features aren't working.
 
