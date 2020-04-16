@@ -8,72 +8,27 @@
 [node name="new_generic_mob" groups=[
 "enemies",
 ] instance=ExtResource( 1 )]
-
+light_mask = 2
 script = ExtResource( 2 )
 max_health = 1.0
-detection_range = 100
-shooting_range = 200
-mob_color = Color( 1, 1, 1, 1 )
-knockbackable = true
 
 [node name="knockback_area" parent="." index="1" groups=[
 "enemies",
 ]]
 
 [node name="pathfinding_timer" type="Timer" parent="." index="5"]
-
-process_mode = 1
 wait_time = 0.5
-one_shot = false
-autostart = false
 
 [node name="passive_timer" type="Timer" parent="." index="6"]
 
-process_mode = 1
-wait_time = 1.0
-one_shot = false
-autostart = false
-
 [node name="attack_timer" type="Timer" parent="." index="7"]
 
-process_mode = 1
-wait_time = 1.0
-one_shot = false
-autostart = false
-
 [node name="mob_health_bar" type="TextureProgress" parent="." index="8"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_left = -8.0
 margin_top = 9.0
 margin_right = 8.0
 margin_bottom = 13.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-min_value = 0.0
-max_value = 100.0
-step = 1.0
-page = 0.0
-value = 0.0
-exp_edit = false
-rounded = false
 texture_under = ExtResource( 3 )
-texture_over = null
 texture_progress = ExtResource( 4 )
-radial_fill_degrees = 360.0
-radial_center_offset = Vector2( 0, 0 )
-nine_patch_stretch = false
-_sections_unfolded = [ "Textures" ]
-
 [connection signal="timeout" from="pathfinding_timer" to="." method="_on_pathfinding_timer_timeout"]
-
 [connection signal="timeout" from="passive_timer" to="." method="_on_passive_timer_timeout"]
-
-

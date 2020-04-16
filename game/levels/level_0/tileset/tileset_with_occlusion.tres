@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=17 format=2]
+[gd_resource type="TileSet" load_steps=14 format=2]
 
 [ext_resource path="res://game/levels/level_0/tileset/tile_shape.tres" type="Shape2D" id=1]
 [ext_resource path="res://game/levels/level_0/tileset/tile1.png" type="Texture" id=2]
@@ -13,21 +13,12 @@
 [ext_resource path="res://game/levels/traps/pit_area/tiles/temple/pit_temple_area_corner.png" type="Texture" id=11]
 
 [sub_resource type="OccluderPolygon2D" id=2]
-polygon = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
-
-[sub_resource type="ConvexPolygonShape2D" id=3]
-points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygon = PoolVector2Array( -4, 4, 4, 4, 4, -4, -4, -4 )
 
 [sub_resource type="NavigationPolygon" id=1]
 vertices = PoolVector2Array( 8, 8, -8, 8, -8, -8, 8, -8 )
 polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 outlines = [ PoolVector2Array( 8, 8, -8, 8, -8, -8, 8, -8 ) ]
-
-[sub_resource type="OccluderPolygon2D" id=4]
-polygon = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
-
-[sub_resource type="ConvexPolygonShape2D" id=5]
-points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 
 [resource]
 0/name = "wall"
@@ -45,12 +36,6 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 "one_way_margin": 1.0,
 "shape": ExtResource( 1 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 8, 8 )
-}, {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 3 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 0/z_index = 0
 1/name = "floor"
@@ -108,7 +93,6 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 5/region = Rect2( 0, 0, 16, 16 )
 5/tile_mode = 0
 5/occluder_offset = Vector2( 8, 8 )
-5/occluder = SubResource( 4 )
 5/navigation_offset = Vector2( 8, 8 )
 5/navigation = ExtResource( 3 )
 5/shapes = [ {
@@ -117,12 +101,6 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 "one_way_margin": 1.0,
 "shape": ExtResource( 1 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 8, 8 )
-}, {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 5 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 5/z_index = 0
 6/name = "pit_side_1"

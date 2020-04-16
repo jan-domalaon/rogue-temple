@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/pit_temple_area_side_2.png-94233084b909c43fd37ac2a05411722d.stex"
+path="res://.import/light.png-aeae3b04f5c5350b01abd3489b4c14b8.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://game/levels/traps/pit_area/tiles/temple/pit_temple_area_side_2.png"
-dest_files=[ "res://.import/pit_temple_area_side_2.png-94233084b909c43fd37ac2a05411722d.stex" ]
+source_file="res://game/characters/player/light.png"
+dest_files=[ "res://.import/light.png-aeae3b04f5c5350b01abd3489b4c14b8.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

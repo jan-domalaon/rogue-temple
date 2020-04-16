@@ -6,15 +6,12 @@
 [ext_resource path="res://game/items/weapons/wooden_staff/wooden_staff.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
-
-custom_solver_bias = 0.0
 extents = Vector2( 6, 7 )
 
-[node name="bandit_scavenger" groups=[
-"melee_mobs",
+[node name="bandit_scavenger" index="0" groups=[
 "humanoids",
+"melee_mobs",
 ] instance=ExtResource( 1 )]
-
 script = ExtResource( 2 )
 health = 8.0
 max_health = 8.0
@@ -22,24 +19,17 @@ armor = 2
 move_speed = 85
 character_name = "Bandit Scavenger"
 detection_range = 400
-melee_weapon_path = ""
-ranged_weapon_path = ""
 
 [node name="sprite" parent="." index="0"]
-
 texture = ExtResource( 3 )
 
 [node name="hitbox" parent="." index="2"]
-
 visible = true
 shape = SubResource( 1 )
 
 [node name="weapon" parent="." index="6" instance=ExtResource( 4 )]
-
 visible = false
 modulate = Color( 0.501961, 0.501961, 0.501961, 1 )
 scale = Vector2( 0.5, 0.5 )
-_sections_unfolded = [ "Transform", "Visibility" ]
 user_type = "mob"
-
 

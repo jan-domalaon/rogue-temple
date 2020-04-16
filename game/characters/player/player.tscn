@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://game/characters/generic_character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://game/characters/player/player.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://game/characters/player/inventory.tscn" type="PackedScene" id=4]
 [ext_resource path="res://game/characters/player/player_hud/hud.tscn" type="PackedScene" id=5]
 [ext_resource path="res://game/characters/player/player_hud/death_screen/death_screen.tscn" type="PackedScene" id=6]
+[ext_resource path="res://game/characters/player/light.png" type="Texture" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 14, 16 )
@@ -129,5 +130,14 @@ editor_draw_drag_margin = true
 [node name="death_screen" parent="hud_canvas_layer" index="1" instance=ExtResource( 6 )]
 visible = false
 
+[node name="light" type="Light2D" parent="." index="8"]
+texture = ExtResource( 7 )
+mode = 3
+range_item_cull_mask = 2
+shadow_enabled = true
+shadow_gradient_length = 1.4
+shadow_filter = 3
+shadow_filter_smooth = 5.3
+shadow_item_cull_mask = 2
 [connection signal="health_changed" from="." to="hud_canvas_layer/hud" method="_on_player_health_changed"]
 [connection signal="max_health_changed" from="." to="hud_canvas_layer/hud" method="_on_player_max_health_changed"]

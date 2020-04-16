@@ -121,7 +121,6 @@ text = "Quit"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/switch_screen_anim = SubResource( 3 )
-
 [connection signal="pressed" from="CenterContainer/VBoxContainer/play_button" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/option_button" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/quit_button" to="." method="_on_quit_button_pressed"]

@@ -63,4 +63,3 @@ ProgressBar/colors/font_color_shadow = Color( 0, 0, 0, 1 )
 ProgressBar/fonts/font = null
 ProgressBar/styles/bg = null
 ProgressBar/styles/fg = null
-
