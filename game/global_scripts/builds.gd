@@ -18,13 +18,13 @@ extends Node
 # Holy Adamist Army Maceman: Iron Mace, iron shield, bucket helm, chainmail, chainmail gloves, leather boots
 # 2 crab rangoons
 export var HAA_MACEMAN				= {'Equipment': {"Primary": ["Iron Mace", "WEAPON"], 
-												 	 "Secondary": ["Ranger Bow", "WEAPON"], 
-												 	 "Shield": ["Iron Shield", "SHIELD"], 
-												 	 "Helmet": ["Bucket Helm", "HELMET"], 
-												 	 "Armor": ["Chainmail Armor", "ARMOR"], 
-												 	 "Gloves": ["Chainmail Gloves", "GLOVES"], 
-												 	 "Boots": ["Leather Boots", "BOOTS"]}, 
-								    'Inventory Space': [["Crab Rangoon", "FOODSTUFF"], 
+													  "Secondary": ["Ranger Bow", "WEAPON"], 
+													  "Shield": ["Iron Shield", "SHIELD"], 
+													  "Helmet": ["Bucket Helm", "HELMET"], 
+													  "Armor": ["Chainmail Armor", "ARMOR"], 
+													  "Gloves": ["Chainmail Gloves", "GLOVES"], 
+													  "Boots": ["Leather Boots", "BOOTS"]}, 
+									'Inventory Space': [["Crab Rangoon", "FOODSTUFF"], 
 													   ["Crab Rangoon", "FOODSTUFF"]],
 									'Health': 20,
 									'Max Health': 20}

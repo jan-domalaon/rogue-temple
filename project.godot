@@ -15,7 +15,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Catacombs2018"
+config/name="RogueTemple2020"
 run/main_scene="res://menu/main_menu/menu.tscn"
 boot_splash/image="res://non_commercial_logo.png"
 config/icon="res://icon.png"
@@ -34,7 +34,6 @@ pitfall="*res://game/levels/traps/pit_area/pitfall_global.gd"
 [debug]
 
 gdscript/warnings/unused_variable=false
-gdscript/warnings/unused_class_variable=false
 gdscript/warnings/unused_argument=false
 gdscript/warnings/return_value_discarded=false
 
