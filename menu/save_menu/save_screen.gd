@@ -19,6 +19,9 @@ func _on_load_pressed():
 	# Load a previous save
 	save.continue_game = true
 	# Get the player's current game level from the save
-	var current_level_filepath = save.get_game_level()
-	get_tree().change_scene(current_level_filepath)
+	if save.save_file_exists():
+		var current_level_filepath = save.get_game_level()
+		get_tree().change_scene(current_level_filepath)
+	else:
+		print("Save file doesn't exist!")
 
