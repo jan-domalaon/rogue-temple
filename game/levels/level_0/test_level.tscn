@@ -115,10 +115,20 @@ position = Vector2( 59, 113 )
 position = Vector2( 72, -24 )
 next_level = "res://game/levels/level_0/test_level_2.tscn"
 
-[node name="generic_melee_humanoid2" parent="." instance=ExtResource( 13 )]
+[node name="generic_melee_humanoid2" parent="." groups=[
+"characters",
+"loggable",
+] instance=ExtResource( 13 )]
 position = Vector2( -16, -64 )
+collision_layer = 2
+collision_mask = 15
 
-[node name="generic_ranged_humanoid" parent="." instance=ExtResource( 14 )]
+[node name="generic_ranged_humanoid" parent="." groups=[
+"characters",
+"loggable",
+] instance=ExtResource( 14 )]
 position = Vector2( 456, -64 )
+collision_layer = 2
+collision_mask = 15
 
 [editable path="traps/pit_area"]

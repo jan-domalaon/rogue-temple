@@ -79,7 +79,7 @@ func _physics_process(delta):
 	$mob_healthbar.max_value = max_health
 	
 	# To update draw
-	update()
+	# update()
 
 
 func _draw():

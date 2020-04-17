@@ -15,7 +15,6 @@ func _ready():
 	$HBoxContainer/MarginContainer/HBox/level_margin_cont/game_level.set_text(get_owner().get_owner().level_name)
 	
 	# Get signal from level
-	
 	get_tree().get_root().get_node("level").connect("show_debug", self, "_on_show_debug")
 	
 	# Hide appropriate UI elements

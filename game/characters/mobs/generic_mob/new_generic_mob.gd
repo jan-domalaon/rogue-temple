@@ -41,6 +41,9 @@ export var knockbackable = true
 # For weapon wielding mobs
 var weapon_length = 0
 
+# For showing debug
+var debug_mode = false
+
 
 func _ready():
 	set_nav(nav_map)
@@ -55,6 +58,10 @@ func _ready():
 	# Set mob health bar value
 	$mob_health_bar.max_value = max_health
 	$mob_health_bar.value = health
+	
+	# Get signal for debug mode
+	print("Level? ", get_tree().get_root().get_node("level").name)
+	get_tree().get_root().get_node("level").connect("show_debug", self, "_on_show_debug")
 
 
 func _physics_process(delta):
@@ -80,14 +87,12 @@ func _physics_process(delta):
 	$mob_health_bar.value = health
 	$mob_health_bar.max_value = max_health
 	
-	update()
+	if debug_mode:
+		update()
+	
 
 
 func _draw():
-	# Draw path
-#	if path.size() > 1:
-#		for node in path:
-#			draw_circle(node - position, 5, Color(0, 1, 1))
 	var current_player_pos = get_parent().get_node("player").get_global_position()
 	var player_extents = get_parent().get_node("player/hitbox").shape.extents - Vector2(3, 3)
 	var mob_extents = $hitbox.shape.extents - Vector2(1, 1)
@@ -101,15 +106,21 @@ func _draw():
 	var mob_se = get_global_position() + mob_extents
 	var mob_ne = get_global_position() + Vector2(mob_extents.x, -mob_extents.y)
 	var mob_sw = get_global_position() + Vector2(-mob_extents.x, mob_extents.y)
-	
-	if get_global_position().distance_to(current_player_pos) <= detection_range:
-		draw_line(Vector2(), nw - mob_nw, Color(1, 0, 0))
-		draw_line(Vector2(), se - mob_se, Color(1, 0, 0))
-		draw_line(Vector2(), ne - mob_ne, Color(1, 0, 0))
-		draw_line(Vector2(), sw - mob_sw, Color(1, 0, 0))
-	
-	# Draw vision radius
-	draw_circle(Vector2(), detection_range, Color(0.78, 0.91, 0, 0.3))
+
+	# Draw sight radius and raycasts only when debug mode is on
+	if debug_mode:
+		# Draw path
+		#	if path.size() > 1:
+		#		for node in path:
+		#			draw_circle(node - position, 5, Color(0, 1, 1))
+		if get_global_position().distance_to(current_player_pos) <= detection_range:
+			draw_line(Vector2(), nw - mob_nw, Color(1, 0, 0))
+			draw_line(Vector2(), se - mob_se, Color(1, 0, 0))
+			draw_line(Vector2(), ne - mob_ne, Color(1, 0, 0))
+			draw_line(Vector2(), sw - mob_sw, Color(1, 0, 0))
+		
+		# Draw vision radius
+		draw_circle(Vector2(), detection_range, Color(0.78, 0.91, 0, 0.3))
 
 
 func set_nav(new_nav):
@@ -271,3 +282,9 @@ func _on_passive_timer_timeout():
 		elif (current_state == "WANDER"):
 			current_state = "IDLE"
 			state_idle()
+
+
+func _on_show_debug():
+	# Toggle debug mode on. Check _draw() to see what is drawn in debug
+	# mode
+	debug_mode = false if debug_mode else true
