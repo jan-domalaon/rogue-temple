@@ -5,21 +5,21 @@
 *Art* by Jan Domalaon  
 *Various art assets* from https://www.kenney.nl/assets. Notably, the UI elements.  
 
-I'm currently working on porting my Godot 2 code to Godot 3. Some of the features aren't working.
+Many thanks to [GDQuest](https://www.youtube.com/channel/UCxboW7x0jZqFdvMdCFKTMsQ) and the various tutorials hosted there.
 
 ### Current features
-* Melee, ranged weaponry
-* Damage blocking
+* Melee, ranged weaponry system. Includes pierce, blunt, cut damage - each with unique properties
+* Damage blocking using a shield
 * Basic mobs with knockback
 * Humanoids with ranged and melee AI
 * Inventory system
-* Level elements, like doors, pits, spiked traps
+* Level/scene furniture, such as doors, pits, spiked traps
+* Basic saving
 
 ### Planned Features in no particular order
 * A boss fight
 * More traps, mobs, levels, weaponry
 * More polish with UI
-* Saving
 * Fog of war
 
 ### Tools used
