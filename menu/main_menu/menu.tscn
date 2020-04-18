@@ -5,36 +5,25 @@
 [ext_resource path="res://menu/main_menu/title_splash_alpha.png" type="Texture" id=3]
 [ext_resource path="res://menu/main_menu/default_menu_theme.tres" type="Theme" id=4]
 [ext_resource path="res://fonts/cinzel-bold.font" type="BitmapFont" id=5]
+[ext_resource path="res://menu/transitions/menu_transition.tscn" type="PackedScene" id=6]
 
-[sub_resource type="Animation" id=1]
+[sub_resource type="Animation" id=4]
+resource_name = "screen_swipe"
 tracks/0/type = "value"
-tracks/0/path = NodePath(".:position")
+tracks/0/path = NodePath("menu_transition:material:shader_param/cutoff")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 0.25 ),
+"transitions": PoolRealArray( 0.5, 0.5 ),
 "update": 0,
-"values": [ Vector2( 635, 140 ), Vector2( 635, 150 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 4, 4 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+"values": [ 1.0, 0.0 ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "splash_interact_anim"
-length = 5.0
+[sub_resource type="Animation" id=3]
+resource_name = "switch_screen_anim"
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
@@ -42,14 +31,11 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1, 2, 3, 4, 5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 2 ),
 "update": 0,
-"values": [ Color( 1, 0, 0, 1 ), Color( 0.945313, 0, 1, 1 ), Color( 0, 0.742188, 1, 1 ), Color( 0, 1, 0.296875, 1 ), Color( 1, 0.960938, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
-
-[sub_resource type="Animation" id=3]
-resource_name = "switch_screen_anim"
 
 [node name="menu" type="Container"]
 rect_min_size = Vector2( 1280, 720 )
@@ -72,16 +58,11 @@ __meta__ = {
 }
 
 [node name="splash" type="Sprite" parent="."]
-modulate = Color( 1, 1, 1, 0 )
 position = Vector2( 635, 140 )
 texture = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="splash"]
-anims/splash_anim = SubResource( 1 )
-anims/splash_interact_anim = SubResource( 2 )
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 margin_top = 120.0
@@ -89,41 +70,46 @@ margin_right = 1280.0
 margin_bottom = 720.0
 rect_min_size = Vector2( 1280, 600 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
-margin_left = 352.0
+[node name="menu_button_container" type="VBoxContainer" parent="CenterContainer"]
+margin_left = 425.0
 margin_top = 130.0
-margin_right = 927.0
+margin_right = 855.0
 margin_bottom = 470.0
+rect_min_size = Vector2( 430, 0 )
 custom_constants/separation = 20
 
-[node name="play_button" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_right = 575.0
+[node name="play_button" type="Button" parent="CenterContainer/menu_button_container"]
+margin_right = 430.0
 margin_bottom = 100.0
-rect_min_size = Vector2( 575, 100 )
+rect_min_size = Vector2( 430, 100 )
 theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 5 )
 text = "Play"
 
-[node name="option_button" type="Button" parent="CenterContainer/VBoxContainer"]
+[node name="option_button" type="Button" parent="CenterContainer/menu_button_container"]
 margin_top = 120.0
-margin_right = 575.0
+margin_right = 430.0
 margin_bottom = 220.0
-rect_min_size = Vector2( 575, 100 )
+rect_min_size = Vector2( 430, 100 )
 theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 5 )
 text = "Options"
 
-[node name="quit_button" type="Button" parent="CenterContainer/VBoxContainer"]
+[node name="quit_button" type="Button" parent="CenterContainer/menu_button_container"]
 margin_top = 240.0
-margin_right = 575.0
+margin_right = 430.0
 margin_bottom = 340.0
-rect_min_size = Vector2( 575, 100 )
+rect_min_size = Vector2( 430, 100 )
 theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 5 )
 text = "Quit"
 
+[node name="menu_transition" parent="." instance=ExtResource( 6 )]
+visible = false
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/screen_swipe = SubResource( 4 )
 anims/switch_screen_anim = SubResource( 3 )
-[connection signal="pressed" from="CenterContainer/VBoxContainer/play_button" to="." method="_on_play_button_pressed"]
-[connection signal="pressed" from="CenterContainer/VBoxContainer/option_button" to="." method="_on_options_pressed"]
-[connection signal="pressed" from="CenterContainer/VBoxContainer/quit_button" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="CenterContainer/menu_button_container/play_button" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="CenterContainer/menu_button_container/option_button" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="CenterContainer/menu_button_container/quit_button" to="." method="_on_quit_button_pressed"]

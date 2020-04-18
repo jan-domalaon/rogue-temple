@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://menu/transitions/menu_transition.shader" type="Shader" id=1]
+[ext_resource path="res://menu/transitions/horizontal_mask.png" type="Texture" id=2]
+
+[sub_resource type="ShaderMaterial" id=2]
+render_priority = 1
+shader = ExtResource( 1 )
+shader_param/cutoff = 1.0
+shader_param/smooth_size = 0.2
+shader_param/mask = ExtResource( 2 )
+
+[node name="menu_transition" type="ColorRect"]
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.141176, 0.141176, 0.141176, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
