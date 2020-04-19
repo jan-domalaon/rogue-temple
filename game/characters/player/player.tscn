@@ -90,6 +90,7 @@ collision_layer = 1
 script = ExtResource( 2 )
 health = 20.0
 max_health = 20.0
+move_speed = 200
 character_name = "Player"
 
 [node name="sprite" parent="." index="0"]
