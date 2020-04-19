@@ -2,12 +2,7 @@
 
 [ext_resource path="res://game/characters/mobs/generic_humanoids/generic_melee_humanoid.tscn" type="PackedScene" id=1]
 
-[node name="new_bandit_scavenger" groups=[
-"characters",
-"loggable",
-] instance=ExtResource( 1 )]
-collision_layer = 2
-collision_mask = 15
+[node name="bandit_scavenger" instance=ExtResource( 1 )]
 health = 5.0
 max_health = 5.0
 armor = 2

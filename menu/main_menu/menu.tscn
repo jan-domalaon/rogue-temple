@@ -7,7 +7,7 @@
 [ext_resource path="res://fonts/cinzel-bold.font" type="BitmapFont" id=5]
 [ext_resource path="res://menu/transitions/menu_transition.tscn" type="PackedScene" id=6]
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=1]
 resource_name = "screen_swipe"
 tracks/0/type = "value"
 tracks/0/path = NodePath("menu_transition:material:shader_param/cutoff")
@@ -22,7 +22,7 @@ tracks/0/keys = {
 "values": [ 1.0, 0.0 ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 resource_name = "switch_screen_anim"
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
@@ -108,8 +108,8 @@ text = "Quit"
 visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/screen_swipe = SubResource( 4 )
-anims/switch_screen_anim = SubResource( 3 )
+anims/screen_swipe = SubResource( 1 )
+anims/switch_screen_anim = SubResource( 2 )
 [connection signal="pressed" from="CenterContainer/menu_button_container/play_button" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="CenterContainer/menu_button_container/option_button" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="CenterContainer/menu_button_container/quit_button" to="." method="_on_quit_button_pressed"]
