@@ -20,14 +20,17 @@ func save_game():
 	for node in persistent_nodes:
 		save_dict[node.get_name()] = node.save_data()
 	
-	# Create file
+	# Create save directory if not created already
+	var save_dir = Directory.new()
+	if not save_dir.dir_exists("user://game/saves"):
+		save_dir.make_dir("user://game/saves")
+	
+	# Create save file
 	var save_file = File.new()
 	save_file.open(SAVE_PATH, File.WRITE)
 	
-	# Serialize data and store into save file
+	# Serialize data and store into save file. Close file
 	save_file.store_line(to_json(save_dict))
-	
-	# Close file
 	save_file.close()
 
 
