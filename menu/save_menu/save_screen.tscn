@@ -3,34 +3,49 @@
 [ext_resource path="res://menu/save_menu/save_screen.gd" type="Script" id=1]
 [ext_resource path="res://fonts/cinzel-bold.font" type="BitmapFont" id=2]
 
-[node name="save" type="Container"]
+[node name="save" type="MarginContainer"]
 margin_right = 1280.0
 margin_bottom = 720.0
+custom_constants/margin_right = 100
+custom_constants/margin_top = 100
+custom_constants/margin_left = 100
+custom_constants/margin_bottom = 100
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="save_slots" type="Container" parent="."]
 visible = false
-margin_right = 1280.0
-margin_bottom = 720.0
+margin_left = 100.0
+margin_top = 100.0
+margin_right = 1180.0
+margin_bottom = 620.0
 
-[node name="new_game_cont" type="Container" parent="."]
-margin_right = 1280.0
-margin_bottom = 720.0
+[node name="new_game_cont" type="VBoxContainer" parent="."]
+margin_left = 100.0
+margin_top = 100.0
+margin_right = 1180.0
+margin_bottom = 620.0
+custom_constants/separation = 50
 
 [node name="new_game" type="Button" parent="new_game_cont"]
-margin_left = 320.0
-margin_top = 128.0
-margin_right = 960.0
-margin_bottom = 228.0
+margin_right = 1080.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 0, 100 )
 custom_fonts/font = ExtResource( 2 )
 text = "New Game"
 
 [node name="load" type="Button" parent="new_game_cont"]
-margin_left = 320.0
-margin_top = 288.0
-margin_right = 960.0
-margin_bottom = 388.0
+margin_top = 150.0
+margin_right = 1080.0
+margin_bottom = 250.0
+rect_min_size = Vector2( 0, 100 )
+hint_tooltip = "There is no existing save file!"
 custom_fonts/font = ExtResource( 2 )
+disabled = true
 text = "Continue"
+
+[node name="animation_player" type="AnimationPlayer" parent="."]
 [connection signal="pressed" from="new_game_cont/new_game" to="." method="_on_new_game_pressed"]
 [connection signal="pressed" from="new_game_cont/load" to="." method="_on_load_pressed"]
