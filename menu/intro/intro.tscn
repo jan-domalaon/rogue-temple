@@ -79,9 +79,9 @@ expand = true
 
 [node name="engine" type="TextureRect" parent="."]
 modulate = Color( 1, 1, 1, 0 )
-margin_left = 279.0
+margin_left = 280.0
 margin_top = 150.0
-margin_right = 999.0
+margin_right = 1000.0
 margin_bottom = 570.0
 rect_min_size = Vector2( 720, 420 )
 texture = ExtResource( 3 )

@@ -7,12 +7,12 @@
 [ext_resource path="res://fonts/cinzel-bold.font" type="BitmapFont" id=5]
 [ext_resource path="res://menu/transitions/menu_transition.tscn" type="PackedScene" id=6]
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=1]
 resource_name = "game_launch"
 length = 5.0
 
-[sub_resource type="Animation" id=1]
-resource_name = "screen_swipe"
+[sub_resource type="Animation" id=2]
+length = 1.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("menu_transition:material:shader_param/cutoff")
 tracks/0/interp = 1
@@ -26,8 +26,7 @@ tracks/0/keys = {
 "values": [ 1.0, 0.0 ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "switch_screen_anim"
+[sub_resource type="Animation" id=3]
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
@@ -42,7 +41,6 @@ tracks/0/keys = {
 }
 
 [node name="menu" type="Container"]
-modulate = Color( 1, 1, 1, 0 )
 rect_min_size = Vector2( 1280, 720 )
 script = ExtResource( 1 )
 __meta__ = {
@@ -94,6 +92,7 @@ margin_bottom = 100.0
 rect_min_size = Vector2( 430, 100 )
 theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color_disabled = Color( 0.137255, 0.0235294, 0.0235294, 1 )
 custom_colors/font_color = Color( 0.137255, 0.0235294, 0.0235294, 1 )
 custom_colors/font_color_hover = Color( 0.639216, 0.105882, 0.105882, 1 )
 text = "Play"
@@ -105,6 +104,7 @@ margin_bottom = 220.0
 rect_min_size = Vector2( 430, 100 )
 theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color_disabled = Color( 0.137255, 0.0235294, 0.0235294, 1 )
 custom_colors/font_color = Color( 0.137255, 0.0235294, 0.0235294, 1 )
 custom_colors/font_color_hover = Color( 0.639216, 0.105882, 0.105882, 1 )
 text = "Options"
@@ -116,6 +116,7 @@ margin_bottom = 340.0
 rect_min_size = Vector2( 430, 100 )
 theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color_disabled = Color( 0.137255, 0.0235294, 0.0235294, 1 )
 custom_colors/font_color = Color( 0.137255, 0.0235294, 0.0235294, 1 )
 custom_colors/font_color_hover = Color( 0.639216, 0.105882, 0.105882, 1 )
 text = "Quit"
@@ -124,9 +125,9 @@ text = "Quit"
 visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/game_launch = SubResource( 3 )
-anims/screen_swipe = SubResource( 1 )
-anims/switch_screen_anim = SubResource( 2 )
+anims/game_launch = SubResource( 1 )
+anims/screen_swipe = SubResource( 2 )
+anims/switch_screen_anim = SubResource( 3 )
 [connection signal="pressed" from="CenterContainer/menu_button_container/play_button" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="CenterContainer/menu_button_container/option_button" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="CenterContainer/menu_button_container/quit_button" to="." method="_on_quit_button_pressed"]
