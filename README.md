@@ -1,4 +1,5 @@
-# Rogue Temple (working title)
+![Rogue Temple Splash](/menu/main_menu/splash.png)  
+
 **By Maritimes Gameworks**
 
 *Code* by Jan Domalaon  
