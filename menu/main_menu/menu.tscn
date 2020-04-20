@@ -1,11 +1,15 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://menu/main_menu/menu.gd" type="Script" id=1]
 [ext_resource path="res://fonts/jsl-ancient.font" type="BitmapFont" id=2]
-[ext_resource path="res://menu/main_menu/title_splash_alpha.png" type="Texture" id=3]
+[ext_resource path="res://menu/main_menu/splash.png" type="Texture" id=3]
 [ext_resource path="res://menu/main_menu/default_menu_theme.tres" type="Theme" id=4]
 [ext_resource path="res://fonts/cinzel-bold.font" type="BitmapFont" id=5]
 [ext_resource path="res://menu/transitions/menu_transition.tscn" type="PackedScene" id=6]
+
+[sub_resource type="Animation" id=3]
+resource_name = "game_launch"
+length = 5.0
 
 [sub_resource type="Animation" id=1]
 resource_name = "screen_swipe"
@@ -17,7 +21,7 @@ tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 0.5, 0.5 ),
+"transitions": PoolRealArray( -2, -2 ),
 "update": 0,
 "values": [ 1.0, 0.0 ]
 }
@@ -38,6 +42,7 @@ tracks/0/keys = {
 }
 
 [node name="menu" type="Container"]
+modulate = Color( 1, 1, 1, 0 )
 rect_min_size = Vector2( 1280, 720 )
 script = ExtResource( 1 )
 __meta__ = {
@@ -57,12 +62,17 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="splash" type="Sprite" parent="."]
-position = Vector2( 635, 140 )
+[node name="CenterContainer2" type="CenterContainer" parent="."]
+margin_right = 1280.0
+margin_bottom = 250.0
+rect_min_size = Vector2( 1280, 200 )
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer2"]
+margin_left = 215.0
+margin_top = 60.0
+margin_right = 1065.0
+margin_bottom = 190.0
 texture = ExtResource( 3 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 margin_top = 120.0
@@ -84,6 +94,8 @@ margin_bottom = 100.0
 rect_min_size = Vector2( 430, 100 )
 theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color = Color( 0.137255, 0.0235294, 0.0235294, 1 )
+custom_colors/font_color_hover = Color( 0.639216, 0.105882, 0.105882, 1 )
 text = "Play"
 
 [node name="option_button" type="Button" parent="CenterContainer/menu_button_container"]
@@ -93,6 +105,8 @@ margin_bottom = 220.0
 rect_min_size = Vector2( 430, 100 )
 theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color = Color( 0.137255, 0.0235294, 0.0235294, 1 )
+custom_colors/font_color_hover = Color( 0.639216, 0.105882, 0.105882, 1 )
 text = "Options"
 
 [node name="quit_button" type="Button" parent="CenterContainer/menu_button_container"]
@@ -102,12 +116,15 @@ margin_bottom = 340.0
 rect_min_size = Vector2( 430, 100 )
 theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color = Color( 0.137255, 0.0235294, 0.0235294, 1 )
+custom_colors/font_color_hover = Color( 0.639216, 0.105882, 0.105882, 1 )
 text = "Quit"
 
 [node name="menu_transition" parent="." instance=ExtResource( 6 )]
 visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/game_launch = SubResource( 3 )
 anims/screen_swipe = SubResource( 1 )
 anims/switch_screen_anim = SubResource( 2 )
 [connection signal="pressed" from="CenterContainer/menu_button_container/play_button" to="." method="_on_play_button_pressed"]

@@ -10,6 +10,7 @@ export var unique_weapon = false
 
 
 func _ready():
+	# Connect to attack timer. Paces when the mob attacks
 	$attack_timer.connect("timeout", self, "on_attack_timer_timeout")
 	
 	# Instance weapon and add to humanoid iff mob does not have a unique weapon
@@ -31,18 +32,21 @@ func _ready():
 		$weapon.user_type = "mob"
 		$weapon.modulate = mob_color
 	
-	# Set attack timer time and connectiom
-	$attack_timer.set_wait_time($weapon.get("secondary_as"))
+	# Remove interact area for mob weaponry
+	$weapon/interact_area.queue_free()
+	# Set attack timer time and connection
+	$attack_timer.set_wait_time($weapon.get("secondary_as") + 0.3)
 
 
 func state_melee_attack():
 	# Keep the weapon hitbox disabled if the mob is not attacking
 	# FOR USE WITH DOWNWARD SWING
-	$weapon/weapon_area/hitbox.set_disabled(true)
+	get_node("weapon/weapon_area/hitbox").disabled = false
 	# Mob can attack when cooldown is finished and player is still alive
 	if (can_attack and player_health > 0 and not flickering):
 		can_attack = false
 		$attack_timer.start()
+		# Turn on hitbox when swinging
 		$weapon.make_downward_swing()
 		current_state = "CHASE"
 
@@ -69,3 +73,4 @@ func state_ranged_attack():
 
 func on_attack_timer_timeout():
 	can_attack = true
+	$weapon/weapon_area/hitbox.set_deferred("disabled", false)

@@ -57,4 +57,4 @@ func picked_up_item(user_name, item_name):
 
 
 func level_welcome(level_name):
-	return "Welcome to the " + level_name + "."
+	return "Welcome to " + level_name + "."

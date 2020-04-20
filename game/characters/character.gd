@@ -103,6 +103,11 @@ func knockback():
 			knockback_counter = 10
 			knockback_dir = global_transform.origin - body.global_transform.origin
 			blunt_hit = false
+		# Knockback player if THIS character hits the player with a blunt weapon
+		if (knockback_counter == 0 && ("player" in get_groups() && "blunt_weapons" in body.get_groups()) && blunt_hit):
+			knockback_counter = 10
+			knockback_dir = global_transform.origin - body.global_transform.origin
+			blunt_hit = false
 
 
 func receive_phys_damage(dmg, dmg_type):

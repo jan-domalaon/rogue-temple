@@ -15,7 +15,7 @@ enum WEAPON_TYPES {
 }
 
 onready var weapon_tween = $weapon_area/weapon_tween
-# For tilemap collision
+# For tilemap collision (Get level's tilemap and doors')
 onready var walls = get_parent().get_parent().get_node("nav/tilemap")
 onready var doors = get_parent().get_parent().get_node("doors")
 
@@ -57,7 +57,7 @@ func _ready():
 func _on_weapon_area_body_entered(body):
 	var map_collision = false
 	var enemy_group
-
+	
 	# Verify the owner of this weapon. Get correct enemy group
 	if ("player" in get_parent().get_groups()):
 		enemy_group = "enemies"
@@ -75,7 +75,9 @@ func _on_weapon_area_body_entered(body):
 			elif (attack_type == "secondary"):
 				body.receive_phys_damage(secondary_damage, secondary_dmg_type)
 
-
+#
+# The following functions handle the melee weapon animations in the game
+#
 func make_swing():
 	reset_weapon()
 	# Reset position of weapon and rotating Node2D

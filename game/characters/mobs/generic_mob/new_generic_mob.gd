@@ -147,7 +147,6 @@ func pathfinding():
 		else:
 			path.remove(0)
 	else:
-		print("no more path nodes")
 		movement_dir = Vector2(0,0)
 
 

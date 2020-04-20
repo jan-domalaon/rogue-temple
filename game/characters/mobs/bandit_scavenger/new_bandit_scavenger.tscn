@@ -7,3 +7,4 @@ health = 5.0
 max_health = 5.0
 armor = 2
 character_name = "Bandit Scavenger"
+melee_weapon_path = "res://game/items/weapons/iron_mace/iron_mace.tscn"
