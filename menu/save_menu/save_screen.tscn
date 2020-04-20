@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://menu/save_menu/save_screen.gd" type="Script" id=1]
 [ext_resource path="res://fonts/cinzel-bold.font" type="BitmapFont" id=2]
+[ext_resource path="res://menu/transitions/animations/fade_in.anim" type="Animation" id=3]
 
 [node name="save" type="MarginContainer"]
+modulate = Color( 1, 1, 1, 0 )
 margin_right = 1280.0
 margin_bottom = 720.0
 custom_constants/margin_right = 100
@@ -29,14 +31,18 @@ margin_right = 1180.0
 margin_bottom = 620.0
 custom_constants/separation = 50
 
-[node name="new_game" type="Button" parent="new_game_cont"]
+[node name="new_game" type="Button" parent="new_game_cont" groups=[
+"option",
+]]
 margin_right = 1080.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 0, 100 )
 custom_fonts/font = ExtResource( 2 )
 text = "New Game"
 
-[node name="load" type="Button" parent="new_game_cont"]
+[node name="load" type="Button" parent="new_game_cont" groups=[
+"option",
+]]
 margin_top = 150.0
 margin_right = 1080.0
 margin_bottom = 250.0
@@ -47,5 +53,7 @@ disabled = true
 text = "Continue"
 
 [node name="animation_player" type="AnimationPlayer" parent="."]
+autoplay = "fade_in"
+anims/fade_in = ExtResource( 3 )
 [connection signal="pressed" from="new_game_cont/new_game" to="." method="_on_new_game_pressed"]
 [connection signal="pressed" from="new_game_cont/load" to="." method="_on_load_pressed"]

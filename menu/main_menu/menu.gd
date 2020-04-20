@@ -3,12 +3,17 @@
 
 extends Control
 
+export var version_name = "Test Build #1"
+
 
 func _ready():
 	# Connect to signal when animation is finished
 	# Play menu button animation
 	$AnimationPlayer.play("switch_screen_anim")
 	set_process_input(true)
+	
+	# Update version name
+	$TestLabel.set_text(version_name)
 
 func _on_play_button_pressed():
 	switch_screens("switch_screen_anim", "res://menu/save_menu/save_screen.tscn")

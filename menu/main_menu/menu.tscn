@@ -6,6 +6,7 @@
 [ext_resource path="res://menu/main_menu/default_menu_theme.tres" type="Theme" id=4]
 [ext_resource path="res://fonts/cinzel-bold.font" type="BitmapFont" id=5]
 [ext_resource path="res://menu/transitions/menu_transition.tscn" type="PackedScene" id=6]
+[ext_resource path="res://menu/transitions/animations/fade_in.anim" type="Animation" id=7]
 
 [sub_resource type="Animation" id=1]
 resource_name = "game_launch"
@@ -26,26 +27,14 @@ tracks/0/keys = {
 "values": [ 1.0, 0.0 ]
 }
 
-[sub_resource type="Animation" id=3]
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 2 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
-}
-
 [node name="menu" type="Container"]
+modulate = Color( 1, 1, 1, 0 )
 rect_min_size = Vector2( 1280, 720 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+version_name = "Public Alpha v1.0.0"
 
 [node name="TestLabel" type="Label" parent="."]
 margin_left = 5.0
@@ -55,7 +44,7 @@ margin_bottom = 820.0
 mouse_filter = 1
 size_flags_vertical = 0
 custom_fonts/font = ExtResource( 2 )
-text = "Test Build #1 2020"
+text = "BUILD NAME HERE"
 __meta__ = {
 "_edit_lock_": true
 }
@@ -127,7 +116,7 @@ visible = false
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/game_launch = SubResource( 1 )
 anims/screen_swipe = SubResource( 2 )
-anims/switch_screen_anim = SubResource( 3 )
+anims/switch_screen_anim = ExtResource( 7 )
 [connection signal="pressed" from="CenterContainer/menu_button_container/play_button" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="CenterContainer/menu_button_container/option_button" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="CenterContainer/menu_button_container/quit_button" to="." method="_on_quit_button_pressed"]

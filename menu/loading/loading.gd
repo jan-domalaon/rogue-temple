@@ -3,6 +3,8 @@
 
 extends MarginContainer
 
+var level_thread = Thread.new()
 
 func _ready():
+	# Load correct level
 	pass
