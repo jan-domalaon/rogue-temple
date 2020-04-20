@@ -14,8 +14,10 @@ func _ready():
 	# Get level name from player scene
 	$HBoxContainer/MarginContainer/HBox/level_margin_cont/game_level.set_text(get_owner().get_owner().level_name)
 	
-	# Get signal from level
+	# Get debug signal and welcome from level
+	# Welcome used to trigger menu_transition
 	get_tree().get_root().get_node("level").connect("show_debug", self, "_on_show_debug")
+	#get_tree().get_root().get_node("level").connect("level_welcome", self, "_on_level_welcome")
 	
 	# Hide appropriate UI elements
 	#get_node("inventory").hide()
@@ -74,3 +76,9 @@ func _on_show_debug():
 		$HBoxContainer/MarginContainer/HBox/debug_container.set_modulate(Color(1,1,1,1))
 	else:
 		$HBoxContainer/MarginContainer/HBox/debug_container.set_modulate(Color(1,1,1,0))
+
+
+func _on_level_welcome():
+	print("player hud level welcomes")
+	# Play L to R transition
+	$animation_player.play("screen_swipe_l_to_r")

@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=2]
+
+[ext_resource path="res://menu/transitions/menu_transition.shader" type="Shader" id=1]
+[ext_resource path="res://menu/transitions/horizontal_mask_open_on_right.png" type="Texture" id=2]
+
+[resource]
+shader = ExtResource( 1 )
+shader_param/cutoff = 1.0
+shader_param/smooth_size = 0.2
+shader_param/mask = ExtResource( 2 )

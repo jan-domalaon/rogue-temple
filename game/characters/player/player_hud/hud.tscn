@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://game/characters/player/player_hud/hud.gd" type="Script" id=1]
 [ext_resource path="res://game/pause/pause_menu.tscn" type="PackedScene" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://game/characters/player/player_hud/block_count.gd" type="Script" id=7]
 [ext_resource path="res://fonts/Kenney Pixel.tres" type="DynamicFontData" id=8]
 [ext_resource path="res://game/characters/player/player_hud/game_log.gd" type="Script" id=9]
+[ext_resource path="res://menu/transitions/menu_transition_entered.tscn" type="PackedScene" id=10]
+[ext_resource path="res://menu/transitions/animations/screen_swipe_l_to_r.anim" type="Animation" id=11]
 
 [sub_resource type="DynamicFont" id=1]
 size = 25
@@ -31,6 +33,8 @@ tracks/0/keys = {
 }
 
 [node name="hud" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -166,6 +170,12 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 theme = ExtResource( 5 )
 text = "Level Test"
+
+[node name="menu_transition" parent="." instance=ExtResource( 10 )]
+visible = false
+
+[node name="animation_player" type="AnimationPlayer" parent="."]
+anims/screen_swipe_l_to_r = ExtResource( 11 )
 [connection signal="update_health_bar" from="." to="HBoxContainer/MarginContainer/HBox/VBoxContainer/MarginContainer/bar" method="_on_hud_update_health_bar"]
 [connection signal="update_max_health_bar" from="." to="HBoxContainer/MarginContainer/HBox/VBoxContainer/MarginContainer/bar" method="_on_hud_update_max_health_bar"]
 [connection signal="mouse_entered" from="HBoxContainer/MarginContainer/HBox/game_log" to="HBoxContainer/MarginContainer/HBox/game_log" method="_on_game_log_mouse_entered"]

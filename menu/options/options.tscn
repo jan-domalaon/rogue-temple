@@ -1,19 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://menu/options/options.gd" type="Script" id=1]
 [ext_resource path="res://fonts/cinzel-bold.font" type="BitmapFont" id=2]
 [ext_resource path="res://menu/transitions/menu_transition.tscn" type="PackedScene" id=3]
-[ext_resource path="res://menu/transitions/horizontal_mask_open_on_right.png" type="Texture" id=4]
-[ext_resource path="res://menu/transitions/menu_transition.shader" type="Shader" id=5]
+[ext_resource path="res://shared/shaders/transition_l_to_r.tres" type="Material" id=4]
 
-[sub_resource type="ShaderMaterial" id=1]
-render_priority = 1
-shader = ExtResource( 5 )
-shader_param/cutoff = 0.0
-shader_param/smooth_size = 0.2
-shader_param/mask = ExtResource( 4 )
-
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=1]
 tracks/0/type = "value"
 tracks/0/path = NodePath("menu_transition:material:shader_param/cutoff")
 tracks/0/interp = 1
@@ -170,11 +162,11 @@ __meta__ = {
 }
 
 [node name="menu_transition" parent="." instance=ExtResource( 3 )]
-material = SubResource( 1 )
+material = ExtResource( 4 )
 rect_min_size = Vector2( 1280, 720 )
 
 [node name="animation_player" type="AnimationPlayer" parent="."]
-anims/screen_swipe_open_left = SubResource( 2 )
+anims/screen_swipe_open_left = SubResource( 1 )
 [connection signal="pressed" from="CenterContainer/VBoxContainer/buttons_vbox/HBoxContainer2/audio" to="." method="_on_audio_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/buttons_vbox/HBoxContainer2/video" to="." method="_on_video_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/buttons_vbox/HBoxContainer/changelog" to="." method="_on_changelog_pressed"]

@@ -7,25 +7,11 @@
 [ext_resource path="res://fonts/cinzel-bold.font" type="BitmapFont" id=5]
 [ext_resource path="res://menu/transitions/menu_transition.tscn" type="PackedScene" id=6]
 [ext_resource path="res://menu/transitions/animations/fade_in.anim" type="Animation" id=7]
+[ext_resource path="res://menu/transitions/animations/screen_swipe.anim" type="Animation" id=8]
 
 [sub_resource type="Animation" id=1]
 resource_name = "game_launch"
 length = 5.0
-
-[sub_resource type="Animation" id=2]
-length = 1.5
-tracks/0/type = "value"
-tracks/0/path = NodePath("menu_transition:material:shader_param/cutoff")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( -2, -2 ),
-"update": 0,
-"values": [ 1.0, 0.0 ]
-}
 
 [node name="menu" type="Container"]
 modulate = Color( 1, 1, 1, 0 )
@@ -115,7 +101,7 @@ visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/game_launch = SubResource( 1 )
-anims/screen_swipe = SubResource( 2 )
+anims/screen_swipe = ExtResource( 8 )
 anims/switch_screen_anim = ExtResource( 7 )
 [connection signal="pressed" from="CenterContainer/menu_button_container/play_button" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="CenterContainer/menu_button_container/option_button" to="." method="_on_options_pressed"]

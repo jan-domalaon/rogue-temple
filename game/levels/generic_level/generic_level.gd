@@ -29,13 +29,11 @@ func _ready():
 		elif ($player.health <= 1):
 			$player.health = 1
 		
-	
-	
 	# Reset pitfall vars since player didn't fall into a pit (yet >:))
 	pitfall.pitfallen_chars = []
 	pitfall.player_pitfall = false
-	
-	
+
+
 func _input(event):
 	# Check for key input for debug view
 	if (event.is_action_pressed("access_debug")):

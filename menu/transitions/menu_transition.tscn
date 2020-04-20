@@ -11,6 +11,7 @@ shader_param/smooth_size = 0.2
 shader_param/mask = ExtResource( 2 )
 
 [node name="menu_transition" type="ColorRect"]
+pause_mode = 2
 material = SubResource( 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
