@@ -13,10 +13,6 @@ func _ready():
 	if save.save_file_exists():
 		$margin_container/new_game_cont/load.set_disabled(false)
 		$margin_container/new_game_cont/load.set_tooltip("")
-	
-	# Connect every button to trigger transition
-	for button in get_tree().get_nodes_in_group("option"):
-		button.connect("pressed", self, "on_any_button_pressed")
 
 
 func _on_new_game_pressed():

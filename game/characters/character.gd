@@ -231,7 +231,7 @@ func on_pitfall():
 	# Plays when the character enters a pit trap area (crevice, false trapdoor, etc.)
 	
 	# Disable processes and hitbox
-	$hitbox.set_disabled(true)
+	$hitbox.call_deferred("set", "disabled", true)
 	set_process_input(false)
 	set_process(false)
 	set_physics_process(false)
