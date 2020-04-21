@@ -29,7 +29,7 @@ scale = Vector2( 0.5, 0.5 )
 dropped_item = true
 
 [node name="level_change" parent="level_change_container" index="0"]
-next_level = "res://game/levels/level_0/test_level_2.tscn"
+next_level = "res://game/levels/level_0/prototype_level_2.tscn"
 
 [node name="player" parent="." index="7" instance=ExtResource( 3 )]
 

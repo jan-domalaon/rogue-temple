@@ -142,7 +142,7 @@ func receive_phys_damage(dmg, dmg_type):
 		
 		# Character is dead
 		if (health <= 0):
-			print(get_name() + ' is deadaz')
+			print(get_name() + ' is dead!')
 			# Emit death message to game log
 			emit_signal("character_died", character_name)
 			set_process(false)

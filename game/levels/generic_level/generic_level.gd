@@ -1,7 +1,8 @@
 extends Node
 
 
-export var level_name = "Generic Level"
+export (String) var level_name = "Generic Level"
+export (bool) var terminal_level = false
 
 # Game log signals
 signal player_pitfallen_drop
@@ -32,6 +33,9 @@ func _ready():
 	# Reset pitfall vars since player didn't fall into a pit (yet >:))
 	pitfall.pitfallen_chars = []
 	pitfall.player_pitfall = false
+	
+	# If this level is a terminal level (ie last level), delete any level exits
+	$level_change_container.queue_free()
 
 
 func _input(event):

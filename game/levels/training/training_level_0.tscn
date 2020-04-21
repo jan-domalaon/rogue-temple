@@ -1,6 +1,6 @@
 [gd_scene load_steps=30 format=2]
 
-[ext_resource path="res://game/levels/level_0/test_level_training.gd" type="Script" id=1]
+[ext_resource path="res://game/levels/training/test_level_training.gd" type="Script" id=1]
 [ext_resource path="res://game/levels/level_0/tileset/tileset_post_port.tres" type="TileSet" id=2]
 [ext_resource path="res://npc/practice_dummy/armored_dummy.tscn" type="PackedScene" id=3]
 [ext_resource path="res://npc/practice_dummy/unarmored_dummy.tscn" type="PackedScene" id=4]
@@ -9,6 +9,8 @@
 [ext_resource path="res://scenes/common/weapons/iron_mace/iron_mace.tscn" type="PackedScene" id=7]
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=8]
 [ext_resource path="res://npc/water_jelly/water_jelly.tscn" type="PackedScene" id=9]
+
+
 
 
 
