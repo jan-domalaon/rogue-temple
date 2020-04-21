@@ -45,6 +45,7 @@ var weapon_length = 0
 var debug_mode = false
 
 
+
 func _ready():
 	set_nav(nav_map)
 	player_pos = get_parent().get_node("player").get_global_position()
@@ -89,7 +90,6 @@ func _physics_process(delta):
 	
 	if debug_mode:
 		update()
-	
 
 
 func _draw():
@@ -169,12 +169,12 @@ func detect_ray(target_position, player_pos):
 	# Ignore mob mask (00101 == 5). Bit mask is in binary. Collides with players and walls only.
 	var detect_ray = physics_space.intersect_ray(target_position, player_pos, ignore_areas, 5)
 	if detect_ray != null:
-		print("detect ray not null")
+		#print("detect ray not null")
 		if (detect_ray.collider.is_in_group("player")):
-			print("player seen!")
+			#print("player seen!")
 			return true
 	else:
-		print("detect ray null")
+		#print("detect ray null")
 		return false
 
 

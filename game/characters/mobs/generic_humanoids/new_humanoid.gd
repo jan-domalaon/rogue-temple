@@ -8,6 +8,8 @@ export var melee_weapon_path = ""
 export var ranged_weapon_path = ""
 export var unique_weapon = false
 
+signal enemy_died
+
 
 func _ready():
 	# Connect to attack timer. Paces when the mob attacks
@@ -74,3 +76,4 @@ func state_ranged_attack():
 func on_attack_timer_timeout():
 	can_attack = true
 	$weapon/weapon_area/hitbox.set_deferred("disabled", false)
+

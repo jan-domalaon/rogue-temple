@@ -2,6 +2,8 @@
 
 extends Control
 
+export (String) var new_game_level = 'res://game/levels/level_0/prototype_level_intro.tscn'
+
 
 func _ready():
 	# Reset the continue_game flag in save singleton
@@ -23,7 +25,7 @@ func _on_new_game_pressed():
 	save.clear_save()
 	$animation_player.play("screen_swipe")
 	yield($animation_player, "animation_finished")
-	get_tree().change_scene('res://game/levels/level_0/prototype_level.tscn')
+	get_tree().change_scene(new_game_level)
 
 
 func _on_load_pressed():
@@ -37,10 +39,3 @@ func _on_load_pressed():
 		get_tree().change_scene(current_level_filepath)
 	else:
 		print("Save file doesn't exist!")
-
-
-func on_any_button_pressed():
-#	# Play level transition
-#	$menu_transition.show()
-#	$animation_player.play("screen_swipe")
-	pass

@@ -18,7 +18,7 @@ modulate = Color( 1, 1, 1, 0 )
 rect_min_size = Vector2( 1280, 720 )
 script = ExtResource( 1 )
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_use_anchors_": true
 }
 version_name = "Public Alpha v1.0.0"
 
@@ -61,7 +61,9 @@ margin_bottom = 470.0
 rect_min_size = Vector2( 430, 0 )
 custom_constants/separation = 20
 
-[node name="play_button" type="Button" parent="CenterContainer/menu_button_container"]
+[node name="play_button" type="Button" parent="CenterContainer/menu_button_container" groups=[
+"option",
+]]
 margin_right = 430.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 430, 100 )
@@ -72,7 +74,9 @@ custom_colors/font_color = Color( 0.137255, 0.0235294, 0.0235294, 1 )
 custom_colors/font_color_hover = Color( 0.639216, 0.105882, 0.105882, 1 )
 text = "Play"
 
-[node name="option_button" type="Button" parent="CenterContainer/menu_button_container"]
+[node name="option_button" type="Button" parent="CenterContainer/menu_button_container" groups=[
+"option",
+]]
 margin_top = 120.0
 margin_right = 430.0
 margin_bottom = 220.0
@@ -84,7 +88,9 @@ custom_colors/font_color = Color( 0.137255, 0.0235294, 0.0235294, 1 )
 custom_colors/font_color_hover = Color( 0.639216, 0.105882, 0.105882, 1 )
 text = "Options"
 
-[node name="quit_button" type="Button" parent="CenterContainer/menu_button_container"]
+[node name="quit_button" type="Button" parent="CenterContainer/menu_button_container" groups=[
+"option",
+]]
 margin_top = 240.0
 margin_right = 430.0
 margin_bottom = 340.0
@@ -100,6 +106,7 @@ text = "Quit"
 visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "switch_screen_anim"
 anims/game_launch = SubResource( 1 )
 anims/screen_swipe = ExtResource( 8 )
 anims/switch_screen_anim = ExtResource( 7 )

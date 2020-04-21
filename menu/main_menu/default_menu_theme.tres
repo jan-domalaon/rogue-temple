@@ -25,9 +25,9 @@ region_rect = Rect2( 0, 0, 190, 45 )
 
 [resource]
 default_font = ExtResource( 4 )
-Button/colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
-Button/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
-Button/colors/font_color_hover = Color( 0.941176, 0.941176, 0.941176, 1 )
+Button/colors/font_color = Color( 0.137255, 0.0235294, 0.0235294, 1 )
+Button/colors/font_color_disabled = Color( 0.137255, 0.0235294, 0.0235294, 1 )
+Button/colors/font_color_hover = Color( 0.639216, 0.105882, 0.105882, 1 )
 Button/colors/font_color_pressed = Color( 1, 1, 1, 1 )
 Button/constants/hseparation = 2
 Button/fonts/font = null

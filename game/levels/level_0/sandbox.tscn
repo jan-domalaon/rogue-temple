@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://game/levels/level_0/tileset/tileset_with_occlusion.tres" type="TileSet" id=1]
 [ext_resource path="res://game/characters/generic_character.tscn" type="PackedScene" id=2]
@@ -12,9 +12,6 @@
 [ext_resource path="res://game/items/weapons/wooden_staff/wooden_staff.tscn" type="PackedScene" id=10]
 [ext_resource path="res://game/characters/player/player.tscn" type="PackedScene" id=11]
 [ext_resource path="res://game/levels/level_change/level_change.tscn" type="PackedScene" id=12]
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 20, 26 )
 
 [node name="level" type="Node" groups=[
 "levels",
@@ -76,9 +73,6 @@ position = Vector2( 40, -72 )
 position = Vector2( 696, -176 )
 scale = Vector2( 0.75, 1.5 )
 next_level = "res://game/levels/level_0/test_level_2.tscn"
-
-[node name="pit_collision_shape" parent="traps/pit_area" index="0"]
-shape = SubResource( 1 )
 
 [node name="generic_character" parent="." instance=ExtResource( 2 )]
 position = Vector2( -103, -23 )

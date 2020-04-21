@@ -1,0 +1,110 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://menu/main_menu/default_menu_theme.tres" type="Theme" id=1]
+[ext_resource path="res://fonts/cinzel-bold.font" type="BitmapFont" id=2]
+[ext_resource path="res://fonts/jsl-ancient.font" type="BitmapFont" id=3]
+[ext_resource path="res://game/characters/player/player_hud/game_over/game_over_screen.gd" type="Script" id=4]
+
+[sub_resource type="Animation" id=1]
+resource_name = "fade_in"
+length = 3.0
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "show"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="game_over_screen" type="Control"]
+pause_mode = 2
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="animation_player" type="AnimationPlayer" parent="."]
+anims/fade_in = SubResource( 1 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 140
+custom_constants/margin_top = 40
+custom_constants/margin_left = 140
+custom_constants/margin_bottom = 40
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_left = 140.0
+margin_top = 40.0
+margin_right = 1140.0
+margin_bottom = 680.0
+custom_constants/separation = 50
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+margin_right = 1000.0
+margin_bottom = 56.0
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 1, 0.533333, 0.0392157, 1 )
+text = "Winner!"
+align = 1
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer"]
+margin_top = 106.0
+margin_right = 1000.0
+margin_bottom = 169.0
+custom_fonts/font = ExtResource( 3 )
+text = "Congratulations! You ended all the enemies in the temple (for now)
+Thanks for playing the prototype!"
+align = 1
+
+[node name="return" type="Button" parent="MarginContainer/VBoxContainer"]
+margin_top = 219.0
+margin_right = 1000.0
+margin_bottom = 319.0
+rect_min_size = Vector2( 0, 100 )
+theme = ExtResource( 1 )
+text = "Return to main menu"
+
+[node name="quit" type="Button" parent="MarginContainer/VBoxContainer"]
+margin_top = 369.0
+margin_right = 1000.0
+margin_bottom = 469.0
+rect_min_size = Vector2( 0, 100 )
+theme = ExtResource( 1 )
+text = "Exit Game"
+[connection signal="pressed" from="MarginContainer/VBoxContainer/return" to="." method="_on_return_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/quit" to="." method="_on_quit_pressed"]

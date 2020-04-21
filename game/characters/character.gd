@@ -156,6 +156,8 @@ func receive_phys_damage(dmg, dmg_type):
 				if (is_in_group("humanoids")):
 					# Hide weapon
 					$weapon.hide()
+					if health <= 0:
+						emit_signal("enemy_died")
 				$animation_player.play("character_death")
 			else:
 				# Player has died
@@ -229,10 +231,11 @@ func on_pitfall():
 	# Plays when the character enters a pit trap area (crevice, false trapdoor, etc.)
 	
 	# Disable processes and hitbox
+	$hitbox.set_disabled(true)
 	set_process_input(false)
 	set_process(false)
 	set_physics_process(false)
-	$hitbox.set_disabled(true)
+	
 	pitfall = true
 	
 	# Print message in game log

@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://menu/options/options.gd" type="Script" id=1]
 [ext_resource path="res://fonts/cinzel-bold.font" type="BitmapFont" id=2]
 [ext_resource path="res://menu/transitions/menu_transition.tscn" type="PackedScene" id=3]
 [ext_resource path="res://shared/shaders/transition_l_to_r.tres" type="Material" id=4]
+[ext_resource path="res://menu/main_menu/default_menu_theme.tres" type="Theme" id=5]
 
 [sub_resource type="Animation" id=1]
 tracks/0/type = "value"
@@ -74,7 +75,7 @@ custom_constants/separation = 70
 
 [node name="options_label" type="Label" parent="CenterContainer/VBoxContainer"]
 margin_right = 900.0
-margin_bottom = 58.0
+margin_bottom = 56.0
 hint_tooltip = "ahlie"
 mouse_filter = 1
 size_flags_vertical = 0
@@ -83,9 +84,9 @@ text = "Options"
 align = 1
 
 [node name="buttons_vbox" type="VBoxContainer" parent="CenterContainer/VBoxContainer"]
-margin_top = 128.0
+margin_top = 126.0
 margin_right = 900.0
-margin_bottom = 478.0
+margin_bottom = 476.0
 rect_min_size = Vector2( 800, 0 )
 custom_constants/separation = 25
 
@@ -104,6 +105,7 @@ margin_right = 400.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 400, 100 )
 hint_tooltip = "Not working (yet)"
+theme = ExtResource( 5 )
 custom_fonts/font = ExtResource( 2 )
 text = "Audio"
 
@@ -115,6 +117,7 @@ margin_right = 900.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 400, 100 )
 hint_tooltip = "Not working (yet)"
+theme = ExtResource( 5 )
 custom_fonts/font = ExtResource( 2 )
 text = "Video"
 
@@ -134,6 +137,7 @@ margin_right = 400.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 400, 100 )
 hint_tooltip = "Open Changelog webpage for game"
+theme = ExtResource( 5 )
 custom_fonts/font = ExtResource( 2 )
 text = "Changelog"
 
@@ -144,6 +148,7 @@ margin_left = 500.0
 margin_right = 900.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 400, 0 )
+theme = ExtResource( 5 )
 custom_fonts/font = ExtResource( 2 )
 text = "Credits"
 
@@ -155,6 +160,7 @@ margin_right = 900.0
 margin_bottom = 350.0
 rect_min_size = Vector2( 0, 100 )
 hint_tooltip = "Go back to the main menu"
+theme = ExtResource( 5 )
 custom_fonts/font = ExtResource( 2 )
 text = "Back"
 __meta__ = {

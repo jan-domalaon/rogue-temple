@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://game/characters/generic_character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://game/characters/player/player.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://game/characters/player/player_hud/hud.tscn" type="PackedScene" id=5]
 [ext_resource path="res://game/characters/player/player_hud/death_screen/death_screen.tscn" type="PackedScene" id=6]
 [ext_resource path="res://game/characters/player/light.png" type="Texture" id=7]
+[ext_resource path="res://game/characters/player/player_hud/game_over/game_over_screen.tscn" type="PackedScene" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 14, 16 )
@@ -129,6 +130,9 @@ editor_draw_drag_margin = true
 [node name="hud" parent="hud_canvas_layer" index="0" instance=ExtResource( 5 )]
 
 [node name="death_screen" parent="hud_canvas_layer" index="1" instance=ExtResource( 6 )]
+visible = false
+
+[node name="game_over_screen" parent="hud_canvas_layer" index="2" instance=ExtResource( 8 )]
 visible = false
 
 [node name="light" type="Light2D" parent="." index="8"]

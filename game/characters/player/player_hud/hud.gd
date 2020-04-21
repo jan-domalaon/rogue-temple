@@ -17,7 +17,6 @@ func _ready():
 	# Get debug signal and welcome from level
 	# Welcome used to trigger menu_transition
 	get_tree().get_root().get_node("level").connect("show_debug", self, "_on_show_debug")
-	#get_tree().get_root().get_node("level").connect("level_welcome", self, "_on_level_welcome")
 	
 	# Hide appropriate UI elements
 	#get_node("inventory").hide()
