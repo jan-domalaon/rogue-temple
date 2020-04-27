@@ -22,8 +22,8 @@ func save_game():
 	
 	# Create save directory if not created already
 	var save_dir = Directory.new()
-	if not save_dir.dir_exists("user://game/saves"):
-		save_dir.make_dir("user://game/saves")
+	if not save_dir.dir_exists("res://game/saves"):
+		save_dir.make_dir("res://game/saves")
 	
 	# Create save file
 	var save_file = File.new()

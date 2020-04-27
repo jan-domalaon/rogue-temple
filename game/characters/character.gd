@@ -158,6 +158,7 @@ func receive_phys_damage(dmg, dmg_type):
 					$weapon.hide()
 					if health <= 0:
 						emit_signal("enemy_died")
+						get_node("weapon/weapon_area/hitbox").set_disabled(true)
 				$animation_player.play("character_death")
 			else:
 				# Player has died
