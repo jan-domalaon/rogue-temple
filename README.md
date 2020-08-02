@@ -8,7 +8,15 @@
 
 Many thanks to [GDQuest](https://www.youtube.com/channel/UCxboW7x0jZqFdvMdCFKTMsQ) and the various tutorials hosted there.
 
-### Current features
+### ANNOUNCEMENT AUGUST 2020
+We will be doing a revision of various systems before heading back into development, hopefully by September 2020. The systems we plan on revising are:
+* Scene transitions
+* Mob AI and the state transitions
+* Weapon interaction hitbox and damage hitbox
+* Rewriting of how character movement is handled
+*No new features or changes will be added until these systems are revised*
+
+### Current features as of August 2020
 * Melee, ranged weaponry system. Includes pierce, blunt, cut damage - each with unique properties
 * Damage blocking using a shield
 * Basic mobs with knockback
