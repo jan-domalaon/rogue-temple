@@ -13,7 +13,7 @@ We will be doing a revision of various systems before heading back into developm
 * Scene transitions
 * Mob AI and the state transitions
 * Weapon interaction hitbox and damage hitbox
-* Rewriting of how character movement is handled
+* Rewriting of how character movement is handled  
 *No new features or changes will be added until these systems are revised*
 
 ### Current features as of August 2020
