@@ -1,64 +1,14 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://menu/options/options.gd" type="Script" id=1]
 [ext_resource path="res://fonts/cinzel-bold.font" type="BitmapFont" id=2]
-[ext_resource path="res://menu/transitions/menu_transition.tscn" type="PackedScene" id=3]
-[ext_resource path="res://shared/shaders/transition_l_to_r.tres" type="Material" id=4]
+[ext_resource path="res://game/global_scripts/scene_change_transition.tscn" type="PackedScene" id=3]
 [ext_resource path="res://menu/main_menu/default_menu_theme.tres" type="Theme" id=5]
 
-[sub_resource type="Animation" id=1]
-tracks/0/type = "value"
-tracks/0/path = NodePath("menu_transition:material:shader_param/cutoff")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 0.0, 1.0 ]
-}
-tracks/1/type = "method"
-tracks/1/path = NodePath("menu_transition")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"values": [ {
-"args": [  ],
-"method": "show"
-}, {
-"args": [  ],
-"method": "hide"
-} ]
-}
-tracks/2/type = "method"
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"values": [ {
-"args": [ true ],
-"method": "disable_menu_buttons"
-}, {
-"args": [ false ],
-"method": "disable_menu_buttons"
-} ]
-}
-
-[node name="options" type="Container"]
+[node name="Options" type="CanvasLayer"]
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+
+[node name="SceneChangeTransition" parent="." instance=ExtResource( 3 )]
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 margin_right = 40.0
@@ -166,18 +116,8 @@ text = "Back"
 __meta__ = {
 "_edit_lock_": true
 }
-
-[node name="menu_transition" parent="." instance=ExtResource( 3 )]
-material = ExtResource( 4 )
-rect_min_size = Vector2( 1280, 720 )
-
-[node name="animation_player" type="AnimationPlayer" parent="."]
-autoplay = "screen_swipe_open_left"
-anims/screen_swipe_open_left = SubResource( 1 )
 [connection signal="pressed" from="CenterContainer/VBoxContainer/buttons_vbox/HBoxContainer2/audio" to="." method="_on_audio_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/buttons_vbox/HBoxContainer2/video" to="." method="_on_video_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/buttons_vbox/HBoxContainer/changelog" to="." method="_on_changelog_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/buttons_vbox/HBoxContainer/credits" to="." method="_on_credits_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/buttons_vbox/back" to="." method="_on_back_pressed"]
-
-[editable path="menu_transition"]

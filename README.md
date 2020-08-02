@@ -4,7 +4,8 @@
 
 *Code* by Jan Domalaon  
 *Art* by Jan Domalaon  
-*Various art assets* from https://www.kenney.nl/assets. Notably, the UI elements.  
+*Various art assets* from https://www.kenney.nl/assets. Notably, the UI elements. Will probably change over time  
+*Running on Godot 3.2.2*
 
 Many thanks to [GDQuest](https://www.youtube.com/channel/UCxboW7x0jZqFdvMdCFKTMsQ) and the various tutorials hosted there.
 

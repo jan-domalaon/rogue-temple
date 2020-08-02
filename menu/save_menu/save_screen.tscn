@@ -1,19 +1,16 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://menu/save_menu/save_screen.gd" type="Script" id=1]
 [ext_resource path="res://fonts/cinzel-bold.font" type="BitmapFont" id=2]
-[ext_resource path="res://menu/transitions/animations/fade_in.anim" type="Animation" id=3]
 [ext_resource path="res://menu/transitions/menu_transition.tscn" type="PackedScene" id=4]
-[ext_resource path="res://menu/transitions/animations/screen_swipe.anim" type="Animation" id=5]
 [ext_resource path="res://menu/main_menu/default_menu_theme.tres" type="Theme" id=6]
+[ext_resource path="res://game/global_scripts/scene_change_transition.tscn" type="PackedScene" id=7]
 
-[node name="save" type="Control"]
-margin_right = 1280.0
-margin_bottom = 720.0
+[node name="save" type="CanvasLayer"]
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+modulate = Color( 1, 1, 1, 0 )
+
+[node name="SceneChangeTransition" parent="." instance=ExtResource( 7 )]
 
 [node name="margin_container" type="MarginContainer" parent="."]
 anchor_right = 1.0
@@ -62,11 +59,6 @@ theme = ExtResource( 6 )
 custom_fonts/font = ExtResource( 2 )
 disabled = true
 text = "Continue"
-
-[node name="animation_player" type="AnimationPlayer" parent="."]
-autoplay = "fade_in"
-anims/fade_in = ExtResource( 3 )
-anims/screen_swipe = ExtResource( 5 )
 
 [node name="menu_transition" parent="." instance=ExtResource( 4 )]
 visible = false

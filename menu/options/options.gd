@@ -1,13 +1,12 @@
-extends Node
-
 # Options script. Can be accessed by main menu, or pause menu.
+
+extends CanvasLayer
+
 
 var prev_scene = null
 
 func _ready():
 	set_process_input(true)
-	# Play intro transition (function calls are handled here also)
-	$animation_player.play("screen_swipe_open_left")
 
 
 func disable_menu_buttons(toggle):
@@ -21,7 +20,7 @@ func disable_menu_buttons(toggle):
 
 func _on_back_pressed():
 	# Play close transition and head back to main menu
-	get_tree().change_scene("res://menu/main_menu/menu.tscn")
+	SceneChangeTransition.change_scene_transition("res://menu/main_menu/menu.tscn", $CenterContainer/VBoxContainer/buttons_vbox)
 
 
 func _on_changelog_pressed():

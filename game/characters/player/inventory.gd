@@ -136,7 +136,6 @@ func equip(slot_name):
 
 func unequip(slot_name):
 	#  (str) -> null
-	var i = 0
 	var full_inv = true
 	# Check if this item is a primary
 	var can_drop = primary_unequipped(slot_name)
