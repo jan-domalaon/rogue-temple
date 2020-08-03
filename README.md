@@ -14,8 +14,10 @@ We will be doing a revision of various systems before heading back into developm
 * Scene transitions
 * Mob AI and the state transitions
 * Weapon interaction hitbox and damage hitbox
-* Rewriting of how character movement is handled  
-*No new features or changes will be added until these systems are revised*
+* Rewriting of how character movement is handled
+* Probably more than this. I had this code for almost 2 years and there's bound to be smelly bits 
+
+*No new features or changes will be added until these systems are revised. Or at least we can say it is good to do so*
 
 ### Current features as of August 2020
 * Melee, ranged weaponry system. Includes pierce, blunt, cut damage - each with unique properties
