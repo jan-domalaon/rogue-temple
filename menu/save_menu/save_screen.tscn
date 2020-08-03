@@ -8,7 +8,6 @@
 
 [node name="save" type="CanvasLayer"]
 script = ExtResource( 1 )
-modulate = Color( 1, 1, 1, 0 )
 
 [node name="SceneChangeTransition" parent="." instance=ExtResource( 7 )]
 
