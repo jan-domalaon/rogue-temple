@@ -7,7 +7,7 @@
 *Various art assets* from https://www.kenney.nl/assets. Notably, the UI elements. Will probably change over time  
 *Running on Godot 3.2.2*
 
-Many thanks to [GDQuest](https://www.youtube.com/channel/UCxboW7x0jZqFdvMdCFKTMsQ) and the various tutorials hosted there.
+Many thanks to [GDQuest](https://www.youtube.com/channel/UCxboW7x0jZqFdvMdCFKTMsQ) and the various tutorials and open source projects hosted there. Props to [Game Endeavor](https://www.youtube.com/channel/UCLweX1UtQjRjj7rs_0XQ2Eg) and [KidsCanCode](http://kidscancode.org/godot_recipes/g101/) as well for their Youtube tutorials and Godot Recipes. I wouldn't have gotten this far if it wasn't for their content.
 
 ### ANNOUNCEMENT AUGUST 2020
 We will be doing a revision of various systems before heading back into development, hopefully by September 2020. The systems we plan on revising are:
