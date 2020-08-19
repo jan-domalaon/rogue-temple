@@ -1,0 +1,18 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://game/characters/generic_character_state_machine.gd" type="Script" id=1]
+[ext_resource path="res://game/characters/states/movement/Dead.tscn" type="PackedScene" id=2]
+[ext_resource path="res://game/characters/states/movement/Knockback.tscn" type="PackedScene" id=3]
+[ext_resource path="res://game/characters/states/movement/Moving.tscn" type="PackedScene" id=4]
+[ext_resource path="res://game/characters/states/movement/idle.tscn" type="PackedScene" id=5]
+
+[node name="States" type="Node"]
+script = ExtResource( 1 )
+
+[node name="Dead" parent="." instance=ExtResource( 2 )]
+
+[node name="Idle" parent="." instance=ExtResource( 5 )]
+
+[node name="Knockback" parent="." instance=ExtResource( 3 )]
+
+[node name="Moving" parent="." instance=ExtResource( 4 )]
